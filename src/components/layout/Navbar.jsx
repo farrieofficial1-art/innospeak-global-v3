@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import useScrolled from '../../hooks/useScrolled.js';
+import logo from '../../assets/logo/logo.png';
 
 const navLinks = [
   { label: 'Home', to: '/' },
@@ -21,7 +22,10 @@ export default function Navbar() {
   const { pathname } = useLocation();
 
   const linkBase = 'font-body text-sm font-medium transition-colors duration-200';
-  const linkIdle = scrolled ? 'text-navy-700 hover:text-gold-600' : 'text-navy-800 hover:text-gold-600';
+  const linkIdle = scrolled ? 'text-navy-700 hover:text-gold-600' : 'text-white hover:text-gold-400';
+  const linkActive = scrolled ? 'text-gold-600' : 'text-gold-400';
+  const wordmarkColor = scrolled ? 'text-navy-900' : 'text-white';
+  const menuIconColor = scrolled ? 'text-navy-900 hover:bg-navy-50' : 'text-white hover:bg-white/10';
 
   return (
     <header
@@ -34,11 +38,17 @@ export default function Navbar() {
       <nav className="container-premium flex h-20 items-center justify-between">
         {/* Logo */}
         <Link to="/" className="group flex items-center" onClick={() => setMobileOpen(false)}>
-          <span className="font-display text-xl font-bold tracking-tight text-navy-900 sm:text-2xl">
+          <img
+            src={logo}
+            alt="InnoSpeak Global"
+            className="mr-2 h-10 w-10 select-none"
+            draggable={false}
+          />
+          <span className={`font-display text-xl font-bold tracking-tight transition-colors duration-300 sm:text-2xl ${wordmarkColor}`}>
             InnoSpeak
           </span>
           <span className="ml-1 inline-block h-2 w-2 rounded-full bg-gold-gradient shadow-gold transition-transform duration-300 group-hover:scale-125" />
-          <span className="ml-2 font-display text-xl font-bold tracking-tight text-navy-900 sm:text-2xl">
+          <span className={`ml-2 font-display text-xl font-bold tracking-tight transition-colors duration-300 sm:text-2xl ${wordmarkColor}`}>
             Global
           </span>
         </Link>
@@ -51,7 +61,7 @@ export default function Navbar() {
               <li key={link.to}>
                 <Link
                   to={link.to}
-                  className={`${linkBase} ${linkIdle} ${active ? 'text-gold-600' : ''}`}
+                  className={`${linkBase} ${linkIdle} ${active ? linkActive : ''}`}
                 >
                   {link.label}
                 </Link>
@@ -73,7 +83,7 @@ export default function Navbar() {
           onClick={() => setMobileOpen((v) => !v)}
           aria-label="Toggle menu"
           aria-expanded={mobileOpen}
-          className="inline-flex items-center justify-center rounded-lg p-2 text-navy-900 transition-colors hover:bg-navy-50 lg:hidden"
+          className={`inline-flex items-center justify-center rounded-lg p-2 transition-colors lg:hidden ${menuIconColor}`}
         >
           {mobileOpen ? <X size={24} /> : <Menu size={24} />}
         </button>

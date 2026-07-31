@@ -2,6 +2,12 @@ import { Suspense, useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Navbar, Footer } from '../components/layout';
+import { Outlet } from 'react-router-dom';
+import Navbar from './Navbar.jsx';
+import Footer from './Footer.jsx';
+import ScrollToTop from './ScrollToTop.jsx';
+import TutorWidget from '../tutor/TutorWidget.jsx';
+
 
 /**
  * AppLayout — the persistent shell wrapping every routed page.
@@ -45,9 +51,10 @@ export default function AppLayout() {
             </motion.div>
           </AnimatePresence>
         </Suspense>
+      <Outlet />
       </main>
-
       <Footer />
+      <TutorWidget />
     </div>
   );
 }

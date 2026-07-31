@@ -11,6 +11,7 @@ import Impact from './pages/Impact.jsx';
 import Contact from './pages/Contact.jsx';
 import Apply from './pages/Apply.jsx';
 import Research from './pages/Research.jsx';
+import Tutor from './pages/Tutor.jsx';
 import News from './pages/News.jsx';
 import Events from './pages/Events.jsx';
 import Community from './pages/Community.jsx';
@@ -36,6 +37,7 @@ export default function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/apply" element={<Apply />} />
         <Route path="/research" element={<Research />} />
+        <Route path="/tutor" element={<Tutor />} />
         <Route path="/news" element={<News />} />
         <Route path="/events" element={<Events />} />
         <Route path="/community" element={<Community />} />

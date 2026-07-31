@@ -1,13 +1,22 @@
+
 import Seo from '../components/ui/Seo.jsx';
+import FoundationHero from '../components/sections/foundation/FoundationHero.jsx';
+import FocusAreas from '../components/sections/foundation/FocusAreas.jsx';
+import WaysToGive from '../components/sections/foundation/WaysToGive.jsx';
+import FoundationClosingCTA from '../components/sections/foundation/FoundationClosingCTA.jsx';
 
 export default function Foundation() {
   return (
     <>
-      <Seo title="Foundation" path="/foundation" />
-      <section className="container-premium py-32">
-        <h1 className="font-display text-4xl font-bold text-navy-900 sm:text-5xl">Foundation</h1>
-        <p className="mt-4 font-body text-navy-600">Programme content coming soon.</p>
-      </section>
+      <Seo
+        title="InnoSpeak Global Foundation"
+        description="A dedicated initiative providing scholarships, community outreach and youth empowerment programmes to make quality education accessible to all."
+        path="/foundation"
+      />
+      <FoundationHero />
+      <FocusAreas />
+      <WaysToGive />
+      <FoundationClosingCTA />
     </>
   );
 }

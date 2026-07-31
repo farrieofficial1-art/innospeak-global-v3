@@ -1,13 +1,20 @@
+
 import Seo from '../components/ui/Seo.jsx';
+import ImpactHero from '../components/sections/impact/ImpactHero';
+import ImpactStats from '../components/sections/impact/ImpactStats';
+import ImpactHighlights from '../components/sections/impact/ImpactHighlights';
+import ImpactStory from '../components/sections/impact/ImpactStory';
+import ImpactCTA from '../components/sections/impact/ImpactCTA';
 
 export default function Impact() {
   return (
     <>
       <Seo title="Impact" path="/impact" />
-      <section className="container-premium py-32">
-        <h1 className="font-display text-4xl font-bold text-navy-900 sm:text-5xl">Impact</h1>
-        <p className="mt-4 font-body text-navy-600">Content coming soon.</p>
-      </section>
+      <ImpactHero />
+      <ImpactStats />
+      <ImpactHighlights />
+      <ImpactStory />
+      <ImpactCTA />
     </>
   );
 }

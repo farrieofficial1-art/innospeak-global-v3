@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { staggerContainer, fadeUpItem, inViewOnce } from '../../../lib/motion/presets';
+import founderPhoto from '../../../assets/founder/fred-omondi.png';
 
 const container = staggerContainer(0.1, 0.1);
 
@@ -30,9 +31,11 @@ export default function FounderStory() {
                 <div className="relative flex h-32 w-32 items-center justify-center">
                   <div className="absolute inset-0 rounded-full border-2 border-gold-500/30" aria-hidden="true" />
                   <div className="absolute -inset-3 rounded-full border border-gold-500/15" aria-hidden="true" />
-                  <div className="flex h-24 w-24 items-center justify-center rounded-full bg-gold-500/10 backdrop-blur-sm">
-                    <span className="font-display text-3xl font-bold text-gold-400">FO</span>
-                  </div>
+                  <img
+                    src={founderPhoto}
+                    alt="Fred Omondi, Founder & CEO of InnoSpeak Global"
+                    className="h-24 w-24 rounded-full object-cover shadow-gold"
+                  />
                 </div>
 
                 <p className="mt-6 font-display text-lg font-bold text-white">Fred Omondi</p>
