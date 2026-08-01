@@ -1,21 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import {
-  MessageSquare,
-  Award,
-  Languages,
-  Cpu,
-  GraduationCap,
-  Palette,
-  Briefcase,
-  Rocket,
-  Cog,
-  Compass,
-  Globe2,
-  ChevronDown,
-  ArrowRight,
-} from 'lucide-react';
+import { MessageSquare, Award, Languages, Cpu, GraduationCap, Palette, Briefcase, Rocket, Compass, Globe as Globe2, ChevronDown, ArrowRight, HeartPulse, Sparkles, BookOpen } from 'lucide-react';
 import { Button } from '../../ui';
 import SectionHeading from '../../ui/SectionHeading.jsx';
 import { staggerContainer, fadeUpItem, inViewOnce, easeOutExpo } from '../../../lib/motion/presets';
@@ -39,13 +25,14 @@ const ICON_MAP = {
   'languages': Languages,
   'international-qualifications': Award,
   'national-tvet': GraduationCap,
-  'technology': Cpu,
+  'digital-literacy-productivity': Cpu,
   'creative-design': Palette,
   'business': Briefcase,
   'freelancing': Rocket,
-  'engineering': Cog,
   'career': Compass,
-  'global-opportunities': Globe2,
+  'education-teaching-excellence': BookOpen,
+  'health-hospitality-community': HeartPulse,
+  'personal-development-life-skills': Sparkles,
 };
 
 const container = staggerContainer(0.12, 0.1);
@@ -150,13 +137,14 @@ function PathwayCard({ pathway, isOpen, onToggle, index }) {
 export default function LearningPathways() {
   const [openId, setOpenId] = useState('global-language');
 
+
   return (
     <section aria-label="Our learning pathways" className="bg-white py-20 sm:py-24">
       <div className="container-premium">
         <SectionHeading
           eyebrow="Our Learning Pathways"
           title="Choose the Pathway That Fits Your Future"
-          subtitle="Eleven connected pathways — each opening into a detailed set of programmes designed to take you from foundation to mastery."
+          subtitle="Twelve connected pathways — each opening into a detailed set of programmes designed to take you from foundation to mastery."
         />
 
         <motion.div

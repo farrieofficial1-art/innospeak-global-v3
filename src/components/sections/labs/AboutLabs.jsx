@@ -13,7 +13,7 @@ export default function AboutLabs() {
           <SectionHeading
             eyebrow="Not Another Course"
             title="Where Skills Meet Real Problems"
-            subtitle="Labs isn't a second curriculum — it's what comes after the learning."
+            subtitle="Labs isn't a second curriculum — it's what comes after the learning. Seven schools, one mission: build something real."
           />
 
           <div className="mt-12 grid gap-6 md:grid-cols-2">

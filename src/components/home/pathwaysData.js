@@ -1,7 +1,10 @@
 export const PATHWAY_BADGES = [
   { id: 'communication', label: 'Communication', icon: 'message-circle' },
-  { id: 'technical', label: 'Technical', icon: 'cpu' },
-  { id: 'leadership', label: 'Leadership', icon: 'crown' },
+  { id: 'technical', label: 'Digital & Technology', icon: 'cpu' },
+  { id: 'leadership', label: 'Leadership & Business', icon: 'crown' },
+  { id: 'creative', label: 'Creative & Media', icon: 'palette' },
+  { id: 'life-skills', label: 'Life Skills', icon: 'sparkles' },
+  { id: 'education', label: 'Education', icon: 'book-open' },
 ];
 
 export const PATHWAYS = [

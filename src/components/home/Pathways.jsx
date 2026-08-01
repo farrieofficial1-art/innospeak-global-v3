@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { MessageCircle, Cpu, Crown, ArrowRight } from 'lucide-react';
+import { MessageCircle, Cpu, Crown, Palette, Sparkles, BookOpen, ArrowRight } from 'lucide-react';
 import SectionHeading from '../ui/SectionHeading.jsx';
 import PathwayCard from './PathwayCard.jsx';
 import Button from '../ui/Button.jsx';
@@ -9,6 +9,9 @@ const BADGE_ICONS = {
   'message-circle': MessageCircle,
   cpu: Cpu,
   crown: Crown,
+  palette: Palette,
+  sparkles: Sparkles,
+  'book-open': BookOpen,
 };
 
 export default function Pathways() {

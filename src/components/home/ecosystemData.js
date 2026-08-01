@@ -24,7 +24,7 @@ export const ECOSYSTEM_CARDS = [
     description: 'An innovation and research hub where learners collaborate on engineering, AI, entrepreneurship and technology projects with real-world impact.',
     icon: 'flask',
     link: '/labs',
-    features: ['Innovation Projects', 'Research & Development', 'Startup Incubation', 'Tech Workshops'],
+    features: ['7 Innovation Schools', 'AI & Software Engineering', 'Cloud & Cybersecurity', 'Startup Incubation'],
   },
 ];
 

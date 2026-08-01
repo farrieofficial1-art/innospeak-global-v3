@@ -1,13 +1,7 @@
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import {
-  Search,
-  SlidersHorizontal,
-  X,
-  Grid3X3,
-  ArrowRight,
-} from 'lucide-react';
+import { Search, SlidersHorizontal, X, Grid3x3 as Grid3X3, ArrowRight } from 'lucide-react';
 
 import SectionHeading from '../../ui/SectionHeading.jsx';
 import CourseCard from './CourseCard';
@@ -21,6 +15,7 @@ import {
   STUDY_MODES,
   DURATIONS,
   parseFee,
+  getAcademyCourses,
 } from '../../../lib/data/programmeData';
 
 import {
@@ -120,7 +115,7 @@ export default function ProgrammeCatalogue() {
   const [showFilters, setShowFilters] = useState(false);
 
   const normalizedCourses = useMemo(
-    () => COURSES.map((course, index) => normalizeCourse(course, index)),
+    () => getAcademyCourses().map((course, index) => normalizeCourse(course, index)),
     []
   );
 

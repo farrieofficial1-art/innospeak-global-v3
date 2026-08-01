@@ -86,7 +86,7 @@ const DEFAULT_OUTCOMES = [
 ];
 
 export const COURSE_DETAILS = {
-  // ── Communication Pathway ──────────────────────────────────
+  // ── Global Languages & Communication Pathway ───────────────
   ENG101: {
     overview: {
       description: 'English Speaking Fundamentals is a practical, beginner-friendly course designed to build confident, fluent spoken English for everyday and professional contexts. Through guided conversation, pronunciation drills, and real-world scenarios, you will develop the communication skills needed to express yourself clearly and naturally.',
@@ -119,7 +119,7 @@ export const COURSE_DETAILS = {
     ],
     certification: { items: DEFAULT_CERT_ITEMS },
     careers: ['Customer Support Representative', 'Receptionist', 'Retail Assistant', 'Call Centre Agent', 'Administrative Assistant', 'Hospitality Staff'],
-    relatedCourses: ['ENG102', 'PUB101', 'COM201', 'BUS301'],
+    relatedCourses: ['ENG102', 'ENG106', 'ENG105', 'ENG104'],
     faqs: SHARED_FAQS,
     reviews: DEFAULT_REVIEWS,
   },
@@ -155,7 +155,7 @@ export const COURSE_DETAILS = {
     ],
     certification: { items: DEFAULT_CERT_ITEMS },
     careers: ['Public Relations Officer', 'Communications Specialist', 'Business Executive', 'Project Manager', 'Content Writer', 'Diplomatic Staff'],
-    relatedCourses: ['ENG101', 'PUB101', 'COM201', 'BUS301'],
+    relatedCourses: ['ENG101', 'ENG106', 'ENG105', 'ENG104'],
     faqs: SHARED_FAQS,
     reviews: DEFAULT_REVIEWS,
   },
@@ -191,7 +191,7 @@ export const COURSE_DETAILS = {
     ],
     certification: { items: DEFAULT_CERT_ITEMS },
     careers: ['Public Speaker', 'Teacher', 'Trainer', 'Community Leader', 'Sales Representative', 'Motivational Speaker'],
-    relatedCourses: ['ENG101', 'ENG102', 'COM201', 'BUS301'],
+    relatedCourses: ['ENG101', 'ENG102', 'ENG105', 'ENG104'],
     faqs: SHARED_FAQS,
     reviews: DEFAULT_REVIEWS,
   },
@@ -227,7 +227,7 @@ export const COURSE_DETAILS = {
     ],
     certification: { items: DEFAULT_CERT_ITEMS },
     careers: ['Administrative Officer', 'Project Coordinator', 'HR Assistant', 'Customer Success Manager', 'Business Analyst', 'Team Lead'],
-    relatedCourses: ['ENG101', 'ENG102', 'PUB101', 'BUS301'],
+    relatedCourses: ['ENG101', 'ENG102', 'ENG106', 'ENG104'],
     faqs: SHARED_FAQS,
     reviews: DEFAULT_REVIEWS,
   },
@@ -263,7 +263,7 @@ export const COURSE_DETAILS = {
     ],
     certification: { items: DEFAULT_CERT_ITEMS },
     careers: ['Business Manager', 'Executive Assistant', 'Sales Manager', 'Business Consultant', 'Entrepreneur', 'Corporate Trainer'],
-    relatedCourses: ['ENG101', 'ENG102', 'PUB101', 'COM201'],
+    relatedCourses: ['ENG101', 'ENG102', 'ENG106', 'ENG105'],
     faqs: SHARED_FAQS,
     reviews: DEFAULT_REVIEWS,
   },
@@ -413,7 +413,7 @@ export const COURSE_DETAILS = {
     ],
     certification: { items: DEFAULT_CERT_ITEMS },
     careers: ['English Teacher', 'ESL Instructor', 'Online English Teacher', 'Language School Director', 'Curriculum Developer', 'Education Consultant'],
-    relatedCourses: ['IEL101', 'CAM101', 'ENG102', 'COM201'],
+    relatedCourses: ['IEL101', 'CAM101', 'ENG102', 'ENG105'],
     faqs: SHARED_FAQS,
     reviews: DEFAULT_REVIEWS,
   },
@@ -855,7 +855,7 @@ export const COURSE_DETAILS = {
     ],
     certification: { items: DEFAULT_CERT_ITEMS },
     careers: ['Administrative Assistant', 'Data Entry Clerk', 'Virtual Assistant', 'Office Manager', 'Customer Support', 'Digital Entrepreneur'],
-    relatedCourses: ['ICT102', 'ICT201', 'ENG101', 'COM201'],
+    relatedCourses: ['ICT102', 'ICT201', 'ENG101', 'ENG105'],
     faqs: SHARED_FAQS,
     reviews: DEFAULT_REVIEWS,
   },
@@ -917,7 +917,7 @@ export const COURSE_DETAILS = {
     assessment: DEFAULT_ASSESSMENT,
     certification: { items: DEFAULT_CERT_ITEMS },
     careers: ['Office Manager', 'Executive Assistant', 'Data Analyst', 'Project Coordinator', 'Administrative Manager', 'Business Professional'],
-    relatedCourses: ['ICT101', 'ICT102', 'ICT202', 'COM201'],
+    relatedCourses: ['ICT101', 'ICT102', 'ICT202', 'ENG105'],
     faqs: SHARED_FAQS,
     reviews: DEFAULT_REVIEWS,
   },

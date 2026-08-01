@@ -1,11 +1,21 @@
 import { motion } from 'framer-motion';
-import { Lightbulb, FlaskConical, Rocket, Wrench, Sparkles } from 'lucide-react';
+import { Brain, Code, Cloud, ShieldCheck, ChartBar as BarChart3, Cog, Sparkles, Lightbulb, FlaskConical, Rocket, Wrench } from 'lucide-react';
 import { staggerContainer, fadeUpItem } from '../../../lib/motion/presets';
 import LabsHeroSlider from './LabsHeroSlider.jsx';
 
 const container = staggerContainer(0.1, 0.1);
 
 const CATEGORIES = [
+  { icon: Brain, label: 'AI' },
+  { icon: Code, label: 'Software Engineering' },
+  { icon: Cloud, label: 'Cloud & DevOps' },
+  { icon: ShieldCheck, label: 'Cybersecurity' },
+  { icon: BarChart3, label: 'Data Science' },
+  { icon: Cog, label: 'Engineering & Innovation' },
+  { icon: Sparkles, label: 'Creative AI & Immersive' },
+];
+
+const TRACKS = [
   { icon: Lightbulb, label: 'Innovation Projects' },
   { icon: FlaskConical, label: 'Research & Development' },
   { icon: Rocket, label: 'Startup Incubation' },
@@ -46,20 +56,42 @@ export default function LabsHero() {
             variants={fadeUpItem}
             className="mx-auto mt-8 max-w-2xl font-body text-lg leading-relaxed text-navy-200"
           >
-            An innovation and research hub where learners collaborate on engineering, AI,
-            entrepreneurship and technology projects with real-world impact.
+            Seven innovation schools where learners collaborate on AI, software engineering,
+            cloud, cybersecurity, data science, robotics and creative media projects with real-world impact.
           </motion.p>
 
-          <motion.div variants={fadeUpItem} className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {CATEGORIES.map((item) => (
-              <div
-                key={item.label}
-                className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-md"
-              >
-                <item.icon size={20} className="text-gold-400" aria-hidden="true" />
-                <span className="font-body text-sm font-medium text-white">{item.label}</span>
-              </div>
-            ))}
+          <motion.div variants={fadeUpItem} className="mt-10">
+            <p className="mb-4 font-body text-xs font-semibold uppercase tracking-wider text-gold-400">
+              Seven Schools
+            </p>
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {CATEGORIES.map((item) => (
+                <div
+                  key={item.label}
+                  className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-md"
+                >
+                  <item.icon size={20} className="text-gold-400" aria-hidden="true" />
+                  <span className="font-body text-sm font-medium text-white">{item.label}</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div variants={fadeUpItem} className="mt-6">
+            <p className="mb-4 font-body text-xs font-semibold uppercase tracking-wider text-gold-400">
+              Four Ways to Get Involved
+            </p>
+            <div className="flex flex-wrap justify-center gap-3">
+              {TRACKS.map((item) => (
+                <div
+                  key={item.label}
+                  className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 backdrop-blur-md"
+                >
+                  <item.icon size={16} className="text-gold-400" aria-hidden="true" />
+                  <span className="font-body text-xs font-medium text-white">{item.label}</span>
+                </div>
+              ))}
+            </div>
           </motion.div>
         </motion.div>
       </div>
