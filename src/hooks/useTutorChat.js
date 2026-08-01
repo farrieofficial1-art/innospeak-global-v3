@@ -21,11 +21,24 @@ export default function useTutorChat(initialPersonaId = DEFAULT_PERSONA_ID) {
   const [error, setError] = useState(null);
 
   const sendMessage = useCallback(
-    async (text) => {
+    async (text, attachments = []) => {
       const trimmed = text.trim();
-      if (!trimmed || isSending) return;
+      if ((!trimmed && attachments.length === 0) || isSending) return;
 
-      const userMessage = { id: nextId(), role: 'user', content: trimmed };
+      const userMessage = {
+        id: nextId(),
+        role: 'user',
+        content: trimmed,
+        // Kept locally for display (previewUrl is a data: URL, cheap to hold
+        // in memory); only the current turn's base64 payload is sent below.
+        attachments: attachments.map(({ id, name, mimeType, kind, previewUrl }) => ({
+          id,
+          name,
+          mimeType,
+          kind,
+          previewUrl,
+        })),
+      };
       const history = [...messages, userMessage];
       setMessages(history);
       setError(null);
@@ -34,7 +47,18 @@ export default function useTutorChat(initialPersonaId = DEFAULT_PERSONA_ID) {
       try {
         const reply = await askTutor({
           personaId,
-          messages: history.map(({ role, content }) => ({ role, content })),
+          messages: history.map(({ role, content }, index) => ({
+            role,
+            content,
+            // Only re-send raw attachment bytes for the message just sent —
+            // resending every past image/video on every turn would balloon
+            // the request. Earlier attachments stay visible in the UI via
+            // their local previewUrl above.
+            attachments:
+              index === history.length - 1
+                ? attachments.map(({ mimeType, base64 }) => ({ mimeType, base64 }))
+                : undefined,
+          })),
         });
         setMessages((prev) => [...prev, { id: nextId(), role: 'assistant', content: reply }]);
       } catch (err) {

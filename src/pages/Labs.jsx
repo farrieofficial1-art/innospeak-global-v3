@@ -1,13 +1,24 @@
+
 import Seo from '../components/ui/Seo.jsx';
+import LabsHero from '../components/sections/labs/LabsHero';
+import AboutLabs from '../components/sections/labs/AboutLabs';
+import LabTracks from '../components/sections/labs/LabTracks';
+import InnovationProcess from '../components/sections/labs/InnovationProcess';
+import LabOutcomes from '../components/sections/labs/LabOutcomes';
+import LabsFAQ from '../components/sections/labs/LabsFAQ';
+import SubmitChallenge from '../components/sections/labs/SubmitChallenge';
 
 export default function Labs() {
   return (
     <>
       <Seo title="Labs" path="/labs" />
-      <section className="container-premium py-32">
-        <h1 className="font-display text-4xl font-bold text-navy-900 sm:text-5xl">Labs</h1>
-        <p className="mt-4 font-body text-navy-600">Programme content coming soon.</p>
-      </section>
+      <LabsHero />
+      <AboutLabs />
+      <LabTracks />
+      <InnovationProcess />
+      <LabOutcomes />
+      <LabsFAQ />
+      <SubmitChallenge />
     </>
   );
 }

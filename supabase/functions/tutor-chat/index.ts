@@ -1,16 +1,19 @@
 // supabase/functions/tutor-chat/index.ts
 //
-// InnoSpeak Tutor — Edge Function
+// InnoSpeak Tutor — Edge Function (Gemini backend, free tier)
 //
 // The browser (via src/lib/tutor/tutorApi.js) sends { personaId, messages }
 // here. This function attaches the right system prompt for the persona,
-// calls the Anthropic API with the server-only ANTHROPIC_API_KEY secret,
+// calls Google's Gemini API with the server-only GEMINI_API_KEY secret,
 // and returns { reply }. The API key never reaches the client.
+//
+// Get a free key (no credit card, ~1,500 requests/day on Flash):
+//   https://aistudio.google.com -> Get API key -> Create API key
 //
 // Deploy:
 //   supabase functions deploy tutor-chat
 // Configure the secret once per project:
-//   supabase secrets set ANTHROPIC_API_KEY=sk-ant-...
+//   supabase secrets set GEMINI_API_KEY=AIza...
 //
 // NOTE: persona system prompts are duplicated from
 // src/components/tutor/tutorPersonas.js because Edge Functions run in an
@@ -19,9 +22,10 @@
 
 import { serve } from 'https://deno.land/std@0.224.0/http/server.ts';
 
-const ANTHROPIC_API_KEY = Deno.env.get('ANTHROPIC_API_KEY');
-const MODEL = 'claude-sonnet-5';
-const MAX_TOKENS = 1024;
+const GEMINI_API_KEY = Deno.env.get('GEMINI_API_KEY');
+const MODEL = 'gemini-3.5-flash-lite';
+const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`;
+const MAX_OUTPUT_TOKENS = 1024;
 const MAX_HISTORY_MESSAGES = 20; // keep requests small; trims oldest turns
 
 const CORS_HEADERS = {
@@ -70,24 +74,56 @@ function isValidPersonaId(value: unknown): value is PersonaId {
   return typeof value === 'string' && value in SYSTEM_PROMPTS;
 }
 
+interface Attachment {
+  mimeType: string;
+  base64: string;
+}
+
 interface ChatMessage {
   role: 'user' | 'assistant';
   content: string;
+  attachments?: Attachment[];
 }
+
+const MAX_ATTACHMENTS_PER_MESSAGE = 4;
 
 function sanitizeMessages(raw: unknown): ChatMessage[] {
   if (!Array.isArray(raw)) return [];
   const cleaned = raw
-    .filter(
-      (m): m is ChatMessage =>
-        m &&
-        (m.role === 'user' || m.role === 'assistant') &&
-        typeof m.content === 'string' &&
-        m.content.trim().length > 0
-    )
-    .map((m) => ({ role: m.role, content: m.content.slice(0, 8000) }));
+    .filter((m): m is Record<string, unknown> => Boolean(m) && (m.role === 'user' || m.role === 'assistant'))
+    .map((m) => {
+      const content = typeof m.content === 'string' ? m.content.slice(0, 8000) : '';
+      const attachments = Array.isArray(m.attachments)
+        ? m.attachments
+            .filter(
+              (a: unknown): a is Attachment =>
+                Boolean(a) &&
+                typeof (a as Attachment).mimeType === 'string' &&
+                typeof (a as Attachment).base64 === 'string'
+            )
+            .slice(0, MAX_ATTACHMENTS_PER_MESSAGE)
+        : undefined;
+      return { role: m.role as 'user' | 'assistant', content, attachments };
+    })
+    .filter((m) => m.content.trim().length > 0 || (m.attachments && m.attachments.length > 0));
 
   return cleaned.slice(-MAX_HISTORY_MESSAGES);
+}
+
+// Gemini has no separate "assistant" role — it uses "model". Attachments
+// become inlineData parts alongside the text part for that turn.
+function toGeminiContents(messages: ChatMessage[]) {
+  return messages.map((m) => {
+    const parts: Array<{ text: string } | { inlineData: { mimeType: string; data: string } }> = [];
+    if (m.content) parts.push({ text: m.content });
+    for (const a of m.attachments ?? []) {
+      parts.push({ inlineData: { mimeType: a.mimeType, data: a.base64 } });
+    }
+    return {
+      role: m.role === 'assistant' ? 'model' : 'user',
+      parts,
+    };
+  });
 }
 
 serve(async (req) => {
@@ -102,7 +138,7 @@ serve(async (req) => {
     });
   }
 
-  if (!ANTHROPIC_API_KEY) {
+  if (!GEMINI_API_KEY) {
     return new Response(
       JSON.stringify({ error: 'The AI Tutor is not configured on the server yet.' }),
       { status: 500, headers: { ...CORS_HEADERS, 'Content-Type': 'application/json' } }
@@ -121,34 +157,42 @@ serve(async (req) => {
       });
     }
 
-    const anthropicRes = await fetch('https://api.anthropic.com/v1/messages', {
+    const geminiRes = await fetch(`${GEMINI_URL}?key=${GEMINI_API_KEY}`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': ANTHROPIC_API_KEY,
-        'anthropic-version': '2023-06-01',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        model: MODEL,
-        max_tokens: MAX_TOKENS,
-        system: SYSTEM_PROMPTS[personaId],
-        messages,
+        contents: toGeminiContents(messages),
+        systemInstruction: {
+          parts: [{ text: SYSTEM_PROMPTS[personaId] }],
+        },
+        generationConfig: {
+          maxOutputTokens: MAX_OUTPUT_TOKENS,
+        },
       }),
     });
 
-    if (!anthropicRes.ok) {
-      const errText = await anthropicRes.text();
-      console.error('Anthropic API error:', anthropicRes.status, errText);
+    if (!geminiRes.ok) {
+      const errText = await geminiRes.text();
+      console.error('Gemini API error:', geminiRes.status, errText);
+
+      if (geminiRes.status === 429) {
+        return new Response(
+          JSON.stringify({
+            error: "The AI Tutor is getting a lot of requests right now. Please try again in a moment.",
+          }),
+          { status: 429, headers: { ...CORS_HEADERS, 'Content-Type': 'application/json' } }
+        );
+      }
+
       return new Response(
         JSON.stringify({ error: 'The AI Tutor could not respond right now. Please try again.' }),
         { status: 502, headers: { ...CORS_HEADERS, 'Content-Type': 'application/json' } }
       );
     }
 
-    const data = await anthropicRes.json();
-    const reply = (data.content ?? [])
-      .filter((block: { type: string }) => block.type === 'text')
-      .map((block: { text: string }) => block.text)
+    const data = await geminiRes.json();
+    const reply = (data.candidates?.[0]?.content?.parts ?? [])
+      .map((part: { text?: string }) => part.text ?? '')
       .join('\n')
       .trim();
 
