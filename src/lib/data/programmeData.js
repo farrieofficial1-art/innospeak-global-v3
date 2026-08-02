@@ -8,6 +8,8 @@
  * from props, not from this file directly.
  */
 
+import { NEW_LABS_COURSES } from './labsCourses.js';
+
 export const LEVELS = ['Beginner', 'Intermediate', 'Advanced'];
 export const STUDY_MODES = ['Online', 'Hybrid', 'Physical / Hybrid', 'Physical'];
 export const DURATIONS = ['2 Weeks', '3 Weeks', '4 Weeks', '6 Weeks', '8 Weeks', '10 Weeks', '12 Weeks', '16 Weeks'];
@@ -1053,7 +1055,7 @@ export const COURSES = [
   },
   {
     code: "EDR101", name: "Engineering Drawing", academy: ACADEMY,
-    pathwayId: "national-tvet", category: "National Curriculum & TVET", pillar: "academy",
+    pathwayId: "school-engineering-innovation", category: "School of Engineering & Innovation", pillar: "labs",
     shortDescription: "Master technical drawing for engineering and design.",
     fullDescription: "Engineering Drawing covers technical drawing principles, orthographic projection, isometric drawing, dimensioning and CAD basics for engineering and technical applications.",
     duration: "8 Weeks", studyMode: "Hybrid", level: "Intermediate", language: "English",
@@ -1070,7 +1072,7 @@ export const COURSES = [
   },
   {
     code: "ELI101", name: "Electrical Installation", academy: ACADEMY,
-    pathwayId: "national-tvet", category: "National Curriculum & TVET", pillar: "academy",
+    pathwayId: "school-engineering-innovation", category: "School of Engineering & Innovation", pillar: "labs",
     shortDescription: "Learn electrical installation for residential and commercial buildings.",
     fullDescription: "Electrical Installation covers electrical circuits, wiring, safety, installation practices and basic electrical codes for residential and commercial electrical work.",
     duration: "8 Weeks", studyMode: "Physical / Hybrid", level: "Intermediate", language: "English",
@@ -1087,7 +1089,7 @@ export const COURSES = [
   },
   {
     code: "ELN101", name: "Electronics", academy: ACADEMY,
-    pathwayId: "national-tvet", category: "National Curriculum & TVET", pillar: "academy",
+    pathwayId: "school-engineering-innovation", category: "School of Engineering & Innovation", pillar: "labs",
     shortDescription: "Understand electronics from basic components to circuit design.",
     fullDescription: "Electronics covers electronic components, circuit analysis, soldering, testing and basic circuit design for building and repairing electronic devices.",
     duration: "8 Weeks", studyMode: "Physical / Hybrid", level: "Intermediate", language: "English",
@@ -1104,7 +1106,7 @@ export const COURSES = [
   },
   {
     code: "EMA101", name: "Engineering Mathematics", academy: ACADEMY,
-    pathwayId: "national-tvet", category: "National Curriculum & TVET", pillar: "academy",
+    pathwayId: "school-engineering-innovation", category: "School of Engineering & Innovation", pillar: "labs",
     shortDescription: "Master the mathematics needed for engineering study and practice.",
     fullDescription: "Engineering Mathematics covers algebra, trigonometry, calculus, statistics and engineering applications of mathematics for engineering students and professionals.",
     duration: "10 Weeks", studyMode: "Hybrid", level: "Advanced", language: "English",
@@ -1171,7 +1173,7 @@ export const COURSES = [
   },
   {
     code: "REN101", name: "Renewable Energy", academy: ACADEMY,
-    pathwayId: "national-tvet", category: "National Curriculum & TVET", pillar: "academy",
+    pathwayId: "school-engineering-innovation", category: "School of Engineering & Innovation", pillar: "labs",
     shortDescription: "Understand renewable energy systems and technologies.",
     fullDescription: "Renewable Energy covers solar, wind, hydro and biomass energy systems, including system design, installation, maintenance and policy for the renewable energy sector.",
     duration: "8 Weeks", studyMode: "Hybrid", level: "Intermediate", language: "English",
@@ -1188,7 +1190,7 @@ export const COURSES = [
   },
   {
     code: "SOL101", name: "Solar Installation", academy: ACADEMY,
-    pathwayId: "national-tvet", category: "National Curriculum & TVET", pillar: "academy",
+    pathwayId: "school-engineering-innovation", category: "School of Engineering & Innovation", pillar: "labs",
     shortDescription: "Learn to design, install and maintain solar power systems.",
     fullDescription: "Solar Installation covers solar panel types, system sizing, battery storage, charge controllers, inverters, installation practices and maintenance for residential and commercial solar systems.",
     duration: "8 Weeks", studyMode: "Physical / Hybrid", level: "Beginner", language: "English",
@@ -1306,7 +1308,7 @@ export const COURSES = [
   },
   {
     code: "COD101", name: "Coding Fundamentals", academy: ACADEMY,
-    pathwayId: "digital-literacy-productivity", category: "Digital Literacy & Productivity", pillar: "academy",
+    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
     shortDescription: "Learn the building blocks of programming and computational thinking.",
     fullDescription: "Coding Fundamentals introduces programming concepts including variables, loops, conditionals, functions and data structures, using a beginner-friendly language to build computational thinking.",
     duration: "8 Weeks", studyMode: "Online", level: "Beginner", language: "English",
@@ -1323,7 +1325,7 @@ export const COURSES = [
   },
   {
     code: "PY101", name: "Python Programming", academy: ACADEMY,
-    pathwayId: "digital-literacy-productivity", category: "Digital Literacy & Productivity", pillar: "academy",
+    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
     shortDescription: "Learn Python, one of the world's most in-demand programming languages, from the ground up.",
     fullDescription: "Python Programming builds practical coding skills from syntax and data types to functions, file handling and simple projects, giving learners a strong foundation in one of the most popular programming languages.",
     duration: "10 Weeks", studyMode: "Online", level: "Beginner", language: "English",
@@ -1340,7 +1342,7 @@ export const COURSES = [
   },
   {
     code: "AIF101", name: "Artificial Intelligence Fundamentals", academy: ACADEMY,
-    pathwayId: "digital-literacy-productivity", category: "Digital Literacy & Productivity", pillar: "academy",
+    pathwayId: "school-ai", category: "School of Artificial Intelligence", pillar: "labs",
     shortDescription: "Understand how AI works and explore its real-world applications and impact.",
     fullDescription: "Artificial Intelligence Fundamentals introduces the concepts behind AI, including machine learning, neural networks and natural language processing, with practical exploration of AI tools and their real-world impact.",
     duration: "6 Weeks", studyMode: "Online", level: "Beginner", language: "English",
@@ -1357,7 +1359,7 @@ export const COURSES = [
   },
   {
     code: "AI101", name: "Applied AI Tools", academy: ACADEMY,
-    pathwayId: "digital-literacy-productivity", category: "Digital Literacy & Productivity", pillar: "academy",
+    pathwayId: "school-ai", category: "School of Artificial Intelligence", pillar: "labs",
     shortDescription: "Master AI tools to boost productivity, creativity, and professional efficiency.",
     fullDescription: "Applied AI Tools introduces practical AI tools for content creation, data analysis, design and automation, helping learners integrate AI into their daily work and study.",
     duration: "6 Weeks", studyMode: "Online", level: "Beginner", language: "English",
@@ -1374,7 +1376,7 @@ export const COURSES = [
   },
   {
     code: "CYB101", name: "Cybersecurity Awareness", academy: ACADEMY,
-    pathwayId: "digital-literacy-productivity", category: "Digital Literacy & Productivity", pillar: "academy",
+    pathwayId: "school-cybersecurity", category: "School of Cybersecurity", pillar: "labs",
     shortDescription: "Learn essential cybersecurity skills to stay safe online and protect your data.",
     fullDescription: "Cybersecurity Awareness covers password security, phishing, malware, safe browsing, social media privacy and basic digital hygiene for individuals and small organisations.",
     duration: "4 Weeks", studyMode: "Online", level: "Beginner", language: "English",
@@ -1640,7 +1642,7 @@ export const COURSES = [
   },
   {
     code: "FIG101", name: "Figma Design", academy: ACADEMY,
-    pathwayId: "creative-design", category: "Creative Design & Media", pillar: "academy",
+    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
     shortDescription: "Master Figma for collaborative interface design and prototyping.",
     fullDescription: "Figma Design teaches learners to use Figma for UI design, prototyping, design systems and collaboration, building the skills needed for modern digital product design workflows.",
     duration: "6 Weeks", studyMode: "Online", level: "Beginner", language: "English",
@@ -1657,7 +1659,7 @@ export const COURSES = [
   },
   {
     code: "UIX101", name: "UI/UX Design Fundamentals", academy: ACADEMY,
-    pathwayId: "creative-design", category: "Creative Design & Media", pillar: "academy",
+    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
     shortDescription: "Design intuitive, user-centred digital products from wireframe to prototype.",
     fullDescription: "UI/UX Design Fundamentals covers user research, wireframing, prototyping, usability testing and design systems, giving learners a practical foundation in digital product design.",
     duration: "8 Weeks", studyMode: "Online", level: "Beginner", language: "English",
@@ -1674,7 +1676,7 @@ export const COURSES = [
   },
   {
     code: "UID101", name: "UI Design", academy: ACADEMY,
-    pathwayId: "creative-design", category: "Creative Design & Media", pillar: "academy",
+    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
     shortDescription: "Master the visual design of digital interfaces.",
     fullDescription: "UI Design covers visual hierarchy, colour theory, typography, component design and design systems for web and mobile interfaces, building practical skills in digital visual design.",
     duration: "8 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -1691,7 +1693,7 @@ export const COURSES = [
   },
   {
     code: "UXD101", name: "UX Design", academy: ACADEMY,
-    pathwayId: "creative-design", category: "Creative Design & Media", pillar: "academy",
+    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
     shortDescription: "Master user research, usability and experience design for digital products.",
     fullDescription: "UX Design covers user research methods, personas, journey mapping, usability testing and information architecture, building the skills to design experiences users love.",
     duration: "8 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -1708,7 +1710,7 @@ export const COURSES = [
   },
   {
     code: "MOG101", name: "Motion Graphics", academy: ACADEMY,
-    pathwayId: "creative-design", category: "Creative Design & Media", pillar: "academy",
+    pathwayId: "school-creative-ai-immersive", category: "School of Creative AI & Immersive Media", pillar: "labs",
     shortDescription: "Create dynamic motion graphics for video, web and social media.",
     fullDescription: "Motion Graphics covers animation principles, keyframing, easing, text animation and compositing using After Effects, building skills for creating professional motion content.",
     duration: "8 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -1725,7 +1727,7 @@ export const COURSES = [
   },
   {
     code: "MOT101", name: "Motion Design", academy: ACADEMY,
-    pathwayId: "creative-design", category: "Creative Design & Media", pillar: "academy",
+    pathwayId: "school-creative-ai-immersive", category: "School of Creative AI & Immersive Media", pillar: "labs",
     shortDescription: "Master motion design for digital products and brand experiences.",
     fullDescription: "Motion Design covers advanced animation, transitions, micro-interactions and motion branding for digital products, building skills in creating polished motion design work.",
     duration: "8 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -2120,7 +2122,7 @@ export const COURSES = [
   },
   {
     code: "AIP101", name: "AI Prompt Engineering", academy: ACADEMY,
-    pathwayId: "freelancing", category: "Freelancing & Remote Work", pillar: "academy",
+    pathwayId: "school-ai", category: "School of Artificial Intelligence", pillar: "labs",
     shortDescription: "Master the art of writing effective prompts to get the best results from AI tools.",
     fullDescription: "AI Prompt Engineering teaches learners to design effective prompts for text, image and code-generation AI tools, covering prompt structure, iteration techniques and use cases across freelancing, content and business tasks.",
     duration: "6 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -2443,7 +2445,7 @@ export const COURSES = [
   },
   {
     code: "CRD104", name: "Technical Interview Prep", academy: ACADEMY,
-    pathwayId: "career", category: "Career Development", pillar: "academy",
+    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
     shortDescription: "Prepare for technical interviews at leading technology companies.",
     fullDescription: "Technical Interview Prep covers data structures, algorithms, system design, coding challenges and behavioural interviews, with mock interview practice and strategy for technical roles at tech companies.",
     duration: "6 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -3394,7 +3396,8 @@ export const COURSES = [
     instructor: { name: "To be announced", bio: "Instructor details will be confirmed before intake." },
     brochureUrl: '#', calendarUrl: '#', featuredImage: null,
     featured: false, createdAt: "2026-09-11",
-  }
+  },
+  ...NEW_LABS_COURSES,
 ];
 
 // ── Backward-compatible aliases ──────────────────────────────

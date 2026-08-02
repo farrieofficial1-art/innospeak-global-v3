@@ -15,8 +15,8 @@ export const LAB_SCHOOLS = [
     icon: 'Brain',
     description:
       'Build intelligent systems — from RAG pipelines and AI agents to multimodal applications — using LangChain, LangGraph, MCP and modern LLM APIs.',
-    technologies: ['LangChain', 'LangGraph', 'MCP', 'RAG', 'OpenAI API', 'Vector Databases', 'Python', 'Hugging Face'],
-    tracks: ['AI Foundations', 'AI Agents', 'Multimodal AI', 'AI Automation'],
+    technologies: ['LangChain', 'LangGraph', 'MCP', 'RAG', 'OpenAI API', 'Anthropic API', 'Vector Databases', 'Python', 'Hugging Face', 'CrewAI', 'AutoGen', 'Semantic Kernel', 'Whisper', 'PyTorch', 'TensorFlow'],
+    tracks: ['AI Foundations', 'Generative AI', 'AI Agents', 'Agentic Workflows', 'Multi-Agent Systems', 'MCP', 'RAG Systems', 'NLP', 'Computer Vision', 'Reinforcement Learning', 'Deep Learning', 'AI for Industry', 'AI Ethics'],
   },
   {
     id: 'school-software-engineering',
@@ -24,8 +24,8 @@ export const LAB_SCHOOLS = [
     icon: 'Code',
     description:
       'Design, build and ship production software — from full-stack web apps to mobile applications and well-architected APIs.',
-    technologies: ['React', 'Node.js', 'TypeScript', 'Python', 'PostgreSQL', 'Docker', 'REST', 'GraphQL'],
-    tracks: ['Full-Stack Development', 'API Design', 'Mobile Development', 'DevOps Pipelines'],
+    technologies: ['React', 'Node.js', 'TypeScript', 'Python', 'Go', 'Rust', 'C++', 'PostgreSQL', 'Docker', 'REST', 'GraphQL', 'Swift', 'Kotlin', 'Electron'],
+    tracks: ['Frontend Development', 'Backend Development', 'Full-Stack Development', 'Mobile Development', 'Desktop Applications', 'System Design', 'Software Architecture', 'Microservices', 'API Design', 'Design Patterns', 'Clean Architecture', 'Testing', 'Agile & Scrum', 'Security'],
   },
   {
     id: 'school-cloud-devops',
@@ -33,8 +33,8 @@ export const LAB_SCHOOLS = [
     icon: 'Cloud',
     description:
       'Architect and operate cloud infrastructure — from CI/CD pipelines to Kubernetes clusters and infrastructure as code.',
-    technologies: ['AWS', 'Azure', 'Docker', 'Kubernetes', 'Terraform', 'GitHub Actions', 'Linux', 'Nginx'],
-    tracks: ['Cloud Infrastructure', 'CI/CD Pipelines', 'Container Orchestration', 'Infrastructure as Code'],
+    technologies: ['AWS', 'Azure', 'Google Cloud', 'Docker', 'Kubernetes', 'Terraform', 'Ansible', 'GitHub Actions', 'GitLab CI', 'Linux', 'Nginx', 'Prometheus', 'Grafana', 'ELK Stack'],
+    tracks: ['AWS', 'Azure', 'Google Cloud', 'Docker', 'Kubernetes', 'Terraform', 'CI/CD', 'Serverless', 'DevSecOps', 'Cloud Security', 'Monitoring & Observability', 'Infrastructure as Code', 'Site Reliability Engineering', 'Chaos Engineering'],
   },
   {
     id: 'school-cybersecurity',
@@ -42,8 +42,8 @@ export const LAB_SCHOOLS = [
     icon: 'ShieldCheck',
     description:
       'Learn to defend and attack systems ethically — from penetration testing to security operations and threat hunting.',
-    technologies: ['Kali Linux', 'Wireshark', 'Metasploit', 'Burp Suite', 'SIEM', 'Python', 'Nmap', 'OWASP'],
-    tracks: ['Penetration Testing', 'Security Operations', 'Threat Hunting', 'Secure Code Review'],
+    technologies: ['Kali Linux', 'Wireshark', 'Metasploit', 'Burp Suite', 'Splunk', 'Microsoft Sentinel', 'Python', 'Nmap', 'OWASP', 'YARA', 'Ghidra', 'IDA Pro', 'Frida', 'MITRE ATT&CK'],
+    tracks: ['SOC', 'Blue Team', 'Red Team', 'Penetration Testing', 'Bug Bounty', 'Malware Analysis', 'Reverse Engineering', 'Digital Forensics', 'Cloud Security', 'Zero Trust', 'Threat Hunting', 'SIEM', 'Network Security', 'Cryptography'],
   },
   {
     id: 'school-data-science',
@@ -51,8 +51,8 @@ export const LAB_SCHOOLS = [
     icon: 'BarChart3',
     description:
       'Turn raw data into insight — from data pipelines and analytics dashboards to deployed machine learning models.',
-    technologies: ['Python', 'Pandas', 'NumPy', 'Scikit-learn', 'TensorFlow', 'SQL', 'Tableau', 'Power BI', 'Spark'],
-    tracks: ['Data Engineering', 'ML Model Deployment', 'Analytics Dashboards', 'Big Data'],
+    technologies: ['Python', 'Pandas', 'NumPy', 'Scikit-learn', 'TensorFlow', 'PyTorch', 'SQL', 'Tableau', 'Power BI', 'Spark', 'Airflow', 'dbt', 'D3.js', 'Plotly', 'Excel'],
+    tracks: ['Python for Data Science', 'Statistics', 'Machine Learning', 'Deep Learning', 'Big Data', 'Data Engineering', 'Data Warehousing', 'Business Intelligence', 'Predictive Analytics', 'NLP', 'Computer Vision', 'Data Visualization', 'MLOps', 'Data Governance'],
   },
   {
     id: 'school-engineering-innovation',
@@ -60,8 +60,8 @@ export const LAB_SCHOOLS = [
     icon: 'Cog',
     description:
       'Build physical and embedded systems — from robotics and IoT smart farms to renewable energy and embedded hardware.',
-    technologies: ['Arduino', 'Raspberry Pi', 'ROS', 'PLC', 'AutoCAD', 'SolidWorks', '3D Printing', 'Sensors', 'Microcontrollers'],
-    tracks: ['Robotics', 'IoT & Smart Agriculture', 'Renewable Energy', 'Embedded Systems'],
+    technologies: ['Arduino', 'Raspberry Pi', 'ROS', 'ROS2', 'PLC', 'AutoCAD', 'SolidWorks', '3D Printing', 'Sensors', 'Microcontrollers', 'ESP32', 'STM32', 'Drone SDKs', 'SCADA', 'MPPT Controllers'],
+    tracks: ['Robotics', 'IoT & Smart Agriculture', 'Renewable Energy', 'Embedded Systems', 'Drone Technology', 'Smart Grids', 'Electric Vehicles', 'Digital Twin', 'Edge Computing', 'Smart Cities', 'Industrial AI', 'CAM'],
   },
   {
     id: 'school-creative-ai-immersive',
@@ -69,8 +69,8 @@ export const LAB_SCHOOLS = [
     icon: 'Sparkles',
     description:
       'Create at the intersection of AI and media — from AR/VR experiences in Unreal Engine to AI-generated art and 3D worlds.',
-    technologies: ['Unreal Engine', 'Blender', 'Midjourney', 'Adobe Firefly', 'After Effects', 'Unity', 'AR/VR', '3D Modeling'],
-    tracks: ['AR/VR Development', 'AI Art & Design', '3D & Motion Graphics', 'Immersive Experiences'],
+    technologies: ['Unreal Engine', 'Unity', 'Blender', 'Midjourney', 'Adobe Firefly', 'Runway', 'After Effects', 'AR/VR', 'XR', '3D Modeling', 'Motion Capture', 'Suno', 'Stable Diffusion'],
+    tracks: ['AI Art & Design', '3D Modelling', 'Blender', 'Unreal Engine', 'Unity', 'AR Development', 'VR Development', 'XR Development', 'Motion Capture', 'Virtual Production', 'AI Music', 'AI Animation', 'Game Development', 'Game Design', 'Immersive Storytelling'],
   },
 ];
 
