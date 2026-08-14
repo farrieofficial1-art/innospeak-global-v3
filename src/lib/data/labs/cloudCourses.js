@@ -3,7 +3,7 @@
  * New courses created for the Labs expansion.
  */
 
-const ACADEMY = 'InnoSpeak Academy';
+const ACADEMY = 'InnoSpeak Labs';
 
 export const CLOUD_COURSES = [
   {

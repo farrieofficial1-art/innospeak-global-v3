@@ -1,25 +1,15 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { GraduationCap, Users, HandHeart, HeartHandshake } from 'lucide-react';
-import { FOUNDATION_HERO_SLIDES, FOUNDATION_HERO_IMAGE_STATS, FOUNDATION_FEATURE_CARDS } from './foundationHeroData.js';
+import { motion } from 'framer-motion';
+import { TrendingUp, Briefcase, Globe, Heart } from 'lucide-react';
+import { IMPACT_HERO_IMAGE, IMPACT_HERO_IMAGE_STATS, IMPACT_FEATURE_CARDS } from './impactHeroData.js';
 
 const ICONS = {
-  graduation: GraduationCap,
-  users: Users,
-  'hand-heart': HandHeart,
-  'heart-handshake': HeartHandshake,
+  'trending-up': TrendingUp,
+  briefcase: Briefcase,
+  globe: Globe,
+  heart: Heart,
 };
 
-export default function FoundationHeroImage() {
-  const [current, setCurrent] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % FOUNDATION_HERO_SLIDES.length);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, []);
-
+export default function ImpactHeroImage() {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.95 }}
@@ -28,32 +18,12 @@ export default function FoundationHeroImage() {
       className="relative mx-auto w-full max-w-lg lg:max-w-none"
     >
       <div className="relative overflow-hidden rounded-3xl border border-navy-100 shadow-premium-lg">
-        <div className="relative aspect-[4/5] w-full sm:aspect-[4/3] lg:aspect-[5/6]">
-          <AnimatePresence mode="sync">
-            <motion.img
-              key={current}
-              src={FOUNDATION_HERO_SLIDES[current].image}
-              alt={FOUNDATION_HERO_SLIDES[current].title}
-              initial={{ opacity: 0, scale: 1.05 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute inset-0 h-full w-full object-cover"
-            />
-          </AnimatePresence>
-        </div>
+        <img
+          src={IMPACT_HERO_IMAGE}
+          alt="A learner at InnoSpeak Global"
+          className="aspect-[4/5] w-full object-cover sm:aspect-[4/3] lg:aspect-[5/6]"
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-navy-900/40 via-transparent to-transparent" />
-
-        <div className="absolute left-1/2 top-4 z-10 flex -translate-x-1/2 gap-1.5">
-          {FOUNDATION_HERO_SLIDES.map((_, i) => (
-            <span
-              key={i}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
-                i === current ? 'w-5 bg-gold-400' : 'w-1.5 bg-white/50'
-              }`}
-            />
-          ))}
-        </div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -61,7 +31,7 @@ export default function FoundationHeroImage() {
           transition={{ duration: 0.6, delay: 0.8 }}
           className="absolute bottom-4 left-4 right-4 flex items-center justify-around rounded-2xl border border-white/20 bg-white/15 px-4 py-3 shadow-glass backdrop-blur-md"
         >
-          {FOUNDATION_HERO_IMAGE_STATS.map((stat) => (
+          {IMPACT_HERO_IMAGE_STATS.map((stat) => (
             <div key={stat.label} className="text-center">
               <div className="font-display text-lg font-bold text-white sm:text-xl">
                 {stat.value}
@@ -74,8 +44,8 @@ export default function FoundationHeroImage() {
         </motion.div>
       </div>
 
-      {FOUNDATION_FEATURE_CARDS.map((card, i) => {
-        const Icon = ICONS[card.icon] ?? GraduationCap;
+      {IMPACT_FEATURE_CARDS.map((card, i) => {
+        const Icon = ICONS[card.icon] ?? TrendingUp;
         return (
           <motion.div
             key={card.label}

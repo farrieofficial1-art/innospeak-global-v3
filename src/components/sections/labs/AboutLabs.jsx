@@ -11,9 +11,9 @@ export default function AboutLabs() {
       <div className="container-premium">
         <motion.div variants={container} initial="hidden" whileInView="visible" viewport={inViewOnce}>
           <SectionHeading
-            eyebrow="Not Another Course"
+            eyebrow="More Than a Course"
             title="Where Skills Meet Real Problems"
-            subtitle="Labs isn't a second curriculum — it's what comes after the learning. Seven schools, one mission: build something real."
+            subtitle="Labs isn't a second curriculum — it's what comes after the learning. Seven innovation pathways, one mission: build something real."
           />
 
           <div className="mt-12 grid gap-6 md:grid-cols-2">

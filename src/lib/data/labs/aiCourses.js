@@ -1,9 +1,9 @@
 /**
  * AI Lab courses — School of Artificial Intelligence.
- * New courses created for the Labs expansion.
+ * Fully enriched with learning objectives, modules, capstones, and professional details.
  */
 
-const ACADEMY = 'InnoSpeak Academy';
+const ACADEMY = 'InnoSpeak Labs';
 
 export const AI_COURSES = [
   {

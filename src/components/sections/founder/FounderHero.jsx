@@ -1,59 +1,76 @@
 import { motion } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
-import { staggerContainer, fadeUpItem } from '../../../lib/motion/presets';
-import heroBg from '../../../assets/founder/founder-hero-bg.jpg';
+import FounderHeroImage from './FounderHeroImage.jsx';
+import {
+  FOUNDER_HERO_BADGE,
+  FOUNDER_HERO_HEADLINE,
+  FOUNDER_HERO_QUOTE,
+} from './founderHeroData.js';
 
-const container = staggerContainer(0.12, 0.1);
-
+/**
+ * FounderHero — mirrors the About/Academy/Labs/Foundation/Impact hero
+ * pattern: two-column layout, single framed photo with floating feature
+ * badges and a stats strip. Uses a single static portrait (not a slider)
+ * since there's only one real photo of Fred.
+ */
 export default function FounderHero() {
   return (
-    <section className="relative overflow-hidden bg-navy-950 pb-20 pt-32 md:pt-40">
-      <img
-        src={heroBg}
-        alt=""
-        aria-hidden="true"
-        className="absolute inset-0 h-full w-full object-cover object-top"
-      />
+    <section className="relative overflow-hidden bg-white py-20 sm:py-24 lg:py-28">
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-navy-50/40 via-white to-gold-50/30" />
 
-      <div className="absolute inset-0 bg-gradient-to-b from-navy-950/95 via-navy-900/90 to-navy-950/95" />
+      <div className="container-premium relative z-10">
+        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+          <div className="text-center lg:text-left">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center gap-2 rounded-full border border-gold-500/20 bg-gold-500/10 px-4 py-2"
+            >
+              <Sparkles size={16} className="text-gold-500" />
+              <span className="font-body text-xs font-semibold uppercase tracking-wider text-gold-700">
+                {FOUNDER_HERO_BADGE}
+              </span>
+            </motion.div>
 
-      <div className="pointer-events-none absolute -top-24 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-gold-500/15 blur-[140px]" aria-hidden="true" />
-      <div className="pointer-events-none absolute bottom-0 right-0 h-72 w-72 rounded-full bg-navy-700/30 blur-[120px]" aria-hidden="true" />
+            <h1 className="mt-6 font-display text-4xl font-bold leading-tight text-navy-900 sm:text-5xl lg:text-[3.25rem]">
+              {FOUNDER_HERO_HEADLINE.map((line, i) => (
+                <motion.span
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.15 + i * 0.15 }}
+                  className={line.highlight ? 'block text-gradient-gold' : 'block'}
+                >
+                  {line.text}
+                </motion.span>
+              ))}
+            </h1>
 
-      <div className="container-premium relative">
-        <motion.div
-          variants={container}
-          initial="hidden"
-          animate="visible"
-          className="mx-auto max-w-3xl text-center"
-        >
-          <motion.span
-            variants={fadeUpItem}
-            className="inline-flex items-center gap-2 rounded-full border border-gold-500/30 bg-gold-500/10 px-4 py-2 font-body text-xs font-semibold uppercase tracking-wider text-gold-300 backdrop-blur-sm"
-          >
-            <Sparkles size={14} aria-hidden="true" />
-            A Vision Born from Purpose
-          </motion.span>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.65 }}
+              className="mx-auto mt-6 max-w-xl font-body text-base italic leading-relaxed text-navy-600 lg:mx-0 sm:text-lg"
+            >
+              {FOUNDER_HERO_QUOTE}
+            </motion.p>
 
-          <motion.h1
-            variants={fadeUpItem}
-            className="mt-6 font-display text-4xl font-bold leading-tight text-white sm:text-5xl md:text-6xl"
-          >
-            Meet Our Founder &amp; CEO
-          </motion.h1>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.85 }}
+              className="mt-8"
+            >
+              <p className="font-display text-2xl font-bold text-navy-900">Fred Omondi</p>
+              <p className="mt-1 font-body text-sm text-navy-600">
+                Founder &amp; Chief Executive Officer, InnoSpeak Global
+              </p>
+            </motion.div>
+          </div>
 
-          <motion.p
-            variants={fadeUpItem}
-            className="mx-auto mt-8 max-w-2xl font-body text-lg italic leading-relaxed text-navy-200"
-          >
-            "Some people see obstacles. Others see opportunities to create lasting change."
-          </motion.p>
-
-          <motion.div variants={fadeUpItem} className="mt-8">
-            <p className="font-display text-2xl font-bold text-gold-400">Fred Omondi</p>
-            <p className="mt-1 font-body text-sm text-white/70">Founder &amp; Chief Executive Officer, InnoSpeak Global</p>
-          </motion.div>
-        </motion.div>
+          <FounderHeroImage />
+        </div>
       </div>
     </section>
   );

@@ -10,6 +10,7 @@
 
 import { NEW_LABS_COURSES } from './labsCourses.js';
 
+export const ACADEMY = 'InnoSpeak Academy';
 export const LEVELS = ['Beginner', 'Intermediate', 'Advanced'];
 export const STUDY_MODES = ['Online', 'Hybrid', 'Physical / Hybrid', 'Physical'];
 export const DURATIONS = ['2 Weeks', '3 Weeks', '4 Weeks', '6 Weeks', '8 Weeks', '10 Weeks', '12 Weeks', '16 Weeks'];
@@ -3410,8 +3411,6 @@ export const INTAKES = [
   'September',
 ];
 
-export { ACADEMY };
-
 // ── Helper functions ─────────────────────────────────────────
 
 /** Look up a course by its course code. */
@@ -3460,5 +3459,3 @@ export function getAcademyPathways() {
   const academyPathwayIds = new Set(getAcademyCourses().map((c) => c.pathwayId));
   return PATHWAYS.filter((p) => academyPathwayIds.has(p.id));
 }
-
-const ACADEMY = 'InnoSpeak Academy';

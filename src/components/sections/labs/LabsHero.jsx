@@ -1,99 +1,79 @@
 import { motion } from 'framer-motion';
-import { Brain, Code, Cloud, ShieldCheck, ChartBar as BarChart3, Cog, Sparkles, Lightbulb, FlaskConical, Rocket, Wrench } from 'lucide-react';
-import { staggerContainer, fadeUpItem } from '../../../lib/motion/presets';
-import LabsHeroSlider from './LabsHeroSlider.jsx';
+import { ArrowRight, GraduationCap, Sparkles } from 'lucide-react';
+import { Button } from '../../ui';
+import LabsHeroImage from './LabsHeroImage.jsx';
+import {
+  LABS_HERO_BADGE,
+  LABS_HERO_HEADLINE,
+  LABS_HERO_DESCRIPTION,
+} from './labsHeroData.js';
 
-const container = staggerContainer(0.1, 0.1);
-
-const CATEGORIES = [
-  { icon: Brain, label: 'AI' },
-  { icon: Code, label: 'Software Engineering' },
-  { icon: Cloud, label: 'Cloud & DevOps' },
-  { icon: ShieldCheck, label: 'Cybersecurity' },
-  { icon: BarChart3, label: 'Data Science' },
-  { icon: Cog, label: 'Engineering & Innovation' },
-  { icon: Sparkles, label: 'Creative AI & Immersive' },
-];
-
-const TRACKS = [
-  { icon: Lightbulb, label: 'Innovation Projects' },
-  { icon: FlaskConical, label: 'Research & Development' },
-  { icon: Rocket, label: 'Startup Incubation' },
-  { icon: Wrench, label: 'Tech Workshops' },
-];
-
+/**
+ * LabsHero — mirrors the About/Academy hero pattern: two-column layout,
+ * single framed photo with floating feature badges and a stats strip.
+ */
 export default function LabsHero() {
   return (
-    <section className="relative overflow-hidden bg-navy-950 pb-20 pt-32 md:pt-40">
-      <LabsHeroSlider />
+    <section className="relative overflow-hidden bg-white py-20 sm:py-24 lg:py-28">
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-navy-50/40 via-white to-gold-50/30" />
 
-      <div className="pointer-events-none absolute -top-24 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-gold-500/15 blur-[140px]" aria-hidden="true" />
-      <div className="pointer-events-none absolute bottom-0 right-0 h-72 w-72 rounded-full bg-navy-700/30 blur-[120px]" aria-hidden="true" />
+      <div className="container-premium relative z-10">
+        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+          <div className="text-center lg:text-left">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center gap-2 rounded-full border border-gold-500/20 bg-gold-500/10 px-4 py-2"
+            >
+              <Sparkles size={16} className="text-gold-500" />
+              <span className="font-body text-xs font-semibold uppercase tracking-wider text-gold-700">
+                {LABS_HERO_BADGE}
+              </span>
+            </motion.div>
 
-      <div className="container-premium relative">
-        <motion.div
-          variants={container}
-          initial="hidden"
-          animate="visible"
-          className="mx-auto max-w-3xl text-center"
-        >
-          <motion.span
-            variants={fadeUpItem}
-            className="inline-flex items-center gap-2 rounded-full border border-gold-500/30 bg-gold-500/10 px-4 py-2 font-body text-xs font-semibold uppercase tracking-wider text-gold-300 backdrop-blur-sm"
-          >
-            <Sparkles size={14} aria-hidden="true" />
-            Innovate. Build. Launch.
-          </motion.span>
-
-          <motion.h1
-            variants={fadeUpItem}
-            className="mt-6 font-display text-4xl font-bold leading-tight text-white sm:text-5xl md:text-6xl"
-          >
-            InnoSpeak Global Labs
-          </motion.h1>
-
-          <motion.p
-            variants={fadeUpItem}
-            className="mx-auto mt-8 max-w-2xl font-body text-lg leading-relaxed text-navy-200"
-          >
-            Seven innovation schools where learners collaborate on AI, software engineering,
-            cloud, cybersecurity, data science, robotics and creative media projects with real-world impact.
-          </motion.p>
-
-          <motion.div variants={fadeUpItem} className="mt-10">
-            <p className="mb-4 font-body text-xs font-semibold uppercase tracking-wider text-gold-400">
-              Seven Schools
-            </p>
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-              {CATEGORIES.map((item) => (
-                <div
-                  key={item.label}
-                  className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-md"
+            <h1 className="mt-6 font-display text-4xl font-bold leading-tight text-navy-900 sm:text-5xl lg:text-[3.25rem]">
+              {LABS_HERO_HEADLINE.map((line, i) => (
+                <motion.span
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.15 + i * 0.15 }}
+                  className={line.highlight ? 'block text-gradient-gold' : 'block'}
                 >
-                  <item.icon size={20} className="text-gold-400" aria-hidden="true" />
-                  <span className="font-body text-sm font-medium text-white">{item.label}</span>
-                </div>
+                  {line.text}
+                </motion.span>
               ))}
-            </div>
-          </motion.div>
+            </h1>
 
-          <motion.div variants={fadeUpItem} className="mt-6">
-            <p className="mb-4 font-body text-xs font-semibold uppercase tracking-wider text-gold-400">
-              Four Ways to Get Involved
-            </p>
-            <div className="flex flex-wrap justify-center gap-3">
-              {TRACKS.map((item) => (
-                <div
-                  key={item.label}
-                  className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 backdrop-blur-md"
-                >
-                  <item.icon size={16} className="text-gold-400" aria-hidden="true" />
-                  <span className="font-body text-xs font-medium text-white">{item.label}</span>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        </motion.div>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.65 }}
+              className="mx-auto mt-6 max-w-xl font-body text-base leading-relaxed text-navy-600 lg:mx-0 sm:text-lg"
+            >
+              {LABS_HERO_DESCRIPTION}
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.85 }}
+              className="mt-8 flex flex-col gap-4 sm:flex-row lg:justify-start justify-center"
+            >
+              <Button href="#labs-catalogue" variant="gold" size="lg" className="group">
+                Explore Lab Courses
+                <ArrowRight size={18} className="ml-2 transition-transform group-hover:translate-x-1" />
+              </Button>
+              <Button to="/academy" variant="outline" size="lg" className="group">
+                <GraduationCap size={18} className="mr-2" />
+                Start With the Academy
+              </Button>
+            </motion.div>
+          </div>
+
+          <LabsHeroImage />
+        </div>
       </div>
     </section>
   );

@@ -127,9 +127,9 @@ export default function LabTracks() {
           viewport={inViewOnce}
         >
           <SectionHeading
-            eyebrow="Lab Schools"
-            title="Seven Innovation Schools"
-            subtitle="Each school focuses on a different domain — pick the one that matches what you want to build."
+            eyebrow="Pathways"
+            title="Seven Innovation Pathways"
+            subtitle="Each pathway focuses on a different domain — pick the one that matches what you want to build."
           />
 
           <div className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-2">

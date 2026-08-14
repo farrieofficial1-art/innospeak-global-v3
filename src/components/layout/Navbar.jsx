@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, UserCircle2 } from 'lucide-react';
 import useScrolled from '../../hooks/useScrolled.js';
+import { useAuth } from '../../context/AuthContext.jsx';
 import logo from '../../assets/logo/logo.png';
 
 const navLinks = [
@@ -20,6 +21,7 @@ export default function Navbar() {
   const scrolled = useScrolled(50);
   const [mobileOpen, setMobileOpen] = useState(false);
   const { pathname } = useLocation();
+  const { user } = useAuth();
 
   const linkBase = 'font-body text-sm font-medium transition-colors duration-200';
   const linkIdle = scrolled ? 'text-navy-700 hover:text-gold-600' : 'text-white hover:text-gold-400';
@@ -71,7 +73,16 @@ export default function Navbar() {
         </ul>
 
         {/* Desktop CTA */}
-        <div className="hidden lg:block">
+        <div className="hidden items-center gap-4 lg:flex">
+          <Link
+            to={user ? '/portal' : '/login'}
+            className={`flex items-center gap-1.5 ${linkBase} ${linkIdle} ${
+              pathname === '/portal' ? linkActive : ''
+            }`}
+          >
+            <UserCircle2 size={17} />
+            {user ? 'My Portal' : 'Log In'}
+          </Link>
           <Link to="/apply" className="btn-gold">
             Apply Now
           </Link>
@@ -118,7 +129,14 @@ export default function Navbar() {
                   </li>
                 );
               })}
-              <li className="mt-2">
+              <li className="mt-2 flex flex-col gap-2">
+                <Link
+                  to={user ? '/portal' : '/login'}
+                  onClick={() => setMobileOpen(false)}
+                  className="btn-outline w-full"
+                >
+                  {user ? 'My Portal' : 'Log In'}
+                </Link>
                 <Link
                   to="/apply"
                   onClick={() => setMobileOpen(false)}
