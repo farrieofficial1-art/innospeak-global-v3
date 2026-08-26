@@ -1,29 +1,32 @@
-import { BookOpen, Lightbulb, Cpu, Code } from 'lucide-react';
+import {
+  BookOpen, GraduationCap, Brain, Lightbulb, Cpu, Code2, BriefcaseBusiness,
+} from 'lucide-react';
 import { TUTOR_PERSONAS } from './tutorPersonas';
 import { cn } from '../../utils/cn.js';
 
-const PERSONA_ICONS = { BookOpen, Lightbulb, Cpu, Code };
+const ICONS = { BookOpen, GraduationCap, Brain, Lightbulb, Cpu, Code2, BriefcaseBusiness };
 
 export default function TutorPersonaChips({ activeId, onChange, className = '' }) {
   return (
-    <div className={cn('flex flex-wrap gap-2', className)}>
+    <div className={cn('flex gap-2 overflow-x-auto pb-1 scrollbar-none', className)}>
       {TUTOR_PERSONAS.map((persona) => {
-        const Icon = PERSONA_ICONS[persona.icon];
+        const Icon = ICONS[persona.icon];
         const active = persona.id === activeId;
         return (
           <button
             key={persona.id}
             type="button"
             onClick={() => onChange(persona.id)}
+            title={persona.tagline}
             className={cn(
-              'inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 font-body text-xs font-semibold transition-all duration-200',
+              'group inline-flex shrink-0 items-center gap-2 rounded-xl border px-3 py-2 text-xs font-semibold transition-all',
               active
-                ? 'border-transparent bg-gold-gradient text-navy-900 shadow-gold'
-                : 'border-navy-100 bg-white text-navy-600 hover:border-gold-300 hover:text-gold-700'
+                ? 'border-gold-400/50 bg-gold-400/15 text-gold-700 shadow-sm'
+                : 'border-navy-100 bg-white text-navy-600 hover:border-gold-300 hover:bg-gold-50'
             )}
           >
-            {Icon && <Icon size={13} />}
-            {persona.label}
+            {Icon && <Icon size={15} />}
+            <span>{persona.label}</span>
           </button>
         );
       })}

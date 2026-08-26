@@ -3,14 +3,14 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { LogIn, TriangleAlert } from 'lucide-react';
 import Seo from '../../components/ui/Seo.jsx';
-import { signInWithEmail } from '../../lib/supabase/auth';
+import { signInWithIdentifier } from '../../lib/supabase/auth';
 
 export default function Login() {
   const navigate = useNavigate();
   const location = useLocation();
   const redirectTo = location.state?.from?.pathname || '/portal';
 
-  const [email, setEmail] = useState('');
+  const [identifier, setIdentifier] = useState('');
   const [password, setPassword] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(null);
@@ -20,7 +20,7 @@ export default function Login() {
     setError(null);
     setIsSubmitting(true);
     try {
-      await signInWithEmail({ email, password });
+      await signInWithIdentifier({ identifier, password });
       navigate(redirectTo, { replace: true });
     } catch (err) {
       setError(err.message || 'Could not log you in. Please check your details and try again.');
@@ -49,22 +49,27 @@ export default function Login() {
               Welcome back
             </h1>
             <p className="mt-2 text-center font-body text-sm text-navy-500">
-              Log in to access your courses and progress.
+              Log in with your Student ID or email to access your portal.
             </p>
 
             <form onSubmit={handleSubmit} className="mt-8 space-y-4">
               <div>
-                <label htmlFor="email" className="mb-1.5 block font-body text-xs font-semibold text-navy-700">
-                  Email
+                <label htmlFor="identifier" className="mb-1.5 block font-body text-xs font-semibold text-navy-700">
+                  Student ID or Email
                 </label>
                 <input
-                  id="email"
-                  type="email"
+                  id="identifier"
+                  type="text"
                   required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  autoComplete="username"
+                  placeholder="e.g. ISG-2026-0001 or you@email.com"
+                  value={identifier}
+                  onChange={(e) => setIdentifier(e.target.value)}
                   className="w-full rounded-xl border border-navy-100 bg-white px-4 py-2.5 font-body text-sm text-navy-900 transition-colors duration-200 focus:border-gold-400 focus:outline-none focus:ring-2 focus:ring-gold-400/30"
                 />
+                <p className="mt-1.5 font-body text-xs text-navy-400">
+                  Newly admitted students: use the Student ID and temporary password issued by the institution.
+                </p>
               </div>
 
               <div>

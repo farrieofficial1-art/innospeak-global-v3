@@ -8,7 +8,9 @@ import {
   Mail,
   Phone,
   MapPin,
+  UserCircle2,
 } from 'lucide-react';
+import { useAuth } from '../../context/AuthContext.jsx';
 
 const quickLinks = [
   { label: 'About Us', to: '/about' },
@@ -36,6 +38,8 @@ const linkClass =
   'font-body text-sm text-navy-100/80 transition-colors duration-200 hover:text-gold-300';
 
 export default function Footer() {
+  const { user } = useAuth();
+
   return (
     <footer className="bg-navy-gradient text-white">
       <div className="container-premium py-16">
@@ -76,6 +80,15 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link
+                  to={user ? '/portal' : '/login'}
+                  className={`flex items-center gap-2 font-body text-sm font-semibold text-gold-300 transition-colors duration-200 hover:text-gold-200`}
+                >
+                  <UserCircle2 size={16} />
+                  {user ? 'Student Portal' : 'Student Login'}
+                </Link>
+              </li>
             </ul>
           </div>
 

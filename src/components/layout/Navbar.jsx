@@ -81,7 +81,7 @@ export default function Navbar() {
             }`}
           >
             <UserCircle2 size={17} />
-            {user ? 'My Portal' : 'Log In'}
+            {user ? 'Student Portal' : 'Student Login'}
           </Link>
           <Link to="/apply" className="btn-gold">
             Apply Now
@@ -135,7 +135,7 @@ export default function Navbar() {
                   onClick={() => setMobileOpen(false)}
                   className="btn-outline w-full"
                 >
-                  {user ? 'My Portal' : 'Log In'}
+                  {user ? 'Student Portal' : 'Student Login'}
                 </Link>
                 <Link
                   to="/apply"

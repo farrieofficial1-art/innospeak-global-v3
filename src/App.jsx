@@ -27,6 +27,20 @@ import Signup from './pages/auth/Signup.jsx';
 import ForgotPassword from './pages/auth/ForgotPassword.jsx';
 import ResetPassword from './pages/auth/ResetPassword.jsx';
 import StudentDashboard from './pages/portal/StudentDashboard.jsx';
+import PortalShell from './components/portal/PortalShell.jsx';
+import Profile from './pages/portal/Profile.jsx';
+import Registration from './pages/portal/Registration.jsx';
+import Records from './pages/portal/Records.jsx';
+import Finance from './pages/portal/Finance.jsx';
+import Timetable from './pages/portal/Timetable.jsx';
+import Attendance from './pages/portal/Attendance.jsx';
+import Exams from './pages/portal/Exams.jsx';
+import Documents from './pages/portal/Documents.jsx';
+import Communication from './pages/portal/Communication.jsx';
+import Requests from './pages/portal/Requests.jsx';
+import Support from './pages/portal/Support.jsx';
+import Graduation from './pages/portal/Graduation.jsx';
+import ChangePassword from './pages/portal/ChangePassword.jsx';
 import NotFound from './pages/NotFound.jsx';
 
 export default function App() {
@@ -63,7 +77,22 @@ export default function App() {
 
           {/* Student portal (requires login) */}
           <Route element={<ProtectedRoute />}>
-            <Route path="/portal" element={<StudentDashboard />} />
+            <Route path="/portal" element={<PortalShell />}>
+              <Route index element={<StudentDashboard />} />
+              <Route path="profile" element={<Profile />} />
+              <Route path="registration" element={<Registration />} />
+              <Route path="records" element={<Records />} />
+              <Route path="finance" element={<Finance />} />
+              <Route path="timetable" element={<Timetable />} />
+              <Route path="attendance" element={<Attendance />} />
+              <Route path="exams" element={<Exams />} />
+              <Route path="documents" element={<Documents />} />
+              <Route path="communication" element={<Communication />} />
+              <Route path="requests" element={<Requests />} />
+              <Route path="support" element={<Support />} />
+              <Route path="graduation" element={<Graduation />} />
+              <Route path="change-password" element={<ChangePassword />} />
+            </Route>
           </Route>
 
           <Route path="*" element={<NotFound />} />
