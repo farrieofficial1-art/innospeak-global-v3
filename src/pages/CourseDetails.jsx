@@ -1,7 +1,6 @@
 import { useParams, Navigate } from 'react-router-dom';
 import useDocumentTitle from '../lib/hooks/useDocumentTitle';
 import { buildCourseData } from '../lib/data/courseDetails';
-import EnrollButton from '../components/portal/EnrollButton.jsx';
 import CourseHero from '../components/sections/course/CourseHero';
 import CourseOverview from '../components/sections/course/CourseOverview';
 import KeyInfoCards from '../components/sections/course/KeyInfoCards';
@@ -37,9 +36,6 @@ export default function CourseDetails() {
   return (
     <>
       <CourseHero course={course} />
-      <div className="bg-cream px-4 py-8 sm:px-6">
-        <EnrollButton course={course} />
-      </div>
       <CourseOverview course={course} />
       <KeyInfoCards course={course} />
       <LearningOutcomes course={course} />

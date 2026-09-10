@@ -81,6 +81,7 @@ export default function Apply() {
   const [submitted, setSubmitted] = useState(false);
   const [applicationNumber, setApplicationNumber] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   function update(values) {
     setData((prev) => ({ ...prev, ...values }));
@@ -143,16 +144,17 @@ export default function Apply() {
 
   async function handleSubmit() {
     if (!validateStep()) return;
+    setSubmitError('');
 
     const allDocFiles = Object.values(data.documents || {}).flat();
 
     if (allDocFiles.some((f) => f.status === 'uploading')) {
-      alert('Please wait for all documents to finish uploading before submitting.');
+      setSubmitError('Please wait for all documents to finish uploading before submitting.');
       return;
     }
 
     if (allDocFiles.some((f) => f.status === 'error')) {
-      alert('One or more documents failed to upload. Please retry or remove them before submitting.');
+      setSubmitError('One or more documents failed to upload. Please retry or remove them before submitting.');
       return;
     }
 
@@ -171,7 +173,7 @@ export default function Apply() {
       setApplicationNumber(result.applicationNumber);
       setSubmitted(true);
     } catch (err) {
-      alert(err.message);
+      setSubmitError(err.message || 'We could not submit your application. Please try again.');
       console.error(err);
     } finally {
       setIsSubmitting(false);
@@ -212,6 +214,10 @@ export default function Apply() {
 
         {step === 6 && (
           <Step6Documents data={data} errors={errors} update={update} draftId={draftId} />
+        )}
+
+        {submitError && (
+          <div role="alert" className="mb-5 rounded-xl border border-red-200 bg-red-50 px-4 py-3 font-body text-sm text-red-700">{submitError}</div>
         )}
 
         {step === 7 && (

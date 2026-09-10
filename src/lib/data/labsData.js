@@ -1,5 +1,5 @@
 /**
- * labsData — InnoSpeak Labs: 7 Schools + project-based curriculum.
+ * labsData — InnoSpeak Labs: 7 learning areas + project-based curriculum.
  *
  * Labs courses are also present in programmeData.js COURSES array
  * (with pillar: 'labs') so that routing, admissions, favourites and
@@ -11,7 +11,7 @@
 export const LAB_SCHOOLS = [
   {
     id: 'school-ai',
-    title: 'School of Artificial Intelligence',
+    title: 'Digital Intelligence',
     icon: 'Brain',
     description:
       'Build intelligent systems — from RAG pipelines and AI agents to multimodal applications — using LangChain, LangGraph, MCP and modern LLM APIs.',
@@ -20,7 +20,7 @@ export const LAB_SCHOOLS = [
   },
   {
     id: 'school-software-engineering',
-    title: 'School of Software Engineering',
+    title: 'Software & Digital Systems',
     icon: 'Code',
     description:
       'Design, build and ship production software — from full-stack web apps to mobile applications and well-architected APIs.',
@@ -29,7 +29,7 @@ export const LAB_SCHOOLS = [
   },
   {
     id: 'school-cloud-devops',
-    title: 'School of Cloud & DevOps',
+    title: 'Cloud, Infrastructure & DevOps',
     icon: 'Cloud',
     description:
       'Architect and operate cloud infrastructure — from CI/CD pipelines to Kubernetes clusters and infrastructure as code.',
@@ -38,7 +38,7 @@ export const LAB_SCHOOLS = [
   },
   {
     id: 'school-cybersecurity',
-    title: 'School of Cybersecurity',
+    title: 'Cybersecurity & Digital Safety',
     icon: 'ShieldCheck',
     description:
       'Learn to defend and attack systems ethically — from penetration testing to security operations and threat hunting.',
@@ -47,7 +47,7 @@ export const LAB_SCHOOLS = [
   },
   {
     id: 'school-data-science',
-    title: 'School of Data Science & Analytics',
+    title: 'Data, Analytics & Intelligent Systems',
     icon: 'BarChart3',
     description:
       'Turn raw data into insight — from data pipelines and analytics dashboards to deployed machine learning models.',
@@ -56,7 +56,7 @@ export const LAB_SCHOOLS = [
   },
   {
     id: 'school-engineering-innovation',
-    title: 'School of Engineering & Innovation',
+    title: 'Engineering, Automation & Innovation',
     icon: 'Cog',
     description:
       'Build physical and embedded systems — from robotics and IoT smart farms to renewable energy and embedded hardware.',
@@ -65,7 +65,7 @@ export const LAB_SCHOOLS = [
   },
   {
     id: 'school-creative-ai-immersive',
-    title: 'School of Creative AI & Immersive Media',
+    title: 'Creative Technology & Immersive Media',
     icon: 'Sparkles',
     description:
       'Create at the intersection of AI and media — from AR/VR experiences in Unreal Engine to AI-generated art and 3D worlds.',
@@ -75,7 +75,7 @@ export const LAB_SCHOOLS = [
 ];
 
 export const LAB_PROJECTS = [
-  // ── School of Artificial Intelligence ──────────────────────
+  // ── Digital Intelligence ──────────────────────
   {
     id: 'ai-rag',
     schoolId: 'school-ai',
@@ -121,7 +121,7 @@ export const LAB_PROJECTS = [
     prerequisites: ['Python programming', 'Basic React knowledge'],
   },
 
-  // ── School of Software Engineering ───────────────────────────
+  // ── Software & Digital Systems ───────────────────────────
   {
     id: 'se-fullstack',
     schoolId: 'school-software-engineering',
@@ -167,7 +167,7 @@ export const LAB_PROJECTS = [
     prerequisites: ['Git proficiency', 'Basic cloud knowledge'],
   },
 
-  // ── School of Cloud & DevOps ────────────────────────────────
+  // ── Cloud, Infrastructure & DevOps ────────────────────────────────
   {
     id: 'cloud-infra',
     schoolId: 'school-cloud-devops',
@@ -202,7 +202,7 @@ export const LAB_PROJECTS = [
     prerequisites: ['Cloud basics', 'YAML/Git proficiency'],
   },
 
-  // ── School of Cybersecurity ──────────────────────────────────
+  // ── Cybersecurity & Digital Safety ──────────────────────────────────
   {
     id: 'sec-pentest',
     schoolId: 'school-cybersecurity',
@@ -237,7 +237,7 @@ export const LAB_PROJECTS = [
     prerequisites: ['Security fundamentals', 'Scripting basics'],
   },
 
-  // ── School of Data Science & Analytics ───────────────────────
+  // ── Data, Analytics & Intelligent Systems ───────────────────────
   {
     id: 'ds-pipeline',
     schoolId: 'school-data-science',
@@ -272,7 +272,7 @@ export const LAB_PROJECTS = [
     prerequisites: ['SQL fundamentals', 'Data visualisation basics'],
   },
 
-  // ── School of Engineering & Innovation ───────────────────────
+  // ── Engineering, Automation & Innovation ───────────────────────
   {
     id: 'eng-robotics',
     schoolId: 'school-engineering-innovation',
@@ -318,7 +318,7 @@ export const LAB_PROJECTS = [
     prerequisites: ['C programming', 'Digital electronics basics'],
   },
 
-  // ── School of Creative AI & Immersive Media ──────────────────
+  // ── Creative Technology & Immersive Media ──────────────────
   {
     id: 'ci-arvr',
     schoolId: 'school-creative-ai-immersive',

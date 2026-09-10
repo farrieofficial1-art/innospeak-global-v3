@@ -66,7 +66,7 @@ export default function AcademyHero() {
                 Apply Now
                 <ArrowRight size={18} className="ml-2 transition-transform group-hover:translate-x-1" />
               </Button>
-              <Button href="#programme-catalogue" variant="outline" size="lg" className="group">
+              <Button to="/courses" variant="outline" size="lg" className="group">
                 <BookOpen size={18} className="mr-2" />
                 Explore Programmes
               </Button>

@@ -1,11 +1,2 @@
-import PagePlaceholder from './PagePlaceholder';
-
-export default function Community() {
-  return (
-    <PagePlaceholder
-      eyebrow="Community"
-      title="Our Community"
-      description="Connect with the growing InnoSpeak Global community of learners, educators and innovators. This page is coming soon."
-    />
-  );
-}
+import ContentDirectory from './ContentDirectory.jsx';
+export default function Community() { return <ContentDirectory type="community" />; }

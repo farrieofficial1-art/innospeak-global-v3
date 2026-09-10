@@ -1,5 +1,5 @@
 /**
- * Cybersecurity Lab courses — School of Cybersecurity.
+ * Cybersecurity Lab courses — Cybersecurity & Digital Safety.
  * New courses created for the Labs expansion.
  */
 
@@ -8,7 +8,7 @@ const ACADEMY = 'InnoSpeak Labs';
 export const SEC_COURSES = [
   {
     code: "SEC101", name: "Security Operations Centre (SOC)", academy: ACADEMY,
-    pathwayId: "school-cybersecurity", category: "School of Cybersecurity", pillar: "labs",
+    pathwayId: "school-cybersecurity", category: "Cybersecurity & Digital Safety", pillar: "labs",
     shortDescription: "Build and operate a Security Operations Centre for enterprise defense.",
     fullDescription: "Security Operations Centre covers SOC architecture, SIEM deployment, log collection, correlation rules, alert triage, incident escalation, threat intelligence integration and running a 24/7 security monitoring operation.",
     duration: "10 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -19,7 +19,7 @@ export const SEC_COURSES = [
   },
   {
     code: "SEC102", name: "Blue Team Fundamentals", academy: ACADEMY,
-    pathwayId: "school-cybersecurity", category: "School of Cybersecurity", pillar: "labs",
+    pathwayId: "school-cybersecurity", category: "Cybersecurity & Digital Safety", pillar: "labs",
     shortDescription: "Master defensive security operations as a blue team analyst.",
     fullDescription: "Blue Team Fundamentals covers defensive security, threat detection, incident response, log analysis, endpoint protection, network defense, hardening and the tools and techniques used by blue teams to defend organizations.",
     duration: "10 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -30,7 +30,7 @@ export const SEC_COURSES = [
   },
   {
     code: "SEC103", name: "Red Team Operations", academy: ACADEMY,
-    pathwayId: "school-cybersecurity", category: "School of Cybersecurity", pillar: "labs",
+    pathwayId: "school-cybersecurity", category: "Cybersecurity & Digital Safety", pillar: "labs",
     shortDescription: "Master offensive security operations as a red team operator.",
     fullDescription: "Red Team Operations covers adversarial simulation, attack chains, lateral movement, privilege escalation, persistence, C2 frameworks, evasion techniques and conducting full-scope red team engagements.",
     duration: "12 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -41,7 +41,7 @@ export const SEC_COURSES = [
   },
   {
     code: "SEC104", name: "Penetration Testing", academy: ACADEMY,
-    pathwayId: "school-cybersecurity", category: "School of Cybersecurity", pillar: "labs",
+    pathwayId: "school-cybersecurity", category: "Cybersecurity & Digital Safety", pillar: "labs",
     shortDescription: "Master the full penetration testing lifecycle from recon to reporting.",
     fullDescription: "Penetration Testing covers reconnaissance, scanning, enumeration, exploitation, post-exploitation, privilege escalation, lateral movement and writing professional penetration test reports.",
     duration: "12 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -52,7 +52,7 @@ export const SEC_COURSES = [
   },
   {
     code: "SEC105", name: "Web Application Pen Testing", academy: ACADEMY,
-    pathwayId: "school-cybersecurity", category: "School of Cybersecurity", pillar: "labs",
+    pathwayId: "school-cybersecurity", category: "Cybersecurity & Digital Safety", pillar: "labs",
     shortDescription: "Penetration test web applications for OWASP vulnerabilities and beyond.",
     fullDescription: "Web Application Pen Testing covers OWASP Top 10, SQL injection, XSS, CSRF, SSRF, authentication bypass, API testing, Burp Suite, OWASP ZAP and conducting professional web application penetration tests.",
     duration: "10 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -63,7 +63,7 @@ export const SEC_COURSES = [
   },
   {
     code: "SEC106", name: "Network Pen Testing", academy: ACADEMY,
-    pathwayId: "school-cybersecurity", category: "School of Cybersecurity", pillar: "labs",
+    pathwayId: "school-cybersecurity", category: "Cybersecurity & Digital Safety", pillar: "labs",
     shortDescription: "Penetration test network infrastructure, services and protocols.",
     fullDescription: "Network Pen Testing covers network reconnaissance, service enumeration, vulnerability scanning, exploitation, lateral movement, privilege escalation and testing internal and external network infrastructure.",
     duration: "10 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -74,7 +74,7 @@ export const SEC_COURSES = [
   },
   {
     code: "SEC107", name: "Bug Bounty Hunting", academy: ACADEMY,
-    pathwayId: "school-cybersecurity", category: "School of Cybersecurity", pillar: "labs",
+    pathwayId: "school-cybersecurity", category: "Cybersecurity & Digital Safety", pillar: "labs",
     shortDescription: "Find and report security vulnerabilities for bounties on platforms like HackerOne.",
     fullDescription: "Bug Bounty Hunting covers bug bounty platforms, scope, vulnerability types, reporting, responsible disclosure, recon automation, common bug patterns and building a successful bug bounty hunting practice.",
     duration: "8 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -85,7 +85,7 @@ export const SEC_COURSES = [
   },
   {
     code: "SEC108", name: "Malware Analysis", academy: ACADEMY,
-    pathwayId: "school-cybersecurity", category: "School of Cybersecurity", pillar: "labs",
+    pathwayId: "school-cybersecurity", category: "Cybersecurity & Digital Safety", pillar: "labs",
     shortDescription: "Analyze malicious software to understand behavior and defend against threats.",
     fullDescription: "Malware Analysis covers static analysis, dynamic analysis, sandboxing, disassembly, behavior monitoring, IOC extraction and analyzing viruses, trojans, ransomware and other malicious software.",
     duration: "10 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -96,7 +96,7 @@ export const SEC_COURSES = [
   },
   {
     code: "SEC109", name: "Reverse Engineering", academy: ACADEMY,
-    pathwayId: "school-cybersecurity", category: "School of Cybersecurity", pillar: "labs",
+    pathwayId: "school-cybersecurity", category: "Cybersecurity & Digital Safety", pillar: "labs",
     shortDescription: "Reverse engineer binaries to understand how software works at a low level.",
     fullDescription: "Reverse Engineering covers disassembly, decompilation, debugging, binary analysis, Ghidra, IDA Pro, x64dbg, calling conventions, control flow and reverse engineering software to understand its inner workings.",
     duration: "12 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -107,7 +107,7 @@ export const SEC_COURSES = [
   },
   {
     code: "SEC110", name: "Digital Forensics", academy: ACADEMY,
-    pathwayId: "school-cybersecurity", category: "School of Cybersecurity", pillar: "labs",
+    pathwayId: "school-cybersecurity", category: "Cybersecurity & Digital Safety", pillar: "labs",
     shortDescription: "Investigate digital crimes and incidents with forensic techniques.",
     fullDescription: "Digital Forensics covers evidence collection, chain of custody, disk imaging, file system analysis, memory forensics, network forensics, timeline analysis and conducting digital forensic investigations.",
     duration: "10 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -118,7 +118,7 @@ export const SEC_COURSES = [
   },
   {
     code: "SEC111", name: "Identity & Access Management", academy: ACADEMY,
-    pathwayId: "school-cybersecurity", category: "School of Cybersecurity", pillar: "labs",
+    pathwayId: "school-cybersecurity", category: "Cybersecurity & Digital Safety", pillar: "labs",
     shortDescription: "Design and implement IAM systems for enterprise security.",
     fullDescription: "Identity & Access Management covers authentication, authorization, SSO, MFA, OAuth, SAML, OIDC, RBAC, ABAC, identity lifecycle management and building secure IAM systems.",
     duration: "8 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -129,7 +129,7 @@ export const SEC_COURSES = [
   },
   {
     code: "SEC112", name: "Zero Trust Architecture", academy: ACADEMY,
-    pathwayId: "school-cybersecurity", category: "School of Cybersecurity", pillar: "labs",
+    pathwayId: "school-cybersecurity", category: "Cybersecurity & Digital Safety", pillar: "labs",
     shortDescription: "Design and implement Zero Trust security architectures.",
     fullDescription: "Zero Trust Architecture covers Zero Trust principles, identity-centric security, microsegmentation, least privilege, continuous verification, NIST Zero Trust framework and implementing Zero Trust in modern organizations.",
     duration: "8 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -140,7 +140,7 @@ export const SEC_COURSES = [
   },
   {
     code: "SEC113", name: "Threat Hunting", academy: ACADEMY,
-    pathwayId: "school-cybersecurity", category: "School of Cybersecurity", pillar: "labs",
+    pathwayId: "school-cybersecurity", category: "Cybersecurity & Digital Safety", pillar: "labs",
     shortDescription: "Proactively hunt for threats in enterprise environments.",
     fullDescription: "Threat Hunting covers hypothesis-driven hunting, IOC analysis, MITRE ATT&CK, behavioral detection, YARA rules, threat intelligence and proactively finding threats that evade automated defenses.",
     duration: "8 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -151,7 +151,7 @@ export const SEC_COURSES = [
   },
   {
     code: "SEC114", name: "SIEM Implementation", academy: ACADEMY,
-    pathwayId: "school-cybersecurity", category: "School of Cybersecurity", pillar: "labs",
+    pathwayId: "school-cybersecurity", category: "Cybersecurity & Digital Safety", pillar: "labs",
     shortDescription: "Deploy and operate SIEM platforms for security monitoring.",
     fullDescription: "SIEM Implementation covers Splunk, Elastic SIEM, Microsoft Sentinel, log sources, parsing, correlation rules, dashboards, alerting, use cases and deploying enterprise SIEM platforms for security monitoring.",
     duration: "10 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -162,7 +162,7 @@ export const SEC_COURSES = [
   },
   {
     code: "SEC115", name: "Network Security", academy: ACADEMY,
-    pathwayId: "school-cybersecurity", category: "School of Cybersecurity", pillar: "labs",
+    pathwayId: "school-cybersecurity", category: "Cybersecurity & Digital Safety", pillar: "labs",
     shortDescription: "Secure networks with firewalls, IDS/IPS, VPNs and network segmentation.",
     fullDescription: "Network Security covers firewalls, IDS/IPS, VPNs, network segmentation, zero trust networks, NAC, packet analysis, Wireshark and securing enterprise network infrastructure.",
     duration: "10 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -173,7 +173,7 @@ export const SEC_COURSES = [
   },
   {
     code: "SEC116", name: "Wireless Security", academy: ACADEMY,
-    pathwayId: "school-cybersecurity", category: "School of Cybersecurity", pillar: "labs",
+    pathwayId: "school-cybersecurity", category: "Cybersecurity & Digital Safety", pillar: "labs",
     shortDescription: "Secure and test wireless networks including Wi-Fi and Bluetooth.",
     fullDescription: "Wireless Security covers Wi-Fi encryption, WPA3, wireless attacks, rogue APs, Bluetooth security, IoT wireless protocols, Aircrack-ng and securing and testing wireless networks.",
     duration: "6 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -184,7 +184,7 @@ export const SEC_COURSES = [
   },
   {
     code: "SEC117", name: "Mobile Security", academy: ACADEMY,
-    pathwayId: "school-cybersecurity", category: "School of Cybersecurity", pillar: "labs",
+    pathwayId: "school-cybersecurity", category: "Cybersecurity & Digital Safety", pillar: "labs",
     shortDescription: "Test and secure iOS and Android mobile applications.",
     fullDescription: "Mobile Security covers mobile app reverse engineering, runtime analysis, certificate pinning, root/jailbreak detection, OWASP MASVS, Frida and testing and securing mobile applications.",
     duration: "8 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -195,7 +195,7 @@ export const SEC_COURSES = [
   },
   {
     code: "SEC118", name: "IoT Security", academy: ACADEMY,
-    pathwayId: "school-cybersecurity", category: "School of Cybersecurity", pillar: "labs",
+    pathwayId: "school-cybersecurity", category: "Cybersecurity & Digital Safety", pillar: "labs",
     shortDescription: "Secure Internet of Things devices and systems from cyber threats.",
     fullDescription: "IoT Security covers IoT architecture, device security, firmware analysis, communication protocols, MQTT security, edge computing security, OWASP IoT Top 10 and securing IoT ecosystems.",
     duration: "8 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -206,7 +206,7 @@ export const SEC_COURSES = [
   },
   {
     code: "SEC119", name: "Social Engineering", academy: ACADEMY,
-    pathwayId: "school-cybersecurity", category: "School of Cybersecurity", pillar: "labs",
+    pathwayId: "school-cybersecurity", category: "Cybersecurity & Digital Safety", pillar: "labs",
     shortDescription: "Understand and defend against social engineering and human-targeted attacks.",
     fullDescription: "Social Engineering covers phishing, pretexting, baiting, vishing, OSINT, physical security testing, awareness training and defending organizations against social engineering attacks.",
     duration: "6 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -217,7 +217,7 @@ export const SEC_COURSES = [
   },
   {
     code: "SEC120", name: "Security Auditing", academy: ACADEMY,
-    pathwayId: "school-cybersecurity", category: "School of Cybersecurity", pillar: "labs",
+    pathwayId: "school-cybersecurity", category: "Cybersecurity & Digital Safety", pillar: "labs",
     shortDescription: "Audit organizational security against standards and frameworks.",
     fullDescription: "Security Auditing covers ISO 27001, NIST, SOC 2, PCI DSS, audit planning, evidence collection, gap analysis, risk assessment, remediation tracking and conducting security audits.",
     duration: "8 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -228,7 +228,7 @@ export const SEC_COURSES = [
   },
   {
     code: "SEC121", name: "Incident Response", academy: ACADEMY,
-    pathwayId: "school-cybersecurity", category: "School of Cybersecurity", pillar: "labs",
+    pathwayId: "school-cybersecurity", category: "Cybersecurity & Digital Safety", pillar: "labs",
     shortDescription: "Build and execute incident response plans for security breaches.",
     fullDescription: "Incident Response covers incident lifecycle, preparation, detection, containment, eradication, recovery, lessons learned, forensics, crisis communication and building incident response capabilities.",
     duration: "8 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -239,7 +239,7 @@ export const SEC_COURSES = [
   },
   {
     code: "SEC122", name: "Cryptography Fundamentals", academy: ACADEMY,
-    pathwayId: "school-cybersecurity", category: "School of Cybersecurity", pillar: "labs",
+    pathwayId: "school-cybersecurity", category: "Cybersecurity & Digital Safety", pillar: "labs",
     shortDescription: "Master the mathematics and application of cryptography in security.",
     fullDescription: "Cryptography Fundamentals covers symmetric and asymmetric encryption, hashing, digital signatures, PKI, TLS, key management, cryptographic attacks and applying cryptography in security systems.",
     duration: "8 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -250,7 +250,7 @@ export const SEC_COURSES = [
   },
   {
     code: "SEC123", name: "Ethical Hacking", academy: ACADEMY,
-    pathwayId: "school-cybersecurity", category: "School of Cybersecurity", pillar: "labs",
+    pathwayId: "school-cybersecurity", category: "Cybersecurity & Digital Safety", pillar: "labs",
     shortDescription: "Learn to hack ethically to find and fix security vulnerabilities.",
     fullDescription: "Ethical Hacking covers the hacker mindset, information gathering, vulnerability identification, exploitation, privilege escalation, covering tracks and conducting ethical hacking engagements with authorization.",
     duration: "12 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -261,7 +261,7 @@ export const SEC_COURSES = [
   },
   {
     code: "SEC124", name: "Cloud Security (Cybersecurity)", academy: ACADEMY,
-    pathwayId: "school-cybersecurity", category: "School of Cybersecurity", pillar: "labs",
+    pathwayId: "school-cybersecurity", category: "Cybersecurity & Digital Safety", pillar: "labs",
     shortDescription: "Secure cloud infrastructure from a cybersecurity perspective.",
     fullDescription: "Cloud Security covers cloud threats, misconfigurations, IAM security, container security, serverless security, cloud forensics and defending cloud environments across AWS, Azure and GCP.",
     duration: "10 Weeks", studyMode: "Online", level: "Advanced", language: "English",

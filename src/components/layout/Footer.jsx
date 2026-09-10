@@ -1,12 +1,6 @@
 import { Link } from 'react-router-dom';
 import {
-  Facebook,
-  Twitter,
-  Linkedin,
-  Instagram,
-  Youtube,
   Mail,
-  Phone,
   MapPin,
   UserCircle2,
 } from 'lucide-react';
@@ -26,13 +20,7 @@ const programmes = [
   { label: 'Apply Now', to: '/apply' },
 ];
 
-const socials = [
-  { Icon: Facebook, label: 'Facebook', href: '#' },
-  { Icon: Twitter, label: 'Twitter', href: '#' },
-  { Icon: Linkedin, label: 'LinkedIn', href: '#' },
-  { Icon: Instagram, label: 'Instagram', href: '#' },
-  { Icon: Youtube, label: 'YouTube', href: '#' },
-];
+
 
 const linkClass =
   'font-body text-sm text-navy-100/80 transition-colors duration-200 hover:text-gold-300';
@@ -55,18 +43,7 @@ export default function Footer() {
               Transforming communication, technical and leadership skills for the next
               generation of innovators.
             </p>
-            <div className="mt-6 flex items-center gap-3">
-              {socials.map(({ Icon, label, href }) => (
-                <a
-                  key={label}
-                  href={href}
-                  aria-label={label}
-                  className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-white/15 bg-white/5 text-navy-100/90 transition-all duration-300 hover:border-gold-400/40 hover:bg-gold-500/10 hover:text-gold-300"
-                >
-                  <Icon size={18} />
-                </a>
-              ))}
-            </div>
+
           </div>
 
           {/* Quick Links */}
@@ -114,12 +91,6 @@ export default function Footer() {
                 <Mail size={18} className="mt-0.5 shrink-0 text-gold-400" />
                 <a href="mailto:hello@innospeak.global" className={linkClass}>
                   hello@innospeak.global
-                </a>
-              </li>
-              <li className="flex items-start gap-3">
-                <Phone size={18} className="mt-0.5 shrink-0 text-gold-400" />
-                <a href="tel:+10000000000" className={linkClass}>
-                  +1 (000) 000-0000
                 </a>
               </li>
               <li className="flex items-start gap-3">

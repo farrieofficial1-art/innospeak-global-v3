@@ -9,6 +9,8 @@ import Home from '../pages/Home';
 const Academy = lazy(() => import('../pages/Academy'));
 const About = lazy(() => import('../pages/About'));
 const Programs = lazy(() => import('../pages/Programs'));
+const CourseCatalog = lazy(() => import('../pages/CourseCatalog'));
+const Labs = lazy(() => import('../pages/Labs'));
 const Founder = lazy(() => import('../pages/Founder'));
 const Impact = lazy(() => import('../pages/Impact'));
 const Contact = lazy(() => import('../pages/Contact'));
@@ -20,6 +22,7 @@ const Events = lazy(() => import('../pages/Events'));
 const Community = lazy(() => import('../pages/Community'));
 const Partnerships = lazy(() => import('../pages/Partnerships'));
 const Careers = lazy(() => import('../pages/Careers'));
+const CareerHub = lazy(() => import('../pages/CareerHub'));
 const FAQ = lazy(() => import('../pages/FAQ'));
 const Privacy = lazy(() => import('../pages/Privacy'));
 const Terms = lazy(() => import('../pages/Terms'));
@@ -34,17 +37,20 @@ const router = createBrowserRouter([
       { path: 'academy', element: <Academy /> },
       { path: 'about', element: <About /> },
       { path: 'programs', element: <Programs /> },
+      { path: 'courses', element: <CourseCatalog /> },
+      { path: 'courses/:courseCode', element: <CourseDetails /> },
+      { path: 'labs', element: <Labs /> },
       { path: 'founder', element: <Founder /> },
       { path: 'impact', element: <Impact /> },
       { path: 'contact', element: <Contact /> },
       { path: 'apply', element: <Apply /> },
-      { path: 'courses/:courseCode', element: <CourseDetails /> },
       { path: 'research', element: <Research /> },
       { path: 'news', element: <News /> },
       { path: 'events', element: <Events /> },
       { path: 'community', element: <Community /> },
       { path: 'partnerships', element: <Partnerships /> },
       { path: 'careers', element: <Careers /> },
+      { path: 'career-hub', element: <CareerHub /> },
       { path: 'faq', element: <FAQ /> },
       { path: 'privacy', element: <Privacy /> },
       { path: 'terms', element: <Terms /> },

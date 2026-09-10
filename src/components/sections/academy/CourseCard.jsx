@@ -48,7 +48,7 @@ export default function CourseCard({ course, isFavourite, onToggleFavourite, ind
 
       {/* Description */}
       <p className="mt-3 flex-1 font-body text-xs leading-relaxed text-navy-600 line-clamp-2">
-        {course.shortDescription || course.description || course.summary || course.overview || 'More details coming soon.'}
+        {course.shortDescription || course.description || course.summary || course.overview || 'Explore the course overview, learning outcomes and pathway details.'}
       </p>
 
       {/* Meta */}

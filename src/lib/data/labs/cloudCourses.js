@@ -1,5 +1,5 @@
 /**
- * Cloud & DevOps Lab courses — School of Cloud & DevOps.
+ * Cloud & DevOps Lab courses — Cloud, Infrastructure & DevOps.
  * New courses created for the Labs expansion.
  */
 
@@ -8,7 +8,7 @@ const ACADEMY = 'InnoSpeak Labs';
 export const CLOUD_COURSES = [
   {
     code: "AWS101", name: "AWS Fundamentals", academy: ACADEMY,
-    pathwayId: "school-cloud-devops", category: "School of Cloud & DevOps", pillar: "labs",
+    pathwayId: "school-cloud-devops", category: "Cloud, Infrastructure & DevOps", pillar: "labs",
     shortDescription: "Master the core AWS services and cloud computing fundamentals.",
     fullDescription: "AWS Fundamentals covers EC2, S3, RDS, Lambda, IAM, VPC, CloudWatch and core AWS services, building practical cloud skills on the Amazon Web Services platform.",
     duration: "8 Weeks", studyMode: "Online", level: "Beginner", language: "English",
@@ -19,7 +19,7 @@ export const CLOUD_COURSES = [
   },
   {
     code: "AWS201", name: "AWS Solutions Architect", academy: ACADEMY,
-    pathwayId: "school-cloud-devops", category: "School of Cloud & DevOps", pillar: "labs",
+    pathwayId: "school-cloud-devops", category: "Cloud, Infrastructure & DevOps", pillar: "labs",
     shortDescription: "Design and deploy scalable, resilient AWS architectures.",
     fullDescription: "AWS Solutions Architect covers multi-tier architectures, high availability, disaster recovery, cost optimization, Well-Architected Framework and preparing for the AWS Solutions Architect Associate certification.",
     duration: "12 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -30,7 +30,7 @@ export const CLOUD_COURSES = [
   },
   {
     code: "AZU101", name: "Azure Fundamentals", academy: ACADEMY,
-    pathwayId: "school-cloud-devops", category: "School of Cloud & DevOps", pillar: "labs",
+    pathwayId: "school-cloud-devops", category: "Cloud, Infrastructure & DevOps", pillar: "labs",
     shortDescription: "Master the core Microsoft Azure services and cloud fundamentals.",
     fullDescription: "Azure Fundamentals covers virtual machines, storage, networking, identity, Azure Active Directory, monitoring and core Azure services for building and managing cloud solutions on Microsoft Azure.",
     duration: "8 Weeks", studyMode: "Online", level: "Beginner", language: "English",
@@ -41,7 +41,7 @@ export const CLOUD_COURSES = [
   },
   {
     code: "AZU201", name: "Azure Solutions Architect", academy: ACADEMY,
-    pathwayId: "school-cloud-devops", category: "School of Cloud & DevOps", pillar: "labs",
+    pathwayId: "school-cloud-devops", category: "Cloud, Infrastructure & DevOps", pillar: "labs",
     shortDescription: "Design and deploy enterprise-grade solutions on Microsoft Azure.",
     fullDescription: "Azure Solutions Architect covers compute, storage, networking, security, governance, hybrid scenarios, migration strategies and preparing for the Azure Solutions Architect Expert certification.",
     duration: "12 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -52,7 +52,7 @@ export const CLOUD_COURSES = [
   },
   {
     code: "GCP101", name: "Google Cloud Fundamentals", academy: ACADEMY,
-    pathwayId: "school-cloud-devops", category: "School of Cloud & DevOps", pillar: "labs",
+    pathwayId: "school-cloud-devops", category: "Cloud, Infrastructure & DevOps", pillar: "labs",
     shortDescription: "Master core Google Cloud Platform services and cloud fundamentals.",
     fullDescription: "Google Cloud Fundamentals covers Compute Engine, Cloud Storage, Cloud SQL, BigQuery, IAM, VPC networking and core GCP services for building and managing cloud solutions on Google Cloud Platform.",
     duration: "8 Weeks", studyMode: "Online", level: "Beginner", language: "English",
@@ -63,7 +63,7 @@ export const CLOUD_COURSES = [
   },
   {
     code: "DOC101", name: "Docker Fundamentals", academy: ACADEMY,
-    pathwayId: "school-cloud-devops", category: "School of Cloud & DevOps", pillar: "labs",
+    pathwayId: "school-cloud-devops", category: "Cloud, Infrastructure & DevOps", pillar: "labs",
     shortDescription: "Master containerization with Docker from images to production deployment.",
     fullDescription: "Docker Fundamentals covers Dockerfiles, images, containers, volumes, networks, multi-stage builds, registries, security and containerizing applications for consistent development and deployment.",
     duration: "8 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -74,7 +74,7 @@ export const CLOUD_COURSES = [
   },
   {
     code: "DOC201", name: "Docker Compose", academy: ACADEMY,
-    pathwayId: "school-cloud-devops", category: "School of Cloud & DevOps", pillar: "labs",
+    pathwayId: "school-cloud-devops", category: "Cloud, Infrastructure & DevOps", pillar: "labs",
     shortDescription: "Orchestrate multi-container applications with Docker Compose.",
     fullDescription: "Docker Compose covers multi-container orchestration, service definitions, networking, volumes, environment management, profiles and defining complex multi-service applications with Docker Compose.",
     duration: "4 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -85,7 +85,7 @@ export const CLOUD_COURSES = [
   },
   {
     code: "K8S101", name: "Kubernetes Fundamentals", academy: ACADEMY,
-    pathwayId: "school-cloud-devops", category: "School of Cloud & DevOps", pillar: "labs",
+    pathwayId: "school-cloud-devops", category: "Cloud, Infrastructure & DevOps", pillar: "labs",
     shortDescription: "Master container orchestration with Kubernetes from pods to production.",
     fullDescription: "Kubernetes Fundamentals covers pods, deployments, services, configmaps, secrets, namespaces, RBAC, Helm charts and deploying applications to Kubernetes clusters.",
     duration: "10 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -96,7 +96,7 @@ export const CLOUD_COURSES = [
   },
   {
     code: "K8S201", name: "Kubernetes Advanced", academy: ACADEMY,
-    pathwayId: "school-cloud-devops", category: "School of Cloud & DevOps", pillar: "labs",
+    pathwayId: "school-cloud-devops", category: "Cloud, Infrastructure & DevOps", pillar: "labs",
     shortDescription: "Master advanced Kubernetes operations, networking and security.",
     fullDescription: "Kubernetes Advanced covers custom resources, operators, service meshes, network policies, storage classes, autoscaling, multi-cluster management, GitOps and running production Kubernetes at scale.",
     duration: "10 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -107,7 +107,7 @@ export const CLOUD_COURSES = [
   },
   {
     code: "TFM101", name: "Terraform Fundamentals", academy: ACADEMY,
-    pathwayId: "school-cloud-devops", category: "School of Cloud & DevOps", pillar: "labs",
+    pathwayId: "school-cloud-devops", category: "Cloud, Infrastructure & DevOps", pillar: "labs",
     shortDescription: "Manage infrastructure as code with Terraform.",
     fullDescription: "Terraform Fundamentals covers HCL syntax, providers, resources, variables, outputs, modules, state management, workspaces and provisioning cloud infrastructure with Terraform.",
     duration: "8 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -118,7 +118,7 @@ export const CLOUD_COURSES = [
   },
   {
     code: "TFM201", name: "Terraform Advanced", academy: ACADEMY,
-    pathwayId: "school-cloud-devops", category: "School of Cloud & DevOps", pillar: "labs",
+    pathwayId: "school-cloud-devops", category: "Cloud, Infrastructure & DevOps", pillar: "labs",
     shortDescription: "Build production Terraform modules and manage multi-environment infrastructure.",
     fullDescription: "Terraform Advanced covers module design, testing, policy as code, Sentinel, remote state, CI/CD integration, multi-environment patterns, drift detection and managing complex infrastructure at scale with Terraform.",
     duration: "8 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -129,7 +129,7 @@ export const CLOUD_COURSES = [
   },
   {
     code: "ANS101", name: "Ansible", academy: ACADEMY,
-    pathwayId: "school-cloud-devops", category: "School of Cloud & DevOps", pillar: "labs",
+    pathwayId: "school-cloud-devops", category: "Cloud, Infrastructure & DevOps", pillar: "labs",
     shortDescription: "Automate infrastructure configuration and deployment with Ansible.",
     fullDescription: "Ansible covers playbooks, roles, modules, inventory, variables, templates, handlers, Galaxy and automating server configuration, application deployment and infrastructure management.",
     duration: "8 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -140,7 +140,7 @@ export const CLOUD_COURSES = [
   },
   {
     code: "CICD101", name: "CI/CD with GitHub Actions", academy: ACADEMY,
-    pathwayId: "school-cloud-devops", category: "School of Cloud & DevOps", pillar: "labs",
+    pathwayId: "school-cloud-devops", category: "Cloud, Infrastructure & DevOps", pillar: "labs",
     shortDescription: "Build automated CI/CD pipelines with GitHub Actions.",
     fullDescription: "CI/CD with GitHub Actions covers workflows, runners, actions, secrets, environments, matrix builds, caching, deployment strategies and building complete CI/CD pipelines for automated testing and deployment.",
     duration: "6 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -151,7 +151,7 @@ export const CLOUD_COURSES = [
   },
   {
     code: "CICD102", name: "CI/CD with GitLab", academy: ACADEMY,
-    pathwayId: "school-cloud-devops", category: "School of Cloud & DevOps", pillar: "labs",
+    pathwayId: "school-cloud-devops", category: "Cloud, Infrastructure & DevOps", pillar: "labs",
     shortDescription: "Build automated CI/CD pipelines with GitLab CI/CD.",
     fullDescription: "CI/CD with GitLab covers .gitlab-ci.yml, runners, pipelines, jobs, stages, artifacts, environments, review apps and building complete CI/CD pipelines with GitLab for automated software delivery.",
     duration: "6 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -162,7 +162,7 @@ export const CLOUD_COURSES = [
   },
   {
     code: "SRV101", name: "Serverless Computing", academy: ACADEMY,
-    pathwayId: "school-cloud-devops", category: "School of Cloud & DevOps", pillar: "labs",
+    pathwayId: "school-cloud-devops", category: "Cloud, Infrastructure & DevOps", pillar: "labs",
     shortDescription: "Build serverless applications with AWS Lambda, Azure Functions and more.",
     fullDescription: "Serverless Computing covers AWS Lambda, API Gateway, DynamoDB, Azure Functions, Google Cloud Functions, event-driven architecture, cold starts, cost optimization and building serverless applications.",
     duration: "8 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -173,7 +173,7 @@ export const CLOUD_COURSES = [
   },
   {
     code: "DSO101", name: "DevSecOps", academy: ACADEMY,
-    pathwayId: "school-cloud-devops", category: "School of Cloud & DevOps", pillar: "labs",
+    pathwayId: "school-cloud-devops", category: "Cloud, Infrastructure & DevOps", pillar: "labs",
     shortDescription: "Integrate security into every stage of the DevOps pipeline.",
     fullDescription: "DevSecOps covers security scanning, SAST, DAST, dependency scanning, container security, infrastructure security, compliance automation and embedding security into CI/CD pipelines and DevOps culture.",
     duration: "8 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -184,7 +184,7 @@ export const CLOUD_COURSES = [
   },
   {
     code: "CSE101", name: "Cloud Security", academy: ACADEMY,
-    pathwayId: "school-cloud-devops", category: "School of Cloud & DevOps", pillar: "labs",
+    pathwayId: "school-cloud-devops", category: "Cloud, Infrastructure & DevOps", pillar: "labs",
     shortDescription: "Secure cloud infrastructure and applications across AWS, Azure and GCP.",
     fullDescription: "Cloud Security covers IAM, network security, data encryption, key management, security groups, WAF, compliance frameworks, cloud security posture management and securing multi-cloud environments.",
     duration: "10 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -195,7 +195,7 @@ export const CLOUD_COURSES = [
   },
   {
     code: "MON101", name: "Monitoring & Observability", academy: ACADEMY,
-    pathwayId: "school-cloud-devops", category: "School of Cloud & DevOps", pillar: "labs",
+    pathwayId: "school-cloud-devops", category: "Cloud, Infrastructure & DevOps", pillar: "labs",
     shortDescription: "Build comprehensive monitoring and observability for production systems.",
     fullDescription: "Monitoring & Observability covers metrics, logs, traces, dashboards, alerting, SLOs, error budgets, distributed tracing and building observability stacks with Prometheus, Grafana, Jaeger and the ELK Stack.",
     duration: "8 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -206,7 +206,7 @@ export const CLOUD_COURSES = [
   },
   {
     code: "PGM101", name: "Prometheus & Grafana", academy: ACADEMY,
-    pathwayId: "school-cloud-devops", category: "School of Cloud & DevOps", pillar: "labs",
+    pathwayId: "school-cloud-devops", category: "Cloud, Infrastructure & DevOps", pillar: "labs",
     shortDescription: "Build monitoring and alerting systems with Prometheus and Grafana.",
     fullDescription: "Prometheus & Grafana covers Prometheus architecture, PromQL, exporters, Alertmanager, Grafana dashboards, data sources, alerting rules and building production monitoring systems.",
     duration: "6 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -217,7 +217,7 @@ export const CLOUD_COURSES = [
   },
   {
     code: "ELK101", name: "ELK Stack", academy: ACADEMY,
-    pathwayId: "school-cloud-devops", category: "School of Cloud & DevOps", pillar: "labs",
+    pathwayId: "school-cloud-devops", category: "Cloud, Infrastructure & DevOps", pillar: "labs",
     shortDescription: "Build log management and analytics systems with the ELK Stack.",
     fullDescription: "ELK Stack covers Elasticsearch, Logstash, Kibana, Beats, index management, log pipelines, dashboards, alerting and building centralized logging systems with the ELK Stack.",
     duration: "8 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -228,7 +228,7 @@ export const CLOUD_COURSES = [
   },
   {
     code: "CNE101", name: "Cloud Networking", academy: ACADEMY,
-    pathwayId: "school-cloud-devops", category: "School of Cloud & DevOps", pillar: "labs",
+    pathwayId: "school-cloud-devops", category: "Cloud, Infrastructure & DevOps", pillar: "labs",
     shortDescription: "Master networking in cloud environments across AWS, Azure and GCP.",
     fullDescription: "Cloud Networking covers VPCs, subnets, route tables, NAT gateways, load balancers, DNS, CDN, peering, VPN, Direct Connect and designing cloud network architectures.",
     duration: "8 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -239,7 +239,7 @@ export const CLOUD_COURSES = [
   },
   {
     code: "CCO101", name: "Cloud Cost Optimization", academy: ACADEMY,
-    pathwayId: "school-cloud-devops", category: "School of Cloud & DevOps", pillar: "labs",
+    pathwayId: "school-cloud-devops", category: "Cloud, Infrastructure & DevOps", pillar: "labs",
     shortDescription: "Reduce cloud spending without sacrificing performance or reliability.",
     fullDescription: "Cloud Cost Optimization covers cost monitoring, budgeting, reserved instances, spot instances, right-sizing, storage tiering, FinOps practices and building cost-efficient cloud architectures.",
     duration: "6 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -250,7 +250,7 @@ export const CLOUD_COURSES = [
   },
   {
     code: "IAC101", name: "Infrastructure as Code", academy: ACADEMY,
-    pathwayId: "school-cloud-devops", category: "School of Cloud & DevOps", pillar: "labs",
+    pathwayId: "school-cloud-devops", category: "Cloud, Infrastructure & DevOps", pillar: "labs",
     shortDescription: "Master IaC principles with Terraform, Pulumi and CloudFormation.",
     fullDescription: "Infrastructure as Code covers IaC principles, Terraform, Pulumi, AWS CloudFormation, state management, module design, testing, policy as code and managing infrastructure through code.",
     duration: "10 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -261,7 +261,7 @@ export const CLOUD_COURSES = [
   },
   {
     code: "SRE101", name: "Site Reliability Engineering", academy: ACADEMY,
-    pathwayId: "school-cloud-devops", category: "School of Cloud & DevOps", pillar: "labs",
+    pathwayId: "school-cloud-devops", category: "Cloud, Infrastructure & DevOps", pillar: "labs",
     shortDescription: "Build reliable systems with SRE practices, SLOs and error budgets.",
     fullDescription: "Site Reliability Engineering covers SLOs, SLIs, error budgets, incident management, postmortems, runbooks, capacity planning, chaos engineering and building reliable production systems.",
     duration: "10 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -272,7 +272,7 @@ export const CLOUD_COURSES = [
   },
   {
     code: "CHE101", name: "Chaos Engineering", academy: ACADEMY,
-    pathwayId: "school-cloud-devops", category: "School of Cloud & DevOps", pillar: "labs",
+    pathwayId: "school-cloud-devops", category: "Cloud, Infrastructure & DevOps", pillar: "labs",
     shortDescription: "Build resilient systems by deliberately breaking them with chaos engineering.",
     fullDescription: "Chaos Engineering covers chaos principles, experiments, blast radius, steady state, Litmus, Chaos Mesh, fault injection and building resilience through controlled failure experiments.",
     duration: "6 Weeks", studyMode: "Online", level: "Advanced", language: "English",

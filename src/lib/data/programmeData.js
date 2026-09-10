@@ -15,78 +15,277 @@ export const LEVELS = ['Beginner', 'Intermediate', 'Advanced'];
 export const STUDY_MODES = ['Online', 'Hybrid', 'Physical / Hybrid', 'Physical'];
 export const DURATIONS = ['2 Weeks', '3 Weeks', '4 Weeks', '6 Weeks', '8 Weeks', '10 Weeks', '12 Weeks', '16 Weeks'];
 
+/**
+ * PATHWAYS — the 12 InnoSpeak Global learning programs. Each is the
+ * "Program" academic entity: a structured, versioned area of study that
+ * groups the individual COURSES defined below.
+ *
+ * Fields added for the Programs Academic Foundation upgrade:
+ *   programCode, slug, shortDescription, learningArea, level, programType,
+ *   status, admissionStatus, programVersion, curriculumVersion, reviewDate.
+ *
+ * Deliberately NOT hardcoded here (computed instead, from real course
+ * data, via the helper functions below — never duplicated or invented):
+ *   duration, studyMode, courseIds — these vary per course within a
+ *   program, so a single static value would misrepresent the program.
+ *
+ * Deliberately left empty for now rather than fabricated (no real
+ * source data exists yet for these): entryRequirements, targetAudience,
+ * learningOutcomes, careerPathways. The Program Detail page only renders
+ * a section when the relevant array/string is non-empty.
+ */
 export const PATHWAYS = [
   {
     id: 'global-language',
+    programCode: 'PRG-GLC',
+    slug: 'global-language',
     title: 'Global Languages & Communication',
+    shortDescription: 'Professional and academic English and communication skills for global opportunity.',
     description:
       'Master English, multilingual communication and professional language skills for global education, careers and international opportunities.',
+    learningArea: 'Languages & Communication',
+    level: 'All Levels',
+    programType: 'Certificate Pathway',
+    status: 'active',
+    admissionStatus: 'open',
+    entryRequirements: [],
+    targetAudience: '',
+    learningOutcomes: [],
+    careerPathways: [],
+    programVersion: '1.0',
+    curriculumVersion: '2026.1',
+    reviewDate: '2027-01-01',
   },
   {
     id: 'languages',
+    programCode: 'PRG-WLD',
+    slug: 'languages',
     title: 'World Languages',
+    shortDescription: 'Practical conversational skills across major world languages.',
     description:
       'Learn world languages — from Kiswahili to Mandarin — for travel, career, and cross-cultural connection.',
+    learningArea: 'Languages & Communication',
+    level: 'Beginner',
+    programType: 'Certificate Pathway',
+    status: 'active',
+    admissionStatus: 'open',
+    entryRequirements: [],
+    targetAudience: '',
+    learningOutcomes: [],
+    careerPathways: [],
+    programVersion: '1.0',
+    curriculumVersion: '2026.1',
+    reviewDate: '2027-01-01',
   },
   {
     id: 'international-qualifications',
+    programCode: 'PRG-IQU',
+    slug: 'international-qualifications',
     title: 'International Qualifications',
+    shortDescription: 'Focused preparation for internationally recognised exams and university admission.',
     description:
       'Prepare for internationally recognised qualifications and university admission.',
+    learningArea: 'Academic Qualifications',
+    level: 'Intermediate',
+    programType: 'Exam Preparation Pathway',
+    status: 'active',
+    admissionStatus: 'open',
+    entryRequirements: [],
+    targetAudience: '',
+    learningOutcomes: [],
+    careerPathways: [],
+    programVersion: '1.0',
+    curriculumVersion: '2026.1',
+    reviewDate: '2027-01-01',
   },
   {
     id: 'national-tvet',
+    programCode: 'PRG-TVET',
+    slug: 'national-tvet',
     title: 'National Curriculum & TVET',
+    shortDescription: 'CBC, KCSE, KNEC and TVET-aligned academic and vocational support.',
     description:
       'Support Kenyan learners through CBC, KCSE, KNEC and TVET education.',
+    learningArea: 'National Curriculum & Vocational Training',
+    level: 'All Levels',
+    programType: 'National Curriculum Pathway',
+    status: 'active',
+    admissionStatus: 'open',
+    entryRequirements: [],
+    targetAudience: '',
+    learningOutcomes: [],
+    careerPathways: [],
+    programVersion: '1.0',
+    curriculumVersion: '2026.1',
+    reviewDate: '2027-01-01',
   },
   {
     id: 'digital-literacy-productivity',
+    programCode: 'PRG-DLP',
+    slug: 'digital-literacy-productivity',
     title: 'Digital Literacy & Productivity',
+    shortDescription: 'Foundational digital skills and productivity tools for the modern workplace.',
     description:
       'Build foundational digital skills, productivity tools mastery and safe online habits for the modern workplace.',
+    learningArea: 'Digital Skills',
+    level: 'Beginner',
+    programType: 'Certificate Pathway',
+    status: 'active',
+    admissionStatus: 'open',
+    entryRequirements: [],
+    targetAudience: '',
+    learningOutcomes: [],
+    careerPathways: [],
+    programVersion: '1.0',
+    curriculumVersion: '2026.1',
+    reviewDate: '2027-01-01',
   },
   {
     id: 'creative-design',
+    programCode: 'PRG-CDM',
+    slug: 'creative-design',
     title: 'Creative Design & Media',
+    shortDescription: 'Visual, video and multimedia production skills for the creative economy.',
     description:
       'Develop creative, visual and multimedia production skills for the digital economy.',
+    learningArea: 'Creative & Media',
+    level: 'All Levels',
+    programType: 'Certificate Pathway',
+    status: 'active',
+    admissionStatus: 'open',
+    entryRequirements: [],
+    targetAudience: '',
+    learningOutcomes: [],
+    careerPathways: [],
+    programVersion: '1.0',
+    curriculumVersion: '2026.1',
+    reviewDate: '2027-01-01',
   },
   {
     id: 'business',
+    programCode: 'PRG-BUS',
+    slug: 'business',
     title: 'Business, Entrepreneurship & Leadership',
+    shortDescription: 'Management, entrepreneurship and leadership skills for ventures and organisations.',
     description:
       'Build entrepreneurial, management and leadership excellence for ventures and organisations.',
+    learningArea: 'Business & Leadership',
+    level: 'All Levels',
+    programType: 'Certificate Pathway',
+    status: 'active',
+    admissionStatus: 'open',
+    entryRequirements: [],
+    targetAudience: '',
+    learningOutcomes: [],
+    careerPathways: [],
+    programVersion: '1.0',
+    curriculumVersion: '2026.1',
+    reviewDate: '2027-01-01',
   },
   {
     id: 'freelancing',
+    programCode: 'PRG-FRL',
+    slug: 'freelancing',
     title: 'Freelancing & Remote Work',
+    shortDescription: 'In-demand digital skills to work independently from anywhere.',
     description:
       'Learn high-income digital skills and work from anywhere in the world.',
+    learningArea: 'Freelancing & Remote Work',
+    level: 'Beginner',
+    programType: 'Certificate Pathway',
+    status: 'active',
+    admissionStatus: 'open',
+    entryRequirements: [],
+    targetAudience: '',
+    learningOutcomes: [],
+    careerPathways: [],
+    programVersion: '1.0',
+    curriculumVersion: '2026.1',
+    reviewDate: '2027-01-01',
   },
   {
     id: 'career',
+    programCode: 'PRG-CAR',
+    slug: 'career',
     title: 'Career Development',
+    shortDescription: 'CV, interview and career-planning skills for professional growth.',
     description:
       'Prepare for successful careers, global opportunities and professional growth.',
+    learningArea: 'Career Development',
+    level: 'All Levels',
+    programType: 'Certificate Pathway',
+    status: 'active',
+    admissionStatus: 'open',
+    entryRequirements: [],
+    targetAudience: '',
+    learningOutcomes: [],
+    careerPathways: [],
+    programVersion: '1.0',
+    curriculumVersion: '2026.1',
+    reviewDate: '2027-01-01',
   },
   {
     id: 'education-teaching-excellence',
+    programCode: 'PRG-EDT',
+    slug: 'education-teaching-excellence',
     title: 'Education & Teaching Excellence',
+    shortDescription: 'Teaching methodology, curriculum design and EdTech for educators.',
     description:
       'Develop teaching methodologies, curriculum design and EdTech skills for educators and trainers.',
+    learningArea: 'Education & Teaching',
+    level: 'Intermediate',
+    programType: 'Certificate Pathway',
+    status: 'active',
+    admissionStatus: 'open',
+    entryRequirements: [],
+    targetAudience: '',
+    learningOutcomes: [],
+    careerPathways: [],
+    programVersion: '1.0',
+    curriculumVersion: '2026.1',
+    reviewDate: '2027-01-01',
   },
   {
     id: 'health-hospitality-community',
+    programCode: 'PRG-HHC',
+    slug: 'health-hospitality-community',
     title: 'Health, Hospitality & Community Development',
+    shortDescription: 'Hospitality, tourism, health and community-development skills.',
     description:
       'Build skills in hospitality, tourism, community health and event management for impactful careers.',
+    learningArea: 'Community & Hospitality',
+    level: 'Beginner',
+    programType: 'Certificate Pathway',
+    status: 'active',
+    admissionStatus: 'open',
+    entryRequirements: [],
+    targetAudience: '',
+    learningOutcomes: [],
+    careerPathways: [],
+    programVersion: '1.0',
+    curriculumVersion: '2026.1',
+    reviewDate: '2027-01-01',
   },
   {
     id: 'personal-development-life-skills',
+    programCode: 'PRG-PDL',
+    slug: 'personal-development-life-skills',
     title: 'Personal Development & Life Skills',
+    shortDescription: 'Emotional intelligence, critical thinking and life skills for personal growth.',
     description:
       'Cultivate emotional intelligence, critical thinking, productivity and the life skills that underpin success.',
+    learningArea: 'Personal Development',
+    level: 'Beginner',
+    programType: 'Certificate Pathway',
+    status: 'active',
+    admissionStatus: 'open',
+    entryRequirements: [],
+    targetAudience: '',
+    learningOutcomes: [],
+    careerPathways: [],
+    programVersion: '1.0',
+    curriculumVersion: '2026.1',
+    reviewDate: '2027-01-01',
   }
 ];
 
@@ -891,14 +1090,33 @@ export const COURSES = [
     featured: false, createdAt: "2026-12-08",
   },
   {
-    code: "CBC101", name: "CBC Junior School Support", academy: ACADEMY,
+    code: "CBP101", name: "CBE Primary Support (PP1 – Grade 6)", academy: ACADEMY,
     pathwayId: "national-tvet", category: "National Curriculum & TVET", pillar: "academy",
-    shortDescription: "Support for CBC junior school learners across core competencies.",
-    fullDescription: "CBC Junior School Support provides comprehensive support for CBC junior school learners, covering core competencies, literacy, numeracy and key learning areas aligned with the Kenyan Competency Based Curriculum.",
+    status: 'Active',
+    shortDescription: "CBE-aligned support for learners from PP1 through Grade 6.",
+    fullDescription: "CBE Primary Support covers the Competency Based Education curriculum for Pre-Primary 1 through Grade 6, building core literacy, numeracy and foundational competencies aligned with the current Kenyan CBE framework.",
     duration: "12 Weeks", studyMode: "Hybrid", level: "Beginner", language: "English",
-    fees: "KES 12,000", certification: "CBC Support Certificate",
+    fees: "KES 12,000", certification: "CBE Primary Support Certificate",
     entryRequirements: [
-    "CBC junior school learner",
+    "Enrolled in PP1 through Grade 6",
+    "Basic English literacy",
+    "Internet access for online learners",
+    "Commitment to regular study"
+  ],
+    instructor: { name: "To be announced", bio: "Instructor details will be confirmed before intake." },
+    brochureUrl: '#', calendarUrl: '#', featuredImage: null,
+    featured: false, createdAt: "2026-05-01",
+  },
+  {
+    code: "CBJ101", name: "CBE Junior Secondary Support", academy: ACADEMY,
+    pathwayId: "national-tvet", category: "National Curriculum & TVET", pillar: "academy",
+    status: 'Active',
+    shortDescription: "CBE-aligned support for Junior Secondary learners (Grade 7 – 9).",
+    fullDescription: "CBE Junior Secondary Support provides comprehensive support for learners in Grade 7 through Grade 9, covering core learning areas and pathway subjects aligned with the Kenyan Competency Based Education curriculum.",
+    duration: "12 Weeks", studyMode: "Hybrid", level: "Intermediate", language: "English",
+    fees: "KES 14,000", certification: "CBE Junior Secondary Certificate",
+    entryRequirements: [
+    "Enrolled in Grade 7 through Grade 9",
     "Basic English literacy",
     "Internet access for online learners",
     "Commitment to regular study"
@@ -910,6 +1128,7 @@ export const COURSES = [
   {
     code: "KCS101", name: "KCSE Revision", academy: ACADEMY,
     pathwayId: "national-tvet", category: "National Curriculum & TVET", pillar: "academy",
+    status: 'Active',
     shortDescription: "Comprehensive KCSE revision across core subjects.",
     fullDescription: "KCSE Revision provides comprehensive revision for the Kenya Certificate of Secondary Education examination, covering core subjects with past papers, exam technique and targeted revision.",
     duration: "16 Weeks", studyMode: "Hybrid", level: "Advanced", language: "English",
@@ -925,21 +1144,22 @@ export const COURSES = [
     featured: true, createdAt: "2026-05-02",
   },
   {
-    code: "KCP101", name: "KCPE Revision", academy: ACADEMY,
+    code: "CBS101", name: "CBE Senior Secondary Support", academy: ACADEMY,
     pathwayId: "national-tvet", category: "National Curriculum & TVET", pillar: "academy",
-    shortDescription: "Targeted KCPE revision for primary school learners.",
-    fullDescription: "KCPE Revision provides comprehensive revision for the Kenya Certificate of Primary Education examination, covering Mathematics, English, Kiswahili, Science and Social Studies with past papers and exam technique.",
-    duration: "12 Weeks", studyMode: "Hybrid", level: "Intermediate", language: "English",
-    fees: "KES 14,000", certification: "KCPE Readiness Certificate",
+    status: 'Active',
+    shortDescription: "CBE-aligned support for Senior Secondary learners (Grade 10 – 12).",
+    fullDescription: "CBE Senior Secondary Support provides pathway-focused support for learners in Grade 10 through Grade 12, covering the core and pathway-specific learning areas of the Kenyan Competency Based Education curriculum.",
+    duration: "16 Weeks", studyMode: "Hybrid", level: "Advanced", language: "English",
+    fees: "KES 18,000", certification: "CBE Senior Secondary Certificate",
     entryRequirements: [
-    "Class 8 student or equivalent",
-    "Basic English literacy",
+    "Enrolled in Grade 10 through Grade 12",
+    "Intermediate English proficiency",
     "Internet access for online learners",
-    "Commitment to regular revision"
+    "Commitment to regular study"
   ],
     instructor: { name: "To be announced", bio: "Instructor details will be confirmed before intake." },
     brochureUrl: '#', calendarUrl: '#', featuredImage: null,
-    featured: false, createdAt: "2026-05-03",
+    featured: false, createdAt: "2026-05-02",
   },
   {
     code: "TVT101", name: "TVET Engineering", academy: ACADEMY,
@@ -1056,7 +1276,7 @@ export const COURSES = [
   },
   {
     code: "EDR101", name: "Engineering Drawing", academy: ACADEMY,
-    pathwayId: "school-engineering-innovation", category: "School of Engineering & Innovation", pillar: "labs",
+    pathwayId: "school-engineering-innovation", category: "Engineering, Automation & Innovation", pillar: "labs",
     shortDescription: "Master technical drawing for engineering and design.",
     fullDescription: "Engineering Drawing covers technical drawing principles, orthographic projection, isometric drawing, dimensioning and CAD basics for engineering and technical applications.",
     duration: "8 Weeks", studyMode: "Hybrid", level: "Intermediate", language: "English",
@@ -1073,7 +1293,7 @@ export const COURSES = [
   },
   {
     code: "ELI101", name: "Electrical Installation", academy: ACADEMY,
-    pathwayId: "school-engineering-innovation", category: "School of Engineering & Innovation", pillar: "labs",
+    pathwayId: "school-engineering-innovation", category: "Engineering, Automation & Innovation", pillar: "labs",
     shortDescription: "Learn electrical installation for residential and commercial buildings.",
     fullDescription: "Electrical Installation covers electrical circuits, wiring, safety, installation practices and basic electrical codes for residential and commercial electrical work.",
     duration: "8 Weeks", studyMode: "Physical / Hybrid", level: "Intermediate", language: "English",
@@ -1090,7 +1310,7 @@ export const COURSES = [
   },
   {
     code: "ELN101", name: "Electronics", academy: ACADEMY,
-    pathwayId: "school-engineering-innovation", category: "School of Engineering & Innovation", pillar: "labs",
+    pathwayId: "school-engineering-innovation", category: "Engineering, Automation & Innovation", pillar: "labs",
     shortDescription: "Understand electronics from basic components to circuit design.",
     fullDescription: "Electronics covers electronic components, circuit analysis, soldering, testing and basic circuit design for building and repairing electronic devices.",
     duration: "8 Weeks", studyMode: "Physical / Hybrid", level: "Intermediate", language: "English",
@@ -1107,7 +1327,7 @@ export const COURSES = [
   },
   {
     code: "EMA101", name: "Engineering Mathematics", academy: ACADEMY,
-    pathwayId: "school-engineering-innovation", category: "School of Engineering & Innovation", pillar: "labs",
+    pathwayId: "school-engineering-innovation", category: "Engineering, Automation & Innovation", pillar: "labs",
     shortDescription: "Master the mathematics needed for engineering study and practice.",
     fullDescription: "Engineering Mathematics covers algebra, trigonometry, calculus, statistics and engineering applications of mathematics for engineering students and professionals.",
     duration: "10 Weeks", studyMode: "Hybrid", level: "Advanced", language: "English",
@@ -1174,7 +1394,7 @@ export const COURSES = [
   },
   {
     code: "REN101", name: "Renewable Energy", academy: ACADEMY,
-    pathwayId: "school-engineering-innovation", category: "School of Engineering & Innovation", pillar: "labs",
+    pathwayId: "school-engineering-innovation", category: "Engineering, Automation & Innovation", pillar: "labs",
     shortDescription: "Understand renewable energy systems and technologies.",
     fullDescription: "Renewable Energy covers solar, wind, hydro and biomass energy systems, including system design, installation, maintenance and policy for the renewable energy sector.",
     duration: "8 Weeks", studyMode: "Hybrid", level: "Intermediate", language: "English",
@@ -1191,7 +1411,7 @@ export const COURSES = [
   },
   {
     code: "SOL101", name: "Solar Installation", academy: ACADEMY,
-    pathwayId: "school-engineering-innovation", category: "School of Engineering & Innovation", pillar: "labs",
+    pathwayId: "school-engineering-innovation", category: "Engineering, Automation & Innovation", pillar: "labs",
     shortDescription: "Learn to design, install and maintain solar power systems.",
     fullDescription: "Solar Installation covers solar panel types, system sizing, battery storage, charge controllers, inverters, installation practices and maintenance for residential and commercial solar systems.",
     duration: "8 Weeks", studyMode: "Physical / Hybrid", level: "Beginner", language: "English",
@@ -1309,7 +1529,7 @@ export const COURSES = [
   },
   {
     code: "COD101", name: "Coding Fundamentals", academy: ACADEMY,
-    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
+    pathwayId: "school-software-engineering", category: "Software & Digital Systems", pillar: "labs",
     shortDescription: "Learn the building blocks of programming and computational thinking.",
     fullDescription: "Coding Fundamentals introduces programming concepts including variables, loops, conditionals, functions and data structures, using a beginner-friendly language to build computational thinking.",
     duration: "8 Weeks", studyMode: "Online", level: "Beginner", language: "English",
@@ -1326,7 +1546,7 @@ export const COURSES = [
   },
   {
     code: "PY101", name: "Python Programming", academy: ACADEMY,
-    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
+    pathwayId: "school-software-engineering", category: "Software & Digital Systems", pillar: "labs",
     shortDescription: "Learn Python, one of the world's most in-demand programming languages, from the ground up.",
     fullDescription: "Python Programming builds practical coding skills from syntax and data types to functions, file handling and simple projects, giving learners a strong foundation in one of the most popular programming languages.",
     duration: "10 Weeks", studyMode: "Online", level: "Beginner", language: "English",
@@ -1343,7 +1563,7 @@ export const COURSES = [
   },
   {
     code: "AIF101", name: "Artificial Intelligence Fundamentals", academy: ACADEMY,
-    pathwayId: "school-ai", category: "School of Artificial Intelligence", pillar: "labs",
+    pathwayId: "school-ai", category: "Digital Intelligence", pillar: "labs",
     shortDescription: "Understand how AI works and explore its real-world applications and impact.",
     fullDescription: "Artificial Intelligence Fundamentals introduces the concepts behind AI, including machine learning, neural networks and natural language processing, with practical exploration of AI tools and their real-world impact.",
     duration: "6 Weeks", studyMode: "Online", level: "Beginner", language: "English",
@@ -1360,7 +1580,7 @@ export const COURSES = [
   },
   {
     code: "AI101", name: "Applied AI Tools", academy: ACADEMY,
-    pathwayId: "school-ai", category: "School of Artificial Intelligence", pillar: "labs",
+    pathwayId: "school-ai", category: "Digital Intelligence", pillar: "labs",
     shortDescription: "Master AI tools to boost productivity, creativity, and professional efficiency.",
     fullDescription: "Applied AI Tools introduces practical AI tools for content creation, data analysis, design and automation, helping learners integrate AI into their daily work and study.",
     duration: "6 Weeks", studyMode: "Online", level: "Beginner", language: "English",
@@ -1377,7 +1597,7 @@ export const COURSES = [
   },
   {
     code: "CYB101", name: "Cybersecurity Awareness", academy: ACADEMY,
-    pathwayId: "school-cybersecurity", category: "School of Cybersecurity", pillar: "labs",
+    pathwayId: "school-cybersecurity", category: "Cybersecurity & Digital Safety", pillar: "labs",
     shortDescription: "Learn essential cybersecurity skills to stay safe online and protect your data.",
     fullDescription: "Cybersecurity Awareness covers password security, phishing, malware, safe browsing, social media privacy and basic digital hygiene for individuals and small organisations.",
     duration: "4 Weeks", studyMode: "Online", level: "Beginner", language: "English",
@@ -1643,7 +1863,7 @@ export const COURSES = [
   },
   {
     code: "FIG101", name: "Figma Design", academy: ACADEMY,
-    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
+    pathwayId: "school-software-engineering", category: "Software & Digital Systems", pillar: "labs",
     shortDescription: "Master Figma for collaborative interface design and prototyping.",
     fullDescription: "Figma Design teaches learners to use Figma for UI design, prototyping, design systems and collaboration, building the skills needed for modern digital product design workflows.",
     duration: "6 Weeks", studyMode: "Online", level: "Beginner", language: "English",
@@ -1660,7 +1880,7 @@ export const COURSES = [
   },
   {
     code: "UIX101", name: "UI/UX Design Fundamentals", academy: ACADEMY,
-    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
+    pathwayId: "school-software-engineering", category: "Software & Digital Systems", pillar: "labs",
     shortDescription: "Design intuitive, user-centred digital products from wireframe to prototype.",
     fullDescription: "UI/UX Design Fundamentals covers user research, wireframing, prototyping, usability testing and design systems, giving learners a practical foundation in digital product design.",
     duration: "8 Weeks", studyMode: "Online", level: "Beginner", language: "English",
@@ -1677,7 +1897,7 @@ export const COURSES = [
   },
   {
     code: "UID101", name: "UI Design", academy: ACADEMY,
-    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
+    pathwayId: "school-software-engineering", category: "Software & Digital Systems", pillar: "labs",
     shortDescription: "Master the visual design of digital interfaces.",
     fullDescription: "UI Design covers visual hierarchy, colour theory, typography, component design and design systems for web and mobile interfaces, building practical skills in digital visual design.",
     duration: "8 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -1694,7 +1914,7 @@ export const COURSES = [
   },
   {
     code: "UXD101", name: "UX Design", academy: ACADEMY,
-    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
+    pathwayId: "school-software-engineering", category: "Software & Digital Systems", pillar: "labs",
     shortDescription: "Master user research, usability and experience design for digital products.",
     fullDescription: "UX Design covers user research methods, personas, journey mapping, usability testing and information architecture, building the skills to design experiences users love.",
     duration: "8 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -1711,7 +1931,7 @@ export const COURSES = [
   },
   {
     code: "MOG101", name: "Motion Graphics", academy: ACADEMY,
-    pathwayId: "school-creative-ai-immersive", category: "School of Creative AI & Immersive Media", pillar: "labs",
+    pathwayId: "school-creative-ai-immersive", category: "Creative Technology & Immersive Media", pillar: "labs",
     shortDescription: "Create dynamic motion graphics for video, web and social media.",
     fullDescription: "Motion Graphics covers animation principles, keyframing, easing, text animation and compositing using After Effects, building skills for creating professional motion content.",
     duration: "8 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -1728,7 +1948,7 @@ export const COURSES = [
   },
   {
     code: "MOT101", name: "Motion Design", academy: ACADEMY,
-    pathwayId: "school-creative-ai-immersive", category: "School of Creative AI & Immersive Media", pillar: "labs",
+    pathwayId: "school-creative-ai-immersive", category: "Creative Technology & Immersive Media", pillar: "labs",
     shortDescription: "Master motion design for digital products and brand experiences.",
     fullDescription: "Motion Design covers advanced animation, transitions, micro-interactions and motion branding for digital products, building skills in creating polished motion design work.",
     duration: "8 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -2123,7 +2343,7 @@ export const COURSES = [
   },
   {
     code: "AIP101", name: "AI Prompt Engineering", academy: ACADEMY,
-    pathwayId: "school-ai", category: "School of Artificial Intelligence", pillar: "labs",
+    pathwayId: "school-ai", category: "Digital Intelligence", pillar: "labs",
     shortDescription: "Master the art of writing effective prompts to get the best results from AI tools.",
     fullDescription: "AI Prompt Engineering teaches learners to design effective prompts for text, image and code-generation AI tools, covering prompt structure, iteration techniques and use cases across freelancing, content and business tasks.",
     duration: "6 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -2446,7 +2666,7 @@ export const COURSES = [
   },
   {
     code: "CRD104", name: "Technical Interview Prep", academy: ACADEMY,
-    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
+    pathwayId: "school-software-engineering", category: "Software & Digital Systems", pillar: "labs",
     shortDescription: "Prepare for technical interviews at leading technology companies.",
     fullDescription: "Technical Interview Prep covers data structures, algorithms, system design, coding challenges and behavioural interviews, with mock interview practice and strategy for technical roles at tech companies.",
     duration: "6 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -3019,7 +3239,7 @@ export const COURSES = [
   },
   {
     code: "ML101", name: "Machine Learning", academy: ACADEMY,
-    pathwayId: "school-ai", category: "School of Artificial Intelligence", pillar: "labs",
+    pathwayId: "school-ai", category: "Digital Intelligence", pillar: "labs",
     shortDescription: "Learn to build and evaluate machine learning models using real datasets.",
     fullDescription: "Machine Learning covers supervised and unsupervised learning, model evaluation, feature engineering and deployment basics, using Python and popular ML libraries.",
     duration: "12 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -3036,7 +3256,7 @@ export const COURSES = [
   },
   {
     code: "JAV101", name: "Java Programming", academy: ACADEMY,
-    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
+    pathwayId: "school-software-engineering", category: "Software & Digital Systems", pillar: "labs",
     shortDescription: "Build a strong foundation in Java for enterprise software and Android development.",
     fullDescription: "Java Programming covers object-oriented programming, data structures, exception handling and basic enterprise patterns, building a strong foundation in one of the most widely used programming languages.",
     duration: "12 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -3053,7 +3273,7 @@ export const COURSES = [
   },
   {
     code: "JSC101", name: "JavaScript Programming", academy: ACADEMY,
-    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
+    pathwayId: "school-software-engineering", category: "Software & Digital Systems", pillar: "labs",
     shortDescription: "Master JavaScript, the essential language of the interactive web.",
     fullDescription: "JavaScript Programming covers DOM manipulation, events, async programming, APIs and modern ES6+ features, building the skills needed for modern web development.",
     duration: "10 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -3070,7 +3290,7 @@ export const COURSES = [
   },
   {
     code: "REA101", name: "React Development", academy: ACADEMY,
-    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
+    pathwayId: "school-software-engineering", category: "Software & Digital Systems", pillar: "labs",
     shortDescription: "Build modern, component-based web applications with React.",
     fullDescription: "React Development covers components, hooks, state management, routing and API integration, building the skills to create modern single-page applications with React.",
     duration: "10 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -3087,7 +3307,7 @@ export const COURSES = [
   },
   {
     code: "WEB101", name: "Web Development", academy: ACADEMY,
-    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
+    pathwayId: "school-software-engineering", category: "Software & Digital Systems", pillar: "labs",
     shortDescription: "Learn HTML, CSS, and JavaScript to build your first responsive websites.",
     fullDescription: "Web Development covers HTML5, CSS3, responsive design, basic JavaScript and deployment, giving learners the skills to build and publish modern websites from scratch.",
     duration: "10 Weeks", studyMode: "Online", level: "Beginner", language: "English",
@@ -3104,7 +3324,7 @@ export const COURSES = [
   },
   {
     code: "MOB101", name: "Mobile App Development", academy: ACADEMY,
-    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
+    pathwayId: "school-software-engineering", category: "Software & Digital Systems", pillar: "labs",
     shortDescription: "Design and build mobile applications for Android and iOS.",
     fullDescription: "Mobile App Development covers cross-platform development with React Native, covering UI components, navigation, state management, API integration and deployment to app stores.",
     duration: "10 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -3121,7 +3341,7 @@ export const COURSES = [
   },
   {
     code: "CLD101", name: "Cloud Computing", academy: ACADEMY,
-    pathwayId: "school-cloud-devops", category: "School of Cloud & DevOps", pillar: "labs",
+    pathwayId: "school-cloud-devops", category: "Cloud, Infrastructure & DevOps", pillar: "labs",
     shortDescription: "Learn to deploy, manage and secure applications on modern cloud platforms.",
     fullDescription: "Cloud Computing covers cloud architecture, deployment models, scaling, security and cost management across AWS and Azure, building practical cloud infrastructure skills.",
     duration: "10 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -3138,7 +3358,7 @@ export const COURSES = [
   },
   {
     code: "NET101", name: "Networking (CCNA)", academy: ACADEMY,
-    pathwayId: "school-cloud-devops", category: "School of Cloud & DevOps", pillar: "labs",
+    pathwayId: "school-cloud-devops", category: "Cloud, Infrastructure & DevOps", pillar: "labs",
     shortDescription: "Build practical networking skills and prepare for the Cisco CCNA certification.",
     fullDescription: "Networking (CCNA) covers network fundamentals, IP addressing, routing, switching, security and troubleshooting, preparing learners for the Cisco CCNA certification exam.",
     duration: "12 Weeks", studyMode: "Hybrid", level: "Intermediate", language: "English",
@@ -3155,7 +3375,7 @@ export const COURSES = [
   },
   {
     code: "LNX101", name: "Linux Administration", academy: ACADEMY,
-    pathwayId: "school-cloud-devops", category: "School of Cloud & DevOps", pillar: "labs",
+    pathwayId: "school-cloud-devops", category: "Cloud, Infrastructure & DevOps", pillar: "labs",
     shortDescription: "Build practical skills in managing and administering Linux systems.",
     fullDescription: "Linux Administration covers installation, file systems, user management, permissions, process management, networking and shell scripting for managing Linux servers.",
     duration: "8 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -3172,7 +3392,7 @@ export const COURSES = [
   },
   {
     code: "CYB201", name: "Cybersecurity Fundamentals", academy: ACADEMY,
-    pathwayId: "school-cybersecurity", category: "School of Cybersecurity", pillar: "labs",
+    pathwayId: "school-cybersecurity", category: "Cybersecurity & Digital Safety", pillar: "labs",
     shortDescription: "Build foundational skills in network security, threat detection and incident response.",
     fullDescription: "Cybersecurity Fundamentals covers network security principles, threat detection, vulnerability assessment, incident response and security operations for protecting systems and data.",
     duration: "10 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -3189,7 +3409,7 @@ export const COURSES = [
   },
   {
     code: "DSC101", name: "Data Science", academy: ACADEMY,
-    pathwayId: "school-data-science", category: "School of Data Science & Analytics", pillar: "labs",
+    pathwayId: "school-data-science", category: "Data, Analytics & Intelligent Systems", pillar: "labs",
     shortDescription: "Analyse, visualise and draw insight from data using modern data science tools.",
     fullDescription: "Data Science covers data cleaning, exploratory analysis, visualisation, statistical methods and introductory machine learning using Python, Pandas and visualisation libraries.",
     duration: "12 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -3206,7 +3426,7 @@ export const COURSES = [
   },
   {
     code: "SQL101", name: "SQL & Database Management", academy: ACADEMY,
-    pathwayId: "school-data-science", category: "School of Data Science & Analytics", pillar: "labs",
+    pathwayId: "school-data-science", category: "Data, Analytics & Intelligent Systems", pillar: "labs",
     shortDescription: "Learn to design, query and manage relational databases using SQL.",
     fullDescription: "SQL & Database Management covers database design, normalisation, SQL queries, joins, aggregation, indexing and basic database administration for managing data effectively.",
     duration: "8 Weeks", studyMode: "Online", level: "Beginner", language: "English",
@@ -3223,7 +3443,7 @@ export const COURSES = [
   },
   {
     code: "ELE201", name: "Electrical Engineering", academy: ACADEMY,
-    pathwayId: "school-engineering-innovation", category: "School of Engineering & Innovation", pillar: "labs",
+    pathwayId: "school-engineering-innovation", category: "Engineering, Automation & Innovation", pillar: "labs",
     shortDescription: "Build a strong foundation in electrical engineering theory and application.",
     fullDescription: "Electrical Engineering covers circuit analysis, electrical machines, power systems and electrical safety, building a strong foundation in electrical engineering theory and practice.",
     duration: "16 Weeks", studyMode: "Physical / Hybrid", level: "Advanced", language: "English",
@@ -3239,7 +3459,7 @@ export const COURSES = [
   },
   {
     code: "ELC101", name: "Electronics Engineering", academy: ACADEMY,
-    pathwayId: "school-engineering-innovation", category: "School of Engineering & Innovation", pillar: "labs",
+    pathwayId: "school-engineering-innovation", category: "Engineering, Automation & Innovation", pillar: "labs",
     shortDescription: "Explore the design and analysis of electronic circuits and systems.",
     fullDescription: "Electronics Engineering covers analog and digital circuits, semiconductor devices, signal processing and PCB design for building and analysing electronic systems.",
     duration: "16 Weeks", studyMode: "Physical / Hybrid", level: "Advanced", language: "English",
@@ -3255,7 +3475,7 @@ export const COURSES = [
   },
   {
     code: "PLC101", name: "PLC Programming", academy: ACADEMY,
-    pathwayId: "school-engineering-innovation", category: "School of Engineering & Innovation", pillar: "labs",
+    pathwayId: "school-engineering-innovation", category: "Engineering, Automation & Innovation", pillar: "labs",
     shortDescription: "Learn to program Programmable Logic Controllers used in industrial automation.",
     fullDescription: "PLC Programming covers ladder logic, function block diagrams, PLC hardware, HMI integration and industrial communication protocols for automation control systems.",
     duration: "10 Weeks", studyMode: "Physical / Hybrid", level: "Intermediate", language: "English",
@@ -3271,7 +3491,7 @@ export const COURSES = [
   },
   {
     code: "CAD101", name: "AutoCAD", academy: ACADEMY,
-    pathwayId: "school-engineering-innovation", category: "School of Engineering & Innovation", pillar: "labs",
+    pathwayId: "school-engineering-innovation", category: "Engineering, Automation & Innovation", pillar: "labs",
     shortDescription: "Master computer-aided design for engineering and architectural drawings.",
     fullDescription: "AutoCAD covers 2D drafting, 3D modelling, dimensions, annotations, layouts and plotting, building practical CAD skills for engineering and architecture.",
     duration: "8 Weeks", studyMode: "Hybrid", level: "Beginner", language: "English",
@@ -3288,7 +3508,7 @@ export const COURSES = [
   },
   {
     code: "CIV101", name: "Civil Engineering Basics", academy: ACADEMY,
-    pathwayId: "school-engineering-innovation", category: "School of Engineering & Innovation", pillar: "labs",
+    pathwayId: "school-engineering-innovation", category: "Engineering, Automation & Innovation", pillar: "labs",
     shortDescription: "Build a foundational understanding of civil engineering principles and construction.",
     fullDescription: "Civil Engineering Basics covers surveying, construction materials, structural analysis, hydraulics and project management for civil engineering projects.",
     duration: "16 Weeks", studyMode: "Physical / Hybrid", level: "Intermediate", language: "English",
@@ -3304,7 +3524,7 @@ export const COURSES = [
   },
   {
     code: "MEC101", name: "Mechanical Engineering", academy: ACADEMY,
-    pathwayId: "school-engineering-innovation", category: "School of Engineering & Innovation", pillar: "labs",
+    pathwayId: "school-engineering-innovation", category: "Engineering, Automation & Innovation", pillar: "labs",
     shortDescription: "Explore the fundamentals of mechanical systems, materials and design.",
     fullDescription: "Mechanical Engineering covers thermodynamics, fluid mechanics, materials science, machine design and manufacturing processes for mechanical systems.",
     duration: "16 Weeks", studyMode: "Physical / Hybrid", level: "Intermediate", language: "English",
@@ -3320,7 +3540,7 @@ export const COURSES = [
   },
   {
     code: "MTR101", name: "Mechatronics", academy: ACADEMY,
-    pathwayId: "school-engineering-innovation", category: "School of Engineering & Innovation", pillar: "labs",
+    pathwayId: "school-engineering-innovation", category: "Engineering, Automation & Innovation", pillar: "labs",
     shortDescription: "Combine mechanical, electronic and computing skills to build smart systems.",
     fullDescription: "Mechatronics introduces the integration of mechanical systems, electronics and computing, covering sensors, actuators, microcontrollers and control programming for smart devices.",
     duration: "12 Weeks", studyMode: "Physical / Hybrid", level: "Advanced", language: "English",
@@ -3336,7 +3556,7 @@ export const COURSES = [
   },
   {
     code: "ROB101", name: "Robotics", academy: ACADEMY,
-    pathwayId: "school-engineering-innovation", category: "School of Engineering & Innovation", pillar: "labs",
+    pathwayId: "school-engineering-innovation", category: "Engineering, Automation & Innovation", pillar: "labs",
     shortDescription: "Design, build and program robots from the ground up.",
     fullDescription: "Robotics covers robot kinematics, sensors, actuators, microcontroller programming and robot operating systems for building autonomous and remote-controlled robots.",
     duration: "12 Weeks", studyMode: "Physical / Hybrid", level: "Advanced", language: "English",
@@ -3352,7 +3572,7 @@ export const COURSES = [
   },
   {
     code: "IAT101", name: "Industrial Automation", academy: ACADEMY,
-    pathwayId: "school-engineering-innovation", category: "School of Engineering & Innovation", pillar: "labs",
+    pathwayId: "school-engineering-innovation", category: "Engineering, Automation & Innovation", pillar: "labs",
     shortDescription: "Learn to design and manage automated systems for modern manufacturing.",
     fullDescription: "Industrial Automation covers sensors, actuators, control systems and industrial networking used to automate manufacturing and processing lines, preparing learners for roles in modern industrial facilities.",
     duration: "12 Weeks", studyMode: "Physical / Hybrid", level: "Intermediate", language: "English",
@@ -3368,7 +3588,7 @@ export const COURSES = [
   },
   {
     code: "IOT101", name: "IoT Fundamentals", academy: ACADEMY,
-    pathwayId: "school-engineering-innovation", category: "School of Engineering & Innovation", pillar: "labs",
+    pathwayId: "school-engineering-innovation", category: "Engineering, Automation & Innovation", pillar: "labs",
     shortDescription: "Build connected devices using Internet of Things (IoT) technology.",
     fullDescription: "IoT Fundamentals covers IoT architecture, sensors, microcontrollers, wireless protocols, cloud integration and data visualisation for building connected IoT devices and systems.",
     duration: "8 Weeks", studyMode: "Hybrid", level: "Intermediate", language: "English",
@@ -3384,7 +3604,7 @@ export const COURSES = [
   },
   {
     code: "TDP101", name: "3D Printing", academy: ACADEMY,
-    pathwayId: "school-engineering-innovation", category: "School of Engineering & Innovation", pillar: "labs",
+    pathwayId: "school-engineering-innovation", category: "Engineering, Automation & Innovation", pillar: "labs",
     shortDescription: "Learn 3D modelling and printing from design to finished product.",
     fullDescription: "3D Printing covers 3D modelling basics, slicer software, printer setup, calibration, material selection and post-processing for creating physical objects from digital designs.",
     duration: "6 Weeks", studyMode: "Hybrid", level: "Beginner", language: "English",
@@ -3458,4 +3678,75 @@ export function getLabsCourses() {
 export function getAcademyPathways() {
   const academyPathwayIds = new Set(getAcademyCourses().map((c) => c.pathwayId));
   return PATHWAYS.filter((p) => academyPathwayIds.has(p.id));
+}
+
+// ── Programs Academic Foundation helpers ─────────────────────
+// Program → Course resolution always reads from the single COURSES
+// catalogue above — never a second, duplicated dataset.
+
+/** Look up a program (pathway) by its slug. Returns null if not found. */
+export function getProgramBySlug(slug) {
+  return PATHWAYS.find((p) => p.slug === slug) || null;
+}
+
+/**
+ * Programs appropriate for public display: 'active' and 'coming_soon'
+ * only. 'draft', 'under_review' and 'archived' are excluded from public
+ * pages but never deleted from PATHWAYS.
+ */
+export function getVisiblePrograms() {
+  return PATHWAYS.filter((p) => p.status === 'active' || p.status === 'coming_soon');
+}
+
+/**
+ * The real course records for a program, resolved from COURSES by
+ * pathwayId — this IS the program's `courseIds` relationship, computed
+ * live rather than duplicated as a stored array that could drift out of
+ * sync with the catalogue.
+ */
+export function getProgramCourses(programId) {
+  return getCoursesByPathway(programId);
+}
+
+/** The course codes belonging to a program (derived, not stored). */
+export function getProgramCourseIds(programId) {
+  return getProgramCourses(programId).map((c) => c.code);
+}
+
+/** Distinct study modes actually offered across a program's courses. */
+export function getProgramStudyModes(programId) {
+  return [...new Set(getProgramCourses(programId).map((c) => c.studyMode).filter(Boolean))];
+}
+
+/** Distinct levels actually offered across a program's courses. */
+export function getProgramLevels(programId) {
+  return [...new Set(getProgramCourses(programId).map((c) => c.level).filter(Boolean))];
+}
+
+/**
+ * A human-readable duration summary for a program, derived from its
+ * courses' actual durations (never a fabricated single figure).
+ */
+export function getProgramDurationSummary(programId) {
+  const durations = [...new Set(getProgramCourses(programId).map((c) => c.duration).filter(Boolean))];
+  if (durations.length === 0) return null;
+  if (durations.length === 1) return durations[0];
+  return `${durations[0]} – ${durations[durations.length - 1]}`;
+}
+
+/**
+ * Decide the right primary CTA for a program based on its real status
+ * and admission status — never a fake "Apply" for a program that isn't
+ * actually open.
+ */
+export function getProgramCta(program) {
+  if (program.status === 'archived') return { label: 'Archived', to: null, disabled: true };
+  if (program.status === 'coming_soon') return { label: 'Coming Soon', to: null, disabled: true };
+  if (program.status === 'active' && program.admissionStatus === 'open') {
+    return { label: 'Apply Now', to: '/apply', disabled: false };
+  }
+  if (program.status === 'active') {
+    return { label: 'Explore Courses', to: `/programs/${program.slug}`, disabled: false };
+  }
+  return { label: 'Explore Courses', to: `/programs/${program.slug}`, disabled: false };
 }

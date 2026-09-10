@@ -12,6 +12,10 @@ import Partners from '../components/home/Partners.jsx';
 import Testimonials from '../components/home/Testimonials.jsx';
 import FAQ from '../components/home/FAQ.jsx';
 import ClosingCTA from '../components/home/ClosingCTA.jsx';
+import PromotionRail from '../components/home/PromotionRail.jsx';
+import FeaturedLearning from '../components/home/FeaturedLearning.jsx';
+import LearningEcosystem from '../components/home/LearningEcosystem.jsx';
+import AnnouncementBanner from '../components/home/AnnouncementBanner.jsx';
 
 export default function Home() {
   return (
@@ -22,11 +26,15 @@ export default function Home() {
         path="/"
       />
 
+      <div className="pt-20"><AnnouncementBanner /></div>
       <Hero />
+      <PromotionRail />
       <Trusted />
       <HighlightStrip />
       <WhyChoose />
       <Pathways />
+      <FeaturedLearning />
+      <LearningEcosystem />
       <LearningJourney />
       <Ecosystem />
       <Impact />

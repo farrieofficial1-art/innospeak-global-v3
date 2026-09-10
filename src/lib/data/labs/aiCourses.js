@@ -1,5 +1,5 @@
 /**
- * AI Lab courses — School of Artificial Intelligence.
+ * AI Lab courses — Digital Intelligence.
  * Fully enriched with learning objectives, modules, capstones, and professional details.
  */
 
@@ -8,7 +8,7 @@ const ACADEMY = 'InnoSpeak Labs';
 export const AI_COURSES = [
   {
     code: "AIF102", name: "Generative AI", academy: ACADEMY,
-    pathwayId: "school-ai", category: "School of Artificial Intelligence", pillar: "labs",
+    pathwayId: "school-ai", category: "Digital Intelligence", pillar: "labs",
     shortDescription: "Build generative AI applications using LLMs, diffusion models and multimodal architectures.",
     fullDescription: "Generative AI covers the architecture, training and deployment of generative models including large language models, diffusion models for image generation, and multimodal systems. Learn to build applications that generate text, images, audio and code using state-of-the-art generative AI techniques.",
     duration: "10 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -19,7 +19,7 @@ export const AI_COURSES = [
   },
   {
     code: "AIF103", name: "AI Agents", academy: ACADEMY,
-    pathwayId: "school-ai", category: "School of Artificial Intelligence", pillar: "labs",
+    pathwayId: "school-ai", category: "Digital Intelligence", pillar: "labs",
     shortDescription: "Design and build autonomous AI agents that plan, reason and use tools.",
     fullDescription: "AI Agents covers the design and implementation of autonomous AI agents, including planning, reasoning, tool use, memory and reflection. Build agents that can break down complex tasks, interact with APIs and complete multi-step workflows autonomously.",
     duration: "8 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -30,7 +30,7 @@ export const AI_COURSES = [
   },
   {
     code: "AIF104", name: "Agentic Workflows", academy: ACADEMY,
-    pathwayId: "school-ai", category: "School of Artificial Intelligence", pillar: "labs",
+    pathwayId: "school-ai", category: "Digital Intelligence", pillar: "labs",
     shortDescription: "Build production agentic workflows with planning, routing and human-in-the-loop steps.",
     fullDescription: "Agentic Workflows covers the design and orchestration of multi-step agentic pipelines, including task routing, conditional branching, human-in-the-loop checkpoints, state management and observability for production AI workflows.",
     duration: "8 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -41,7 +41,7 @@ export const AI_COURSES = [
   },
   {
     code: "AIF105", name: "Multi-Agent Systems", academy: ACADEMY,
-    pathwayId: "school-ai", category: "School of Artificial Intelligence", pillar: "labs",
+    pathwayId: "school-ai", category: "Digital Intelligence", pillar: "labs",
     shortDescription: "Build systems where multiple AI agents collaborate, debate and solve problems together.",
     fullDescription: "Multi-Agent Systems covers architectures for coordinating multiple AI agents, including role assignment, communication protocols, debate frameworks, consensus mechanisms and emergent collaboration patterns for solving complex problems.",
     duration: "8 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -52,7 +52,7 @@ export const AI_COURSES = [
   },
   {
     code: "AIF106", name: "MCP (Model Context Protocol)", academy: ACADEMY,
-    pathwayId: "school-ai", category: "School of Artificial Intelligence", pillar: "labs",
+    pathwayId: "school-ai", category: "Digital Intelligence", pillar: "labs",
     shortDescription: "Implement Model Context Protocol servers to connect AI models with external tools and data.",
     fullDescription: "MCP covers the Model Context Protocol specification, server implementation, tool registration, resource exposure, security considerations and client integration for connecting AI models to external systems in a standardized way.",
     duration: "6 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -63,7 +63,7 @@ export const AI_COURSES = [
   },
   {
     code: "AIF107", name: "LangChain Development", academy: ACADEMY,
-    pathwayId: "school-ai", category: "School of Artificial Intelligence", pillar: "labs",
+    pathwayId: "school-ai", category: "Digital Intelligence", pillar: "labs",
     shortDescription: "Build LLM-powered applications using the LangChain framework.",
     fullDescription: "LangChain Development covers chains, prompts, memory, document loaders, text splitters, vector stores, retrievers, agents and callbacks in the LangChain ecosystem for building production LLM applications.",
     duration: "8 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -74,7 +74,7 @@ export const AI_COURSES = [
   },
   {
     code: "AIF108", name: "LangGraph Development", academy: ACADEMY,
-    pathwayId: "school-ai", category: "School of Artificial Intelligence", pillar: "labs",
+    pathwayId: "school-ai", category: "Digital Intelligence", pillar: "labs",
     shortDescription: "Build stateful, graph-based AI workflows with LangGraph.",
     fullDescription: "LangGraph Development covers state graphs, nodes, edges, conditional routing, persistence, human-in-the-loop patterns and streaming for building complex, stateful AI workflows using the LangGraph framework.",
     duration: "8 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -85,7 +85,7 @@ export const AI_COURSES = [
   },
   {
     code: "AIF109", name: "CrewAI Framework", academy: ACADEMY,
-    pathwayId: "school-ai", category: "School of Artificial Intelligence", pillar: "labs",
+    pathwayId: "school-ai", category: "Digital Intelligence", pillar: "labs",
     shortDescription: "Build collaborative AI agent crews using the CrewAI framework.",
     fullDescription: "CrewAI Framework covers agent roles, crew composition, task delegation, process orchestration, tools integration and output parsing for building teams of collaborative AI agents using CrewAI.",
     duration: "6 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -96,7 +96,7 @@ export const AI_COURSES = [
   },
   {
     code: "AIF110", name: "AutoGen Framework", academy: ACADEMY,
-    pathwayId: "school-ai", category: "School of Artificial Intelligence", pillar: "labs",
+    pathwayId: "school-ai", category: "Digital Intelligence", pillar: "labs",
     shortDescription: "Build multi-agent conversational AI systems with Microsoft AutoGen.",
     fullDescription: "AutoGen Framework covers conversational agent design, group chat orchestration, code execution agents, tool integration and human-in-the-loop patterns using Microsoft AutoGen for building multi-agent conversational systems.",
     duration: "6 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -107,7 +107,7 @@ export const AI_COURSES = [
   },
   {
     code: "AIF111", name: "Semantic Kernel", academy: ACADEMY,
-    pathwayId: "school-ai", category: "School of Artificial Intelligence", pillar: "labs",
+    pathwayId: "school-ai", category: "Digital Intelligence", pillar: "labs",
     shortDescription: "Build enterprise AI integrations using Microsoft Semantic Kernel.",
     fullDescription: "Semantic Kernel covers plugins, prompt functions, semantic functions, native functions, planners, memory and kernel orchestration for integrating AI capabilities into enterprise applications using Microsoft Semantic Kernel.",
     duration: "6 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -118,7 +118,7 @@ export const AI_COURSES = [
   },
   {
     code: "AIF112", name: "RAG Systems", academy: ACADEMY,
-    pathwayId: "school-ai", category: "School of Artificial Intelligence", pillar: "labs",
+    pathwayId: "school-ai", category: "Digital Intelligence", pillar: "labs",
     shortDescription: "Build production retrieval-augmented generation systems with vector databases.",
     fullDescription: "RAG Systems covers document ingestion, chunking strategies, embedding models, vector databases, retrieval strategies, reranking, evaluation and production deployment for building retrieval-augmented generation pipelines.",
     duration: "10 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -129,7 +129,7 @@ export const AI_COURSES = [
   },
   {
     code: "AIF113", name: "LLM Fine-Tuning", academy: ACADEMY,
-    pathwayId: "school-ai", category: "School of Artificial Intelligence", pillar: "labs",
+    pathwayId: "school-ai", category: "Digital Intelligence", pillar: "labs",
     shortDescription: "Fine-tune large language models for domain-specific tasks.",
     fullDescription: "LLM Fine-Tuning covers supervised fine-tuning, instruction tuning, LoRA, QLoRA, PEFT, dataset preparation, evaluation metrics and deployment of fine-tuned models for domain-specific applications.",
     duration: "8 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -140,7 +140,7 @@ export const AI_COURSES = [
   },
   {
     code: "AIF114", name: "AI APIs", academy: ACADEMY,
-    pathwayId: "school-ai", category: "School of Artificial Intelligence", pillar: "labs",
+    pathwayId: "school-ai", category: "Digital Intelligence", pillar: "labs",
     shortDescription: "Integrate AI capabilities into applications using OpenAI, Anthropic and other AI APIs.",
     fullDescription: "AI APIs covers the OpenAI API, Anthropic Claude API, Google Gemini API, rate limiting, streaming, function calling, structured outputs, error handling and cost optimization for integrating AI capabilities into production applications.",
     duration: "6 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -151,7 +151,7 @@ export const AI_COURSES = [
   },
   {
     code: "AIF115", name: "Open Source LLMs", academy: ACADEMY,
-    pathwayId: "school-ai", category: "School of Artificial Intelligence", pillar: "labs",
+    pathwayId: "school-ai", category: "Digital Intelligence", pillar: "labs",
     shortDescription: "Deploy and run open-source LLMs locally and in production.",
     fullDescription: "Open Source LLMs covers Llama, Mistral, Phi, Gemma and other open-source models, including local deployment with Ollama, quantization, inference optimization, serving with vLLM and building applications with open-source models.",
     duration: "8 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -162,7 +162,7 @@ export const AI_COURSES = [
   },
   {
     code: "AIF116", name: "AI Product Development", academy: ACADEMY,
-    pathwayId: "school-ai", category: "School of Artificial Intelligence", pillar: "labs",
+    pathwayId: "school-ai", category: "Digital Intelligence", pillar: "labs",
     shortDescription: "Design, build and ship AI-powered products from concept to production.",
     fullDescription: "AI Product Development covers AI product strategy, user experience for AI, model selection, evaluation, cost management, safety, guardrails, analytics and the full lifecycle of building and shipping AI-powered products.",
     duration: "10 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -173,7 +173,7 @@ export const AI_COURSES = [
   },
   {
     code: "AIF117", name: "Voice AI", academy: ACADEMY,
-    pathwayId: "school-ai", category: "School of Artificial Intelligence", pillar: "labs",
+    pathwayId: "school-ai", category: "Digital Intelligence", pillar: "labs",
     shortDescription: "Build voice-enabled AI applications with speech recognition and synthesis.",
     fullDescription: "Voice AI covers speech-to-text with Whisper, text-to-speech synthesis, voice cloning, real-time audio processing, voice agent architecture and deployment for building voice-enabled AI applications.",
     duration: "8 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -184,7 +184,7 @@ export const AI_COURSES = [
   },
   {
     code: "AIF118", name: "AI Automation", academy: ACADEMY,
-    pathwayId: "school-ai", category: "School of Artificial Intelligence", pillar: "labs",
+    pathwayId: "school-ai", category: "Digital Intelligence", pillar: "labs",
     shortDescription: "Automate business workflows using AI agents, APIs and automation tools.",
     fullDescription: "AI Automation covers workflow automation with AI, including email automation, document processing, data extraction, chatbot deployment, CRM integration and building end-to-end automated business processes powered by AI.",
     duration: "8 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -195,7 +195,7 @@ export const AI_COURSES = [
   },
   {
     code: "AIF119", name: "AI for Education", academy: ACADEMY,
-    pathwayId: "school-ai", category: "School of Artificial Intelligence", pillar: "labs",
+    pathwayId: "school-ai", category: "Digital Intelligence", pillar: "labs",
     shortDescription: "Build AI-powered educational tools and personalized learning systems.",
     fullDescription: "AI for Education covers intelligent tutoring systems, automated grading, personalized learning paths, content generation for educators, student analytics, plagiarism detection and building AI tools that enhance teaching and learning outcomes.",
     duration: "8 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -206,7 +206,7 @@ export const AI_COURSES = [
   },
   {
     code: "AIF120", name: "AI for Healthcare", academy: ACADEMY,
-    pathwayId: "school-ai", category: "School of Artificial Intelligence", pillar: "labs",
+    pathwayId: "school-ai", category: "Digital Intelligence", pillar: "labs",
     shortDescription: "Build AI applications for medical diagnosis, imaging and healthcare.",
     fullDescription: "AI for Healthcare covers medical image analysis, clinical NLP, drug discovery, patient risk prediction, EHR processing, regulatory considerations and building AI systems for healthcare applications.",
     duration: "10 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -217,7 +217,7 @@ export const AI_COURSES = [
   },
   {
     code: "AIF121", name: "AI for Finance", academy: ACADEMY,
-    pathwayId: "school-ai", category: "School of Artificial Intelligence", pillar: "labs",
+    pathwayId: "school-ai", category: "Digital Intelligence", pillar: "labs",
     shortDescription: "Build AI systems for fraud detection, trading, risk and financial analytics.",
     fullDescription: "AI for Finance covers algorithmic trading, fraud detection, credit risk modeling, robo-advisors, financial NLP, time series forecasting, regulatory considerations and building AI systems for the financial sector.",
     duration: "10 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -228,7 +228,7 @@ export const AI_COURSES = [
   },
   {
     code: "AIF122", name: "AI Ethics", academy: ACADEMY,
-    pathwayId: "school-ai", category: "School of Artificial Intelligence", pillar: "labs",
+    pathwayId: "school-ai", category: "Digital Intelligence", pillar: "labs",
     shortDescription: "Understand and apply ethical principles in AI system design and deployment.",
     fullDescription: "AI Ethics covers bias and fairness, transparency, accountability, privacy, consent, AI governance frameworks, regulatory landscape, responsible AI practices and building ethical guardrails into AI systems.",
     duration: "6 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -239,7 +239,7 @@ export const AI_COURSES = [
   },
   {
     code: "AIF123", name: "Natural Language Processing", academy: ACADEMY,
-    pathwayId: "school-ai", category: "School of Artificial Intelligence", pillar: "labs",
+    pathwayId: "school-ai", category: "Digital Intelligence", pillar: "labs",
     shortDescription: "Build NLP systems for text classification, sentiment analysis and language understanding.",
     fullDescription: "Natural Language Processing covers tokenization, embeddings, transformers, text classification, NER, sentiment analysis, machine translation, summarization and building NLP pipelines for real-world text processing tasks.",
     duration: "10 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -250,7 +250,7 @@ export const AI_COURSES = [
   },
   {
     code: "AIF124", name: "Computer Vision", academy: ACADEMY,
-    pathwayId: "school-ai", category: "School of Artificial Intelligence", pillar: "labs",
+    pathwayId: "school-ai", category: "Digital Intelligence", pillar: "labs",
     shortDescription: "Build computer vision systems for image recognition, detection and segmentation.",
     fullDescription: "Computer Vision covers image processing, CNNs, object detection, image segmentation, facial recognition, OCR, video analysis and deploying vision models for real-world applications using OpenCV, PyTorch and TensorFlow.",
     duration: "10 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -261,7 +261,7 @@ export const AI_COURSES = [
   },
   {
     code: "AIF125", name: "Reinforcement Learning", academy: ACADEMY,
-    pathwayId: "school-ai", category: "School of Artificial Intelligence", pillar: "labs",
+    pathwayId: "school-ai", category: "Digital Intelligence", pillar: "labs",
     shortDescription: "Build agents that learn through interaction with environments using reinforcement learning.",
     fullDescription: "Reinforcement Learning covers MDPs, Q-learning, policy gradients, actor-critic methods, PPO, multi-agent RL, reward shaping and training agents in simulated environments using RLlib and Stable Baselines3.",
     duration: "10 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -272,7 +272,7 @@ export const AI_COURSES = [
   },
   {
     code: "AIF126", name: "Deep Learning", academy: ACADEMY,
-    pathwayId: "school-ai", category: "School of Artificial Intelligence", pillar: "labs",
+    pathwayId: "school-ai", category: "Digital Intelligence", pillar: "labs",
     shortDescription: "Build and train deep neural networks using TensorFlow and PyTorch.",
     fullDescription: "Deep Learning covers neural network architectures, backpropagation, CNNs, RNNs, LSTMs, transformers, attention mechanisms, regularization, optimization and training deep models for real-world tasks using TensorFlow and PyTorch.",
     duration: "12 Weeks", studyMode: "Online", level: "Advanced", language: "English",

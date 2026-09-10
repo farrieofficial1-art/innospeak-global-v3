@@ -1,5 +1,5 @@
 /**
- * Software Engineering Lab courses — School of Software Engineering.
+ * Software Engineering Lab courses — Software & Digital Systems.
  * New courses created for the Labs expansion.
  */
 
@@ -8,7 +8,7 @@ const ACADEMY = 'InnoSpeak Labs';
 export const SE_COURSES = [
   {
     code: "TYP101", name: "TypeScript Programming", academy: ACADEMY,
-    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
+    pathwayId: "school-software-engineering", category: "Software & Digital Systems", pillar: "labs",
     shortDescription: "Master TypeScript for building type-safe, scalable applications.",
     fullDescription: "TypeScript Programming covers types, interfaces, generics, decorators, modules, type inference, utility types and integrating TypeScript with modern frameworks for building type-safe, maintainable applications.",
     duration: "8 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -19,7 +19,7 @@ export const SE_COURSES = [
   },
   {
     code: "GO101", name: "Go Programming", academy: ACADEMY,
-    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
+    pathwayId: "school-software-engineering", category: "Software & Digital Systems", pillar: "labs",
     shortDescription: "Build high-performance, concurrent applications with Go.",
     fullDescription: "Go Programming covers goroutines, channels, interfaces, error handling, testing, benchmarking, HTTP servers and building concurrent, high-performance backend services with the Go programming language.",
     duration: "8 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -29,8 +29,8 @@ export const SE_COURSES = [
     brochureUrl: '#', calendarUrl: '#', featuredImage: null, featured: false, createdAt: "2026-07-02",
   },
   {
-    code: "RUS101", name: "Rust Programming", academy: ACADEMY,
-    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
+    code: "RST101", name: "Rust Programming", academy: ACADEMY,
+    pathwayId: "school-software-engineering", category: "Software & Digital Systems", pillar: "labs",
     shortDescription: "Build fast, memory-safe systems with the Rust programming language.",
     fullDescription: "Rust Programming covers ownership, borrowing, lifetimes, traits, error handling, concurrency, macros and building safe, high-performance systems-level software with Rust.",
     duration: "10 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -41,7 +41,7 @@ export const SE_COURSES = [
   },
   {
     code: "CPP101", name: "C++ Programming", academy: ACADEMY,
-    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
+    pathwayId: "school-software-engineering", category: "Software & Digital Systems", pillar: "labs",
     shortDescription: "Master C++ for systems programming, game engines and high-performance applications.",
     fullDescription: "C++ Programming covers memory management, pointers, references, classes, templates, STL, RAII, smart pointers, concurrency and building high-performance applications with modern C++.",
     duration: "12 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -52,7 +52,7 @@ export const SE_COURSES = [
   },
   {
     code: "FSE101", name: "Frontend Development", academy: ACADEMY,
-    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
+    pathwayId: "school-software-engineering", category: "Software & Digital Systems", pillar: "labs",
     shortDescription: "Build modern, responsive, accessible web frontends with React and modern tooling.",
     fullDescription: "Frontend Development covers HTML5, CSS3, Flexbox, Grid, Tailwind CSS, React, state management, routing, API integration, accessibility, performance optimization and building production-grade web frontends.",
     duration: "12 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -63,7 +63,7 @@ export const SE_COURSES = [
   },
   {
     code: "BSE101", name: "Backend Development", academy: ACADEMY,
-    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
+    pathwayId: "school-software-engineering", category: "Software & Digital Systems", pillar: "labs",
     shortDescription: "Build scalable, secure backend services with Node.js, Express and databases.",
     fullDescription: "Backend Development covers REST API design, authentication, authorization, database integration, caching, error handling, logging, testing and building production backend services with Node.js and Express.",
     duration: "12 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -74,7 +74,7 @@ export const SE_COURSES = [
   },
   {
     code: "FSE201", name: "Full-Stack Development", academy: ACADEMY,
-    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
+    pathwayId: "school-software-engineering", category: "Software & Digital Systems", pillar: "labs",
     shortDescription: "Build complete web applications from database to deployment.",
     fullDescription: "Full-Stack Development covers frontend, backend, database design, authentication, API design, deployment, CI/CD and building complete, production-ready web applications from scratch.",
     duration: "16 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -85,7 +85,7 @@ export const SE_COURSES = [
   },
   {
     code: "SSE101", name: "System Design", academy: ACADEMY,
-    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
+    pathwayId: "school-software-engineering", category: "Software & Digital Systems", pillar: "labs",
     shortDescription: "Design scalable, reliable, distributed systems for production workloads.",
     fullDescription: "System Design covers scalability, load balancing, caching, database sharding, message queues, microservices, CDN, rate limiting, circuit breakers and designing systems that handle millions of users.",
     duration: "10 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -96,7 +96,7 @@ export const SE_COURSES = [
   },
   {
     code: "SSE102", name: "Software Architecture", academy: ACADEMY,
-    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
+    pathwayId: "school-software-engineering", category: "Software & Digital Systems", pillar: "labs",
     shortDescription: "Master architectural patterns for building maintainable, scalable software.",
     fullDescription: "Software Architecture covers layered architecture, hexagonal architecture, event-driven architecture, CQRS, microservices architecture, architectural decision records, trade-off analysis and documenting software architecture.",
     duration: "10 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -107,7 +107,7 @@ export const SE_COURSES = [
   },
   {
     code: "SSE103", name: "Microservices", academy: ACADEMY,
-    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
+    pathwayId: "school-software-engineering", category: "Software & Digital Systems", pillar: "labs",
     shortDescription: "Design, build and deploy microservices for distributed applications.",
     fullDescription: "Microservices covers service decomposition, API gateways, service discovery, inter-service communication, event sourcing, sagas, distributed transactions, observability and deploying microservices with Docker and Kubernetes.",
     duration: "10 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -118,7 +118,7 @@ export const SE_COURSES = [
   },
   {
     code: "SSE104", name: "API Design (REST)", academy: ACADEMY,
-    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
+    pathwayId: "school-software-engineering", category: "Software & Digital Systems", pillar: "labs",
     shortDescription: "Design, build and document production-grade REST APIs.",
     fullDescription: "API Design (REST) covers REST principles, resource modeling, HTTP methods, status codes, versioning, pagination, filtering, sorting, authentication, rate limiting, OpenAPI documentation and API testing.",
     duration: "8 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -129,7 +129,7 @@ export const SE_COURSES = [
   },
   {
     code: "SSE105", name: "API Design (GraphQL)", academy: ACADEMY,
-    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
+    pathwayId: "school-software-engineering", category: "Software & Digital Systems", pillar: "labs",
     shortDescription: "Build flexible, efficient APIs with GraphQL.",
     fullDescription: "API Design (GraphQL) covers schema design, queries, mutations, subscriptions, resolvers, DataLoader, caching, authentication, federation and building production GraphQL APIs with Apollo Server.",
     duration: "8 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -140,7 +140,7 @@ export const SE_COURSES = [
   },
   {
     code: "SSE106", name: "Software Design Patterns", academy: ACADEMY,
-    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
+    pathwayId: "school-software-engineering", category: "Software & Digital Systems", pillar: "labs",
     shortDescription: "Master creational, structural and behavioral design patterns.",
     fullDescription: "Software Design Patterns covers the 23 GoF patterns, including Singleton, Factory, Builder, Observer, Strategy, Decorator, Adapter, Facade, Command and modern pattern applications in real-world software.",
     duration: "8 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -151,7 +151,7 @@ export const SE_COURSES = [
   },
   {
     code: "SSE107", name: "Clean Architecture", academy: ACADEMY,
-    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
+    pathwayId: "school-software-engineering", category: "Software & Digital Systems", pillar: "labs",
     shortDescription: "Build software with clean, maintainable, testable architecture.",
     fullDescription: "Clean Architecture covers dependency inversion, separation of concerns, entity boundaries, use cases, interface adapters, frameworks, testing strategies and applying Clean Architecture principles to real projects.",
     duration: "8 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -162,7 +162,7 @@ export const SE_COURSES = [
   },
   {
     code: "SSE108", name: "Git & GitHub", academy: ACADEMY,
-    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
+    pathwayId: "school-software-engineering", category: "Software & Digital Systems", pillar: "labs",
     shortDescription: "Master version control with Git and collaboration with GitHub.",
     fullDescription: "Git & GitHub covers branching strategies, merging, rebasing, pull requests, code review, GitHub Actions, issue tracking, project boards and professional Git workflows for team collaboration.",
     duration: "6 Weeks", studyMode: "Online", level: "Beginner", language: "English",
@@ -173,7 +173,7 @@ export const SE_COURSES = [
   },
   {
     code: "SSE109", name: "Agile & Scrum", academy: ACADEMY,
-    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
+    pathwayId: "school-software-engineering", category: "Software & Digital Systems", pillar: "labs",
     shortDescription: "Master Agile methodologies and Scrum for software project delivery.",
     fullDescription: "Agile & Scrum covers Agile principles, Scrum roles, ceremonies, artifacts, sprint planning, backlog grooming, velocity, burndown charts, retrospectives and scaling Agile for teams and organizations.",
     duration: "6 Weeks", studyMode: "Online", level: "Beginner", language: "English",
@@ -184,7 +184,7 @@ export const SE_COURSES = [
   },
   {
     code: "SSE110", name: "Test-Driven Development", academy: ACADEMY,
-    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
+    pathwayId: "school-software-engineering", category: "Software & Digital Systems", pillar: "labs",
     shortDescription: "Learn to write tests first and build reliable software with TDD.",
     fullDescription: "Test-Driven Development covers the red-green-refactor cycle, unit testing, integration testing, mocking, test coverage, refactoring and building software with confidence using TDD practices.",
     duration: "6 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -195,7 +195,7 @@ export const SE_COURSES = [
   },
   {
     code: "SSE111", name: "Domain-Driven Design", academy: ACADEMY,
-    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
+    pathwayId: "school-software-engineering", category: "Software & Digital Systems", pillar: "labs",
     shortDescription: "Design software around business domains with DDD principles.",
     fullDescription: "Domain-Driven Design covers bounded contexts, aggregates, entities, value objects, domain events, repositories, context mapping and aligning software design with business domain models.",
     duration: "8 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -206,7 +206,7 @@ export const SE_COURSES = [
   },
   {
     code: "SSE112", name: "Software Testing", academy: ACADEMY,
-    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
+    pathwayId: "school-software-engineering", category: "Software & Digital Systems", pillar: "labs",
     shortDescription: "Master testing strategies from unit tests to end-to-end automation.",
     fullDescription: "Software Testing covers unit testing, integration testing, end-to-end testing, snapshot testing, mocking, test pyramids, coverage tools, Playwright, Cypress, Jest and building comprehensive test suites.",
     duration: "8 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -217,7 +217,7 @@ export const SE_COURSES = [
   },
   {
     code: "SSE113", name: "Docker for Developers", academy: ACADEMY,
-    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
+    pathwayId: "school-software-engineering", category: "Software & Digital Systems", pillar: "labs",
     shortDescription: "Containerize applications and streamline development with Docker.",
     fullDescription: "Docker for Developers covers Dockerfiles, images, containers, volumes, networks, multi-stage builds, Docker Compose, development environments and containerizing web applications for consistent deployment.",
     duration: "6 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -228,7 +228,7 @@ export const SE_COURSES = [
   },
   {
     code: "SSE114", name: "iOS Development", academy: ACADEMY,
-    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
+    pathwayId: "school-software-engineering", category: "Software & Digital Systems", pillar: "labs",
     shortDescription: "Build native iOS applications with Swift and SwiftUI.",
     fullDescription: "iOS Development covers Swift, SwiftUI, UIKit, navigation, data persistence, networking, push notifications, App Store deployment and building native iOS applications from concept to publication.",
     duration: "12 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -239,7 +239,7 @@ export const SE_COURSES = [
   },
   {
     code: "SSE115", name: "Android Development", academy: ACADEMY,
-    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
+    pathwayId: "school-software-engineering", category: "Software & Digital Systems", pillar: "labs",
     shortDescription: "Build native Android applications with Kotlin and Jetpack Compose.",
     fullDescription: "Android Development covers Kotlin, Jetpack Compose, navigation, Room database, networking, push notifications, Play Store deployment and building native Android applications from concept to publication.",
     duration: "12 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -250,7 +250,7 @@ export const SE_COURSES = [
   },
   {
     code: "SSE116", name: "Desktop Applications (Electron)", academy: ACADEMY,
-    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
+    pathwayId: "school-software-engineering", category: "Software & Digital Systems", pillar: "labs",
     shortDescription: "Build cross-platform desktop applications with Electron.",
     fullDescription: "Desktop Applications (Electron) covers main and renderer processes, IPC communication, native menus, system tray, auto-update, packaging, code signing and building cross-platform desktop apps with web technologies.",
     duration: "8 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -261,7 +261,7 @@ export const SE_COURSES = [
   },
   {
     code: "SSE117", name: "Web Performance", academy: ACADEMY,
-    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
+    pathwayId: "school-software-engineering", category: "Software & Digital Systems", pillar: "labs",
     shortDescription: "Optimize web applications for speed, Core Web Vitals and user experience.",
     fullDescription: "Web Performance covers Core Web Vitals, Lighthouse auditing, code splitting, lazy loading, image optimization, caching strategies, CDN configuration, bundle analysis and making web applications load and run fast.",
     duration: "6 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -272,7 +272,7 @@ export const SE_COURSES = [
   },
   {
     code: "SSE118", name: "Web Accessibility", academy: ACADEMY,
-    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
+    pathwayId: "school-software-engineering", category: "Software & Digital Systems", pillar: "labs",
     shortDescription: "Build web applications that are accessible to all users, including those with disabilities.",
     fullDescription: "Web Accessibility covers WCAG guidelines, ARIA, semantic HTML, keyboard navigation, screen reader support, color contrast, focus management, accessibility testing and building inclusive web applications.",
     duration: "6 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -283,7 +283,7 @@ export const SE_COURSES = [
   },
   {
     code: "SSE119", name: "Security for Developers", academy: ACADEMY,
-    pathwayId: "school-software-engineering", category: "School of Software Engineering", pillar: "labs",
+    pathwayId: "school-software-engineering", category: "Software & Digital Systems", pillar: "labs",
     shortDescription: "Build secure applications and protect against common vulnerabilities.",
     fullDescription: "Security for Developers covers OWASP Top 10, input validation, SQL injection prevention, XSS prevention, CSRF protection, authentication, authorization, encryption, secure coding practices and security testing.",
     duration: "8 Weeks", studyMode: "Online", level: "Intermediate", language: "English",

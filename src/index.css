@@ -53,17 +53,3 @@
            focus:text-paper;
   }
 }
-
-@keyframes tutor-progress {
-  0% {
-    transform: translateX(-120%);
-  }
-
-  50% {
-    transform: translateX(150%);
-  }
-
-  100% {
-    transform: translateX(350%);
-  }
-}

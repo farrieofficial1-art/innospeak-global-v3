@@ -46,7 +46,7 @@ function normalizeCourse(course, index) {
     ...course,
     code: course.code || `LAB-${index + 1}`,
     name: course.name || 'Untitled course',
-    shortDescription: course.shortDescription || 'More details coming soon.',
+    shortDescription: course.shortDescription || 'Explore the course overview, learning outcomes and pathway details.',
     category: course.category || '',
     pathwayId: course.pathwayId || '',
     level: course.level || 'Flexible',

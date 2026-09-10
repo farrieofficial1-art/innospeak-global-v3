@@ -1,5 +1,5 @@
 /**
- * Engineering & Innovation Lab courses — School of Engineering & Innovation.
+ * Engineering & Innovation Lab courses — Engineering, Automation & Innovation.
  * New courses created for the Labs expansion.
  */
 
@@ -8,7 +8,7 @@ const ACADEMY = 'InnoSpeak Labs';
 export const ENG_COURSES = [
   {
     code: "ENG201", name: "Drone Technology", academy: ACADEMY,
-    pathwayId: "school-engineering-innovation", category: "School of Engineering & Innovation", pillar: "labs",
+    pathwayId: "school-engineering-innovation", category: "Engineering, Automation & Innovation", pillar: "labs",
     shortDescription: "Design, build and program drones for aerial applications.",
     fullDescription: "Drone Technology covers drone aerodynamics, frame design, flight controllers, sensors, GPS, camera systems, programming autonomous flight missions and building drones for aerial applications.",
     duration: "10 Weeks", studyMode: "Hybrid", level: "Advanced", language: "English",
@@ -19,7 +19,7 @@ export const ENG_COURSES = [
   },
   {
     code: "ENG202", name: "Smart Grids", academy: ACADEMY,
-    pathwayId: "school-engineering-innovation", category: "School of Engineering & Innovation", pillar: "labs",
+    pathwayId: "school-engineering-innovation", category: "Engineering, Automation & Innovation", pillar: "labs",
     shortDescription: "Design and build smart grid systems for modern power distribution.",
     fullDescription: "Smart Grids covers grid architecture, smart meters, demand response, distributed energy resources, grid communication protocols, SCADA and building intelligent power distribution systems.",
     duration: "10 Weeks", studyMode: "Hybrid", level: "Advanced", language: "English",
@@ -30,7 +30,7 @@ export const ENG_COURSES = [
   },
   {
     code: "ENG203", name: "Electric Vehicle Technology", academy: ACADEMY,
-    pathwayId: "school-engineering-innovation", category: "School of Engineering & Innovation", pillar: "labs",
+    pathwayId: "school-engineering-innovation", category: "Engineering, Automation & Innovation", pillar: "labs",
     shortDescription: "Understand and build electric vehicle powertrains and battery systems.",
     fullDescription: "Electric Vehicle Technology covers EV architecture, battery management systems, motor controllers, charging systems, regenerative braking, thermal management and building EV powertrain components.",
     duration: "12 Weeks", studyMode: "Physical / Hybrid", level: "Advanced", language: "English",
@@ -41,7 +41,7 @@ export const ENG_COURSES = [
   },
   {
     code: "ENG204", name: "Digital Twin", academy: ACADEMY,
-    pathwayId: "school-engineering-innovation", category: "School of Engineering & Innovation", pillar: "labs",
+    pathwayId: "school-engineering-innovation", category: "Engineering, Automation & Innovation", pillar: "labs",
     shortDescription: "Build digital replicas of physical systems for simulation and optimization.",
     fullDescription: "Digital Twin covers digital twin architecture, sensor integration, real-time data streaming, simulation modeling, predictive maintenance and building digital twins of physical assets and systems.",
     duration: "10 Weeks", studyMode: "Hybrid", level: "Advanced", language: "English",
@@ -52,7 +52,7 @@ export const ENG_COURSES = [
   },
   {
     code: "ENG205", name: "Edge Computing", academy: ACADEMY,
-    pathwayId: "school-engineering-innovation", category: "School of Engineering & Innovation", pillar: "labs",
+    pathwayId: "school-engineering-innovation", category: "Engineering, Automation & Innovation", pillar: "labs",
     shortDescription: "Build computing systems at the edge for real-time processing.",
     fullDescription: "Edge Computing covers edge architecture, edge devices, real-time processing, edge AI, fog computing, edge-to-cloud communication and building systems that process data at the network edge.",
     duration: "8 Weeks", studyMode: "Hybrid", level: "Advanced", language: "English",
@@ -63,7 +63,7 @@ export const ENG_COURSES = [
   },
   {
     code: "ENG206", name: "Smart Cities", academy: ACADEMY,
-    pathwayId: "school-engineering-innovation", category: "School of Engineering & Innovation", pillar: "labs",
+    pathwayId: "school-engineering-innovation", category: "Engineering, Automation & Innovation", pillar: "labs",
     shortDescription: "Build IoT and AI systems for smart urban infrastructure.",
     fullDescription: "Smart Cities covers smart infrastructure, intelligent transportation, smart energy, environmental monitoring, city data platforms, urban analytics and building technology systems for smart cities.",
     duration: "10 Weeks", studyMode: "Hybrid", level: "Advanced", language: "English",
@@ -74,7 +74,7 @@ export const ENG_COURSES = [
   },
   {
     code: "ENG207", name: "Smart Agriculture", academy: ACADEMY,
-    pathwayId: "school-engineering-innovation", category: "School of Engineering & Innovation", pillar: "labs",
+    pathwayId: "school-engineering-innovation", category: "Engineering, Automation & Innovation", pillar: "labs",
     shortDescription: "Build IoT and AI systems for precision agriculture and smart farming.",
     fullDescription: "Smart Agriculture covers soil sensors, weather stations, drone monitoring, automated irrigation, crop health analysis with AI, livestock tracking and building technology systems for modern agriculture.",
     duration: "10 Weeks", studyMode: "Hybrid", level: "Intermediate", language: "English",
@@ -85,7 +85,7 @@ export const ENG_COURSES = [
   },
   {
     code: "ENG208", name: "Industrial AI", academy: ACADEMY,
-    pathwayId: "school-engineering-innovation", category: "School of Engineering & Innovation", pillar: "labs",
+    pathwayId: "school-engineering-innovation", category: "Engineering, Automation & Innovation", pillar: "labs",
     shortDescription: "Apply AI to industrial systems for predictive maintenance and optimization.",
     fullDescription: "Industrial AI covers predictive maintenance, anomaly detection, quality inspection with computer vision, process optimization, digital twins and applying AI to industrial and manufacturing systems.",
     duration: "10 Weeks", studyMode: "Hybrid", level: "Advanced", language: "English",
@@ -96,7 +96,7 @@ export const ENG_COURSES = [
   },
   {
     code: "ENG209", name: "CAM Fundamentals", academy: ACADEMY,
-    pathwayId: "school-engineering-innovation", category: "School of Engineering & Innovation", pillar: "labs",
+    pathwayId: "school-engineering-innovation", category: "Engineering, Automation & Innovation", pillar: "labs",
     shortDescription: "Master computer-aided manufacturing for CNC and production.",
     fullDescription: "CAM Fundamentals covers CNC programming, toolpath generation, G-code, M-code, CNC simulation, material selection, fixturing and using CAM software for computer-aided manufacturing.",
     duration: "8 Weeks", studyMode: "Physical / Hybrid", level: "Intermediate", language: "English",
@@ -107,7 +107,7 @@ export const ENG_COURSES = [
   },
   {
     code: "ENG210", name: "SolidWorks", academy: ACADEMY,
-    pathwayId: "school-engineering-innovation", category: "School of Engineering & Innovation", pillar: "labs",
+    pathwayId: "school-engineering-innovation", category: "Engineering, Automation & Innovation", pillar: "labs",
     shortDescription: "Master 3D mechanical design with SolidWorks.",
     fullDescription: "SolidWorks covers part modeling, assembly design, drawing creation, sheet metal, surfacing, simulation, motion analysis and building professional 3D mechanical designs with SolidWorks.",
     duration: "10 Weeks", studyMode: "Hybrid", level: "Intermediate", language: "English",
@@ -118,7 +118,7 @@ export const ENG_COURSES = [
   },
   {
     code: "ENG211", name: "Advanced Robotics", academy: ACADEMY,
-    pathwayId: "school-engineering-innovation", category: "School of Engineering & Innovation", pillar: "labs",
+    pathwayId: "school-engineering-innovation", category: "Engineering, Automation & Innovation", pillar: "labs",
     shortDescription: "Build advanced robotic systems with computer vision and AI.",
     fullDescription: "Advanced Robotics covers ROS2, SLAM, path planning, computer vision for robots, manipulator control, multi-robot systems, human-robot interaction and building advanced autonomous robotic systems.",
     duration: "12 Weeks", studyMode: "Physical / Hybrid", level: "Advanced", language: "English",

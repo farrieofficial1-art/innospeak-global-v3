@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { GraduationCap, Wallet, BookOpenCheck, Bell, TriangleAlert } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { GraduationCap, Wallet, BookOpenCheck, Bell, TriangleAlert, ShieldCheck } from 'lucide-react';
 import Seo from '../../components/ui/Seo.jsx';
 import StatCard from '../../components/portal/StatCard.jsx';
 import SectionCard from '../../components/portal/SectionCard.jsx';
@@ -68,6 +69,26 @@ export default function StudentDashboard() {
           {profile?.program_id ? 'Here is where things stand this semester.' : 'A quick look at your academic and financial status.'}
         </p>
       </div>
+
+      {profile?.role === 'admin' && (
+        <Link
+          to="/admin"
+          className="mt-6 flex items-center justify-between gap-3 rounded-2xl border border-gold-300/60 bg-gold-50 px-5 py-4 shadow-premium transition-all duration-200 hover:-translate-y-0.5 hover:shadow-premium-lg"
+        >
+          <span className="flex items-center gap-3">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gold-500/15 text-gold-700 ring-1 ring-gold-500/30">
+              <ShieldCheck size={18} />
+            </span>
+            <span>
+              <span className="block font-body text-sm font-semibold text-navy-900">Staff Panel</span>
+              <span className="block font-body text-xs text-navy-500">
+                Manage students, programs, requests, and more
+              </span>
+            </span>
+          </span>
+          <span className="font-body text-sm font-semibold text-gold-700">Open &rarr;</span>
+        </Link>
+      )}
 
       {/* A. Student identity summary */}
       <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

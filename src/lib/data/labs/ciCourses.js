@@ -1,5 +1,5 @@
 /**
- * Creative AI & Immersive Media Lab courses — School of Creative AI & Immersive Media.
+ * Creative AI & Immersive Media Lab courses — Creative Technology & Immersive Media.
  * New courses created for the Labs expansion.
  */
 
@@ -8,7 +8,7 @@ const ACADEMY = 'InnoSpeak Labs';
 export const CI_COURSES = [
   {
     code: "CI101", name: "Midjourney Mastery", academy: ACADEMY,
-    pathwayId: "school-creative-ai-immersive", category: "School of Creative AI & Immersive Media", pillar: "labs",
+    pathwayId: "school-creative-ai-immersive", category: "Creative Technology & Immersive Media", pillar: "labs",
     shortDescription: "Master AI image generation with Midjourney for art, design and commercial work.",
     fullDescription: "Midjourney Mastery covers prompting techniques, parameters, style references, character references, blends, inpainting, upscaling, commercial use and building a professional AI art workflow with Midjourney.",
     duration: "6 Weeks", studyMode: "Online", level: "Beginner", language: "English",
@@ -19,7 +19,7 @@ export const CI_COURSES = [
   },
   {
     code: "CI102", name: "Adobe Firefly", academy: ACADEMY,
-    pathwayId: "school-creative-ai-immersive", category: "School of Creative AI & Immersive Media", pillar: "labs",
+    pathwayId: "school-creative-ai-immersive", category: "Creative Technology & Immersive Media", pillar: "labs",
     shortDescription: "Generate and edit images with Adobe Firefly AI tools.",
     fullDescription: "Adobe Firefly covers text-to-image generation, generative fill, generative expand, style matching, text effects and integrating Firefly AI into professional design workflows with Adobe Creative Cloud.",
     duration: "4 Weeks", studyMode: "Online", level: "Beginner", language: "English",
@@ -30,7 +30,7 @@ export const CI_COURSES = [
   },
   {
     code: "CI103", name: "Runway AI", academy: ACADEMY,
-    pathwayId: "school-creative-ai-immersive", category: "School of Creative AI & Immersive Media", pillar: "labs",
+    pathwayId: "school-creative-ai-immersive", category: "Creative Technology & Immersive Media", pillar: "labs",
     shortDescription: "Create AI-generated video and motion content with Runway.",
     fullDescription: "Runway AI covers text-to-video, image-to-video, motion brush, camera controls, green screen, inpainting, video editing and building AI-powered video content with Runway ML.",
     duration: "6 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -41,7 +41,7 @@ export const CI_COURSES = [
   },
   {
     code: "CI104", name: "Blender Fundamentals", academy: ACADEMY,
-    pathwayId: "school-creative-ai-immersive", category: "School of Creative AI & Immersive Media", pillar: "labs",
+    pathwayId: "school-creative-ai-immersive", category: "Creative Technology & Immersive Media", pillar: "labs",
     shortDescription: "Master 3D modeling, animation and rendering with Blender.",
     fullDescription: "Blender Fundamentals covers the Blender interface, modeling, sculpting, texturing, lighting, camera, rendering with Cycles and Eevee and building 3D scenes from scratch.",
     duration: "10 Weeks", studyMode: "Online", level: "Beginner", language: "English",
@@ -52,7 +52,7 @@ export const CI_COURSES = [
   },
   {
     code: "CI105", name: "Blender Advanced", academy: ACADEMY,
-    pathwayId: "school-creative-ai-immersive", category: "School of Creative AI & Immersive Media", pillar: "labs",
+    pathwayId: "school-creative-ai-immersive", category: "Creative Technology & Immersive Media", pillar: "labs",
     shortDescription: "Master advanced 3D techniques with Blender for production work.",
     fullDescription: "Blender Advanced covers advanced modeling, geometry nodes, particle systems, fluid and smoke simulation, character rigging, animation and compositing for professional 3D production.",
     duration: "10 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -63,7 +63,7 @@ export const CI_COURSES = [
   },
   {
     code: "CI106", name: "Unreal Engine Fundamentals", academy: ACADEMY,
-    pathwayId: "school-creative-ai-immersive", category: "School of Creative AI & Immersive Media", pillar: "labs",
+    pathwayId: "school-creative-ai-immersive", category: "Creative Technology & Immersive Media", pillar: "labs",
     shortDescription: "Build real-time 3D experiences with Unreal Engine.",
     fullDescription: "Unreal Engine Fundamentals covers the Unreal editor, Blueprints, materials, lighting, landscapes, visual scripting, packaging and building interactive 3D experiences with Unreal Engine 5.",
     duration: "12 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -74,7 +74,7 @@ export const CI_COURSES = [
   },
   {
     code: "CI107", name: "Unreal Engine Advanced", academy: ACADEMY,
-    pathwayId: "school-creative-ai-immersive", category: "School of Creative AI & Immersive Media", pillar: "labs",
+    pathwayId: "school-creative-ai-immersive", category: "Creative Technology & Immersive Media", pillar: "labs",
     shortDescription: "Master advanced Unreal Engine techniques for games and virtual production.",
     fullDescription: "Unreal Engine Advanced covers C++ programming, advanced Blueprints, Niagara VFX, MetaHuman, virtual production, multiplayer networking, optimization and building production Unreal Engine projects.",
     duration: "12 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -85,7 +85,7 @@ export const CI_COURSES = [
   },
   {
     code: "CI108", name: "Unity Fundamentals", academy: ACADEMY,
-    pathwayId: "school-creative-ai-immersive", category: "School of Creative AI & Immersive Media", pillar: "labs",
+    pathwayId: "school-creative-ai-immersive", category: "Creative Technology & Immersive Media", pillar: "labs",
     shortDescription: "Build 2D and 3D games with Unity.",
     fullDescription: "Unity Fundamentals covers the Unity editor, C# scripting, game objects, physics, lighting, UI, animation, audio, building and deploying games with Unity.",
     duration: "12 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -96,7 +96,7 @@ export const CI_COURSES = [
   },
   {
     code: "CI109", name: "AR Development", academy: ACADEMY,
-    pathwayId: "school-creative-ai-immersive", category: "School of Creative AI & Immersive Media", pillar: "labs",
+    pathwayId: "school-creative-ai-immersive", category: "Creative Technology & Immersive Media", pillar: "labs",
     shortDescription: "Build augmented reality experiences for mobile and wearable devices.",
     fullDescription: "AR Development covers AR Foundation, ARKit, ARCore, plane detection, image tracking, raycasting, world mapping, UI for AR and building augmented reality apps for iOS and Android.",
     duration: "10 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -107,7 +107,7 @@ export const CI_COURSES = [
   },
   {
     code: "CI110", name: "VR Development", academy: ACADEMY,
-    pathwayId: "school-creative-ai-immersive", category: "School of Creative AI & Immersive Media", pillar: "labs",
+    pathwayId: "school-creative-ai-immersive", category: "Creative Technology & Immersive Media", pillar: "labs",
     shortDescription: "Build immersive virtual reality experiences for headsets.",
     fullDescription: "VR Development covers VR SDKs, locomotion, interaction design, comfort, performance optimization, hand tracking, haptics and building VR experiences for Meta Quest, HTC Vive and other headsets.",
     duration: "10 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -118,7 +118,7 @@ export const CI_COURSES = [
   },
   {
     code: "CI111", name: "XR Development", academy: ACADEMY,
-    pathwayId: "school-creative-ai-immersive", category: "School of Creative AI & Immersive Media", pillar: "labs",
+    pathwayId: "school-creative-ai-immersive", category: "Creative Technology & Immersive Media", pillar: "labs",
     shortDescription: "Build cross-reality (XR) experiences spanning AR, VR and mixed reality.",
     fullDescription: "XR Development covers XR architecture, passthrough, mixed reality, spatial anchors, shared experiences, cross-platform deployment and building applications that span the AR-VR-MR continuum.",
     duration: "10 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -129,7 +129,7 @@ export const CI_COURSES = [
   },
   {
     code: "CI112", name: "Motion Capture", academy: ACADEMY,
-    pathwayId: "school-creative-ai-immersive", category: "School of Creative AI & Immersive Media", pillar: "labs",
+    pathwayId: "school-creative-ai-immersive", category: "Creative Technology & Immersive Media", pillar: "labs",
     shortDescription: "Capture, process and apply motion data for animation and games.",
     fullDescription: "Motion Capture covers mocap systems, body tracking, facial capture, data cleanup, retargeting, real-time mocap, AI-assisted mocap and applying captured motion to 3D characters.",
     duration: "8 Weeks", studyMode: "Hybrid", level: "Advanced", language: "English",
@@ -140,7 +140,7 @@ export const CI_COURSES = [
   },
   {
     code: "CI113", name: "Virtual Production", academy: ACADEMY,
-    pathwayId: "school-creative-ai-immersive", category: "School of Creative AI & Immersive Media", pillar: "labs",
+    pathwayId: "school-creative-ai-immersive", category: "Creative Technology & Immersive Media", pillar: "labs",
     shortDescription: "Build virtual film and content production pipelines with real-time engines.",
     fullDescription: "Virtual Production covers LED walls, real-time rendering, camera tracking, virtual sets, digital doubles, Unreal Engine virtual production and building real-time film and content production pipelines.",
     duration: "10 Weeks", studyMode: "Hybrid", level: "Advanced", language: "English",
@@ -151,7 +151,7 @@ export const CI_COURSES = [
   },
   {
     code: "CI114", name: "AI Music Generation", academy: ACADEMY,
-    pathwayId: "school-creative-ai-immersive", category: "School of Creative AI & Immersive Media", pillar: "labs",
+    pathwayId: "school-creative-ai-immersive", category: "Creative Technology & Immersive Media", pillar: "labs",
     shortDescription: "Generate, edit and produce music with AI tools.",
     fullDescription: "AI Music Generation covers Suno, Udio, MusicGen, stem separation, AI mastering, text-to-music, style transfer, commercial licensing and building AI-powered music production workflows.",
     duration: "6 Weeks", studyMode: "Online", level: "Beginner", language: "English",
@@ -162,7 +162,7 @@ export const CI_COURSES = [
   },
   {
     code: "CI115", name: "AI Animation", academy: ACADEMY,
-    pathwayId: "school-creative-ai-immersive", category: "School of Creative AI & Immersive Media", pillar: "labs",
+    pathwayId: "school-creative-ai-immersive", category: "Creative Technology & Immersive Media", pillar: "labs",
     shortDescription: "Create animations with AI-powered tools and techniques.",
     fullDescription: "AI Animation covers AI-assisted keyframing, motion synthesis, style transfer for animation, AI lip sync, AI in-betweening, generative animation and building AI-powered animation workflows.",
     duration: "8 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -173,7 +173,7 @@ export const CI_COURSES = [
   },
   {
     code: "CI116", name: "Game Development Fundamentals", academy: ACADEMY,
-    pathwayId: "school-creative-ai-immersive", category: "School of Creative AI & Immersive Media", pillar: "labs",
+    pathwayId: "school-creative-ai-immersive", category: "Creative Technology & Immersive Media", pillar: "labs",
     shortDescription: "Build your first complete game from concept to playable prototype.",
     fullDescription: "Game Development Fundamentals covers game loops, player input, collision, scoring, levels, sound, UI, game feel, prototyping and building a complete playable game from start to finish.",
     duration: "10 Weeks", studyMode: "Online", level: "Beginner", language: "English",
@@ -184,7 +184,7 @@ export const CI_COURSES = [
   },
   {
     code: "CI117", name: "Game Design", academy: ACADEMY,
-    pathwayId: "school-creative-ai-immersive", category: "School of Creative AI & Immersive Media", pillar: "labs",
+    pathwayId: "school-creative-ai-immersive", category: "Creative Technology & Immersive Media", pillar: "labs",
     shortDescription: "Master the principles of game design for engaging player experiences.",
     fullDescription: "Game Design covers game mechanics, level design, difficulty curves, player psychology, narrative design, game balance, prototyping, playtesting and designing games that players love.",
     duration: "8 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -195,7 +195,7 @@ export const CI_COURSES = [
   },
   {
     code: "CI118", name: "3D Modelling", academy: ACADEMY,
-    pathwayId: "school-creative-ai-immersive", category: "School of Creative AI & Immersive Media", pillar: "labs",
+    pathwayId: "school-creative-ai-immersive", category: "Creative Technology & Immersive Media", pillar: "labs",
     shortDescription: "Master 3D modelling for games, film and product design.",
     fullDescription: "3D Modelling covers polygonal modelling, sculpting, retopology, UV mapping, texturing, baking and building clean, production-ready 3D models for games, film and product visualization.",
     duration: "10 Weeks", studyMode: "Online", level: "Intermediate", language: "English",
@@ -206,7 +206,7 @@ export const CI_COURSES = [
   },
   {
     code: "CI119", name: "3D Character Design", academy: ACADEMY,
-    pathwayId: "school-creative-ai-immersive", category: "School of Creative AI & Immersive Media", pillar: "labs",
+    pathwayId: "school-creative-ai-immersive", category: "Creative Technology & Immersive Media", pillar: "labs",
     shortDescription: "Design, model and rig 3D characters for games and animation.",
     fullDescription: "3D Character Design covers character concept, anatomy, modelling, sculpting, retopology, texturing, rigging, weight painting and building production-ready 3D characters for games and animation.",
     duration: "12 Weeks", studyMode: "Online", level: "Advanced", language: "English",
@@ -217,7 +217,7 @@ export const CI_COURSES = [
   },
   {
     code: "CI120", name: "Immersive Storytelling", academy: ACADEMY,
-    pathwayId: "school-creative-ai-immersive", category: "School of Creative AI & Immersive Media", pillar: "labs",
+    pathwayId: "school-creative-ai-immersive", category: "Creative Technology & Immersive Media", pillar: "labs",
     shortDescription: "Craft narratives for AR, VR and immersive experiences.",
     fullDescription: "Immersive Storytelling covers spatial narrative, branching stories, environmental storytelling, interactive dialogue, player agency, emotional design and crafting stories for immersive and interactive media.",
     duration: "8 Weeks", studyMode: "Online", level: "Intermediate", language: "English",

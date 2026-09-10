@@ -1,3 +1,6 @@
+import { getProgrammeByCode, getPathwayById } from './programmeData.js';
+import { getCourseGovernance } from './catalogPolicy.js';
+
 /**
  * courseDetails — rich course data for the Course Details Template.
  *
@@ -1138,6 +1141,7 @@ export function buildCourseData(code) {
 
   const detail = getCourseDetail(code);
   const pathway = getPathwayById(base.pathwayId);
+  const governance = getCourseGovernance(base);
 
   return {
     // From base course data
@@ -1161,7 +1165,8 @@ export function buildCourseData(code) {
     calendarUrl: base.calendarUrl,
     featuredImage: base.featuredImage,
     featured: base.featured,
-    status: 'Open for Applications',
+    ...governance,
+    status: governance.status === 'Active' ? 'Open for Applications' : governance.status,
 
     // Rich detail (or generated defaults)
     overview: detail?.overview || {
@@ -1188,4 +1193,3 @@ export function buildCourseData(code) {
   };
 }
 
-import { getProgrammeByCode, getPathwayById } from './programmeData';

@@ -1,24 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import {
-  Send,
-  Paperclip,
-  Mic,
-  X,
-  Square,
-  Sparkles,
-  Globe2,
-  Brain,
-} from 'lucide-react';
-
+import { Send, Sparkles, TriangleAlert, Paperclip, Mic, X } from 'lucide-react';
 import TutorMessageBubble from './TutorMessageBubble';
 import TutorTypingIndicator from './TutorTypingIndicator';
 import { getPersonaById } from './tutorPersonas';
 import { cn } from '../../utils/cn.js';
-
 import useSpeechRecognition from '../../hooks/useSpeechRecognition';
 import useSpeechSynthesis from '../../hooks/useSpeechSynthesis';
-
 import {
   fileToAttachment,
   MAX_ATTACHMENTS,
@@ -26,450 +14,243 @@ import {
   MAX_FILE_SIZE_BYTES,
 } from '../../lib/tutor/attachments';
 
+/**
+ * TutorPanel — the chat body shared by TutorWidget (compact) and the
+ * /tutor page (full). Presentation-only for conversation state (all of
+ * that comes from useTutorChat via props); owns its own local state for
+ * the composer: draft text, pending attachments, mic listening, and which
+ * reply (if any) is currently being read aloud.
+ */
 export default function TutorPanel({
   personaId,
   messages,
   isSending,
   error,
   onSend,
-  onRegenerate,
-  onStop,
-  webSearch,
-  deepThink,
   variant = 'compact',
 }) {
   const [draft, setDraft] = useState('');
   const [pendingAttachments, setPendingAttachments] = useState([]);
   const [attachError, setAttachError] = useState(null);
-
   const scrollRef = useRef(null);
   const fileInputRef = useRef(null);
-
   const persona = getPersonaById(personaId);
 
-  const {
-    isSupported: micSupported,
-    isListening,
-    start: startListening,
-    stop: stopListening,
-  } = useSpeechRecognition({
-    onResult: (t) =>
-      setDraft((p) => (p ? `${p} ${t}` : t)),
-  });
-
-  const {
-    isSupported: speechSupported,
-    speakingId,
-    speak,
-  } = useSpeechSynthesis();
-
-  /*
-   * Scroll only the conversation container.
-   *
-   * The composer is no longer sitting on top of
-   * the scroll area, so the last message cannot
-   * disappear underneath it.
-   */
-  useEffect(() => {
-    const container = scrollRef.current;
-
-    if (!container) return;
-
-    requestAnimationFrame(() => {
-      container.scrollTo({
-        top: container.scrollHeight,
-        behavior: 'smooth',
-      });
+  const { isSupported: micSupported, isListening, start: startListening, stop: stopListening } =
+    useSpeechRecognition({
+      onResult: (transcript) => {
+        setDraft((prev) => (prev ? `${prev} ${transcript}` : transcript));
+      },
     });
+
+  const { isSupported: speechSupported, speakingId, speak } = useSpeechSynthesis();
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
   }, [messages, isSending]);
 
-  async function submit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
-
-    if (
-      (!draft.trim() &&
-        !pendingAttachments.length) ||
-      isSending
-    ) {
-      return;
-    }
-
-    await onSend(
-      draft,
-      pendingAttachments
-    );
-
+    if ((!draft.trim() && pendingAttachments.length === 0) || isSending) return;
+    onSend(draft, pendingAttachments);
     setDraft('');
     setPendingAttachments([]);
   }
 
-  async function chooseFiles(e) {
-    const files = Array.from(
-      e.target.files || []
-    );
-
-    e.target.value = '';
-
-    if (!files.length) return;
-
-    setAttachError(null);
-
-    const room =
-      MAX_ATTACHMENTS -
-      pendingAttachments.length;
-
-    const results =
-      await Promise.allSettled(
-        files
-          .slice(0, room)
-          .map(fileToAttachment)
-      );
-
-    const good = results
-      .filter(
-        (r) =>
-          r.status === 'fulfilled'
-      )
-      .map((r) => r.value);
-
-    const bad = results.find(
-      (r) =>
-        r.status === 'rejected'
-    );
-
-    if (good.length) {
-      setPendingAttachments(
-        (p) => [...p, ...good]
-      );
-    }
-
-    if (bad) {
-      setAttachError(
-        bad.reason?.message ||
-          'Attachment could not be loaded.'
-      );
-    }
+  function handleStarterClick(prompt) {
+    if (isSending) return;
+    onSend(prompt, []);
   }
 
+  async function handleFilesSelected(e) {
+    const files = Array.from(e.target.files || []);
+    e.target.value = ''; // allow re-selecting the same file later
+    if (files.length === 0) return;
+
+    setAttachError(null);
+    const room = MAX_ATTACHMENTS - pendingAttachments.length;
+    if (room <= 0) {
+      setAttachError(`You can attach up to ${MAX_ATTACHMENTS} files at a time.`);
+      return;
+    }
+
+    const toProcess = files.slice(0, room);
+    const results = await Promise.allSettled(toProcess.map(fileToAttachment));
+
+    const successes = [];
+    let firstError = null;
+    for (const r of results) {
+      if (r.status === 'fulfilled') successes.push(r.value);
+      else firstError = firstError || r.reason?.message;
+    }
+
+    if (successes.length > 0) {
+      setPendingAttachments((prev) => [...prev, ...successes]);
+    }
+    if (firstError) setAttachError(firstError);
+  }
+
+  function removeAttachment(id) {
+    setPendingAttachments((prev) => prev.filter((a) => a.id !== id));
+  }
+
+  function toggleMic() {
+    if (isListening) stopListening();
+    else startListening();
+  }
+
+  const listPadding = variant === 'full' ? 'px-2 py-6 sm:px-4' : 'px-4 py-4';
+
   return (
-    <div className="relative flex min-h-0 flex-1 flex-col overflow-hidden">
-      {/* =====================================================
-          CONVERSATION AREA
-          ===================================================== */}
-
-      <div
-        ref={scrollRef}
-        className="min-h-0 flex-1 overflow-y-auto overscroll-contain scroll-smooth"
-      >
-        <div className="mx-auto w-full max-w-4xl px-4 pb-8 pt-4 sm:px-8 sm:pb-10 sm:pt-8">
-          {/* Empty state */}
-
-          {messages.length === 0 && (
-            <div className="flex min-h-[55vh] flex-col items-center justify-center py-12 text-center">
-              <motion.div
-                initial={{
-                  scale: 0.8,
-                  opacity: 0,
-                }}
-                animate={{
-                  scale: 1,
-                  opacity: 1,
-                }}
-                className="flex h-16 w-16 items-center justify-center rounded-3xl bg-navy-950 text-gold-300 shadow-xl"
-              >
-                <Sparkles size={28} />
-              </motion.div>
-
-              <h1 className="mt-6 font-display text-3xl font-bold tracking-tight text-navy-950 sm:text-4xl">
-                How can I help you learn?
-              </h1>
-
-              <p className="mt-3 max-w-xl text-sm leading-6 text-navy-500">
-                {persona.tagline}. Ask a question,
-                upload material, or start with one
-                of these.
-              </p>
-
-              <div className="mt-8 grid w-full max-w-2xl gap-3 sm:grid-cols-3">
-                {persona.starterPrompts.map(
-                  (prompt) => (
-                    <button
-                      key={prompt}
-                      type="button"
-                      onClick={() =>
-                        onSend(
-                          prompt,
-                          []
-                        )
-                      }
-                      className="rounded-2xl border border-navy-100 bg-white p-4 text-left text-xs font-medium leading-5 text-navy-700 shadow-sm transition hover:-translate-y-0.5 hover:border-gold-300 hover:shadow-md"
-                    >
-                      {prompt}
-                    </button>
-                  )
-                )}
-              </div>
-            </div>
-          )}
-
-          {/* Messages */}
-
-          {messages.map((m, i) => (
-            <TutorMessageBubble
-              key={m.id}
-              {...m}
-              isSpeaking={
-                speechSupported &&
-                speakingId === m.id
-              }
-              onToggleSpeak={
-                speechSupported
-                  ? speak
-                  : undefined
-              }
-              onRegenerate={
-                m.role === 'assistant' &&
-                i ===
-                  messages.length - 1
-                  ? onRegenerate
-                  : undefined
-              }
-            />
-          ))}
-
-          {/* Loading */}
-
-          {isSending && (
-            <TutorTypingIndicator
-              deepThink={deepThink}
-            />
-          )}
-
-          {/* Error */}
-
-          {error && (
-            <div className="my-4 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
-              {error}
-            </div>
-          )}
-
-          {/* Small bottom breathing room */}
-
-          <div className="h-2 sm:h-4" />
-        </div>
-      </div>
-
-      {/* =====================================================
-          FIXED COMPOSER
-          ===================================================== */}
-
-      <div className="shrink-0 border-t border-navy-100/70 bg-white/90 backdrop-blur-xl dark:border-slate-800/70 dark:bg-slate-950/90">
-        <div className="mx-auto w-full max-w-4xl px-3 py-3 sm:px-6 sm:py-4">
-          <div className="rounded-3xl border border-navy-200 bg-white p-2 shadow-2xl dark:border-slate-700 dark:bg-slate-900">
-            {/* Attachments */}
-
-            {pendingAttachments.length > 0 && (
-              <div className="flex gap-2 overflow-x-auto px-2 pt-2">
-                {pendingAttachments.map(
-                  (a) => (
-                    <div
-                      key={a.id}
-                      className="relative h-14 w-14 shrink-0 overflow-visible"
-                    >
-                      <img
-                        src={a.previewUrl}
-                        alt={a.name}
-                        className="h-14 w-14 rounded-xl object-cover ring-1 ring-navy-200"
-                      />
-
-                      <button
-                        type="button"
-                        onClick={() =>
-                          setPendingAttachments(
-                            (p) =>
-                              p.filter(
-                                (x) =>
-                                  x.id !==
-                                  a.id
-                              )
-                          )
-                        }
-                        className="absolute -right-1.5 -top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-navy-950 text-white shadow-md transition hover:scale-110"
-                      >
-                        <X size={11} />
-                      </button>
-                    </div>
-                  )
-                )}
-              </div>
-            )}
-
-            {/* Attachment error */}
-
-            {attachError && (
-              <div className="px-3 pt-2 text-[11px] text-red-600">
-                {attachError}
-              </div>
-            )}
-
-            {/* Main input */}
-
-            <form
-              onSubmit={submit}
-              className="flex items-end gap-1"
-            >
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept="image/*,video/*"
-                multiple
-                onChange={chooseFiles}
-                className="hidden"
-              />
-
-              {/* Attachment */}
-
-              <button
-                type="button"
-                onClick={() =>
-                  fileInputRef.current?.click()
-                }
-                title={`Attach files · max ${formatFileSize(
-                  MAX_FILE_SIZE_BYTES
-                )}`}
-                className="m-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl text-navy-400 transition hover:bg-navy-50 hover:text-navy-800"
-              >
-                <Paperclip size={18} />
-              </button>
-
-              {/* Microphone */}
-
-              {micSupported && (
+    <div className="flex h-full flex-col">
+      {/* Message list */}
+      <div ref={scrollRef} className={cn('flex-1 space-y-4 overflow-y-auto', listPadding)}>
+        {messages.length === 0 && (
+          <div className={cn('text-center', variant === 'full' ? 'py-10' : 'py-6')}>
+            <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-gold-500/10 text-gold-600 ring-1 ring-gold-500/20">
+              <Sparkles size={20} />
+            </span>
+            <p className="mt-3 font-body text-sm text-navy-600">
+              Ask the {persona.label.toLowerCase()} tutor anything, or try:
+            </p>
+            <div className="mx-auto mt-4 flex max-w-md flex-col gap-2">
+              {persona.starterPrompts.map((prompt) => (
                 <button
+                  key={prompt}
                   type="button"
-                  onClick={
-                    isListening
-                      ? stopListening
-                      : startListening
-                  }
-                  className={cn(
-                    'm-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl transition',
-                    isListening
-                      ? 'bg-gold-100 text-gold-700'
-                      : 'text-navy-400 hover:bg-navy-50'
-                  )}
+                  onClick={() => handleStarterClick(prompt)}
+                  className="rounded-xl border border-navy-100 bg-white px-4 py-2.5 text-left font-body text-sm text-navy-700 shadow-premium transition-all duration-200 hover:-translate-y-0.5 hover:border-gold-300 hover:shadow-premium-lg"
                 >
-                  <Mic size={18} />
+                  {prompt}
                 </button>
-              )}
-
-              {/* Textarea */}
-
-              <textarea
-                value={draft}
-                onChange={(e) =>
-                  setDraft(
-                    e.target.value
-                  )
-                }
-                onKeyDown={(e) => {
-                  if (
-                    e.key === 'Enter' &&
-                    !e.shiftKey
-                  ) {
-                    e.preventDefault();
-                    submit(e);
-                  }
-                }}
-                rows={1}
-                placeholder={
-                  isListening
-                    ? 'Listening…'
-                    : `Ask the ${persona.label} tutor…`
-                }
-                disabled={isSending}
-                className="max-h-40 min-h-10 flex-1 resize-none bg-transparent px-2 py-2.5 text-sm leading-5 text-navy-950 outline-none placeholder:text-navy-300 dark:text-white dark:placeholder:text-slate-500"
-              />
-
-              {/* Stop */}
-
-              <button
-                type="button"
-                onClick={() =>
-                  onStop?.()
-                }
-                disabled={!isSending}
-                className={cn(
-                  'm-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl',
-                  isSending
-                    ? 'bg-red-50 text-red-600 hover:bg-red-100'
-                    : 'hidden'
-                )}
-                title="Stop generating"
-              >
-                <Square
-                  size={15}
-                  fill="currentColor"
-                />
-              </button>
-
-              {/* Send */}
-
-              <button
-                type="submit"
-                disabled={
-                  isSending ||
-                  (!draft.trim() &&
-                    !pendingAttachments.length)
-                }
-                className="m-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-navy-950 text-white shadow-sm transition hover:bg-navy-800 disabled:cursor-not-allowed disabled:opacity-30"
-              >
-                <Send size={16} />
-              </button>
-            </form>
-
-            {/* Tools */}
-
-            <div className="flex items-center justify-between px-3 pb-1 pt-1.5">
-              <div className="flex items-center gap-1.5">
-                <button
-                  type="button"
-                  onClick={() => {}}
-                  className={cn(
-                    'inline-flex items-center gap-1.5 rounded-lg px-2 py-1 text-[10px] font-semibold',
-                    webSearch
-                      ? 'bg-blue-50 text-blue-700'
-                      : 'text-navy-400 hover:bg-navy-50'
-                  )}
-                >
-                  <Globe2 size={12} />
-                  Web research
-                  {webSearch && ' on'}
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => {}}
-                  className={cn(
-                    'inline-flex items-center gap-1.5 rounded-lg px-2 py-1 text-[10px] font-semibold',
-                    deepThink
-                      ? 'bg-gold-50 text-gold-700'
-                      : 'text-navy-400 hover:bg-navy-50'
-                  )}
-                >
-                  <Brain size={12} />
-                  Deep thinking
-                  {deepThink && ' on'}
-                </button>
-              </div>
-
-              <span className="hidden text-[10px] text-navy-300 sm:block">
-                InnoSpeak AI can make mistakes ·
-                verify important information
-              </span>
+              ))}
             </div>
           </div>
-        </div>
+        )}
+
+        {messages.map((m) => (
+          <TutorMessageBubble
+            key={m.id}
+            id={m.id}
+            role={m.role}
+            content={m.content}
+            attachments={m.attachments}
+            isSpeaking={speechSupported && speakingId === m.id}
+            onToggleSpeak={speechSupported ? speak : undefined}
+          />
+        ))}
+
+        {isSending && <TutorTypingIndicator />}
+
+        {error && (
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="flex items-start gap-2 rounded-xl border border-gold-300 bg-gold-50 px-4 py-3 font-body text-sm text-navy-800"
+          >
+            <TriangleAlert size={16} className="mt-0.5 shrink-0 text-gold-700" />
+            <span>{error}</span>
+          </motion.div>
+        )}
+      </div>
+
+      {/* Composer */}
+      <div className="border-t border-navy-100 bg-white/80 backdrop-blur-md">
+        {pendingAttachments.length > 0 && (
+          <div className="flex flex-wrap gap-2 px-3 pt-3">
+            {pendingAttachments.map((a) => (
+              <div key={a.id} className="group relative h-14 w-14 shrink-0">
+                <div className="h-full w-full overflow-hidden rounded-lg border border-navy-100 shadow-premium">
+                  {a.kind === 'video' ? (
+                    <video src={a.previewUrl} className="h-full w-full object-cover" />
+                  ) : (
+                    <img src={a.previewUrl} alt={a.name} className="h-full w-full object-cover" />
+                  )}
+                </div>
+                <button
+                  type="button"
+                  onClick={() => removeAttachment(a.id)}
+                  aria-label={`Remove ${a.name}`}
+                  className="absolute -right-1.5 -top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-navy-900 text-white shadow-premium transition-transform duration-150 hover:scale-110"
+                >
+                  <X size={11} />
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {attachError && (
+          <p className="px-3 pt-2 font-body text-[11px] text-gold-700">{attachError}</p>
+        )}
+
+        <form onSubmit={handleSubmit} className="flex items-center gap-2 p-3">
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*,video/*"
+            multiple
+            onChange={handleFilesSelected}
+            className="hidden"
+          />
+          <button
+            type="button"
+            onClick={() => fileInputRef.current?.click()}
+            disabled={isSending || pendingAttachments.length >= MAX_ATTACHMENTS}
+            aria-label="Attach an image or video"
+            title={`Attach an image or video (max ${formatFileSize(MAX_FILE_SIZE_BYTES)} each)`}
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-navy-400 transition-colors duration-200 hover:bg-navy-50 hover:text-navy-700 disabled:opacity-40"
+          >
+            <Paperclip size={17} />
+          </button>
+
+          {micSupported && (
+            <button
+              type="button"
+              onClick={toggleMic}
+              disabled={isSending}
+              aria-label={isListening ? 'Stop voice input' : 'Speak your question'}
+              className={cn(
+                'relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-colors duration-200 disabled:opacity-40',
+                isListening
+                  ? 'bg-gold-500/10 text-gold-600 ring-1 ring-gold-400/40'
+                  : 'text-navy-400 hover:bg-navy-50 hover:text-navy-700'
+              )}
+            >
+              {isListening && (
+                <motion.span
+                  className="absolute inset-0 rounded-xl bg-gold-400/30"
+                  animate={{ opacity: [0.6, 0, 0.6], scale: [1, 1.25, 1] }}
+                  transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
+                />
+              )}
+              <Mic size={17} className="relative" />
+            </button>
+          )}
+
+          <input
+            type="text"
+            value={draft}
+            onChange={(e) => setDraft(e.target.value)}
+            placeholder={
+              isListening ? "Listening\u2026" : `Ask the ${persona.label} tutor\u2026`
+            }
+            disabled={isSending}
+            className="flex-1 rounded-xl border border-navy-100 bg-white px-4 py-2.5 font-body text-sm text-navy-900 placeholder:text-navy-300 transition-colors duration-200 focus:border-gold-400 focus:outline-none focus:ring-2 focus:ring-gold-400/30 disabled:opacity-60"
+          />
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            type="submit"
+            disabled={isSending || (!draft.trim() && pendingAttachments.length === 0)}
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gold-gradient text-navy-900 shadow-gold transition-opacity duration-200 disabled:opacity-40"
+            aria-label="Send message"
+          >
+            <Send size={16} />
+          </motion.button>
+        </form>
       </div>
     </div>
   );

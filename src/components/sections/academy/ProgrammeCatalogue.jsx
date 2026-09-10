@@ -69,7 +69,7 @@ function normalizeCourse(course, index) {
       course.description ||
       course.summary ||
       course.overview ||
-      'More details coming soon.',
+      'Explore the course overview, learning outcomes and pathway details.',
     category:
       course.category ||
       course.pathway ||
