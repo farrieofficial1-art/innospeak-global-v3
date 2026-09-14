@@ -87,6 +87,8 @@ import CourseView from './pages/learn/CourseView.jsx';
 import LessonView from './pages/learn/LessonView.jsx';
 import AssignmentView from './pages/learn/AssignmentView.jsx';
 import QuizAttempt from './pages/learn/QuizAttempt.jsx';
+import BecomeTutor from './pages/BecomeTutor.jsx';
+import AdminTutorApplications from './pages/admin/TutorApplications.jsx';
 import NotFound from './pages/NotFound.jsx';
 
 export default function App() {
@@ -107,6 +109,7 @@ export default function App() {
           <Route path="/impact" element={<Impact />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/apply" element={<Apply />} />
+          <Route path="/become-tutor" element={<BecomeTutor />} />
           <Route path="/research" element={<Research />} />
           <Route path="/tutor" element={<Tutor />} />
           <Route path="/news" element={<News />} />
@@ -153,6 +156,7 @@ export default function App() {
               <Route path="students" element={<AdminStudents />} />
               <Route path="students/:id" element={<AdminStudentDetail />} />
               <Route path="applications" element={<AdminApplications />} />
+              <Route path="tutor-applications" element={<AdminTutorApplications />} />
               <Route path="messages" element={<AdminContactMessages />} />
               <Route path="programs" element={<AdminPrograms />} />
               <Route path="semesters" element={<AdminSemesters />} />

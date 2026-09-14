@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, UserCircle2, ShieldCheck, ChevronDown, GraduationCap, BookOpen } from 'lucide-react';
+import { Menu, X, UserCircle2, ShieldCheck, ChevronDown, GraduationCap, BookOpen, UserCheck } from 'lucide-react';
 import useScrolled from '../../hooks/useScrolled.js';
 import { useAuth } from '../../context/AuthContext.jsx';
 import logo from '../../assets/logo/logo.png';
@@ -207,6 +207,16 @@ export default function Navbar() {
                         Staff Panel
                       </Link>
                     )}
+                    <Link
+                      to="/become-tutor"
+                      onClick={() => setAccountOpen(false)}
+                      className={`flex items-center gap-2.5 border-t border-navy-50 px-4 py-2.5 font-body text-sm font-medium text-navy-700 hover:bg-navy-50 ${
+                        pathname === '/become-tutor' ? 'text-gold-600' : ''
+                      }`}
+                    >
+                      <UserCheck size={16} />
+                      Become a Tutor
+                    </Link>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -301,6 +311,13 @@ export default function Navbar() {
                         Staff Panel
                       </Link>
                     )}
+                    <Link
+                      to="/become-tutor"
+                      onClick={() => setMobileOpen(false)}
+                      className="btn-outline w-full"
+                    >
+                      Become a Tutor
+                    </Link>
                   </>
                 ) : (
                   <Link
