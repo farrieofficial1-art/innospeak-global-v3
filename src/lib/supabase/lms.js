@@ -316,6 +316,20 @@ export async function listCourseEnrollments(courseId) {
   return data || [];
 }
 
+export async function getMyEnrollment(courseId) {
+  assertConfigured();
+  const { data: authData } = await supabase.auth.getUser();
+  const uid = authData?.user?.id;
+  const { data, error } = await supabase
+    .from('lms_enrollments')
+    .select('*')
+    .eq('course_id', courseId)
+    .eq('student_id', uid)
+    .maybeSingle();
+  if (error) throw error;
+  return data;
+}
+
 // ============================================================
 // Progress (single source — always call these, never compute
 // completion % inline in a component)
@@ -342,6 +356,24 @@ export async function getLessonProgress(lessonId) {
     .maybeSingle();
   if (error) throw error;
   return data;
+}
+
+export async function getAllLessonProgress(courseId) {
+  assertConfigured();
+  const { data: authData } = await supabase.auth.getUser();
+  const uid = authData?.user?.id;
+  const { data, error } = await supabase
+    .from('lesson_progress')
+    .select('lesson_id, status, started_at, completed_at, updated_at')
+    .in('lesson_id', (
+      await supabase
+        .from('modules')
+        .select('lessons(id)')
+        .eq('course_id', courseId)
+    ).data?.flatMap((m) => m.lessons?.map((l) => l.id) || []) || [])
+    .eq('student_id', uid);
+  if (error) throw error;
+  return data || [];
 }
 
 export async function markLessonStarted(lessonId) {
