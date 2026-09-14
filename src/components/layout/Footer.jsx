@@ -3,6 +3,10 @@ import {
   Mail,
   MapPin,
   UserCircle2,
+  GraduationCap,
+  BookOpen,
+  ShieldCheck,
+  UserCheck,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext.jsx';
 
@@ -20,18 +24,22 @@ const programmes = [
   { label: 'Apply Now', to: '/apply' },
 ];
 
-
-
 const linkClass =
   'font-body text-sm text-navy-100/80 transition-colors duration-200 hover:text-gold-300';
 
+const portalLinkClass =
+  'flex items-center gap-2 font-body text-sm font-semibold text-gold-300 transition-colors duration-200 hover:text-gold-200';
+
 export default function Footer() {
-  const { user } = useAuth();
+  const { user, profile } = useAuth();
+
+  const isAdmin = profile?.role === 'admin';
+  const isInstructor = profile?.role === 'instructor' || profile?.role === 'lms_admin';
 
   return (
     <footer className="bg-navy-gradient text-white">
       <div className="container-premium py-16">
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-5">
           {/* Brand + socials */}
           <div className="max-w-xs">
             <Link to="/" className="flex items-center">
@@ -43,7 +51,6 @@ export default function Footer() {
               Transforming communication, technical and leadership skills for the next
               generation of innovators.
             </p>
-
           </div>
 
           {/* Quick Links */}
@@ -60,7 +67,7 @@ export default function Footer() {
               <li>
                 <Link
                   to={user ? '/portal' : '/login'}
-                  className={`flex items-center gap-2 font-body text-sm font-semibold text-gold-300 transition-colors duration-200 hover:text-gold-200`}
+                  className={portalLinkClass}
                 >
                   <UserCircle2 size={16} />
                   {user ? 'Student Portal' : 'Student Login'}
@@ -80,6 +87,42 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
+            </ul>
+          </div>
+
+          {/* Portals */}
+          <div>
+            <h3 className="font-display text-base font-semibold text-white">Portals</h3>
+            <ul className="mt-5 space-y-3">
+              <li>
+                <Link to="/learn" className={portalLinkClass}>
+                  <GraduationCap size={16} />
+                  E-Learning
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to={user ? '/portal' : '/login'}
+                  className={portalLinkClass}
+                >
+                  <BookOpen size={16} />
+                  Student Portal
+                </Link>
+              </li>
+              {(isAdmin || isInstructor) && (
+                <li>
+                  <Link to={isAdmin ? '/admin' : '/teach'} className={portalLinkClass}>
+                    <ShieldCheck size={16} />
+                    {isAdmin ? 'Staff Panel' : 'Tutor Dashboard'}
+                  </Link>
+                </li>
+              )}
+              <li>
+                <Link to="/become-tutor" className={portalLinkClass}>
+                  <UserCheck size={16} />
+                  Become a Tutor
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -108,6 +151,17 @@ export default function Footer() {
           <p className="font-body text-xs text-navy-100/70">
             © {new Date().getFullYear()} InnoSpeak Global. All rights reserved.
           </p>
+          <div className="flex items-center gap-4">
+            <Link to="/privacy" className="font-body text-xs text-navy-100/70 transition-colors hover:text-gold-300">
+              Privacy
+            </Link>
+            <Link to="/terms" className="font-body text-xs text-navy-100/70 transition-colors hover:text-gold-300">
+              Terms
+            </Link>
+            <Link to="/faq" className="font-body text-xs text-navy-100/70 transition-colors hover:text-gold-300">
+              FAQ
+            </Link>
+          </div>
           <p className="font-body text-xs text-navy-100/70">
             Built for the next generation of leaders.
           </p>
