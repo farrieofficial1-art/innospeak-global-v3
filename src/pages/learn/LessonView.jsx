@@ -1,10 +1,23 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, CheckCircle2 } from 'lucide-react';
+import {
+  ArrowLeft, ArrowRight, CheckCircle2, Target, Download, ExternalLink,
+  Video, FileText, Headphones, Presentation, File, Link as LinkIcon, BookOpen,
+} from 'lucide-react';
 import Seo from '../../components/ui/Seo.jsx';
 import SectionCard from '../../components/portal/SectionCard.jsx';
 import { LoadingState, ErrorState } from '../../components/portal/PortalStates.jsx';
 import { getLesson, listModulesWithLessons, markLessonStarted, markLessonComplete, getLessonProgress } from '../../lib/supabase/lms';
+
+const RESOURCE_ICONS = {
+  video: Video,
+  pdf: FileText,
+  audio: Headphones,
+  presentation: Presentation,
+  document: File,
+  link: LinkIcon,
+  downloadable: Download,
+};
 
 export default function LessonView() {
   const { lessonId } = useParams();
@@ -52,6 +65,7 @@ export default function LessonView() {
 
   const { lesson } = state;
   const isComplete = state.progress?.status === 'completed';
+  const resources = (lesson.lesson_resources || []).sort((a, b) => (a.position || 0) - (b.position || 0));
 
   return (
     <>
@@ -64,28 +78,80 @@ export default function LessonView() {
       </div>
 
       <SectionCard title={lesson.title} className="mt-4">
-        {lesson.content_type === 'video' && lesson.video_url && (
-          <video controls className="mb-4 w-full rounded-xl" src={lesson.video_url} />
+        {lesson.description && (
+          <p className="mb-4 font-body text-sm text-navy-600">{lesson.description}</p>
         )}
-        {lesson.content_type === 'link' && lesson.external_url && (
-          <a href={lesson.external_url} target="_blank" rel="noreferrer" className="mb-4 inline-block font-body text-sm font-semibold text-gold-700 hover:underline">
-            Open external resource →
-          </a>
-        )}
-        {lesson.content && <div className="prose prose-sm max-w-none font-body text-navy-800 whitespace-pre-wrap">{lesson.content}</div>}
 
-        {lesson.lesson_resources?.length > 0 && (
-          <div className="mt-6 border-t border-navy-100 pt-4">
-            <p className="font-body text-sm font-semibold text-navy-900">Resources</p>
+        {lesson.learning_objectives?.length > 0 && (
+          <div className="mb-4 rounded-xl bg-gold-500/5 p-4">
+            <p className="flex items-center gap-2 font-body text-sm font-bold text-navy-900">
+              <Target size={15} className="text-gold-600" /> Learning Objectives
+            </p>
             <ul className="mt-2 space-y-1">
-              {lesson.lesson_resources.map((r) => (
-                <li key={r.id}>
-                  <a href={r.file_url} target="_blank" rel="noreferrer" className="font-body text-sm text-gold-700 hover:underline">
-                    {r.title}
-                  </a>
+              {lesson.learning_objectives.map((obj, i) => (
+                <li key={i} className="flex items-start gap-2 font-body text-sm text-navy-700">
+                  <CheckCircle2 size={14} className="mt-0.5 flex-shrink-0 text-gold-600" />
+                  {obj}
                 </li>
               ))}
             </ul>
+          </div>
+        )}
+
+        {lesson.content_type === 'video' && lesson.video_url && (
+          <div className="mb-4">
+            {lesson.video_url.includes('youtube.com') || lesson.video_url.includes('youtu.be') ? (
+              <iframe
+                src={lesson.video_url.replace('watch?v=', 'embed/')}
+                className="aspect-video w-full rounded-xl"
+                allowFullScreen
+              />
+            ) : (
+              <video controls className="w-full rounded-xl" src={lesson.video_url} />
+            )}
+          </div>
+        )}
+
+        {lesson.content_type === 'link' && lesson.external_url && (
+          <a href={lesson.external_url} target="_blank" rel="noreferrer" className="mb-4 inline-flex items-center gap-2 font-body text-sm font-semibold text-gold-700 hover:underline">
+            <ExternalLink size={15} /> Open external resource →
+          </a>
+        )}
+
+        {lesson.content && (
+          <div className="prose prose-sm max-w-none font-body text-navy-800" dangerouslySetInnerHTML={{ __html: lesson.content }} />
+        )}
+
+        {resources.length > 0 && (
+          <div className="mt-6 border-t border-navy-100 pt-4">
+            <p className="font-body text-sm font-semibold text-navy-900">Lesson Resources</p>
+            <div className="mt-2 space-y-2">
+              {resources.map((r) => {
+                const Icon = RESOURCE_ICONS[r.resource_type] || BookOpen;
+                const href = r.external_url || r.file_url;
+                return (
+                  <div key={r.id} className="flex items-center gap-3 rounded-xl bg-navy-50/60 px-4 py-3">
+                    <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-gold-500/10 text-gold-700">
+                      <Icon size={16} />
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate font-body text-sm font-semibold text-navy-800">{r.title}</p>
+                      {r.description && <p className="font-body text-xs text-navy-500">{r.description}</p>}
+                    </div>
+                    {r.is_downloadable && href && (
+                      <a
+                        href={href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-1 rounded-lg bg-gold-500/10 px-3 py-1.5 font-body text-xs font-semibold text-gold-700 hover:bg-gold-500/20"
+                      >
+                        <Download size={13} /> Download
+                      </a>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
           </div>
         )}
 

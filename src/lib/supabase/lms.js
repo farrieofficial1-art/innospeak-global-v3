@@ -227,6 +227,60 @@ export async function getLesson(lessonId) {
 }
 
 // ============================================================
+// Lesson resources (files, links, downloads)
+// ============================================================
+export async function createLessonResource(lessonId, fields) {
+  assertConfigured();
+  const { data, error } = await supabase
+    .from('lesson_resources')
+    .insert([{ lesson_id: lessonId, ...fields }])
+    .select()
+    .single();
+  if (error) throw error;
+  return data;
+}
+
+export async function updateLessonResource(resourceId, fields) {
+  assertConfigured();
+  const { data, error } = await supabase
+    .from('lesson_resources')
+    .update(fields)
+    .eq('id', resourceId)
+    .select()
+    .single();
+  if (error) throw error;
+  return data;
+}
+
+export async function deleteLessonResource(resourceId) {
+  assertConfigured();
+  const { error } = await supabase.from('lesson_resources').delete().eq('id', resourceId);
+  if (error) throw error;
+}
+
+export async function listLessonResources(lessonId) {
+  assertConfigured();
+  const { data, error } = await supabase
+    .from('lesson_resources')
+    .select('*')
+    .eq('lesson_id', lessonId)
+    .order('position');
+  if (error) throw error;
+  return data || [];
+}
+
+export async function uploadLessonResourceFile(lessonId, file) {
+  assertConfigured();
+  const { data: authData } = await supabase.auth.getUser();
+  const uid = authData?.user?.id;
+  const path = `${uid}/${lessonId}/${Date.now()}_${file.name}`;
+  const { error } = await supabase.storage.from('lesson-resources').upload(path, file);
+  if (error) throw error;
+  const { data: signed } = await supabase.storage.from('lesson-resources').createSignedUrl(path, 60 * 60 * 24 * 365);
+  return signed?.signedUrl || path;
+}
+
+// ============================================================
 // Enrollment
 // ============================================================
 export async function enrollInCourse(courseId) {

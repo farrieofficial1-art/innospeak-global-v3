@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Plus, Trash2, BookOpen, ArrowUp, ArrowDown, Eye, Send,
-  CheckCircle2, AlertCircle, X, Save, Users, GripVertical,
+  CheckCircle2, AlertCircle, X, Save, Users, GripVertical, Pencil,
 } from 'lucide-react';
 import Seo from '../../components/ui/Seo.jsx';
 import SectionCard from '../../components/portal/SectionCard.jsx';
@@ -46,16 +46,20 @@ const LANGUAGE_OPTIONS = ['English', 'Swahili', 'French', 'Arabic', 'Spanish', '
 
 const EDITABLE_STATUSES = ['draft', 'rejected', 'changes_requested'];
 
-function LessonRow({ lesson, onMoveUp, onMoveDown, canUp, canDown, onDelete, onEdit, isPreview }) {
+function LessonRow({ lesson, onMoveUp, onMoveDown, canUp, canDown, onDelete, isPreview }) {
   return (
     <div className="flex items-center gap-2 rounded-lg bg-navy-50/60 px-3 py-2">
       {!isPreview && <GripVertical size={12} className="text-navy-300" />}
       <BookOpen size={13} className="text-navy-400" />
       <span className="flex-1 font-body text-sm text-navy-800">
         {lesson.title} <span className="text-xs text-navy-400">({lesson.content_type})</span>
+        {lesson.status === 'published' && <span className="ml-2 rounded-md bg-emerald-50 px-1.5 py-0.5 text-xs font-semibold text-emerald-600">Published</span>}
       </span>
       {!isPreview && (
         <div className="flex items-center gap-1">
+          <Link to={`/teach/lessons/${lesson.id}`} className="text-navy-400 hover:text-gold-600" title="Edit lesson content">
+            <Pencil size={14} />
+          </Link>
           <button type="button" disabled={!canUp} onClick={onMoveUp} className="text-navy-400 hover:text-gold-600 disabled:opacity-30"><ArrowUp size={14} /></button>
           <button type="button" disabled={!canDown} onClick={onMoveDown} className="text-navy-400 hover:text-gold-600 disabled:opacity-30"><ArrowDown size={14} /></button>
           <button type="button" onClick={onDelete} className="text-navy-400 hover:text-rose-600"><Trash2 size={14} /></button>
