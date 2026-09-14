@@ -16,6 +16,7 @@ const STATUS_TONE = {
   eligible: 'positive',
   resolved: 'positive',
   read: 'positive',
+  published: 'positive',
 
   submitted: 'pending',
   processing: 'pending',
@@ -24,6 +25,9 @@ const STATUS_TONE = {
   in_progress: 'pending',
   unread: 'pending',
   applied: 'pending',
+  under_review: 'pending',
+  changes_requested: 'pending',
+  draft: 'neutral',
 
   dropped: 'negative',
   absent: 'negative',

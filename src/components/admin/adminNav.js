@@ -1,4 +1,4 @@
-import { LayoutDashboard, Users, GraduationCap, CalendarRange, BookMarked, SendHorizontal as SendHorizonal, LifeBuoy, Award, Megaphone, ClipboardList, Mail, Wallet, CalendarDays, ChartBar as BarChart3, UsersRound, BriefcaseBusiness, UserCheck } from 'lucide-react';
+import { LayoutDashboard, Users, GraduationCap, CalendarRange, BookMarked, SendHorizontal as SendHorizonal, LifeBuoy, Award, Megaphone, ClipboardList, Mail, Wallet, CalendarDays, ChartBar as BarChart3, UsersRound, BriefcaseBusiness, UserCheck, BookOpen } from 'lucide-react';
 
 export const adminNav = [
   { key: 'dashboard', label: 'Dashboard', path: '/admin', icon: LayoutDashboard, end: true },
@@ -8,6 +8,7 @@ export const adminNav = [
   { key: 'students', label: 'Students', path: '/admin/students', icon: Users },
   { key: 'applications', label: 'Applications', path: '/admin/applications', icon: ClipboardList },
   { key: 'tutor-applications', label: 'Tutor Applications', path: '/admin/tutor-applications', icon: UserCheck },
+  { key: 'course-review', label: 'Course Review', path: '/admin/course-review', icon: BookOpen },
   { key: 'messages', label: 'Contact Messages', path: '/admin/messages', icon: Mail },
   { key: 'programs', label: 'Programs', path: '/admin/programs', icon: GraduationCap },
   { key: 'semesters', label: 'Semesters', path: '/admin/semesters', icon: CalendarRange },

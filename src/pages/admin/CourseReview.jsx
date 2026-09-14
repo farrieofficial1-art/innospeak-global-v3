@@ -1,0 +1,324 @@
+import { useEffect, useState, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+  BookOpen, ArrowLeft, CheckCircle2, XCircle, AlertCircle,
+  Clock, Send, Upload, Eye,
+} from 'lucide-react';
+import Seo from '../../components/ui/Seo.jsx';
+import SectionCard from '../../components/portal/SectionCard.jsx';
+import DataTable from '../../components/portal/DataTable.jsx';
+import StatusBadge from '../../components/portal/StatusBadge.jsx';
+import { LoadingState, ErrorState, EmptyState } from '../../components/portal/PortalStates.jsx';
+import {
+  listAllCourses, getCourseForAdmin, listModulesWithLessons,
+  setCourseUnderReview, approveCourse, publishCourse,
+  rejectCourse, requestCourseChanges,
+} from '../../lib/supabase/lms';
+
+function InfoRow({ label, value }) {
+  return (
+    <div>
+      <p className="font-body text-xs font-semibold uppercase tracking-wider text-navy-400">{label}</p>
+      <p className="mt-1 font-body text-sm text-navy-800">{value || '—'}</p>
+    </div>
+  );
+}
+
+function DetailSection({ title, children }) {
+  return (
+    <div className="rounded-2xl border border-navy-100 bg-white p-5 shadow-premium">
+      <h3 className="font-display text-base font-bold text-navy-900">{title}</h3>
+      <div className="mt-4">{children}</div>
+    </div>
+  );
+}
+
+export default function CourseReview() {
+  const [list, setList] = useState({ loading: true, error: null, items: [] });
+  const [selectedId, setSelectedId] = useState(null);
+  const [detail, setDetail] = useState({ loading: false, error: null, course: null, modules: [] });
+  const [actionLoading, setActionLoading] = useState(false);
+  const [actionError, setActionError] = useState(null);
+  const [notes, setNotes] = useState('');
+
+  const loadList = useCallback(async () => {
+    setList({ loading: true, error: null, items: [] });
+    try {
+      const items = await listAllCourses();
+      setList({ loading: false, error: null, items });
+    } catch {
+      setList({ loading: false, error: 'Could not load courses.', items: [] });
+    }
+  }, []);
+
+  useEffect(() => { loadList(); }, [loadList]);
+
+  const loadDetail = useCallback(async (id) => {
+    setSelectedId(id);
+    setDetail({ loading: true, error: null, course: null, modules: [] });
+    setNotes('');
+    setActionError(null);
+    try {
+      const [course, modules] = await Promise.all([getCourseForAdmin(id), listModulesWithLessons(id)]);
+      setDetail({ loading: false, error: null, course, modules });
+      setNotes(course.reviewer_notes || '');
+    } catch {
+      setDetail({ loading: false, error: 'Could not load this course.', course: null, modules: [] });
+    }
+  }, []);
+
+  async function handleAction(action) {
+    if (!selectedId) return;
+    setActionLoading(true);
+    setActionError(null);
+    try {
+      if (action === 'review') {
+        await setCourseUnderReview(selectedId);
+      } else if (action === 'approve') {
+        await approveCourse(selectedId);
+      } else if (action === 'publish') {
+        await publishCourse(selectedId);
+      } else if (action === 'reject') {
+        if (!notes.trim()) { setActionError('Please provide feedback notes for the rejection.'); setActionLoading(false); return; }
+        await rejectCourse(selectedId, notes);
+      } else if (action === 'changes') {
+        if (!notes.trim()) { setActionError('Please provide feedback notes for the change request.'); setActionLoading(false); return; }
+        await requestCourseChanges(selectedId, notes);
+      }
+      await loadDetail(selectedId);
+      await loadList();
+    } catch {
+      setActionError('Could not complete this action. Please try again.');
+    } finally {
+      setActionLoading(false);
+    }
+  }
+
+  const columns = [
+    {
+      key: 'title',
+      label: 'Course',
+      render: (r) => (
+        <button onClick={() => loadDetail(r.id)} className="text-left">
+          <p className="font-body text-sm font-semibold text-navy-900 hover:text-gold-600">{r.title}</p>
+          <p className="font-body text-xs text-navy-500">{r.category || 'No category'}</p>
+        </button>
+      ),
+    },
+    {
+      key: 'instructor',
+      label: 'Instructor',
+      render: (r) => {
+        const ins = r.course_instructors?.[0]?.profiles;
+        return ins ? `${ins.full_name || '—'}` : '—';
+      },
+    },
+    { key: 'level', label: 'Level', render: (r) => r.level || '—' },
+    { key: 'status', label: 'Status', render: (r) => <StatusBadge status={r.status} /> },
+    {
+      key: 'action',
+      label: '',
+      render: (r) => (
+        <button onClick={() => loadDetail(r.id)} className="font-body text-xs font-semibold text-gold-700 hover:text-gold-800">
+          Review →
+        </button>
+      ),
+    },
+  ];
+
+  // Detail view
+  if (selectedId) {
+    const course = detail.course;
+    const canAct = course && ['submitted', 'under_review', 'changes_requested', 'rejected'].includes(course.status);
+    const canPublish = course && course.status === 'approved';
+
+    return (
+      <>
+        <Seo title="Course Review" description="Review submitted courses." path="/admin/course-review" />
+
+        <button
+          onClick={() => { setSelectedId(null); setDetail({ loading: false, error: null, course: null, modules: [] }); }}
+          className="inline-flex items-center gap-2 font-body text-sm font-semibold text-navy-600 hover:text-gold-600"
+        >
+          <ArrowLeft size={16} /> Back to list
+        </button>
+
+        {detail.loading && <div className="mt-6"><SectionCard><LoadingState /></SectionCard></div>}
+        {detail.error && <div className="mt-6"><SectionCard><ErrorState message={detail.error} /></SectionCard></div>}
+
+        {course && !detail.loading && (
+          <div className="mt-6 space-y-6">
+            {/* Header */}
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <p className="font-body text-xs font-semibold uppercase tracking-wider text-gold-600">Admin Panel</p>
+                <h1 className="mt-1 font-display text-2xl font-bold text-navy-900">{course.title}</h1>
+                <p className="mt-1 font-body text-sm text-navy-500">{course.code || 'No code'}</p>
+              </div>
+              <StatusBadge status={course.status} className="text-sm" />
+            </div>
+
+            {/* Course Details */}
+            <DetailSection title="Course Information">
+              <div className="grid gap-4 sm:grid-cols-2">
+                <InfoRow label="Title" value={course.title} />
+                <InfoRow label="Category" value={course.category} />
+                <InfoRow label="Level" value={course.level} />
+                <InfoRow label="Duration" value={course.duration} />
+                <InfoRow label="Language" value={course.language} />
+                <InfoRow label="Instructor" value={course.course_instructors?.[0]?.profiles?.full_name || '—'} />
+              </div>
+              <div className="mt-4">
+                <InfoRow label="Description" value={course.description} />
+              </div>
+              <div className="mt-4">
+                <InfoRow label="Requirements" value={course.requirements} />
+              </div>
+              {course.thumbnail_path && (
+                <div className="mt-4">
+                  <p className="font-body text-xs font-semibold uppercase tracking-wider text-navy-400">Thumbnail</p>
+                  <img src={course.thumbnail_path} alt="Course thumbnail" className="mt-2 h-32 w-56 rounded-xl object-cover border border-navy-100" />
+                </div>
+              )}
+            </DetailSection>
+
+            {/* Learning Outcomes */}
+            {course.learning_outcomes && course.learning_outcomes.length > 0 && (
+              <DetailSection title="Learning Outcomes">
+                <ul className="space-y-2">
+                  {course.learning_outcomes.map((o, i) => (
+                    <li key={i} className="flex items-start gap-2">
+                      <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-gold-600" />
+                      <span className="font-body text-sm text-navy-700">{o}</span>
+                    </li>
+                  ))}
+                </ul>
+              </DetailSection>
+            )}
+
+            {/* Course Content */}
+            <DetailSection title={`Course Content (${detail.modules.length} modules)`}>
+              {detail.modules.length === 0 ? (
+                <p className="font-body text-sm text-navy-400">No modules have been added to this course yet.</p>
+              ) : (
+                <div className="space-y-3">
+                  {detail.modules.map((mod, idx) => (
+                    <div key={mod.id} className="rounded-xl border border-navy-100 p-4">
+                      <p className="font-body text-sm font-bold text-navy-900">Module {idx + 1}: {mod.title}</p>
+                      {mod.description && <p className="mt-1 font-body text-xs text-navy-500">{mod.description}</p>}
+                      {(mod.lessons || []).length > 0 && (
+                        <ul className="mt-2 space-y-1">
+                          {mod.lessons.map((lesson, li) => (
+                            <li key={lesson.id} className="flex items-center gap-2 font-body text-xs text-navy-600">
+                              <BookOpen size={12} className="text-navy-400" />
+                              {li + 1}. {lesson.title} <span className="text-navy-400">({lesson.content_type})</span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </DetailSection>
+
+            {/* Reviewer feedback from previous round */}
+            {course.reviewer_notes && (course.status === 'rejected' || course.status === 'changes_requested') && (
+              <div className={`rounded-2xl border p-4 ${course.status === 'rejected' ? 'border-rose-200 bg-rose-50' : 'border-amber-200 bg-amber-50'}`}>
+                <p className="font-body text-xs font-semibold uppercase tracking-wider text-navy-400">Previous Feedback</p>
+                <p className="mt-1 font-body text-sm text-navy-700">{course.reviewer_notes}</p>
+              </div>
+            )}
+
+            {/* Review actions */}
+            {canAct && (
+              <SectionCard title="Review Actions" description="Approve, reject, or request changes for this course.">
+                {actionError && (
+                  <div className="mb-4 flex items-start gap-2 rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 font-body text-sm text-navy-800">
+                    <AlertCircle size={16} className="mt-0.5 shrink-0 text-rose-600" />
+                    <span>{actionError}</span>
+                  </div>
+                )}
+                <div>
+                  <label className="font-body text-sm font-bold tracking-wide text-navy-900">Reviewer Notes</label>
+                  <p className="mt-0.5 font-body text-xs text-navy-400">Visible to the tutor when rejecting or requesting changes</p>
+                  <textarea
+                    value={notes}
+                    onChange={(e) => setNotes(e.target.value)}
+                    rows={4}
+                    placeholder="Enter feedback for the tutor..."
+                    className="mt-2 w-full rounded-2xl border border-navy-100 bg-white px-5 py-4 font-body text-sm text-navy-900 shadow-sm focus:border-gold-500 focus:outline-none focus:ring-4 focus:ring-gold-500/20"
+                  />
+                </div>
+                <div className="mt-5 flex flex-wrap gap-3">
+                  {course.status === 'submitted' && (
+                    <button type="button" onClick={() => handleAction('review')} disabled={actionLoading} className="inline-flex items-center gap-2 rounded-xl border border-navy-200 px-4 py-2.5 font-body text-sm font-semibold text-navy-700 hover:bg-navy-50 disabled:opacity-60">
+                      <Clock size={15} /> Mark Under Review
+                    </button>
+                  )}
+                  <button type="button" onClick={() => handleAction('approve')} disabled={actionLoading} className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-4 py-2.5 font-body text-sm font-semibold text-white hover:bg-emerald-700 disabled:opacity-60">
+                    <CheckCircle2 size={15} /> Approve
+                  </button>
+                  <button type="button" onClick={() => handleAction('changes')} disabled={actionLoading} className="inline-flex items-center gap-2 rounded-xl bg-amber-500 px-4 py-2.5 font-body text-sm font-semibold text-white hover:bg-amber-600 disabled:opacity-60">
+                    <AlertCircle size={15} /> Request Changes
+                  </button>
+                  <button type="button" onClick={() => handleAction('reject')} disabled={actionLoading} className="inline-flex items-center gap-2 rounded-xl bg-rose-600 px-4 py-2.5 font-body text-sm font-semibold text-white hover:bg-rose-700 disabled:opacity-60">
+                    <XCircle size={15} /> Reject
+                  </button>
+                </div>
+              </SectionCard>
+            )}
+
+            {/* Publish action */}
+            {canPublish && (
+              <SectionCard title="Publish Course" description="This course has been approved. Publish it to make it available to students.">
+                <button type="button" onClick={() => handleAction('publish')} disabled={actionLoading} className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-4 py-2.5 font-body text-sm font-semibold text-white hover:bg-emerald-700 disabled:opacity-60">
+                  <Upload size={15} /> Publish Course
+                </button>
+              </SectionCard>
+            )}
+
+            {/* Already published */}
+            {course.status === 'published' && (
+              <div className="flex items-center gap-3 rounded-2xl border border-emerald-200 bg-emerald-50 p-5">
+                <CheckCircle2 size={20} className="text-emerald-600" />
+                <div>
+                  <p className="font-body text-sm font-bold text-navy-900">Course Published</p>
+                  <p className="mt-0.5 font-body text-sm text-navy-500">This course is live and available to students.</p>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+      </>
+    );
+  }
+
+  // List view
+  return (
+    <>
+      <Seo title="Course Review" description="Review and approve tutor courses." path="/admin/course-review" />
+
+      <div>
+        <p className="font-body text-xs font-semibold uppercase tracking-wider text-gold-600">Admin Panel</p>
+        <h1 className="mt-1 font-display text-2xl font-bold text-navy-900 sm:text-3xl">Course Review</h1>
+        <p className="mt-2 font-body text-sm text-navy-500">
+          Review courses submitted by tutors. Approve courses to make them available for publishing, or reject with feedback.
+        </p>
+      </div>
+
+      <div className="mt-6">
+        <SectionCard>
+          {list.loading && <LoadingState />}
+          {!list.loading && list.error && <ErrorState message={list.error} />}
+          {!list.loading && !list.error && list.items.length === 0 && (
+            <EmptyState icon={BookOpen} title="No courses yet" message="Courses created by tutors will appear here for review." />
+          )}
+          {!list.loading && !list.error && list.items.length > 0 && (
+            <DataTable columns={columns} rows={list.items} />
+          )}
+        </SectionCard>
+      </div>
+    </>
+  );
+}

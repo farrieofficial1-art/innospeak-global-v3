@@ -70,6 +70,93 @@ export async function listPublishedCourses() {
   return data || [];
 }
 
+// Admin: list all courses for review
+export async function listAllCourses() {
+  assertConfigured();
+  const { data, error } = await supabase
+    .from('lms_courses')
+    .select('*, course_instructors(instructor_id, profiles!course_instructors_instructor_id_fkey(full_name, email))')
+    .order('created_at', { ascending: false });
+  if (error) throw error;
+  return data || [];
+}
+
+// Admin: get a single course with instructor info
+export async function getCourseForAdmin(courseId) {
+  assertConfigured();
+  const { data, error } = await supabase
+    .from('lms_courses')
+    .select('*, course_instructors(instructor_id, profiles!course_instructors_instructor_id_fkey(full_name, email))')
+    .eq('id', courseId)
+    .single();
+  if (error) throw error;
+  return data;
+}
+
+// Upload course thumbnail
+export async function uploadCourseThumbnail(courseId, file) {
+  assertConfigured();
+  const { data: authData } = await supabase.auth.getUser();
+  const uid = authData?.user?.id;
+  const ext = file.name.split('.').pop();
+  const path = `${courseId || uid}/thumb-${Date.now()}.${ext}`;
+  const { error } = await supabase.storage.from('course-thumbnails').upload(path, file, { upsert: true });
+  if (error) throw error;
+  const { data: pub } = supabase.storage.from('course-thumbnails').getPublicUrl(path);
+  return pub?.publicUrl || path;
+}
+
+// Course review workflow
+export async function submitCourseForReview(courseId) {
+  assertConfigured();
+  const { error } = await supabase.rpc('submit_course_for_review', { p_course_id: courseId });
+  if (error) throw error;
+}
+
+export async function setCourseUnderReview(courseId) {
+  assertConfigured();
+  const { error } = await supabase.rpc('set_course_under_review', { p_course_id: courseId });
+  if (error) throw error;
+}
+
+export async function approveCourse(courseId) {
+  assertConfigured();
+  const { error } = await supabase.rpc('approve_course', { p_course_id: courseId });
+  if (error) throw error;
+}
+
+export async function publishCourse(courseId) {
+  assertConfigured();
+  const { error } = await supabase.rpc('publish_course', { p_course_id: courseId });
+  if (error) throw error;
+}
+
+export async function rejectCourse(courseId, notes) {
+  assertConfigured();
+  const { error } = await supabase.rpc('reject_course', { p_course_id: courseId, p_notes: notes });
+  if (error) throw error;
+}
+
+export async function requestCourseChanges(courseId, notes) {
+  assertConfigured();
+  const { error } = await supabase.rpc('request_course_changes', { p_course_id: courseId, p_notes: notes });
+  if (error) throw error;
+}
+
+// Reorder modules
+export async function reorderModules(courseId, moduleIds) {
+  assertConfigured();
+  const { error } = await supabase.rpc('reorder_modules', { p_course_id: courseId, p_module_ids: moduleIds });
+  if (error) throw error;
+}
+
+// Reorder lessons
+export async function reorderLessons(moduleId, lessonIds) {
+  assertConfigured();
+  const { error } = await supabase.rpc('reorder_lessons', { p_module_id: moduleId, p_lesson_ids: lessonIds });
+  if (error) throw error;
+}
+
 // ============================================================
 // Course structure: modules, lessons, resources
 // ============================================================
