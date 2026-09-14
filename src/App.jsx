@@ -65,7 +65,17 @@ import AdminCohorts from './pages/admin/Cohorts.jsx';
 import AdminCareerOpportunities from './pages/admin/CareerOpportunities.jsx';
 import InstructorRoute from './components/auth/InstructorRoute.jsx';
 import TeachShell from './components/teach/TeachShell.jsx';
-import TeachDashboard from './pages/teach/TeachDashboard.jsx';
+import TeachOverview from './pages/teach/TeachOverview.jsx';
+import TeachProfile from './pages/teach/TeachProfile.jsx';
+import MyCourses from './pages/teach/MyCourses.jsx';
+import CreateCourse from './pages/teach/CreateCourse.jsx';
+import TeachStudents from './pages/teach/TeachStudents.jsx';
+import LearningMaterials from './pages/teach/LearningMaterials.jsx';
+import Assignments from './pages/teach/Assignments.jsx';
+import Assessments from './pages/teach/Assessments.jsx';
+import TeachMessages from './pages/teach/TeachMessages.jsx';
+import TeachNotifications from './pages/teach/TeachNotifications.jsx';
+import TeachSettings from './pages/teach/TeachSettings.jsx';
 import CourseBuilder from './pages/teach/CourseBuilder.jsx';
 import QuizEditor from './pages/teach/QuizEditor.jsx';
 import Submissions from './pages/teach/Submissions.jsx';
@@ -195,11 +205,21 @@ export default function App() {
           {/* LMS — instructor teaching tools (instructor / lms_admin / admin) */}
           <Route element={<InstructorRoute />}>
             <Route path="/teach" element={<TeachShell />}>
-              <Route index element={<TeachDashboard />} />
+              <Route index element={<TeachOverview />} />
+              <Route path="profile" element={<TeachProfile />} />
+              <Route path="courses" element={<MyCourses />} />
+              <Route path="create-course" element={<CreateCourse />} />
+              <Route path="students" element={<TeachStudents />} />
+              <Route path="materials" element={<LearningMaterials />} />
+              <Route path="assignments" element={<Assignments />} />
+              <Route path="assessments" element={<Assessments />} />
+              <Route path="sessions" element={<SessionsManager />} />
+              <Route path="messages" element={<TeachMessages />} />
+              <Route path="notifications" element={<TeachNotifications />} />
+              <Route path="settings" element={<TeachSettings />} />
               <Route path="courses/:courseId" element={<CourseBuilder />} />
               <Route path="courses/:courseId/submissions" element={<Submissions />} />
               <Route path="courses/:courseId/gradebook" element={<Gradebook />} />
-              <Route path="sessions" element={<SessionsManager />} />
               <Route path="quizzes/:quizId" element={<QuizEditor />} />
             </Route>
           </Route>

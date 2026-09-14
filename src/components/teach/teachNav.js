@@ -1,7 +1,10 @@
-import { LayoutDashboard, Video, BookOpen, CirclePlus as PlusCircle, Users, FileText, ClipboardCheck, GraduationCap, CalendarDays, MessageSquare, Bell, Settings } from 'lucide-react';
+import {
+  LayoutDashboard, Video, BookOpen, CirclePlus as PlusCircle, Users, FileText, ClipboardCheck, GraduationCap, CalendarDays, MessageSquare, Bell, Settings, User,
+} from 'lucide-react';
 
 export const teachNav = [
   { key: 'dashboard', label: 'Overview', path: '/teach', icon: LayoutDashboard, end: true },
+  { key: 'profile', label: 'My Profile', path: '/teach/profile', icon: User },
   { key: 'my-courses', label: 'My Courses', path: '/teach/courses', icon: BookOpen },
   { key: 'create-course', label: 'Create Course', path: '/teach/create-course', icon: PlusCircle },
   { key: 'students', label: 'Students', path: '/teach/students', icon: Users },
