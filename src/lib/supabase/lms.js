@@ -980,3 +980,51 @@ export async function getLmsOverview() {
   if (error) throw error;
   return data;
 }
+
+// ============================================================
+// Student academic progress & performance
+// ============================================================
+export async function getStudentAcademicSummary() {
+  assertConfigured();
+  const { data: authData } = await supabase.auth.getUser();
+  const uid = authData?.user?.id;
+  const { data, error } = await supabase.rpc('get_student_academic_summary', { p_student_id: uid });
+  if (error) throw error;
+  return data;
+}
+
+export async function getStudentCoursePerformance() {
+  assertConfigured();
+  const { data: authData } = await supabase.auth.getUser();
+  const uid = authData?.user?.id;
+  const { data, error } = await supabase.rpc('get_student_course_performance', { p_student_id: uid });
+  if (error) throw error;
+  return data || [];
+}
+
+export async function getStudentRecentActivity(limit = 20) {
+  assertConfigured();
+  const { data: authData } = await supabase.auth.getUser();
+  const uid = authData?.user?.id;
+  const { data, error } = await supabase.rpc('get_student_recent_activity', { p_student_id: uid, p_limit: limit });
+  if (error) throw error;
+  return data || [];
+}
+
+export async function getStudentCourseDetail(courseId) {
+  assertConfigured();
+  const { data: authData } = await supabase.auth.getUser();
+  const uid = authData?.user?.id;
+  const { data, error } = await supabase.rpc('get_student_course_detail', { p_student_id: uid, p_course_id: courseId });
+  if (error) throw error;
+  return data;
+}
+
+export async function getStudentAssessmentPerformance() {
+  assertConfigured();
+  const { data: authData } = await supabase.auth.getUser();
+  const uid = authData?.user?.id;
+  const { data, error } = await supabase.rpc('get_student_assessment_performance', { p_student_id: uid });
+  if (error) throw error;
+  return data || [];
+}

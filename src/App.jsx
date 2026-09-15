@@ -44,6 +44,7 @@ import Requests from './pages/portal/Requests.jsx';
 import Support from './pages/portal/Support.jsx';
 import Graduation from './pages/portal/Graduation.jsx';
 import ChangePassword from './pages/portal/ChangePassword.jsx';
+import MyProgress from './pages/portal/MyProgress.jsx';
 import AdminRoute from './components/auth/AdminRoute.jsx';
 import AdminShell from './components/admin/AdminShell.jsx';
 import AdminDashboard from './pages/admin/AdminDashboard.jsx';
@@ -146,6 +147,8 @@ export default function App() {
               <Route path="profile" element={<Profile />} />
               <Route path="registration" element={<Registration />} />
               <Route path="records" element={<Records />} />
+              <Route path="progress" element={<MyProgress />} />
+              <Route path="progress/:courseId" element={<MyProgress />} />
               <Route path="finance" element={<Finance />} />
               <Route path="timetable" element={<Timetable />} />
               <Route path="attendance" element={<Attendance />} />

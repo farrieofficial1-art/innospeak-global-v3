@@ -12,6 +12,7 @@ import {
   SendHorizonal,
   LifeBuoy,
   GraduationCap,
+  TrendingUp,
 } from 'lucide-react';
 
 /**
@@ -24,6 +25,7 @@ export const portalNav = [
   { key: 'profile', label: 'Profile', path: '/portal/profile', icon: UserRound },
   { key: 'registration', label: 'Academic Registration', path: '/portal/registration', icon: ClipboardList },
   { key: 'records', label: 'Academic Records', path: '/portal/records', icon: BookOpenCheck },
+  { key: 'progress', label: 'My Progress', path: '/portal/progress', icon: TrendingUp },
   { key: 'finance', label: 'Fees & Finance', path: '/portal/finance', icon: Wallet },
   { key: 'timetable', label: 'Timetable', path: '/portal/timetable', icon: CalendarDays },
   { key: 'attendance', label: 'Attendance', path: '/portal/attendance', icon: CheckCircle2 },
