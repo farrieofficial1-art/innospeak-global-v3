@@ -15,6 +15,7 @@ import {
   getCourseProgress, getLessonProgress, getAllLessonProgress,
   markLessonStarted, markLessonComplete,
 } from '../../lib/supabase/lms';
+import QuizPlayer from '../../components/learn/QuizPlayer.jsx';
 
 const RESOURCE_ICONS = {
   video: Video,
@@ -284,6 +285,7 @@ export default function LearningPlayer() {
     resources: [],
     progress: null,
   });
+  const [quizState, setQuizState] = useState({ loading: false, quiz: null });
   const [completing, setCompleting] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -656,6 +658,9 @@ export default function LearningPlayer() {
               onComplete={handleComplete}
               completing={completing}
             />
+
+            {/* Quiz / Knowledge Check */}
+            <QuizPlayer lessonId={lessonId} enrollmentId={state.enrollment?.id} />
 
             {/* Prev / Next navigation */}
             <div className="mt-8 flex items-center justify-between border-t border-navy-100 pt-6">

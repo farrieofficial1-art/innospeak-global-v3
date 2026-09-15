@@ -15,7 +15,7 @@ import {
 export default function QuizAttempt() {
   const { quizId } = useParams();
   const [state, setState] = useState({ loading: true, error: null, quiz: null, attempts: [], activeAttempt: null });
-  const [answers, setAnswers] = useState({}); // questionId -> { selectedOptionIds, textAnswer }
+  const [answers, setAnswers] = useState({});
   const [result, setResult] = useState(null);
   const [secondsLeft, setSecondsLeft] = useState(null);
   const submittingRef = useRef(false);
@@ -34,9 +34,7 @@ export default function QuizAttempt() {
       .catch((err) => setState({ loading: false, error: err.message || 'Could not load this quiz.', quiz: null, attempts: [], activeAttempt: null }));
   }, [quizId]);
 
-  useEffect(() => {
-    load();
-  }, [load]);
+  useEffect(() => { load(); }, [load]);
 
   const handleSubmit = useCallback(async () => {
     if (submittingRef.current || !state.activeAttempt) return;
@@ -50,15 +48,9 @@ export default function QuizAttempt() {
     }
   }, [state.activeAttempt, load]);
 
-  // Countdown timer — auto-submits when it reaches zero, so a network
-  // interruption or a closed tab still results in a graded attempt
-  // rather than a silently lost one (Section 12 requirement).
   useEffect(() => {
     if (secondsLeft === null || result) return undefined;
-    if (secondsLeft <= 0) {
-      handleSubmit();
-      return undefined;
-    }
+    if (secondsLeft <= 0) { handleSubmit(); return undefined; }
     const t = setTimeout(() => setSecondsLeft((s) => s - 1), 1000);
     return () => clearTimeout(t);
   }, [secondsLeft, result, handleSubmit]);
@@ -81,6 +73,7 @@ export default function QuizAttempt() {
 
   const { quiz, attempts, activeAttempt } = state;
   const bestAttempt = attempts.filter((a) => a.status !== 'in_progress').sort((a, b) => (b.score || 0) - (a.score || 0))[0];
+  const questions = (quiz.quiz_questions || []).sort((a, b) => a.position - b.position);
 
   return (
     <>
@@ -101,7 +94,7 @@ export default function QuizAttempt() {
           <div className="mt-4 rounded-xl bg-emerald-50 px-4 py-3">
             <p className="font-body text-sm font-semibold text-emerald-800">
               <CheckCircle2 size={15} className="mr-1 inline" />
-              Submitted — score {result.score} / {result.max_score}
+              Submitted — score {result.score} / {result.max_score} ({result.percent}%)
             </p>
           </div>
         )}
@@ -130,13 +123,13 @@ export default function QuizAttempt() {
             )}
 
             <div className="mt-6 space-y-6">
-              {(quiz.questions || []).sort((a, b) => a.position - b.position).map((q, i) => (
+              {questions.map((q, i) => (
                 <div key={q.id} className="border-b border-navy-100 pb-6">
                   <p className="font-body text-sm font-semibold text-navy-900">{i + 1}. {q.question_text} <span className="font-normal text-navy-400">({q.marks} marks)</span></p>
 
                   {(q.question_type === 'multiple_choice' || q.question_type === 'true_false') && (
                     <div className="mt-3 space-y-2">
-                      {(q.question_options || []).sort((a, b) => a.position - b.position).map((o) => (
+                      {(q.quiz_question_options || []).sort((a, b) => a.position - b.position).map((o) => (
                         <label key={o.id} className="flex items-center gap-2 font-body text-sm text-navy-700">
                           <input
                             type="radio"
@@ -150,28 +143,7 @@ export default function QuizAttempt() {
                     </div>
                   )}
 
-                  {q.question_type === 'multiple_response' && (
-                    <div className="mt-3 space-y-2">
-                      {(q.question_options || []).sort((a, b) => a.position - b.position).map((o) => {
-                        const current = answers[q.id]?.selectedOptionIds || [];
-                        return (
-                          <label key={o.id} className="flex items-center gap-2 font-body text-sm text-navy-700">
-                            <input
-                              type="checkbox"
-                              checked={current.includes(o.id)}
-                              onChange={(e) => {
-                                const next = e.target.checked ? [...current, o.id] : current.filter((id) => id !== o.id);
-                                handleAnswerChange(q.id, { selectedOptionIds: next });
-                              }}
-                            />
-                            {o.option_text}
-                          </label>
-                        );
-                      })}
-                    </div>
-                  )}
-
-                  {(q.question_type === 'short_answer' || q.question_type === 'fill_blank') && (
+                  {q.question_type === 'short_answer' && (
                     <input
                       type="text"
                       value={answers[q.id]?.textAnswer || ''}

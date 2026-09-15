@@ -78,7 +78,6 @@ import TeachNotifications from './pages/teach/TeachNotifications.jsx';
 import TeachSettings from './pages/teach/TeachSettings.jsx';
 import CourseBuilder from './pages/teach/CourseBuilder.jsx';
 import LessonContentBuilder from './pages/teach/LessonContentBuilder.jsx';
-import QuizEditor from './pages/teach/QuizEditor.jsx';
 import Submissions from './pages/teach/Submissions.jsx';
 import SessionsManager from './pages/teach/SessionsManager.jsx';
 import Gradebook from './pages/teach/Gradebook.jsx';
@@ -223,7 +222,6 @@ export default function App() {
               <Route path="lessons/:lessonId" element={<LessonContentBuilder />} />
               <Route path="courses/:courseId/submissions" element={<Submissions />} />
               <Route path="courses/:courseId/gradebook" element={<Gradebook />} />
-              <Route path="quizzes/:quizId" element={<QuizEditor />} />
             </Route>
           </Route>
 

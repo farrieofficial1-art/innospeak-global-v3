@@ -18,6 +18,7 @@ import {
   listLessonResources, createLessonResource, updateLessonResource,
   deleteLessonResource, uploadLessonResourceFile,
 } from '../../lib/supabase/lms';
+import QuizEditor from '../../components/teach/QuizEditor.jsx';
 
 const RESOURCE_TYPES = [
   { value: 'video', label: 'Video', icon: Video },
@@ -610,6 +611,14 @@ export default function LessonContentBuilder() {
                 />
               ))}
             </div>
+          </SectionCard>
+
+          {/* Quiz / Knowledge Check */}
+          <SectionCard
+            title="Quiz / Knowledge Check"
+            description="Add a quiz to test student understanding. Students see it inline when viewing the lesson."
+          >
+            <QuizEditor lessonId={lessonId} />
           </SectionCard>
 
           {/* Practical Activity */}

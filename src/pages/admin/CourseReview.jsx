@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   BookOpen, ArrowLeft, CheckCircle2, XCircle, AlertCircle,
-  Clock, Send, Upload, Eye,
+  Clock, Send, Upload, Eye, HelpCircle, Circle,
 } from 'lucide-react';
 import Seo from '../../components/ui/Seo.jsx';
 import SectionCard from '../../components/portal/SectionCard.jsx';
@@ -13,6 +13,7 @@ import {
   listAllCourses, getCourseForAdmin, listModulesWithLessons,
   setCourseUnderReview, approveCourse, publishCourse,
   rejectCourse, requestCourseChanges,
+  getLessonQuizForAdmin,
 } from '../../lib/supabase/lms';
 
 function InfoRow({ label, value }) {
@@ -29,6 +30,71 @@ function DetailSection({ title, children }) {
     <div className="rounded-2xl border border-navy-100 bg-white p-5 shadow-premium">
       <h3 className="font-display text-base font-bold text-navy-900">{title}</h3>
       <div className="mt-4">{children}</div>
+    </div>
+  );
+}
+
+function LessonQuizInfo({ lessonIds }) {
+  const [quizzes, setQuizzes] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (lessonIds.length === 0) { setLoading(false); return; }
+    Promise.all(lessonIds.map((id) => getLessonQuizForAdmin(id).catch(() => null)))
+      .then((results) => {
+        setQuizzes(results.filter(Boolean));
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, [lessonIds.join(',')]);
+
+  if (loading || quizzes.length === 0) return null;
+
+  return (
+    <div className="mt-3 space-y-2 rounded-lg bg-navy-50/60 p-3">
+      <p className="flex items-center gap-1.5 font-body text-xs font-bold text-navy-700">
+        <HelpCircle size={13} className="text-gold-600" /> Quizzes
+      </p>
+      {quizzes.map((qz) => (
+        <div key={qz.id} className="rounded-lg border border-navy-100 bg-white p-3">
+          <div className="flex items-center gap-2">
+            <span className={`rounded-full px-2 py-0.5 font-body text-xs font-semibold ${
+              qz.status === 'published' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'
+            }`}>
+              {qz.status === 'published' ? 'Published' : 'Draft'}
+            </span>
+            <p className="font-body text-xs font-semibold text-navy-900">{qz.title}</p>
+          </div>
+          <div className="mt-1 flex flex-wrap gap-3 font-body text-xs text-navy-400">
+            <span>{(qz.quiz_questions || []).length} questions</span>
+            <span>Pass: {qz.passing_score_percent}%</span>
+            <span>Max attempts: {qz.max_attempts}</span>
+            {qz.require_pass_to_complete && <span className="text-gold-700">Required to complete lesson</span>}
+          </div>
+          {(qz.quiz_questions || []).length > 0 && (
+            <ul className="mt-2 space-y-1">
+              {qz.quiz_questions.sort((a, b) => a.position - b.position).map((qq, qi) => (
+                <li key={qq.id} className="font-body text-xs text-navy-600">
+                  <span className="font-semibold text-navy-700">{qi + 1}.</span> {qq.question_text}
+                  <span className="ml-1 text-navy-400">({qq.question_type}, {qq.marks}m)</span>
+                  {qq.quiz_question_options && (
+                    <ul className="ml-4 mt-0.5 space-y-0.5">
+                      {qq.quiz_question_options.sort((a, b) => a.position - b.position).map((o) => (
+                        <li key={o.id} className="flex items-center gap-1">
+                          {o.is_correct
+                            ? <CheckCircle2 size={10} className="text-emerald-600" />
+                            : <Circle size={10} className="text-navy-200" />}
+                          <span className={o.is_correct ? 'text-emerald-700' : 'text-navy-500'}>{o.option_text}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      ))}
     </div>
   );
 }
@@ -216,6 +282,7 @@ export default function CourseReview() {
                           ))}
                         </ul>
                       )}
+                      <LessonQuizInfo moduleId={mod.id} lessonIds={(mod.lessons || []).map((l) => l.id)} />
                     </div>
                   ))}
                 </div>
