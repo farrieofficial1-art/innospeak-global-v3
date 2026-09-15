@@ -406,9 +406,47 @@ export async function markLessonComplete(lessonId) {
 // ============================================================
 // Assignments & submissions
 // ============================================================
-export async function createAssignment(moduleId, fields) {
+export async function createAssignment(lessonId, courseId, moduleId, fields) {
   assertConfigured();
-  const { data, error } = await supabase.from('assignments').insert([{ module_id: moduleId, ...fields }]).select().single();
+  const { data: authData } = await supabase.auth.getUser();
+  const uid = authData?.user?.id;
+  const { data, error } = await supabase
+    .from('assignments')
+    .insert([{ lesson_id: lessonId, course_id: courseId, module_id: moduleId, created_by: uid, ...fields }])
+    .select()
+    .single();
+  if (error) throw error;
+  return data;
+}
+
+export async function updateAssignment(assignmentId, fields) {
+  assertConfigured();
+  const { data, error } = await supabase.from('assignments').update(fields).eq('id', assignmentId).select().single();
+  if (error) throw error;
+  return data;
+}
+
+export async function deleteAssignment(assignmentId) {
+  assertConfigured();
+  const { error } = await supabase.from('assignments').delete().eq('id', assignmentId);
+  if (error) throw error;
+}
+
+export async function getAssignment(assignmentId) {
+  assertConfigured();
+  const { data, error } = await supabase.from('assignments').select('*').eq('id', assignmentId).single();
+  if (error) throw error;
+  return data;
+}
+
+export async function getLessonAssignment(lessonId) {
+  assertConfigured();
+  const { data, error } = await supabase
+    .from('assignments')
+    .select('*')
+    .eq('lesson_id', lessonId)
+    .order('created_at')
+    .maybeSingle();
   if (error) throw error;
   return data;
 }
@@ -420,25 +458,28 @@ export async function listModuleAssignments(moduleId) {
   return data || [];
 }
 
-export async function getAssignment(assignmentId) {
+export async function listCourseAssignments(courseId) {
   assertConfigured();
-  const { data, error } = await supabase.from('assignments').select('*, modules(course_id)').eq('id', assignmentId).single();
-  if (error) throw error;
-  return data;
-}
-
-export async function listMySubmissions(assignmentId) {
-  assertConfigured();
-  const { data, error } = await supabase
-    .from('submissions')
-    .select('*')
-    .eq('assignment_id', assignmentId)
-    .order('attempt_number', { ascending: false });
+  const { data, error } = await supabase.from('assignments').select('*, lessons(id, title)').eq('course_id', courseId).order('created_at');
   if (error) throw error;
   return data || [];
 }
 
-export async function submitAssignment(assignmentId, { fileUrl, comment, attemptNumber, isLate }) {
+// Student: get own submission status for an assignment
+export async function getMySubmissionStatus(assignmentId) {
+  assertConfigured();
+  const { data: authData } = await supabase.auth.getUser();
+  const uid = authData?.user?.id;
+  const { data, error } = await supabase.rpc('get_student_assignment_status', {
+    p_assignment_id: assignmentId,
+    p_student_id: uid,
+  });
+  if (error) throw error;
+  return data?.[0] || null;
+}
+
+// Student: submit assignment
+export async function submitAssignment(assignmentId, { textResponse, fileUrl, fileName, attemptNumber, isLate, enrollmentId }) {
   assertConfigured();
   const { data: authData } = await supabase.auth.getUser();
   const uid = authData?.user?.id;
@@ -447,11 +488,32 @@ export async function submitAssignment(assignmentId, { fileUrl, comment, attempt
     .insert([{
       assignment_id: assignmentId,
       student_id: uid,
+      enrollment_id: enrollmentId || null,
       attempt_number: attemptNumber,
-      file_url: fileUrl,
-      comment,
+      text_response: textResponse || '',
+      file_url: fileUrl || '',
+      file_name: fileName || '',
       is_late: isLate,
     }])
+    .select()
+    .single();
+  if (error) throw error;
+  return data;
+}
+
+// Student: replace submission (update existing ungraded submission)
+export async function replaceSubmission(submissionId, { textResponse, fileUrl, fileName, isLate }) {
+  assertConfigured();
+  const { data, error } = await supabase
+    .from('submissions')
+    .update({
+      text_response: textResponse || '',
+      file_url: fileUrl || '',
+      file_name: fileName || '',
+      is_late: isLate,
+      submitted_at: new Date().toISOString(),
+    })
+    .eq('id', submissionId)
     .select()
     .single();
   if (error) throw error;
@@ -466,9 +528,10 @@ export async function uploadSubmissionFile(assignmentId, file) {
   const { error } = await supabase.storage.from('assignment-submissions').upload(path, file);
   if (error) throw error;
   const { data: signed } = await supabase.storage.from('assignment-submissions').createSignedUrl(path, 60 * 60 * 24 * 365);
-  return signed?.signedUrl || path;
+  return { signedUrl: signed?.signedUrl || path, path };
 }
 
+// Instructor: list all submissions for an assignment
 export async function listAssignmentSubmissions(assignmentId) {
   assertConfigured();
   const { data, error } = await supabase
@@ -480,18 +543,50 @@ export async function listAssignmentSubmissions(assignmentId) {
   return data || [];
 }
 
-export async function gradeSubmission(submissionId, { score, feedback }) {
+// Instructor: list all submissions across a course
+export async function listCourseSubmissions(courseId) {
   assertConfigured();
-  const { data: authData } = await supabase.auth.getUser();
-  const uid = authData?.user?.id;
   const { data, error } = await supabase
     .from('submissions')
-    .update({ score, feedback, status: 'graded', graded_by: uid, graded_at: new Date().toISOString() })
-    .eq('id', submissionId)
-    .select()
-    .single();
+    .select('*, assignments!inner(id, title, max_score, course_id, lessons(id, title)), profiles(id, full_name, student_number)')
+    .eq('assignments.course_id', courseId)
+    .order('submitted_at', { ascending: false });
   if (error) throw error;
-  return data;
+  return data || [];
+}
+
+// Instructor: grade a submission
+export async function gradeSubmission(submissionId, { score, feedback }) {
+  assertConfigured();
+  const { error } = await supabase.rpc('grade_submission', {
+    p_submission_id: submissionId,
+    p_score: score,
+    p_feedback: feedback || '',
+    p_status: 'graded',
+  });
+  if (error) throw error;
+}
+
+// Instructor: request resubmission
+export async function requestResubmission(submissionId, feedback) {
+  assertConfigured();
+  const { error } = await supabase.rpc('request_resubmission', {
+    p_submission_id: submissionId,
+    p_feedback: feedback || '',
+  });
+  if (error) throw error;
+}
+
+// Admin: get assignments for course review
+export async function getCourseAssignmentsForAdmin(courseId) {
+  assertConfigured();
+  const { data, error } = await supabase
+    .from('assignments')
+    .select('id, title, description, instructions, due_date, max_score, submission_type, status, lessons(id, title)')
+    .eq('course_id', courseId)
+    .order('created_at');
+  if (error) throw error;
+  return data || [];
 }
 
 // ============================================================

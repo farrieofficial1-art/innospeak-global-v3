@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   BookOpen, ArrowLeft, CheckCircle2, XCircle, AlertCircle,
-  Clock, Send, Upload, Eye, HelpCircle, Circle,
+  Clock, Send, Upload, Eye, HelpCircle, Circle, ClipboardList,
 } from 'lucide-react';
 import Seo from '../../components/ui/Seo.jsx';
 import SectionCard from '../../components/portal/SectionCard.jsx';
@@ -14,6 +14,7 @@ import {
   setCourseUnderReview, approveCourse, publishCourse,
   rejectCourse, requestCourseChanges,
   getLessonQuizForAdmin,
+  getCourseAssignmentsForAdmin,
 } from '../../lib/supabase/lms';
 
 function InfoRow({ label, value }) {
@@ -93,6 +94,48 @@ function LessonQuizInfo({ lessonIds }) {
               ))}
             </ul>
           )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function LessonAssignmentInfo({ courseId }) {
+  const [assignments, setAssignments] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!courseId) { setLoading(false); return; }
+    getCourseAssignmentsForAdmin(courseId)
+      .then(setAssignments)
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, [courseId]);
+
+  if (loading || assignments.length === 0) return null;
+
+  return (
+    <div className="mt-3 space-y-2 rounded-lg bg-navy-50/60 p-3">
+      <p className="flex items-center gap-1.5 font-body text-xs font-bold text-navy-700">
+        <ClipboardList size={13} className="text-gold-600" /> Assignments ({assignments.length})
+      </p>
+      {assignments.map((asg) => (
+        <div key={asg.id} className="rounded-lg border border-navy-100 bg-white p-3">
+          <div className="flex items-center gap-2">
+            <span className={`rounded-full px-2 py-0.5 font-body text-xs font-semibold ${
+              asg.status === 'published' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'
+            }`}>
+              {asg.status === 'published' ? 'Published' : 'Draft'}
+            </span>
+            <p className="font-body text-xs font-semibold text-navy-900">{asg.title}</p>
+          </div>
+          <div className="mt-1 flex flex-wrap gap-3 font-body text-xs text-navy-400">
+            <span>Max score: {asg.max_score}</span>
+            <span>Type: {asg.submission_type === 'text' ? 'Text' : asg.submission_type === 'file' ? 'File' : 'Text + File'}</span>
+            {asg.due_date && <span>Due: {new Date(asg.due_date).toLocaleDateString()}</span>}
+            {asg.lessons?.title && <span>Lesson: {asg.lessons.title}</span>}
+          </div>
+          {asg.description && <p className="mt-1 font-body text-xs text-navy-500">{asg.description}</p>}
         </div>
       ))}
     </div>
@@ -283,6 +326,7 @@ export default function CourseReview() {
                         </ul>
                       )}
                       <LessonQuizInfo moduleId={mod.id} lessonIds={(mod.lessons || []).map((l) => l.id)} />
+                      <LessonAssignmentInfo courseId={course.id} />
                     </div>
                   ))}
                 </div>

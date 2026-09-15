@@ -19,6 +19,7 @@ import {
   deleteLessonResource, uploadLessonResourceFile,
 } from '../../lib/supabase/lms';
 import QuizEditor from '../../components/teach/QuizEditor.jsx';
+import AssignmentEditor from '../../components/teach/AssignmentEditor.jsx';
 
 const RESOURCE_TYPES = [
   { value: 'video', label: 'Video', icon: Video },
@@ -619,6 +620,14 @@ export default function LessonContentBuilder() {
             description="Add a quiz to test student understanding. Students see it inline when viewing the lesson."
           >
             <QuizEditor lessonId={lessonId} />
+          </SectionCard>
+
+          {/* Assignment */}
+          <SectionCard
+            title="Assignment"
+            description="Attach an assignment to this lesson. Students can submit text, files, or both — then you grade their work."
+          >
+            <AssignmentEditor lessonId={lessonId} courseId={courseId} moduleId={lesson.modules?.id} />
           </SectionCard>
 
           {/* Practical Activity */}
