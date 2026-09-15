@@ -495,30 +495,164 @@ export async function gradeSubmission(submissionId, { score, feedback }) {
 }
 
 // ============================================================
-// Quizzes
+// Quizzes (lesson-scoped)
 // ============================================================
-export async function createQuiz(moduleId, fields) {
+export async function getLessonQuiz(lessonId) {
   assertConfigured();
-  const { data, error } = await supabase.from('quizzes').insert([{ module_id: moduleId, ...fields }]).select().single();
+  const { data, error } = await supabase
+    .from('quizzes')
+    .select('*, quiz_questions(*, quiz_question_options(*))')
+    .eq('lesson_id', lessonId)
+    .order('created_at')
+    .maybeSingle();
   if (error) throw error;
   return data;
 }
 
-export async function listModuleQuizzes(moduleId) {
+export async function createLessonQuiz(lessonId, fields) {
   assertConfigured();
-  const { data, error } = await supabase.from('quizzes').select('*').eq('module_id', moduleId).order('created_at');
-  if (error) throw error;
-  return data || [];
-}
-
-export async function getQuizForStudent(quizId) {
-  assertConfigured();
-  // Deliberately select only columns safe for a student to see —
-  // never select question_options.is_correct or questions.correct_short_answer
-  // here (see the RLS migration's note on column-level filtering).
   const { data, error } = await supabase
     .from('quizzes')
-    .select('*, questions(id, question_text, question_type, marks, position, question_options(id, option_text, position))')
+    .insert([{ lesson_id: lessonId, ...fields }])
+    .select()
+    .single();
+  if (error) throw error;
+  return data;
+}
+
+export async function updateLessonQuiz(quizId, fields) {
+  assertConfigured();
+  const { data, error } = await supabase
+    .from('quizzes')
+    .update(fields)
+    .eq('id', quizId)
+    .select()
+    .single();
+  if (error) throw error;
+  return data;
+}
+
+export async function deleteLessonQuiz(quizId) {
+  assertConfigured();
+  const { error } = await supabase.from('quizzes').delete().eq('id', quizId);
+  if (error) throw error;
+}
+
+export async function createQuizQuestion(quizId, fields, options = []) {
+  assertConfigured();
+  const { data: question, error } = await supabase
+    .from('quiz_questions')
+    .insert([{ quiz_id: quizId, ...fields }])
+    .select()
+    .single();
+  if (error) throw error;
+
+  if (options.length > 0) {
+    const { error: optionsError } = await supabase
+      .from('quiz_question_options')
+      .insert(options.map((o, i) => ({ question_id: question.id, position: i, ...o })));
+    if (optionsError) throw optionsError;
+  }
+  return question;
+}
+
+export async function updateQuizQuestion(questionId, fields) {
+  assertConfigured();
+  const { data, error } = await supabase
+    .from('quiz_questions')
+    .update(fields)
+    .eq('id', questionId)
+    .select()
+    .single();
+  if (error) throw error;
+  return data;
+}
+
+export async function deleteQuizQuestion(questionId) {
+  assertConfigured();
+  const { error } = await supabase.from('quiz_questions').delete().eq('id', questionId);
+  if (error) throw error;
+}
+
+export async function createQuizOption(questionId, fields) {
+  assertConfigured();
+  const { data, error } = await supabase
+    .from('quiz_question_options')
+    .insert([{ question_id: questionId, ...fields }])
+    .select()
+    .single();
+  if (error) throw error;
+  return data;
+}
+
+export async function updateQuizOption(optionId, fields) {
+  assertConfigured();
+  const { data, error } = await supabase
+    .from('quiz_question_options')
+    .update(fields)
+    .eq('id', optionId)
+    .select()
+    .single();
+  if (error) throw error;
+  return data;
+}
+
+export async function deleteQuizOption(optionId) {
+  assertConfigured();
+  const { error } = await supabase.from('quiz_question_options').delete().eq('id', optionId);
+  if (error) throw error;
+}
+
+export async function saveQuizOptions(questionId, options) {
+  assertConfigured();
+  const existing = await supabase
+    .from('quiz_question_options')
+    .select('*')
+    .eq('question_id', questionId);
+  if (existing.error) throw existing.error;
+
+  const existingIds = (existing.data || []).map((o) => o.id);
+  const newIds = options.filter((o) => o.id).map((o) => o.id);
+  const toDelete = existingIds.filter((id) => !newIds.includes(id));
+
+  if (toDelete.length > 0) {
+    const { error: delErr } = await supabase
+      .from('quiz_question_options')
+      .delete()
+      .in('id', toDelete);
+    if (delErr) throw delErr;
+  }
+
+  for (let i = 0; i < options.length; i++) {
+    const opt = options[i];
+    if (opt.id) {
+      const { error } = await supabase
+        .from('quiz_question_options')
+        .update({ option_text: opt.option_text, is_correct: opt.is_correct, position: i })
+        .eq('id', opt.id);
+      if (error) throw error;
+    } else {
+      const { error } = await supabase
+        .from('quiz_question_options')
+        .insert([{ question_id: questionId, option_text: opt.option_text, is_correct: opt.is_correct, position: i }]);
+      if (error) throw error;
+    }
+  }
+}
+
+// Student-side: get quiz without correct answers
+export async function getQuizForStudent(quizId) {
+  assertConfigured();
+  const { data, error } = await supabase
+    .from('quizzes')
+    .select(`
+      id, lesson_id, title, instructions, status, passing_score_percent,
+      max_attempts, time_limit_minutes, require_pass_to_complete,
+      quiz_questions!inner (
+        id, question_type, question_text, marks, position, explanation,
+        quiz_question_options (id, option_text, position)
+      )
+    `)
     .eq('id', quizId)
     .single();
   if (error) throw error;
@@ -529,38 +663,20 @@ export async function getQuizForInstructor(quizId) {
   assertConfigured();
   const { data, error } = await supabase
     .from('quizzes')
-    .select('*, questions(*, question_options(*))')
+    .select('*, quiz_questions(*, quiz_question_options(*))')
     .eq('id', quizId)
     .single();
   if (error) throw error;
   return data;
 }
 
-export async function createQuestion(quizId, fields, options = []) {
-  assertConfigured();
-  const { data: question, error } = await supabase
-    .from('questions')
-    .insert([{ quiz_id: quizId, ...fields }])
-    .select()
-    .single();
-  if (error) throw error;
-
-  if (options.length > 0) {
-    const { error: optionsError } = await supabase
-      .from('question_options')
-      .insert(options.map((o, i) => ({ question_id: question.id, position: i, ...o })));
-    if (optionsError) throw optionsError;
-  }
-  return question;
-}
-
-export async function startQuizAttempt(quizId, attemptNumber) {
+export async function startQuizAttempt(quizId, attemptNumber, enrollmentId) {
   assertConfigured();
   const { data: authData } = await supabase.auth.getUser();
   const uid = authData?.user?.id;
   const { data, error } = await supabase
     .from('quiz_attempts')
-    .insert([{ quiz_id: quizId, student_id: uid, attempt_number: attemptNumber }])
+    .insert([{ quiz_id: quizId, student_id: uid, attempt_number: attemptNumber, enrollment_id: enrollmentId || null }])
     .select()
     .single();
   if (error) throw error;
@@ -592,6 +708,42 @@ export async function saveQuizAnswer(attemptId, questionId, { selectedOptionIds,
 export async function submitQuizAttempt(attemptId) {
   assertConfigured();
   const { data, error } = await supabase.rpc('submit_quiz_attempt', { target_attempt_id: attemptId });
+  if (error) throw error;
+  return data;
+}
+
+// Get quiz attempt results with answers for review
+export async function getQuizAttemptResults(attemptId) {
+  assertConfigured();
+  const { data, error } = await supabase
+    .from('quiz_attempts')
+    .select(`
+      *,
+      quiz_answers (
+        id, question_id, selected_option_ids, text_answer, is_correct, awarded_marks
+      ),
+      quiz:quizzes (
+        id, title, passing_score_percent,
+        quiz_questions (
+          id, question_type, question_text, marks, position, explanation, correct_short_answer,
+          quiz_question_options (id, option_text, is_correct, position)
+        )
+      )
+    `)
+    .eq('id', attemptId)
+    .single();
+  if (error) throw error;
+  return data;
+}
+
+// Admin: get quiz info for a lesson (for course review)
+export async function getLessonQuizForAdmin(lessonId) {
+  assertConfigured();
+  const { data, error } = await supabase
+    .from('quizzes')
+    .select('id, title, instructions, status, passing_score_percent, max_attempts, require_pass_to_complete, quiz_questions(id, question_type, question_text, marks, position, explanation, quiz_question_options(id, option_text, is_correct, position))')
+    .eq('lesson_id', lessonId)
+    .maybeSingle();
   if (error) throw error;
   return data;
 }
