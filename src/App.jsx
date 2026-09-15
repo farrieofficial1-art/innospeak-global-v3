@@ -94,8 +94,7 @@ import Mentorship from './pages/learn/Mentorship.jsx';
 import Certificates from './pages/learn/Certificates.jsx';
 import CertificateVerify from './pages/learn/CertificateVerify.jsx';
 import CareerHub from './pages/CareerHub.jsx';
-import CourseView from './pages/learn/CourseView.jsx';
-import LessonView from './pages/learn/LessonView.jsx';
+import LearningPlayer from './pages/learn/LearningPlayer.jsx';
 import AssignmentView from './pages/learn/AssignmentView.jsx';
 import QuizAttempt from './pages/learn/QuizAttempt.jsx';
 import BecomeTutor from './pages/BecomeTutor.jsx';
@@ -198,8 +197,8 @@ export default function App() {
               <Route path="projects" element={<Projects />} />
               <Route path="mentorship" element={<Mentorship />} />
               <Route path="certificates" element={<Certificates />} />
-              <Route path="courses/:courseId" element={<CourseView />} />
-              <Route path="lessons/:lessonId" element={<LessonView />} />
+              <Route path="courses/:courseId" element={<LearningPlayer />} />
+              <Route path="courses/:courseId/lessons/:lessonId" element={<LearningPlayer />} />
               <Route path="assignments/:assignmentId" element={<AssignmentView />} />
               <Route path="quizzes/:quizId" element={<QuizAttempt />} />
             </Route>

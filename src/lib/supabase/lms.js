@@ -362,15 +362,16 @@ export async function getAllLessonProgress(courseId) {
   assertConfigured();
   const { data: authData } = await supabase.auth.getUser();
   const uid = authData?.user?.id;
+  const { data: modulesData } = await supabase
+    .from('modules')
+    .select('lessons(id)')
+    .eq('course_id', courseId);
+  const lessonIds = (modulesData || []).flatMap((m) => (m.lessons || []).map((l) => l.id));
+  if (lessonIds.length === 0) return [];
   const { data, error } = await supabase
     .from('lesson_progress')
     .select('lesson_id, status, started_at, completed_at, updated_at')
-    .in('lesson_id', (
-      await supabase
-        .from('modules')
-        .select('lessons(id)')
-        .eq('course_id', courseId)
-    ).data?.flatMap((m) => m.lessons?.map((l) => l.id) || []) || [])
+    .in('lesson_id', lessonIds)
     .eq('student_id', uid);
   if (error) throw error;
   return data || [];
