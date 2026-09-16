@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   BookOpen, ArrowLeft, CheckCircle2, XCircle, AlertCircle,
   Clock, Send, Upload, Eye, HelpCircle, Circle, ClipboardList,
+  Award, Save,
 } from 'lucide-react';
 import Seo from '../../components/ui/Seo.jsx';
 import SectionCard from '../../components/portal/SectionCard.jsx';
@@ -15,6 +16,7 @@ import {
   rejectCourse, requestCourseChanges,
   getLessonQuizForAdmin,
   getCourseAssignmentsForAdmin,
+  updateCourseCompletionConfig,
 } from '../../lib/supabase/lms';
 
 function InfoRow({ label, value }) {
@@ -149,6 +151,14 @@ export default function CourseReview() {
   const [actionLoading, setActionLoading] = useState(false);
   const [actionError, setActionError] = useState(null);
   const [notes, setNotes] = useState('');
+  const [completionConfig, setCompletionConfig] = useState({
+    awards_certificate: true,
+    requires_lesson_completion: true,
+    requires_quiz_pass: false,
+    requires_assignment_completion: false,
+  });
+  const [configSaving, setConfigSaving] = useState(false);
+  const [configSaved, setConfigSaved] = useState(false);
 
   const loadList = useCallback(async () => {
     setList({ loading: true, error: null, items: [] });
@@ -171,6 +181,12 @@ export default function CourseReview() {
       const [course, modules] = await Promise.all([getCourseForAdmin(id), listModulesWithLessons(id)]);
       setDetail({ loading: false, error: null, course, modules });
       setNotes(course.reviewer_notes || '');
+      setCompletionConfig({
+        awards_certificate: course.awards_certificate !== false,
+        requires_lesson_completion: course.requires_lesson_completion !== false,
+        requires_quiz_pass: course.requires_quiz_pass === true,
+        requires_assignment_completion: course.requires_assignment_completion === true,
+      });
     } catch {
       setDetail({ loading: false, error: 'Could not load this course.', course: null, modules: [] });
     }
@@ -399,6 +415,89 @@ export default function CourseReview() {
                 </div>
               </div>
             )}
+
+            {/* Completion & Certificate Settings */}
+            <SectionCard title="Completion & Certificate Settings" description="Configure what students must satisfy to complete this course and earn a certificate.">
+              <div className="space-y-4">
+                <label className="flex items-start gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={completionConfig.awards_certificate}
+                    onChange={(e) => setCompletionConfig((p) => ({ ...p, awards_certificate: e.target.checked }))}
+                    className="mt-1 h-4 w-4 rounded border-navy-300 text-gold-600 focus:ring-gold-500"
+                  />
+                  <div>
+                    <p className="flex items-center gap-1.5 font-body text-sm font-bold text-navy-900">
+                      <Award size={15} className="text-gold-600" /> Awards certificate
+                    </p>
+                    <p className="font-body text-xs text-navy-400">Issue a verifiable certificate when a student completes this course.</p>
+                  </div>
+                </label>
+                <label className="flex items-start gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={completionConfig.requires_lesson_completion}
+                    onChange={(e) => setCompletionConfig((p) => ({ ...p, requires_lesson_completion: e.target.checked }))}
+                    className="mt-1 h-4 w-4 rounded border-navy-300 text-gold-600 focus:ring-gold-500"
+                  />
+                  <div>
+                    <p className="font-body text-sm font-bold text-navy-900">Require all lessons completed</p>
+                    <p className="font-body text-xs text-navy-400">Student must mark every lesson as complete.</p>
+                  </div>
+                </label>
+                <label className="flex items-start gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={completionConfig.requires_quiz_pass}
+                    onChange={(e) => setCompletionConfig((p) => ({ ...p, requires_quiz_pass: e.target.checked }))}
+                    className="mt-1 h-4 w-4 rounded border-navy-300 text-gold-600 focus:ring-gold-500"
+                  />
+                  <div>
+                    <p className="font-body text-sm font-bold text-navy-900">Require all quizzes passed</p>
+                    <p className="font-body text-xs text-navy-400">Student must pass every published quiz in this course.</p>
+                  </div>
+                </label>
+                <label className="flex items-start gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={completionConfig.requires_assignment_completion}
+                    onChange={(e) => setCompletionConfig((p) => ({ ...p, requires_assignment_completion: e.target.checked }))}
+                    className="mt-1 h-4 w-4 rounded border-navy-300 text-gold-600 focus:ring-gold-500"
+                  />
+                  <div>
+                    <p className="font-body text-sm font-bold text-navy-900">Require all assignments completed</p>
+                    <p className="font-body text-xs text-navy-400">Student must complete/submit all assignments in this course.</p>
+                  </div>
+                </label>
+              </div>
+              <div className="mt-5 flex items-center gap-3">
+                <button
+                  type="button"
+                  onClick={async () => {
+                    setConfigSaving(true);
+                    setConfigSaved(false);
+                    try {
+                      await updateCourseCompletionConfig(selectedId, completionConfig);
+                      setConfigSaved(true);
+                      setTimeout(() => setConfigSaved(false), 3000);
+                    } catch {
+                      setActionError('Could not save completion settings.');
+                    } finally {
+                      setConfigSaving(false);
+                    }
+                  }}
+                  disabled={configSaving}
+                  className="inline-flex items-center gap-2 rounded-xl bg-navy-900 px-4 py-2.5 font-body text-sm font-semibold text-white hover:bg-navy-800 disabled:opacity-60"
+                >
+                  <Save size={15} /> {configSaving ? 'Saving…' : 'Save Settings'}
+                </button>
+                {configSaved && (
+                  <span className="inline-flex items-center gap-1.5 font-body text-sm font-semibold text-emerald-600">
+                    <CheckCircle2 size={15} /> Settings saved
+                  </span>
+                )}
+              </div>
+            </SectionCard>
           </div>
         )}
       </>

@@ -41,7 +41,7 @@ export async function listCareerOpportunities() { const c = requireClient(); con
 export async function listMentorshipRequests() { const c = requireClient(); const id = await uid(); const { data, error } = await c.from('mentorship_requests').select('*').eq('student_id', id).order('created_at', { ascending: false }); if (error) throw error; return data || []; }
 export async function createMentorshipRequest(fields) { const c = requireClient(); const id = await uid(); const { data, error } = await c.from('mentorship_requests').insert([{ ...fields, student_id: id }]).select().single(); if (error) throw error; return data; }
 
-export async function verifyCertificate(number) { const c = requireClient(); const { data, error } = await c.rpc('verify_certificate', { input_number: number.trim() }); if (error) throw error; return data?.[0] || null; }
+export async function verifyCertificate(number) { const c = requireClient(); const { data, error } = await c.rpc('verify_certificate', { input_number: number.trim() }); if (error) throw error; return data || null; }
 
 export async function listMyApplications(email) { const c = requireClient(); const { data, error } = await c.from('applications').select('application_number, programme, course_code, intake, status, created_at, review_notes').eq('email', email).order('created_at', { ascending: false }); if (error) throw error; return data || []; }
 export async function updateApplicationStatus(id, fields) { const c = requireClient(); const { data, error } = await c.from('applications').update(fields).eq('id', id).select().single(); if (error) throw error; return data; }

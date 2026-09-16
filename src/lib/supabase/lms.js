@@ -1028,3 +1028,88 @@ export async function getStudentAssessmentPerformance() {
   if (error) throw error;
   return data || [];
 }
+
+// ============================================================
+// Course Completion & Certificates
+// ============================================================
+
+export async function checkCourseCompletion(enrollmentId) {
+  assertConfigured();
+  const { data, error } = await supabase.rpc('check_and_record_completion', { p_enrollment_id: enrollmentId });
+  if (error) throw error;
+  return data;
+}
+
+export async function listMyCertificates() {
+  assertConfigured();
+  const { data: authData } = await supabase.auth.getUser();
+  const uid = authData?.user?.id;
+  const { data, error } = await supabase
+    .from('certificates')
+    .select('*, lms_courses(title, code)')
+    .eq('student_id', uid)
+    .order('issue_date', { ascending: false });
+  if (error) throw error;
+  return data || [];
+}
+
+export async function getMyCertificate(certificateId) {
+  assertConfigured();
+  const { data: authData } = await supabase.auth.getUser();
+  const uid = authData?.user?.id;
+  const { data, error } = await supabase
+    .from('certificates')
+    .select('*, lms_courses(title, code, description)')
+    .eq('id', certificateId)
+    .eq('student_id', uid)
+    .single();
+  if (error) throw error;
+  return data;
+}
+
+// Admin: list all certificates
+export async function listAllCertificates(search = '') {
+  assertConfigured();
+  let query = supabase
+    .from('certificates')
+    .select('*, lms_courses(title, code), profiles(full_name, email, student_number)')
+    .order('created_at', { ascending: false });
+  if (search) {
+    query = query.or(`certificate_number.ilike.%${search}%,student_name.ilike.%${search}%`);
+  }
+  const { data, error } = await query;
+  if (error) throw error;
+  return data || [];
+}
+
+// Admin: revoke a certificate
+export async function revokeCertificate(certificateId, reason) {
+  assertConfigured();
+  const { error } = await supabase.rpc('revoke_certificate', {
+    p_certificate_id: certificateId,
+    p_reason: reason || '',
+  });
+  if (error) throw error;
+}
+
+// Admin: reactivate a certificate
+export async function reactivateCertificate(certificateId) {
+  assertConfigured();
+  const { error } = await supabase.rpc('reactivate_certificate', { p_certificate_id: certificateId });
+  if (error) throw error;
+}
+
+// Admin: update course completion settings
+export async function updateCourseCompletionConfig(courseId, fields) {
+  assertConfigured();
+  const { error } = await supabase
+    .from('lms_courses')
+    .update({
+      awards_certificate: fields.awards_certificate,
+      requires_lesson_completion: fields.requires_lesson_completion,
+      requires_quiz_pass: fields.requires_quiz_pass,
+      requires_assignment_completion: fields.requires_assignment_completion,
+    })
+    .eq('id', courseId);
+  if (error) throw error;
+}

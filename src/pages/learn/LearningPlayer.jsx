@@ -13,7 +13,7 @@ import { useAuth } from '../../context/AuthContext';
 import {
   getCourse, getMyEnrollment, listModulesWithLessons, getLesson,
   getCourseProgress, getLessonProgress, getAllLessonProgress,
-  markLessonStarted, markLessonComplete,
+  markLessonStarted, markLessonComplete, checkCourseCompletion,
 } from '../../lib/supabase/lms';
 import QuizPlayer from '../../components/learn/QuizPlayer.jsx';
 import AssignmentPanel from '../../components/learn/AssignmentPanel.jsx';
@@ -289,6 +289,8 @@ export default function LearningPlayer() {
   const [quizState, setQuizState] = useState({ loading: false, quiz: null });
   const [completing, setCompleting] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [completionResult, setCompletionResult] = useState(null);
+  const [showCompletionBanner, setShowCompletionBanner] = useState(false);
 
   // Load course structure + enrollment + progress
   const loadCourse = useCallback(async () => {
@@ -390,6 +392,18 @@ export default function LearningPlayer() {
         const percent = total > 0 ? Math.round((completedCount / total) * 100) : 0;
         return { ...prev, progressMap: newMap, progressData: { ...prev.progressData, percent, completed_lessons: completedCount } };
       });
+      // Check if course completion requirements are now satisfied
+      if (state.enrollment?.id) {
+        try {
+          const result = await checkCourseCompletion(state.enrollment.id);
+          if (result?.success && result?.completed) {
+            setCompletionResult(result);
+            setShowCompletionBanner(true);
+          }
+        } catch {
+          // Completion check is best-effort; don't block the user
+        }
+      }
     } finally {
       setCompleting(false);
     }
@@ -714,6 +728,54 @@ export default function LearningPlayer() {
                 </div>
               )}
             </div>
+
+            {/* Completion banner */}
+            {showCompletionBanner && completionResult?.success && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mt-6 overflow-hidden rounded-2xl border border-emerald-200 bg-emerald-50 p-5"
+              >
+                <div className="flex items-start gap-3">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-100 text-emerald-700">
+                    <GraduationCap size={22} />
+                  </span>
+                  <div className="flex-1">
+                    <p className="font-display text-sm font-bold text-emerald-900">
+                      Course Completed!
+                    </p>
+                    <p className="mt-1 font-body text-sm text-emerald-700">
+                      Congratulations — you have met all completion requirements for this course.
+                      {completionResult?.certificate_id
+                        ? ' Your certificate has been issued and is available in your certificate library.'
+                        : ''}
+                    </p>
+                    <div className="mt-3 flex flex-wrap gap-3">
+                      {completionResult?.certificate_id && (
+                        <Link
+                          to="/learn/certificates"
+                          className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-4 py-2 font-body text-sm font-semibold text-white hover:bg-emerald-700"
+                        >
+                          <GraduationCap size={15} /> View My Certificates
+                        </Link>
+                      )}
+                      <button
+                        onClick={() => setShowCompletionBanner(false)}
+                        className="inline-flex items-center gap-2 rounded-xl border border-emerald-300 px-4 py-2 font-body text-sm font-semibold text-emerald-700 hover:bg-emerald-100"
+                      >
+                        Continue Learning
+                      </button>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => setShowCompletionBanner(false)}
+                    className="rounded-lg p-1 text-emerald-400 hover:bg-emerald-100"
+                  >
+                    <X size={18} />
+                  </button>
+                </div>
+              </motion.div>
+            )}
           </div>
         </main>
       </div>

@@ -100,6 +100,7 @@ import QuizAttempt from './pages/learn/QuizAttempt.jsx';
 import BecomeTutor from './pages/BecomeTutor.jsx';
 import AdminTutorApplications from './pages/admin/TutorApplications.jsx';
 import AdminCourseReview from './pages/admin/CourseReview.jsx';
+import AdminCertificates from './pages/admin/Certificates.jsx';
 import NotFound from './pages/NotFound.jsx';
 
 export default function App() {
@@ -130,6 +131,7 @@ export default function App() {
           <Route path="/careers" element={<Careers />} />
           <Route path="/career-hub" element={<CareerHub />} />
           <Route path="/verify-certificate" element={<CertificateVerify />} />
+          <Route path="/verify-certificate/:certificateId" element={<CertificateVerify />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
@@ -184,6 +186,7 @@ export default function App() {
               <Route path="cohorts" element={<AdminCohorts />} />
               <Route path="career-opportunities" element={<AdminCareerOpportunities />} />
               <Route path="lms" element={<AdminLmsOverview />} />
+              <Route path="certificates" element={<AdminCertificates />} />
             </Route>
           </Route>
 

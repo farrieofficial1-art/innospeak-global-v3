@@ -36,7 +36,13 @@ export async function deletePortfolioItem(id) {
 
 export async function listMyCertificates() {
   assertConfigured();
-  const { data, error } = await supabase.from('certificates').select('*, lms_courses(title)').order('issued_at', { ascending: false });
+  const { data: authData } = await supabase.auth.getUser();
+  const uid = authData?.user?.id;
+  const { data, error } = await supabase
+    .from('certificates')
+    .select('*, lms_courses(title, code)')
+    .eq('student_id', uid)
+    .order('issue_date', { ascending: false });
   if (error) throw error;
   return data || [];
 }

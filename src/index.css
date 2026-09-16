@@ -53,3 +53,39 @@
            focus:text-paper;
   }
 }
+
+/* Print styles for certificate documents */
+@media print {
+  body {
+    background: white !important;
+  }
+
+  /* Hide everything except the certificate when printing */
+  .print\:hidden {
+    display: none !important;
+  }
+
+  /* Show only the printable certificate area */
+  .certificate-print-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Ensure certificate colors print correctly */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Remove shadows and borders that don't print well */
+  .shadow-premium,
+  .shadow-premium-lg {
+    box-shadow: none !important;
+  }
+}
