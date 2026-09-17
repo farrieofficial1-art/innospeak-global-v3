@@ -1,12 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import {
-  ArrowLeft, Save, Eye, Pencil, Plus, Trash2, X, GripVertical,
-  BookOpen, Video, FileText, Headphones, Presentation, Link as LinkIcon,
-  Download, Upload, CheckCircle2, AlertCircle, Play, ArrowUp, ArrowDown,
-  Target, ListChecks, File, ExternalLink,
-} from 'lucide-react';
+import { ArrowLeft, Save, Eye, Pencil, Plus, Trash2, X, GripVertical, BookOpen, Video, FileText, Headphones, Presentation, Link as LinkIcon, Download, Upload, CircleCheck as CheckCircle2, CircleAlert as AlertCircle, Play, ArrowUp, ArrowDown, Target, ListChecks, File, ExternalLink } from 'lucide-react';
 import Seo from '../../components/ui/Seo.jsx';
 import SectionCard from '../../components/portal/SectionCard.jsx';
 import StatusBadge from '../../components/portal/StatusBadge.jsx';
@@ -330,6 +325,7 @@ export default function LessonContentBuilder() {
           content: lesson.content || '',
           video_url: lesson.video_url || '',
           external_url: lesson.external_url || '',
+          practical_activity: lesson.practical_activity || '',
           status: lesson.status || 'draft',
         });
         setObjectives(lesson.learning_objectives || []);
@@ -357,6 +353,7 @@ export default function LessonContentBuilder() {
         content: form.content,
         video_url: form.video_url || null,
         external_url: form.external_url || null,
+        practical_activity: form.practical_activity || null,
         learning_objectives: cleanObjectives,
         status: publish ? 'published' : 'draft',
       });
@@ -504,7 +501,7 @@ export default function LessonContentBuilder() {
               />
               <div>
                 <p className="font-body text-sm font-bold tracking-wide text-navy-900">Learning Objectives</p>
-                <p className="mt-1 font-body text-xs text-navy-400">What students should be able to do after completing this lesson.</p>
+                <p className="mt-1 font-body text-xs text-navy-400">What students should be able to do after completing this lesson. Use action verbs (e.g. "Define", "Build", "Analyse").</p>
                 <div className="mt-2 space-y-2">
                   {objectives.map((obj, idx) => (
                     <div key={idx} className="flex items-center gap-2">
@@ -563,7 +560,7 @@ export default function LessonContentBuilder() {
           )}
 
           {/* Rich Text Content */}
-          <SectionCard title="Lesson Content" description="Write the main body of the lesson. Supports rich text formatting.">
+          <SectionCard title="Lesson Content" description="Write the main body of the lesson. Use headings, short paragraphs, and bullet lists to keep it scannable.">
             <RichTextEditor
               value={form.content}
               onChange={(html) => update('content', html)}
@@ -631,7 +628,7 @@ export default function LessonContentBuilder() {
           </SectionCard>
 
           {/* Practical Activity */}
-          <SectionCard title="Practical Activity / Instructions" description="Add hands-on instructions or a practical activity for students to complete.">
+          <SectionCard title="Practical Activity / Instructions" description="Give students a hands-on task to apply what they learned — an exercise, mini-project, or reflection prompt.">
             <div>
               <label className="font-body text-sm font-bold tracking-wide text-navy-900">Activity Instructions</label>
               <textarea
