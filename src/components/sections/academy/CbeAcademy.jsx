@@ -20,11 +20,11 @@ export default function CbeAcademy() {
           title={
             <>
               CBE / CBC Academy
-              <span className="block text-gradient-gold">Grades 3\u201312 Learning Support</span>
+              <span className="block text-gradient-gold">Grades 3–12 Learning Support</span>
             </>
           }
           subtitle={CBE_INFO.description}
-          dark
+          light
         />
 
         <div className="mt-14 grid gap-7 md:grid-cols-3">

@@ -7,6 +7,7 @@ import Home from '../pages/Home';
 
 // Code-split secondary routes so the initial bundle stays lean.
 const Academy = lazy(() => import('../pages/Academy'));
+const CbeAcademyPage = lazy(() => import('../pages/CbeAcademyPage'));
 const About = lazy(() => import('../pages/About'));
 const Programs = lazy(() => import('../pages/Programs'));
 const CourseCatalog = lazy(() => import('../pages/CourseCatalog'));
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: 'academy', element: <Academy /> },
+      { path: 'academy/cbe', element: <CbeAcademyPage /> },
+      { path: 'academy/cbe/:levelId', element: <CbeAcademyPage /> },
+      { path: 'academy/cbe/:levelId/:gradeId', element: <CbeAcademyPage /> },
+      { path: 'academy/cbe/:levelId/:gradeId/:subjectId', element: <CbeAcademyPage /> },
       { path: 'about', element: <About /> },
       { path: 'programs', element: <Programs /> },
       { path: 'courses', element: <CourseCatalog /> },

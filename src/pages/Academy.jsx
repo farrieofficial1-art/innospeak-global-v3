@@ -9,6 +9,7 @@ import CareerOpportunities from '../components/sections/academy/CareerOpportunit
 import WhyStudyWithUs from '../components/sections/academy/WhyStudyWithUs.jsx';
 import FAQ from '../components/sections/academy/FAQ.jsx';
 import FinalCTA from '../components/sections/academy/FinalCTA.jsx';
+import CbeAcademy from '../components/sections/academy/CbeAcademy.jsx';
 
 export default function Academy() {
   return (
@@ -22,6 +23,7 @@ export default function Academy() {
       <AcademyHero />
       <AboutAcademy />
       <ProgrammeCatalogue />
+      <CbeAcademy />
       <LearningModel />
       <LearningPathways />
       <Certification />
