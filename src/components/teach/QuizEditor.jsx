@@ -7,7 +7,7 @@ import {
 } from 'lucide-react';
 import SectionCard from '../portal/SectionCard.jsx';
 import {
-  getLessonQuiz, createLessonQuiz, updateLessonQuiz, deleteLessonQuiz,
+  getLessonQuizForAdmin, createLessonQuiz, updateLessonQuiz, deleteLessonQuiz,
   createQuizQuestion, updateQuizQuestion, deleteQuizQuestion, saveQuizOptions,
 } from '../../lib/supabase/lms';
 
@@ -268,7 +268,7 @@ export default function QuizEditor({ lessonId }) {
 
   const load = useCallback(async () => {
     try {
-      const quiz = await getLessonQuiz(lessonId);
+      const quiz = await getLessonQuizForAdmin(lessonId);
       setState({ loading: false, error: null, quiz });
       if (quiz) {
         setConfigForm({
