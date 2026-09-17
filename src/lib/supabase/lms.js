@@ -592,13 +592,30 @@ export async function getCourseAssignmentsForAdmin(courseId) {
 // ============================================================
 // Quizzes (lesson-scoped)
 // ============================================================
+export async function listModuleQuizzes(moduleId) {
+  assertConfigured();
+  const { data, error } = await supabase
+    .from('quizzes')
+    .select('id, title, status, passing_score_percent, max_attempts, lessons!inner(id, title)')
+    .eq('lessons.module_id', moduleId)
+    .order('created_at');
+  if (error) throw error;
+  return data || [];
+}
+
 export async function getLessonQuiz(lessonId) {
   assertConfigured();
   const { data, error } = await supabase
     .from('quizzes')
-    .select('*, quiz_questions(*, quiz_question_options(*))')
+    .select(`
+      id, lesson_id, title, instructions, status, passing_score_percent,
+      max_attempts, time_limit_minutes, require_pass_to_complete,
+      quiz_questions (
+        id, question_type, question_text, marks, position, explanation,
+        quiz_question_options (id, option_text, position)
+      )
+    `)
     .eq('lesson_id', lessonId)
-    .order('created_at')
     .maybeSingle();
   if (error) throw error;
   return data;
