@@ -7,6 +7,7 @@ import LearningPathways from '../components/sections/academy/LearningPathways.js
 import Certification from '../components/sections/academy/Certification.jsx';
 import CareerOpportunities from '../components/sections/academy/CareerOpportunities.jsx';
 import WhyStudyWithUs from '../components/sections/academy/WhyStudyWithUs.jsx';
+import WhoItIsFor from '../components/sections/academy/WhoItIsFor.jsx';
 import FAQ from '../components/sections/academy/FAQ.jsx';
 import FinalCTA from '../components/sections/academy/FinalCTA.jsx';
 import CbeAcademy from '../components/sections/academy/CbeAcademy.jsx';
@@ -29,6 +30,7 @@ export default function Academy() {
       <Certification />
       <CareerOpportunities />
       <WhyStudyWithUs />
+      <WhoItIsFor />
       <FAQ />
       <FinalCTA />
     </>

@@ -1,10 +1,18 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight, Sparkles, GraduationCap, FlaskConical, HeartHandshake } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import Button from '../ui/Button.jsx';
 import HeroSlider from './HeroSlider.jsx';
 import HeroStats from './HeroStats.jsx';
 import HeroFloatingCards from './HeroFloatingCards.jsx';
-import { HERO_BADGE, HERO_HEADLINE, HERO_DESCRIPTION } from './heroData.js';
+import { HERO_BADGE, HERO_HEADLINE, HERO_DESCRIPTION, PILLAR_CARDS } from './heroData.js';
+
+const PILLAR_ICONS = { graduation: GraduationCap, flask: FlaskConical, heart: HeartHandshake };
+const PILLAR_STYLES = {
+  gold: { border: 'border-gold-500/30', bg: 'bg-gold-500/10', text: 'text-gold-300', iconBg: 'bg-gold-gradient text-navy-900' },
+  navy: { border: 'border-navy-400/30', bg: 'bg-navy-500/10', text: 'text-navy-200', iconBg: 'bg-navy-700 text-gold-300' },
+  emerald: { border: 'border-emerald-400/30', bg: 'bg-emerald-500/10', text: 'text-emerald-200', iconBg: 'bg-gradient-to-br from-emerald-600 to-emerald-700 text-white' },
+};
 
 export default function Hero() {
   return (
@@ -65,12 +73,12 @@ export default function Hero() {
               <ArrowRight size={18} className="ml-2 transition-transform group-hover:translate-x-1" />
             </Button>
             <Button
-              to="/academy"
+              to="/programs"
               variant="outline"
               size="lg"
               className="border-white/30 text-white hover:bg-white hover:text-navy-900"
             >
-              Explore Programmes
+              Explore Programs
             </Button>
           </motion.div>
 
@@ -82,6 +90,43 @@ export default function Hero() {
           >
             <HeroStats />
           </motion.div>
+        </motion.div>
+      </div>
+
+      {/* Three ecosystem pillars */}
+      <div className="container-premium relative z-10 pb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.4 }}
+          className="grid gap-4 sm:grid-cols-3"
+        >
+          {PILLAR_CARDS.map((pillar) => {
+            const Icon = PILLAR_ICONS[pillar.icon] || GraduationCap;
+            const s = PILLAR_STYLES[pillar.color];
+            return (
+              <Link
+                key={pillar.id}
+                to={pillar.link}
+                className={`group rounded-2xl border ${s.border} ${s.bg} p-6 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02]`}
+              >
+                <div className="flex items-center gap-3">
+                  <div className={`flex h-10 w-10 items-center justify-center rounded-xl ${s.iconBg} shadow-md`}>
+                    <Icon size={20} strokeWidth={1.8} />
+                  </div>
+                  <div>
+                    <p className={`font-body text-xs font-bold uppercase tracking-wider ${s.text}`}>
+                      {pillar.action}
+                    </p>
+                    <p className="font-display text-sm font-bold text-white">{pillar.label}</p>
+                  </div>
+                </div>
+                <p className="mt-3 font-body text-sm leading-relaxed text-white/70">
+                  {pillar.description}
+                </p>
+              </Link>
+            );
+          })}
         </motion.div>
       </div>
     </section>

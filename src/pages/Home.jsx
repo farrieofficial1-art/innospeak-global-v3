@@ -1,46 +1,44 @@
 import Seo from '../components/ui/Seo.jsx';
 
 import Hero from '../components/home/Hero.jsx';
-import Trusted from '../components/home/Trusted.jsx';
-import HighlightStrip from '../components/home/HighlightStrip.jsx';
-import WhyChoose from '../components/home/WhyChoose.jsx';
-import Pathways from '../components/home/Pathways.jsx';
-import LearningJourney from '../components/home/LearningJourney.jsx';
-import Ecosystem from '../components/home/Ecosystem.jsx';
-import Impact from '../components/home/Impact.jsx';
-import Partners from '../components/home/Partners.jsx';
-import Testimonials from '../components/home/Testimonials.jsx';
-import FAQ from '../components/home/FAQ.jsx';
-import ClosingCTA from '../components/home/ClosingCTA.jsx';
-import PromotionRail from '../components/home/PromotionRail.jsx';
-import FeaturedLearning from '../components/home/FeaturedLearning.jsx';
-import LearningEcosystem from '../components/home/LearningEcosystem.jsx';
 import AnnouncementBanner from '../components/home/AnnouncementBanner.jsx';
+import WhyChoose from '../components/home/WhyChoose.jsx';
+import Ecosystem from '../components/home/Ecosystem.jsx';
+import Pathways from '../components/home/Pathways.jsx';
+import LabsPromotion from '../components/home/LabsPromotion.jsx';
+import Impact from '../components/home/Impact.jsx';
+import ClosingCTA from '../components/home/ClosingCTA.jsx';
 
 export default function Home() {
   return (
     <>
       <Seo
-        title="InnoSpeak Global"
-        description="Empowering learners through communication, innovation, technology and leadership."
+        title="InnoSpeak Global — Learn. Build. Innovate. Make an Impact."
+        description="A connected ecosystem of structured learning, practical innovation, and educational support."
         path="/"
       />
 
       <div className="pt-20"><AnnouncementBanner /></div>
+
+      {/* Hero — communicates the three pillars + clear CTAs */}
       <Hero />
-      <PromotionRail />
-      <Trusted />
-      <HighlightStrip />
+
+      {/* Who We Are */}
       <WhyChoose />
-      <Pathways />
-      <FeaturedLearning />
-      <LearningEcosystem />
-      <LearningJourney />
+
+      {/* Our Ecosystem — three pillars expanded */}
       <Ecosystem />
+
+      {/* Programs / Learning Pathways */}
+      <Pathways />
+
+      {/* Practical Innovation / Labs */}
+      <LabsPromotion />
+
+      {/* Foundation / Impact */}
       <Impact />
-      <Partners />
-      <Testimonials />
-      <FAQ />
+
+      {/* Apply / Get Started */}
       <ClosingCTA />
     </>
   );

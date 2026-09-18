@@ -1,18 +1,18 @@
-export const HERO_BADGE = 'Learn • Practise • Prove • Grow';
+export const HERO_BADGE = 'Learn • Build • Innovate • Make an Impact';
 
 export const HERO_HEADLINE = [
-  { text: 'Build skills that', highlight: false },
-  { text: 'move your future forward.', highlight: true },
+  { text: 'Learn. Build. Innovate.', highlight: false },
+  { text: 'Make an Impact.', highlight: true },
 ];
 
 export const HERO_DESCRIPTION =
-  'InnoSpeak Global connects structured learning, practical labs, live learning experiences, assessment, credentials and career development — so you do more than finish a course.';
+  'InnoSpeak Global is a connected ecosystem of structured learning, practical innovation, and educational support — Academy, Labs, and Foundation working together so you do more than finish a course.';
 
 export const HERO_STATS = [
   { value: 350, suffix: '+', label: 'Courses in catalogue' },
   { value: 12, suffix: '', label: 'Learning pathways' },
-  { value: 3, suffix: '', label: 'Study modes' },
-  { value: 1, suffix: '', label: 'Connected platform' },
+  { value: 7, suffix: '', label: 'Innovation schools' },
+  { value: 3, suffix: '', label: 'Ecosystem pillars' },
 ];
 
 export const HERO_SLIDES = [
@@ -41,4 +41,37 @@ export const HERO_FLOATING_CARDS = [
   { id: 'physical', icon: 'building', label: 'Physical Classes', color: 'navy' },
   { id: 'hybrid', icon: 'shuffle', label: 'Hybrid Mode', color: 'gold' },
   { id: 'practical', icon: 'wrench', label: 'Practical Labs', color: 'navy' },
+];
+
+export const PILLAR_CARDS = [
+  {
+    id: 'academy',
+    label: 'Academy',
+    action: 'Learn',
+    title: 'InnoSpeak Global Academy',
+    description: 'Structured courses, professional development and credentials.',
+    icon: 'graduation',
+    link: '/academy',
+    color: 'gold',
+  },
+  {
+    id: 'labs',
+    label: 'Labs',
+    action: 'Build',
+    title: 'InnoSpeak Global Labs',
+    description: 'Engineering, technology, innovation and practical projects.',
+    icon: 'flask',
+    link: '/labs',
+    color: 'navy',
+  },
+  {
+    id: 'foundation',
+    label: 'Foundation',
+    action: 'Impact',
+    title: 'InnoSpeak Global Foundation',
+    description: 'Scholarships, educational support and community opportunity.',
+    icon: 'heart',
+    link: '/foundation',
+    color: 'emerald',
+  },
 ];

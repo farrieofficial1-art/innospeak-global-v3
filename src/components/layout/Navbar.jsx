@@ -1,25 +1,61 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, UserCircle2, ShieldCheck, ChevronDown, GraduationCap, BookOpen, UserCheck } from 'lucide-react';
+import {
+  Menu,
+  X,
+  UserCircle2,
+  ShieldCheck,
+  ChevronDown,
+  GraduationCap,
+  BookOpen,
+  UserCheck,
+  FlaskConical,
+  HeartHandshake,
+  Compass,
+  LayoutGrid,
+} from 'lucide-react';
 import useScrolled from '../../hooks/useScrolled.js';
 import { useAuth } from '../../context/AuthContext.jsx';
 import logo from '../../assets/logo/logo.png';
 
-const navLinks = [
-  { label: 'Home', to: '/' },
-  { label: 'Academy', to: '/academy' },
-  { label: 'Programs', to: '/programs' },
-  { label: 'Labs', to: '/labs' },
-  { label: 'Career Hub', to: '/career-hub' },
-  { label: 'Contact', to: '/contact' },
+const exploreLinks = [
+  {
+    label: 'Academy',
+    to: '/academy',
+    icon: GraduationCap,
+    description: 'Structured courses & certification',
+  },
+  {
+    label: 'Labs',
+    to: '/labs',
+    icon: FlaskConical,
+    description: 'Practical engineering & innovation',
+  },
+  {
+    label: 'Foundation',
+    to: '/foundation',
+    icon: HeartHandshake,
+    description: 'Scholarships & educational support',
+  },
+  {
+    label: 'All Programs',
+    to: '/programs',
+    icon: LayoutGrid,
+    description: 'Browse the full catalogue',
+  },
 ];
 
 const aboutLinks = [
   { label: 'About Us', to: '/about' },
   { label: 'Our Founder', to: '/founder' },
-  { label: 'Foundation', to: '/foundation' },
   { label: 'Our Impact', to: '/impact' },
+];
+
+const topNavLinks = [
+  { label: 'Home', to: '/' },
+  { label: 'Career Hub', to: '/career-hub' },
+  { label: 'Contact', to: '/contact' },
 ];
 
 export default function Navbar() {
@@ -27,8 +63,10 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [accountOpen, setAccountOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
+  const [exploreOpen, setExploreOpen] = useState(false);
   const accountRef = useRef(null);
   const aboutRef = useRef(null);
+  const exploreRef = useRef(null);
   const { pathname } = useLocation();
   const { user, profile } = useAuth();
   const isAdmin = profile?.role === 'admin';
@@ -38,14 +76,14 @@ export default function Navbar() {
     function onClickOutside(e) {
       if (accountRef.current && !accountRef.current.contains(e.target)) setAccountOpen(false);
       if (aboutRef.current && !aboutRef.current.contains(e.target)) setAboutOpen(false);
+      if (exploreRef.current && !exploreRef.current.contains(e.target)) setExploreOpen(false);
     }
     document.addEventListener('mousedown', onClickOutside);
     return () => document.removeEventListener('mousedown', onClickOutside);
   }, []);
 
   const aboutActive = aboutLinks.some((l) => pathname === l.to);
-
-  const inLmsOrPortalOrAdmin = pathname.startsWith('/portal') || pathname.startsWith('/learn') || pathname.startsWith('/teach') || pathname.startsWith('/admin');
+  const exploreActive = exploreLinks.some((l) => pathname === l.to);
 
   const linkBase = 'font-body text-sm font-medium transition-colors duration-200';
   const linkIdle = scrolled ? 'text-navy-700 hover:text-gold-600' : 'text-white hover:text-gold-400';
@@ -81,15 +119,17 @@ export default function Navbar() {
 
         {/* Desktop links */}
         <ul className="hidden items-center gap-6 lg:flex">
+          {/* Home */}
           <li>
             <Link
-              to={navLinks[0].to}
-              className={`${linkBase} ${linkIdle} ${pathname === navLinks[0].to ? linkActive : ''}`}
+              to="/"
+              className={`${linkBase} ${linkIdle} ${pathname === '/' ? linkActive : ''}`}
             >
-              {navLinks[0].label}
+              Home
             </Link>
           </li>
 
+          {/* About dropdown */}
           <li className="relative" ref={aboutRef}>
             <button
               type="button"
@@ -125,7 +165,55 @@ export default function Navbar() {
             </AnimatePresence>
           </li>
 
-          {navLinks.slice(1).map((link) => {
+          {/* Explore mega-dropdown */}
+          <li className="relative" ref={exploreRef}>
+            <button
+              type="button"
+              onClick={() => setExploreOpen((v) => !v)}
+              className={`flex items-center gap-1 ${linkBase} ${linkIdle} ${exploreActive ? linkActive : ''}`}
+            >
+              Explore
+              <ChevronDown size={13} className={`transition-transform ${exploreOpen ? 'rotate-180' : ''}`} />
+            </button>
+            <AnimatePresence>
+              {exploreOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.15 }}
+                  className="absolute left-1/2 mt-3 w-80 -translate-x-1/2 overflow-hidden rounded-2xl border border-navy-100 bg-white py-3 shadow-premium-lg"
+                >
+                  {exploreLinks.map((link) => {
+                    const Icon = link.icon;
+                    return (
+                      <Link
+                        key={link.to}
+                        to={link.to}
+                        onClick={() => setExploreOpen(false)}
+                        className={`flex items-start gap-3 px-4 py-3 transition-colors hover:bg-navy-50 ${
+                          pathname === link.to ? 'bg-gold-500/5' : ''
+                        }`}
+                      >
+                        <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gold-500/10 text-gold-700">
+                          <Icon size={18} strokeWidth={1.8} />
+                        </div>
+                        <div>
+                          <p className={`font-body text-sm font-bold ${pathname === link.to ? 'text-gold-700' : 'text-navy-900'}`}>
+                            {link.label}
+                          </p>
+                          <p className="font-body text-xs text-navy-500">{link.description}</p>
+                        </div>
+                      </Link>
+                    );
+                  })}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </li>
+
+          {/* Career Hub + Contact */}
+          {topNavLinks.slice(1).map((link) => {
             const active = pathname === link.to;
             return (
               <li key={link.to}>
@@ -147,7 +235,7 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={() => setAccountOpen((v) => !v)}
-                className={`flex items-center gap-1.5 ${linkBase} ${linkIdle} ${inLmsOrPortalOrAdmin ? linkActive : ''}`}
+                className={`flex items-center gap-1.5 ${linkBase} ${linkIdle}`}
               >
                 <UserCircle2 size={17} />
                 My Account
@@ -258,81 +346,100 @@ export default function Navbar() {
             className="overflow-hidden border-t border-navy-100 bg-white shadow-premium-lg lg:hidden"
           >
             <ul className="container-premium flex flex-col gap-1 py-4">
-              {[navLinks[0], ...aboutLinks, ...navLinks.slice(1)].map((link) => {
-                const active = pathname === link.to;
-                return (
-                  <li key={link.to}>
-                    <Link
-                      to={link.to}
-                      onClick={() => setMobileOpen(false)}
-                      className={`block rounded-lg px-4 py-3 font-body text-sm font-medium transition-colors ${
-                        active
-                          ? 'bg-gold-500/10 text-gold-700'
-                          : 'text-navy-700 hover:bg-navy-50'
-                      }`}
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                );
-              })}
+              {/* Home */}
+              <li>
+                <Link
+                  to="/"
+                  onClick={() => setMobileOpen(false)}
+                  className={`block rounded-lg px-4 py-3 font-body text-sm font-medium transition-colors ${
+                    pathname === '/' ? 'bg-gold-500/10 text-gold-700' : 'text-navy-700 hover:bg-navy-50'
+                  }`}
+                >
+                  Home
+                </Link>
+              </li>
+
+              {/* About group */}
+              <li className="px-4 pt-3 pb-1 font-body text-xs font-bold uppercase tracking-wider text-navy-400">
+                About
+              </li>
+              {aboutLinks.map((link) => (
+                <li key={link.to}>
+                  <Link
+                    to={link.to}
+                    onClick={() => setMobileOpen(false)}
+                    className={`block rounded-lg px-4 py-3 font-body text-sm font-medium transition-colors ${
+                      pathname === link.to ? 'bg-gold-500/10 text-gold-700' : 'text-navy-700 hover:bg-navy-50'
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+
+              {/* Explore group */}
+              <li className="px-4 pt-3 pb-1 font-body text-xs font-bold uppercase tracking-wider text-navy-400">
+                Explore
+              </li>
+              {exploreLinks.map((link) => (
+                <li key={link.to}>
+                  <Link
+                    to={link.to}
+                    onClick={() => setMobileOpen(false)}
+                    className={`flex items-center gap-3 rounded-lg px-4 py-3 font-body text-sm font-medium transition-colors ${
+                      pathname === link.to ? 'bg-gold-500/10 text-gold-700' : 'text-navy-700 hover:bg-navy-50'
+                    }`}
+                  >
+                    <link.icon size={16} className="text-gold-600" />
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+
+              {/* Top-level */}
+              {topNavLinks.slice(1).map((link) => (
+                <li key={link.to}>
+                  <Link
+                    to={link.to}
+                    onClick={() => setMobileOpen(false)}
+                    className={`block rounded-lg px-4 py-3 font-body text-sm font-medium transition-colors ${
+                      pathname === link.to ? 'bg-gold-500/10 text-gold-700' : 'text-navy-700 hover:bg-navy-50'
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+
               <li className="mt-2 flex flex-col gap-2">
                 {user ? (
                   <>
-                    <Link
-                      to="/portal"
-                      onClick={() => setMobileOpen(false)}
-                      className="btn-outline w-full"
-                    >
+                    <Link to="/portal" onClick={() => setMobileOpen(false)} className="btn-outline w-full">
                       Student Portal
                     </Link>
-                    <Link
-                      to="/learn"
-                      onClick={() => setMobileOpen(false)}
-                      className="btn-outline w-full"
-                    >
+                    <Link to="/learn" onClick={() => setMobileOpen(false)} className="btn-outline w-full">
                       E-Learning
                     </Link>
                     {isInstructor && (
-                      <Link
-                        to="/teach"
-                        onClick={() => setMobileOpen(false)}
-                        className="btn-outline w-full"
-                      >
+                      <Link to="/teach" onClick={() => setMobileOpen(false)} className="btn-outline w-full">
                         Teach
                       </Link>
                     )}
                     {isAdmin && (
-                      <Link
-                        to="/admin"
-                        onClick={() => setMobileOpen(false)}
-                        className="btn-outline w-full"
-                      >
+                      <Link to="/admin" onClick={() => setMobileOpen(false)} className="btn-outline w-full">
                         Staff Panel
                       </Link>
                     )}
-                    <Link
-                      to="/become-tutor"
-                      onClick={() => setMobileOpen(false)}
-                      className="btn-outline w-full"
-                    >
+                    <Link to="/become-tutor" onClick={() => setMobileOpen(false)} className="btn-outline w-full">
                       Become a Tutor
                     </Link>
                   </>
                 ) : (
-                  <Link
-                    to="/login"
-                    onClick={() => setMobileOpen(false)}
-                    className="btn-outline w-full"
-                  >
+                  <Link to="/login" onClick={() => setMobileOpen(false)} className="btn-outline w-full">
                     Student Login
                   </Link>
                 )}
-                <Link
-                  to="/apply"
-                  onClick={() => setMobileOpen(false)}
-                  className="btn-gold w-full"
-                >
+                <Link to="/apply" onClick={() => setMobileOpen(false)} className="btn-gold w-full">
                   Apply Now
                 </Link>
               </li>
