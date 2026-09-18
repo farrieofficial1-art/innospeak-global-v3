@@ -51,6 +51,7 @@ export default function Step7Review({ data, errors, update, onEdit, onSubmit, is
           stepNum={1}
           onEdit={onEdit}
           fields={[
+            { label: 'Division', value: data.division === 'labs' ? 'InnoSpeak Global Labs' : data.division === 'academy' ? 'InnoSpeak Global Academy' : '—' },
             { label: 'Academy', value: data.academy },
             { label: 'Pathway', value: data.pathway },
             { label: 'Programme', value: data.programme },

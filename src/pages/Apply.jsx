@@ -39,6 +39,7 @@ export default function Apply() {
   const [draftId] = useState(() => generateId());
 
   const [data, setData] = useState({
+    division: '',
     academy: 'InnoSpeak Global Academy',
     pathway: '',
     programme: '',
@@ -91,6 +92,7 @@ export default function Apply() {
     const e = {};
 
     if (step === 1) {
+      if (!data.division) e.division = 'Please select a division';
       if (!data.pathway) e.pathway = 'Required';
       if (!data.programme) e.programme = 'Required';
       if (!data.intake) e.intake = 'Required';
@@ -197,7 +199,7 @@ export default function Apply() {
     <>
       <Seo title="Apply" path="/apply" />
 
-      <AdmissionsHero>
+      <AdmissionsHero currentStep={step} totalSteps={7}>
         <Stepper current={step} onStepClick={setStep} />
       </AdmissionsHero>
 

@@ -31,6 +31,7 @@ export async function submitApplication(data) {
 
   const record = {
     application_number: applicationNumber,
+    division: data.division,
     academy: data.academy,
     pathway: data.pathway,
     programme: data.programme,
@@ -90,6 +91,7 @@ export function buildSummaryText(data, applicationNumber) {
     `Date: ${new Date().toLocaleString()}`,
     '',
     '--- PROGRAMME SELECTION ---',
+    `Division: ${data.division === 'labs' ? 'InnoSpeak Global Labs' : data.division === 'academy' ? 'InnoSpeak Global Academy' : 'N/A'}`,
     `Academy: ${data.academy}`,
     `Pathway: ${data.pathway}`,
     `Programme: ${data.programme}`,

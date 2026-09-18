@@ -291,6 +291,10 @@ export default function ApplicationSuccess({
 
               <div className="mt-8 space-y-5">
 
+                <Detail
+                  label="Division"
+                  value={application.division === 'labs' ? 'InnoSpeak Global Labs' : application.division === 'academy' ? 'InnoSpeak Global Academy' : '—'}
+                />
 
                 <Detail
                   label="Programme"

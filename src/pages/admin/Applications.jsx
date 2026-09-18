@@ -34,7 +34,15 @@ export default function Applications() {
 
   const columns = [
     { key: 'application_number', label: 'Application #' },
-    { key: 'name', label: 'Applicant', render: (r) => `${r.first_name || ''} ${r.last_name || ''}`.trim() || '—' },
+    { key: 'name', label: 'Applicant', render: (r) => `${r.first_name || ''} ${r.last_name || ''}`.trim() || r.full_name || '—' },
+    {
+      key: 'division',
+      label: 'Division',
+      render: (r) => {
+        if (!r.division) return '—';
+        return r.division === 'labs' ? 'Labs' : r.division === 'academy' ? 'Academy' : r.division;
+      },
+    },
     { key: 'programme', label: 'Programme', render: (r) => r.programme || r.course_code || '—' },
     { key: 'email', label: 'Email' },
     { key: 'created_at', label: 'Submitted', render: (r) => new Date(r.created_at).toLocaleDateString() },
