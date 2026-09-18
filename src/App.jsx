@@ -101,6 +101,7 @@ import BecomeTutor from './pages/BecomeTutor.jsx';
 import AdminTutorApplications from './pages/admin/TutorApplications.jsx';
 import AdminCourseReview from './pages/admin/CourseReview.jsx';
 import AdminCertificates from './pages/admin/Certificates.jsx';
+import AdminPayments from './pages/admin/Payments.jsx';
 import NotFound from './pages/NotFound.jsx';
 
 export default function App() {
@@ -187,6 +188,7 @@ export default function App() {
               <Route path="career-opportunities" element={<AdminCareerOpportunities />} />
               <Route path="lms" element={<AdminLmsOverview />} />
               <Route path="certificates" element={<AdminCertificates />} />
+              <Route path="payments" element={<AdminPayments />} />
             </Route>
           </Route>
 

@@ -1,14 +1,21 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { GraduationCap, CircleCheck, LogIn, TriangleAlert } from 'lucide-react';
+import { GraduationCap, CircleCheck, LogIn, TriangleAlert, CreditCard } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { getEnrollmentByCode, enrollInCourse } from '../../lib/supabase/portal';
+import { parseFee } from '../../lib/data/programmeData';
+import { checkCoursePaid } from '../../lib/supabase/payments';
+import CheckoutModal from './CheckoutModal';
 
 /**
  * EnrollButton — self-service enrollment for a course. Shown on every
  * /courses/:courseCode page — Academy and Labs courses both route
  * through CourseDetails.jsx, so this one component covers both.
+ *
+ * Free courses (price = 0) use the existing enrollment flow directly.
+ * Paid courses open a CheckoutModal for M-PESA or PayPal payment.
+ * Access is only granted after server-side payment confirmation.
  */
 export default function EnrollButton({ course }) {
   const { user, loading: authLoading } = useAuth();
@@ -18,6 +25,11 @@ export default function EnrollButton({ course }) {
   const [isChecking, setIsChecking] = useState(true);
   const [isEnrolling, setIsEnrolling] = useState(false);
   const [error, setError] = useState(null);
+  const [checkoutOpen, setCheckoutOpen] = useState(false);
+  const [paymentConfirmed, setPaymentConfirmed] = useState(false);
+
+  const coursePrice = parseFee(course?.fees);
+  const isPaid = coursePrice > 0;
 
   useEffect(() => {
     if (!user) {
@@ -26,18 +38,28 @@ export default function EnrollButton({ course }) {
     }
     let cancelled = false;
     setIsChecking(true);
-    getEnrollmentByCode(course.code)
-      .then((data) => {
-        if (!cancelled) setEnrollment(data);
+
+    const checks = [getEnrollmentByCode(course.code)];
+
+    if (isPaid) {
+      checks.push(checkCoursePaid(course.code).catch(() => null));
+    }
+
+    Promise.all(checks)
+      .then(([data, paid]) => {
+        if (cancelled) return;
+        setEnrollment(data);
+        if (paid) setPaymentConfirmed(true);
       })
       .catch(() => {})
       .finally(() => {
         if (!cancelled) setIsChecking(false);
       });
+
     return () => {
       cancelled = true;
     };
-  }, [user, course.code]);
+  }, [user, course.code, isPaid]);
 
   async function handleEnroll() {
     setError(null);
@@ -87,7 +109,7 @@ export default function EnrollButton({ course }) {
     );
   }
 
-  if (enrollment) {
+  if (enrollment || paymentConfirmed) {
     return (
       <div className="mx-auto flex max-w-xl flex-col items-center gap-3 rounded-2xl border border-gold-300/60 bg-gold-50 px-6 py-6 text-center shadow-premium sm:flex-row sm:justify-between sm:text-left">
         <div className="flex items-center gap-3">
@@ -95,7 +117,7 @@ export default function EnrollButton({ course }) {
             <CircleCheck size={18} />
           </span>
           <p className="font-body text-sm text-navy-800">
-            You&rsquo;re enrolled &middot; {enrollment.progress_percent}% complete
+            You&rsquo;re enrolled &middot; {enrollment?.progress_percent || 0}% complete
           </p>
         </div>
         <Link to={`/portal/courses/${course.code}`} className="btn-outline shrink-0 whitespace-nowrap">
@@ -107,16 +129,40 @@ export default function EnrollButton({ course }) {
 
   return (
     <div className="mx-auto flex max-w-xl flex-col items-center gap-3">
-      <motion.button
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-        type="button"
-        onClick={handleEnroll}
-        disabled={isEnrolling}
-        className="btn-gold w-full max-w-xs disabled:opacity-60"
-      >
-        {isEnrolling ? 'Enrolling\u2026' : 'Enroll Now'}
-      </motion.button>
+      {isPaid ? (
+        <>
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            type="button"
+            onClick={() => setCheckoutOpen(true)}
+            className="btn-gold w-full max-w-xs"
+          >
+            <CreditCard size={15} className="mr-2" />
+            Enroll for {course.fees}
+          </motion.button>
+          <CheckoutModal
+            course={course}
+            open={checkoutOpen}
+            onClose={() => setCheckoutOpen(false)}
+            onSuccess={() => {
+              setPaymentConfirmed(true);
+              setCheckoutOpen(false);
+            }}
+          />
+        </>
+      ) : (
+        <motion.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          type="button"
+          onClick={handleEnroll}
+          disabled={isEnrolling}
+          className="btn-gold w-full max-w-xs disabled:opacity-60"
+        >
+          {isEnrolling ? 'Enrolling\u2026' : 'Enroll Now — Free'}
+        </motion.button>
+      )}
       {error && (
         <div className="flex items-start gap-2 rounded-xl border border-gold-300 bg-gold-50 px-4 py-3 font-body text-sm text-navy-800">
           <TriangleAlert size={16} className="mt-0.5 shrink-0 text-gold-700" />
