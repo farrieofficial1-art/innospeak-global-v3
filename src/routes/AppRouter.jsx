@@ -12,6 +12,7 @@ const About = lazy(() => import('../pages/About'));
 const Programs = lazy(() => import('../pages/Programs'));
 const CourseCatalog = lazy(() => import('../pages/CourseCatalog'));
 const Labs = lazy(() => import('../pages/Labs'));
+const Foundation = lazy(() => import('../pages/Foundation'));
 const Founder = lazy(() => import('../pages/Founder'));
 const Impact = lazy(() => import('../pages/Impact'));
 const Contact = lazy(() => import('../pages/Contact'));
@@ -45,6 +46,7 @@ const router = createBrowserRouter([
       { path: 'courses', element: <CourseCatalog /> },
       { path: 'courses/:courseCode', element: <CourseDetails /> },
       { path: 'labs', element: <Labs /> },
+      { path: 'foundation', element: <Foundation /> },
       { path: 'founder', element: <Founder /> },
       { path: 'impact', element: <Impact /> },
       { path: 'contact', element: <Contact /> },
