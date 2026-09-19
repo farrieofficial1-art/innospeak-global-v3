@@ -4,6 +4,7 @@ import AboutLabs from '../components/sections/labs/AboutLabs';
 import LabTracks from '../components/sections/labs/LabTracks';
 import LabsCourseCatalogue from '../components/sections/labs/LabsCourseCatalogue';
 import InnovationProcess from '../components/sections/labs/InnovationProcess';
+import EntrepreneurshipInnovation from '../components/sections/labs/EntrepreneurshipInnovation';
 import LabOutcomes from '../components/sections/labs/LabOutcomes';
 import LabsFAQ from '../components/sections/labs/LabsFAQ';
 import SubmitChallenge from '../components/sections/labs/SubmitChallenge';
@@ -17,6 +18,7 @@ export default function Labs() {
       <LabTracks />
       <LabsCourseCatalogue />
       <InnovationProcess />
+      <EntrepreneurshipInnovation />
       <LabOutcomes />
       <LabsFAQ />
       <SubmitChallenge />

@@ -82,9 +82,27 @@ export default function Catalog() {
       </div>
 
       {state.loading && (
-        <SectionCard className="mt-6">
-          <LoadingState />
-        </SectionCard>
+        <div className="mt-6 grid gap-4 sm:grid-cols-2">
+          {[...Array(4)].map((_, i) => (
+            <div key={i} className="animate-pulse rounded-2xl border border-navy-100 bg-white p-5 shadow-sm">
+              <div className="flex items-start justify-between gap-3">
+                <div className="flex-1">
+                  <div className="h-5 w-3/4 rounded bg-navy-100" />
+                  <div className="mt-2 h-3 w-1/3 rounded bg-navy-50" />
+                </div>
+                <div className="h-6 w-16 rounded-full bg-navy-50" />
+              </div>
+              <div className="mt-3 h-4 w-full rounded bg-navy-50" />
+              <div className="mt-2 h-4 w-2/3 rounded bg-navy-50" />
+              <div className="mt-4 flex gap-4">
+                <div className="h-3 w-16 rounded bg-navy-50" />
+                <div className="h-3 w-16 rounded bg-navy-50" />
+                <div className="h-3 w-16 rounded bg-navy-50" />
+              </div>
+              <div className="mt-4 h-9 w-28 rounded-lg bg-navy-50" />
+            </div>
+          ))}
+        </div>
       )}
 
       {!state.loading && state.error && (

@@ -11,8 +11,8 @@ export const LABS_HERO_SLIDES = [
 export const LABS_HERO_BADGE = 'Innovate. Build. Launch.';
 
 export const LABS_HERO_HEADLINE = [
-  { text: 'InnoSpeak Global', highlight: false },
-  { text: 'Labs', highlight: true },
+  { text: 'Where learning becomes', highlight: false },
+  { text: 'something you can build.', highlight: true },
 ];
 
 export const LABS_HERO_DESCRIPTION =
