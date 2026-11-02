@@ -16,7 +16,6 @@ import {
 } from 'lucide-react';
 import useScrolled from '../../hooks/useScrolled.js';
 import { useAuth } from '../../context/AuthContext.jsx';
-import logo from '../../assets/logo/logo.png';
 
 /**
  * Routes whose hero opens with a dark image or gradient.
@@ -25,9 +24,11 @@ import logo from '../../assets/logo/logo.png';
  */
 const DARK_HERO_PATHS = new Set([
   '/programs',
+  '/academy',
+  '/academy/cbe',
 ]);
 
-
+const exploreLinks = [
   { label: 'Academy', to: '/academy', icon: GraduationCap, description: 'Structured courses & certification' },
   { label: 'Labs', to: '/labs', icon: FlaskConical, description: 'Practical engineering & innovation' },
   { label: 'Foundation', to: '/foundation', icon: HeartHandshake, description: 'Scholarships & educational support' },
@@ -97,7 +98,6 @@ export default function Navbar() {
       <nav className="container-premium flex h-20 items-center justify-between">
         {/* Logo */}
         <Link to="/" className="group flex items-center" onClick={() => setMobileOpen(false)}>
-          <img src={logo} alt="InnoSpeak Global" className="mr-2 h-10 w-10 select-none" draggable={false} />
           <span className={`font-display text-xl font-bold tracking-tight transition-colors duration-300 sm:text-2xl ${wordmarkColor}`}>
             InnoSpeak
           </span>
@@ -248,6 +248,10 @@ export default function Navbar() {
                       <BookOpen size={16} />
                       E-Learning
                     </Link>
+                    <Link to="/my-learning" onClick={() => setAccountOpen(false)} className={`flex items-center gap-2.5 px-4 py-2.5 font-body text-sm font-medium text-white/85 transition-colors hover:bg-white/5 hover:text-gold-400 ${pathname === '/my-learning' ? 'bg-white/5 text-gold-400' : ''}`}>
+                      <GraduationCap size={16} />
+                      My Learning
+                    </Link>
                     {isInstructor && (
                       <Link to="/teach" onClick={() => setAccountOpen(false)} className={`flex items-center gap-2.5 px-4 py-2.5 font-body text-sm font-medium text-white/85 transition-colors hover:bg-white/5 hover:text-gold-400 ${pathname.startsWith('/teach') ? 'bg-white/5 text-gold-400' : ''}`}>
                         <GraduationCap size={16} />
@@ -344,6 +348,7 @@ export default function Navbar() {
                   <>
                     <Link to="/portal" onClick={() => setMobileOpen(false)} className="rounded-xl border border-white/20 bg-white/5 px-5 py-3 text-center font-body text-sm font-bold text-white transition-colors hover:bg-white/10">Student Portal</Link>
                     <Link to="/learn" onClick={() => setMobileOpen(false)} className="rounded-xl border border-white/20 bg-white/5 px-5 py-3 text-center font-body text-sm font-bold text-white transition-colors hover:bg-white/10">E-Learning</Link>
+                    <Link to="/my-learning" onClick={() => setMobileOpen(false)} className="rounded-xl border border-white/20 bg-white/5 px-5 py-3 text-center font-body text-sm font-bold text-white transition-colors hover:bg-white/10">My Learning</Link>
                     {isInstructor && <Link to="/teach" onClick={() => setMobileOpen(false)} className="rounded-xl border border-white/20 bg-white/5 px-5 py-3 text-center font-body text-sm font-bold text-white transition-colors hover:bg-white/10">Teach</Link>}
                     {isAdmin && <Link to="/admin" onClick={() => setMobileOpen(false)} className="rounded-xl border border-white/20 bg-white/5 px-5 py-3 text-center font-body text-sm font-bold text-white transition-colors hover:bg-white/10">Staff Panel</Link>}
                     <Link to="/become-tutor" onClick={() => setMobileOpen(false)} className="rounded-xl border border-white/20 bg-white/5 px-5 py-3 text-center font-body text-sm font-bold text-white transition-colors hover:bg-white/10">Become a Tutor</Link>

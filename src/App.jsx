@@ -22,7 +22,11 @@ import Privacy from './pages/Privacy.jsx';
 import Terms from './pages/Terms.jsx';
 import Login from './pages/auth/Login.jsx';
 import Signup from './pages/auth/Signup.jsx';
-import Register from './pages/Register.jsx';                            
+import Register from './pages/Register.jsx';
+import Academy from './pages/Academy.jsx';
+import AcademyCbe from './pages/AcademyCbe.jsx';
+import AcademyCourseDetail from './pages/AcademyCourseDetail.jsx';
+import MyLearning from './pages/MyLearning.jsx';                            
 import ForgotPassword from './pages/auth/ForgotPassword.jsx';
 import ResetPassword from './pages/auth/ResetPassword.jsx';
 import StudentDashboard from './pages/portal/StudentDashboard.jsx';
@@ -143,7 +147,13 @@ export default function App() {
           <Route path="/about" element={<About />} />
           
           {/* ALL COURSE ROUTES HAVE BEEN PURGED FOR REBUILD */}
-          
+
+          {/* Academy */}
+          <Route path="/academy" element={<Academy />} />
+          <Route path="/academy/cbe" element={<AcademyCbe />} />
+          <Route path="/academy/:slug" element={<AcademyCourseDetail />} />
+          <Route path="/my-learning" element={<MyLearning />} />
+
           <Route path="/foundation" element={<Foundation />} />
           <Route path="/foundation/events" element={<FoundationEvents />} />
           <Route path="/founder" element={<Founder />} />

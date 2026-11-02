@@ -1,4 +1,4 @@
-import fredPhoto from '../../../assets/founder/fred-omondi.png';
+const fredPhoto = 'https://images.pexels.com/photos/33048698/pexels-photo-33048698.jpeg?auto=compress&cs=tinysrgb&w=800&h=1000';
 
 export const FOUNDER_HERO_BADGE = 'A Vision Born from Purpose';
 

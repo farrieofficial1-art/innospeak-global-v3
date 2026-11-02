@@ -1,5 +1,5 @@
-import iceLogo from '../../assets/partners/ice.png';
-import samaritanLogo from '../../assets/partners/samaritan.png';
+const iceLogo = null;
+const samaritanLogo = null;
 
 /**
  * Partner groups shown on the homepage trust strip.

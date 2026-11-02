@@ -1,13 +1,10 @@
-import foundationHeroImage from '../../assets/foundation/foundation-3.jpg';
-import professionalHeroImage from '../../assets/academy/student-1.jpg';
 import { HERO_SLIDES } from '../home/heroData.js';
 
 const BACKGROUND_IMAGES = {
-  foundation: foundationHeroImage,
-  professional: professionalHeroImage,
-  homepage: HERO_SLIDES[0].image,
-  learning:
-    'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1800&q=85',
+  foundation: 'https://images.pexels.com/photos/8423040/pexels-photo-8423040.jpeg?auto=compress&cs=tinysrgb&w=1800&h=1200',
+  professional: 'https://images.pexels.com/photos/6549587/pexels-photo-6549587.jpeg?auto=compress&cs=tinysrgb&w=1800&h=1200',
+  homepage: HERO_SLIDES[0]?.image || null,
+  learning: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1800&q=85',
 };
 
 export default function HeroBackground({ variant = 'foundation' }) {
