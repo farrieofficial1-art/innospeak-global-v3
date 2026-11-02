@@ -1,60 +1,54 @@
 import { useState, useMemo } from 'react';
-import { useSearchParams } from 'react-router-dom';
 import Seo from '../components/ui/Seo.jsx';
 import Container from '../components/ui/Container.jsx';
 import SectionHeading from '../components/ui/SectionHeading.jsx';
 import Reveal from '../components/ui/Reveal.jsx';
-import CourseCard from '../components/academy/CourseCard.jsx';
-import CourseFilters from '../components/academy/CourseFilters.jsx';
-import { CBE_COURSES, TRACKS, TRACK_BY_ID } from '../lib/data/academy.js';
-
-const CBE_GRADES = [
-  'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6',
-  'Grade 7', 'Grade 8', 'Grade 9',
-  'Grade 10', 'Grade 11', 'Grade 12',
-  'Electives',
-];
-
-function gradeOf(title) {
-  const m = title.match(/^(Grade \d+|Electives)/);
-  return m ? m[1] : 'Electives';
-}
+import CbeBundleCard from '../components/academy/CbeBundleCard.jsx';
+import {
+  CBE_BUNDLES,
+  CBE_STAGES,
+  getCbeBundleCourseCount,
+  getBundlesByStage,
+} from '../lib/data/cbe.js';
+import { TRACK_BY_ID } from '../lib/data/academy.js';
 
 export default function AcademyCbe() {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [selectedGrade, setSelectedGrade] = useState('all');
-  const [selectedLevel, setSelectedLevel] = useState('all');
+  const [selectedStage, setSelectedStage] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
 
-  const filtered = useMemo(() => {
-    let list = CBE_COURSES;
-    if (selectedGrade !== 'all') {
-      list = list.filter((c) => {
-        const g = gradeOf(c.title);
-        return selectedGrade === 'Electives' ? g === 'Electives' : g === selectedGrade;
-      });
-    }
-    if (selectedLevel !== 'all') {
-      list = list.filter((c) => c.level === selectedLevel);
-    }
+  const totalCourses = getCbeBundleCourseCount();
+  const track = TRACK_BY_ID['cbe'];
+
+  const visibleBundles = useMemo(() => {
+    let bundles = getBundlesByStage(selectedStage);
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase().trim();
-      list = list.filter(
-        (c) =>
-          c.title.toLowerCase().includes(q) ||
-          c.code.toLowerCase().includes(q),
+      bundles = bundles.filter(
+        (b) =>
+          b.title.toLowerCase().includes(q) ||
+          b.description.toLowerCase().includes(q) ||
+          b.subjects.some((s) => s.toLowerCase().includes(q)),
       );
     }
-    return list;
-  }, [selectedGrade, selectedLevel, searchQuery]);
+    return bundles;
+  }, [selectedStage, searchQuery]);
 
-  const track = TRACK_BY_ID['cbe'];
+  const grouped = useMemo(() => {
+    if (selectedStage !== 'all') {
+      const stage = CBE_STAGES.find((s) => s.id === selectedStage);
+      return [{ stage, bundles: visibleBundles }];
+    }
+    return CBE_STAGES.map((stage) => ({
+      stage,
+      bundles: visibleBundles.filter((b) => b.stage === stage.id),
+    })).filter((group) => group.bundles.length > 0);
+  }, [visibleBundles, selectedStage]);
 
   return (
     <>
       <Seo
         title="Kenya CBE School Programme"
-        description="Competency-Based Curriculum courses for Grades 3–12 plus electives — aligned to the Kenyan CBC."
+        description="Competency-Based Curriculum courses for Grades 3–12 plus electives — organised into structured learning bundles aligned to the Kenyan CBC."
         path="/academy/cbe"
       />
 
@@ -66,11 +60,12 @@ export default function AcademyCbe() {
               Kenya CBE School Programme
             </span>
             <h1 className="mt-5 font-display text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
-              CBC-aligned courses for every grade.
+              CBC-aligned bundles for every grade.
             </h1>
             <p className="mt-5 max-w-2xl font-body text-base leading-relaxed text-white/70 sm:text-lg">
-              {CBE_COURSES.length} courses covering Grades 3–12 core subjects
-              and electives — all aligned with Kenya's Competency-Based Curriculum.
+              {totalCourses} courses across {CBE_BUNDLES.length} structured bundles covering Grades 3–12
+              core subjects and electives — all aligned with Kenya's Competency-Based Curriculum.
+              Open a bundle to explore its courses, subjects and learning outcomes.
             </p>
           </Reveal>
         </div>
@@ -81,63 +76,75 @@ export default function AcademyCbe() {
           <div className="mb-8">
             <SectionHeading
               eyebrow={track.name}
-              title={track.description}
+              title="Choose a learning bundle"
+              subtitle="Each bundle groups the subjects and courses for a grade level or elective pathway. Open any bundle to see its courses, learning areas and outcomes."
               center={false}
             />
           </div>
 
-          {/* Grade pills */}
+          {/* Stage filter pills */}
           <div className="mb-5 flex flex-wrap gap-2">
             <button
               type="button"
-              onClick={() => setSelectedGrade('all')}
+              onClick={() => setSelectedStage('all')}
               className={`rounded-full px-4 py-2 font-body text-xs font-semibold transition-all ${
-                selectedGrade === 'all'
+                selectedStage === 'all'
                   ? 'bg-navy-900 text-white shadow-premium'
                   : 'bg-white text-navy-600 border border-navy-100 hover:border-navy-300 hover:text-navy-900'
               }`}
             >
-              All Grades
+              All Stages
             </button>
-            {CBE_GRADES.map((grade) => {
-              const active = selectedGrade === grade;
+            {CBE_STAGES.map((stage) => {
+              const active = selectedStage === stage.id;
               return (
                 <button
-                  key={grade}
+                  key={stage.id}
                   type="button"
-                  onClick={() => setSelectedGrade(grade)}
+                  onClick={() => setSelectedStage(stage.id)}
                   className={`rounded-full px-4 py-2 font-body text-xs font-semibold transition-all ${
                     active
                       ? 'bg-navy-900 text-white shadow-premium'
                       : 'bg-white text-navy-600 border border-navy-100 hover:border-navy-300 hover:text-navy-900'
                   }`}
                 >
-                  {grade}
+                  {stage.name}
+                  <span className="ml-1.5 text-navy-400">· {stage.grades}</span>
                 </button>
               );
             })}
           </div>
 
-          <CourseFilters
-            selectedTrack="cbe"
-            setSelectedTrack={() => {}}
-            selectedLevel={selectedLevel}
-            setSelectedLevel={setSelectedLevel}
-            searchQuery={searchQuery}
-            setSearchQuery={setSearchQuery}
-            resultCount={filtered.length}
-          />
+          {/* Search */}
+          <div className="relative mb-10 max-w-md">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search bundles by name or subject…"
+              className="w-full rounded-2xl border border-navy-100 bg-white py-3 pl-4 pr-10 font-body text-sm text-navy-900 shadow-premium outline-none transition-colors placeholder:text-navy-400 focus:border-gold-400 focus:ring-2 focus:ring-gold-400/30"
+            />
+            {searchQuery && (
+              <button
+                type="button"
+                onClick={() => setSearchQuery('')}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-navy-400 transition-colors hover:text-navy-700"
+                aria-label="Clear search"
+              >
+                ×
+              </button>
+            )}
+          </div>
 
-          {filtered.length === 0 ? (
+          {grouped.length === 0 ? (
             <div className="mt-16 text-center">
               <p className="font-body text-lg text-navy-500">
-                No courses match your filters. Try a different grade or search term.
+                No bundles match your search. Try a different stage or term.
               </p>
               <button
                 type="button"
                 onClick={() => {
-                  setSelectedGrade('all');
-                  setSelectedLevel('all');
+                  setSelectedStage('all');
                   setSearchQuery('');
                 }}
                 className="btn-outline mt-6"
@@ -146,9 +153,23 @@ export default function AcademyCbe() {
               </button>
             </div>
           ) : (
-            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {filtered.map((course) => (
-                <CourseCard key={course.code} course={course} />
+            <div className="space-y-14">
+              {grouped.map(({ stage, bundles }) => (
+                <div key={stage.id}>
+                  <div className="mb-6 flex items-baseline gap-3">
+                    <h2 className="font-display text-xl font-bold text-navy-900">
+                      {stage.name}
+                    </h2>
+                    <span className="font-body text-sm text-navy-400">
+                      {stage.grades} · {bundles.length} bundle{bundles.length === 1 ? '' : 's'}
+                    </span>
+                  </div>
+                  <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                    {bundles.map((bundle) => (
+                      <CbeBundleCard key={bundle.id} bundle={bundle} />
+                    ))}
+                  </div>
+                </div>
               ))}
             </div>
           )}

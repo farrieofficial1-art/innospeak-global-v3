@@ -25,6 +25,7 @@ import Signup from './pages/auth/Signup.jsx';
 import Register from './pages/Register.jsx';
 import Academy from './pages/Academy.jsx';
 import AcademyCbe from './pages/AcademyCbe.jsx';
+import AcademyCbeBundle from './pages/AcademyCbeBundle.jsx';
 import AcademyCourseDetail from './pages/AcademyCourseDetail.jsx';
 import MyLearning from './pages/MyLearning.jsx';                            
 import ForgotPassword from './pages/auth/ForgotPassword.jsx';
@@ -151,6 +152,7 @@ export default function App() {
           {/* Academy */}
           <Route path="/academy" element={<Academy />} />
           <Route path="/academy/cbe" element={<AcademyCbe />} />
+          <Route path="/academy/cbe/:bundleSlug" element={<AcademyCbeBundle />} />
           <Route path="/academy/:slug" element={<AcademyCourseDetail />} />
           <Route path="/my-learning" element={<MyLearning />} />
 
