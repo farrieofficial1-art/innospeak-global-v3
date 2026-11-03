@@ -10,6 +10,7 @@
  */
 
 import { getProgrammeByCode } from './programmeData';
+import { getLabCourseByCode } from './labs';
 import { listMyPortfolio, listMyCertificates } from '../supabase/learning';
 import { listMyGoals, listMentorshipRequests } from '../supabase/platform';
 
@@ -44,10 +45,18 @@ function aggregateSkills(certificates, portfolio) {
     );
   });
 
-  // Evidence 2: certificates imply the course's category as a skill family
+  // Evidence 2: certificates imply the course's category as a skill family.
+  // Labs courses carry explicit skills[] arrays — add each as a skill.
   certificates.forEach((cert) => {
     const code = cert.lms_courses?.code || cert.course_code;
     if (!code) return;
+    const labCourse = getLabCourseByCode(code);
+    if (labCourse) {
+      (labCourse.skills || []).forEach((skill) =>
+        add(skill, { type: 'certificate', label: labCourse.title, id: cert.id })
+      );
+      return;
+    }
     const course = getProgrammeByCode(code);
     if (!course?.category) return;
     add(course.category, {

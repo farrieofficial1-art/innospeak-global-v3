@@ -27,6 +27,8 @@ import Academy from './pages/Academy.jsx';
 import AcademyCbe from './pages/AcademyCbe.jsx';
 import AcademyCbeBundle from './pages/AcademyCbeBundle.jsx';
 import AcademyCourseDetail from './pages/AcademyCourseDetail.jsx';
+import Labs from './pages/Labs.jsx';
+import LabCourseDetail from './pages/LabCourseDetail.jsx';
 import MyLearning from './pages/MyLearning.jsx';                            
 import ForgotPassword from './pages/auth/ForgotPassword.jsx';
 import ResetPassword from './pages/auth/ResetPassword.jsx';
@@ -154,6 +156,11 @@ export default function App() {
           <Route path="/academy/cbe" element={<AcademyCbe />} />
           <Route path="/academy/cbe/:bundleSlug" element={<AcademyCbeBundle />} />
           <Route path="/academy/:slug" element={<AcademyCourseDetail />} />
+
+          {/* Labs */}
+          <Route path="/labs" element={<Labs />} />
+          <Route path="/labs/:slug" element={<LabCourseDetail />} />
+
           <Route path="/my-learning" element={<MyLearning />} />
 
           <Route path="/foundation" element={<Foundation />} />
