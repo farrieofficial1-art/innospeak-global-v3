@@ -1,9 +1,5 @@
 import { motion } from 'framer-motion';
-import {
-  Mic, Briefcase, Presentation, Code, BarChart3, Brain, Users, Rocket,
-  Globe, Award, Laptop, Compass, Palette, Sparkles, BookOpen, Heart,
-  GraduationCap, Cloud, Shield, Cog, Film, ArrowRight,
-} from 'lucide-react';
+import { Mic, Briefcase, Presentation, Code, ChartBar as BarChart3, Brain, Users, Rocket, Globe, Award, Laptop, Compass, Palette, Sparkles, BookOpen, Heart, GraduationCap, Cloud, Shield, Cog, Film, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const ICONS = {
@@ -32,7 +28,7 @@ const ICONS = {
 
 export default function PathwayCard({ course, index = 0 }) {
   const Icon = ICONS[course.icon] ?? Mic;
-  const href = course.href || `/courses/${course.code}`;
+  const href = course.href || (course.slug ? `/academy/${course.slug}` : `/academy`);
   const isFree = course.isFree === true;
 
   return (

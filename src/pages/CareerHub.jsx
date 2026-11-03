@@ -50,7 +50,7 @@ const JOURNEY_STEPS = [
 
 const DEVELOPMENT_AREAS = [
   { icon: TrendingUp, title: 'Career Development',          description: 'Structured guidance to help you identify, pursue and achieve your professional goals, from your first role to leadership.', href: '/learn/goals' },
-  { icon: BookOpen,   title: 'Skills & Professional Growth', description: 'Build the technical, communication and leadership skills that employers and clients actually value.', href: '/courses' },
+  { icon: BookOpen,   title: 'Skills & Professional Growth', description: 'Build the technical, communication and leadership skills that employers and clients actually value.', href: '/academy' },
   { icon: Rocket,     title: 'Projects & Experience',       description: 'Labs projects, portfolio builds and practical challenges that turn learning into demonstrable evidence.', href: '/learn/projects' },
   { icon: Award,      title: 'Credentials & Achievements',  description: 'Earn recognised credentials that validate your skills and signal your readiness to employers and partners.', href: '/learn/certificates' },
 ];
@@ -66,11 +66,11 @@ const CONNECTION_TYPES = [
 
 const CAREER_DEVELOPMENT_RESOURCES = [
   { title: 'CV & Portfolio',            description: 'Build strong applications and a portfolio that proves what you can do.', href: '/learn/portfolio' },
-  { title: 'Interview Preparation',     description: 'Prepare for interviews with structure, practice and feedback.',           href: '/courses/ITP101' },
-  { title: 'Professional Communication', description: 'Develop the workplace communication that gets you heard.',               href: '/courses/ENG105' },
-  { title: 'Workplace Skills',          description: 'Professionalism, teamwork, time management and leadership.',              href: '/courses/EMP101' },
+  { title: 'Interview Preparation',     description: 'Prepare for interviews with structure, practice and feedback.',           href: '/academy' },
+  { title: 'Professional Communication', description: 'Develop the workplace communication that gets you heard.',               href: '/academy' },
+  { title: 'Workplace Skills',          description: 'Professionalism, teamwork, time management and leadership.',              href: '/academy' },
   { title: 'Career Guidance',           description: 'Understand career paths, make informed choices and plan next steps.',     href: '/learn/goals' },
-  { title: 'Entrepreneurship',          description: 'Explore self-employment, side income and opportunity creation.',          href: '/courses/ENT101' },
+  { title: 'Entrepreneurship',          description: 'Explore self-employment, side income and opportunity creation.',          href: '/academy' },
 ];
 
 const CAREER_EVENT_TYPES = [
@@ -810,7 +810,7 @@ export default function CareerHub() {
                 <ArrowRight size={16} aria-hidden="true" />
               </Link>
               <Link
-                to="/courses"
+                to="/academy"
                 className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-white/25 bg-white/5 px-7 py-3 font-body text-sm font-bold text-white backdrop-blur-sm transition-all duration-300 hover:border-gold-400 hover:bg-white/10 hover:text-gold-300 sm:w-auto"
               >
                 Browse Courses

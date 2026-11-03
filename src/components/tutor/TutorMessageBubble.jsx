@@ -231,7 +231,7 @@ function CourseChips({ courses }) {
         {courses.map(({ code, course }) => (
           <Link
             key={code}
-            to={`/courses/${code}`}
+            to={course.slug ? `/academy/${course.slug}` : '/academy'}
             className="group inline-flex items-center gap-1.5 rounded-full border border-navy-100 bg-cream px-3 py-1.5 transition-all hover:border-gold-300 hover:bg-gold-50/60"
           >
             <span className="font-mono text-[10px] font-bold text-gold-700">{code}</span>

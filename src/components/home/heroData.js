@@ -9,8 +9,8 @@ export const HERO_DESCRIPTION =
   'InnoSpeak Global brings together structured learning, practical innovation and educational support through Academy, Labs and Foundation. Together, they help you do more than finish a course.';
 
 export const HERO_STATS = [
-  { value: 350, suffix: '+', label: 'Courses in catalogue' },
-  { value: 12, suffix: '', label: 'Learning pathways' },
+  { value: 427, suffix: '+', label: 'Courses in catalogue' },
+  { value: 17, suffix: '', label: 'Learning tracks' },
   { value: 7, suffix: '', label: 'Innovation schools' },
   { value: 3, suffix: '', label: 'Ecosystem pillars' },
 ];
