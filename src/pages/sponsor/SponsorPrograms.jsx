@@ -151,8 +151,9 @@ export default function SponsorPrograms() {
                               />
                             </div>
                             <p className="mt-1 font-body text-[11px] text-navy-400">
-                              ${i.raised.toLocaleString()} of ${i.goal.toLocaleString()} ·{' '}
-                              {i.beneficiaries} beneficiaries
+                              {i.raised != null ? `${i.raised.toLocaleString()}` : 'Pending'} of{' '}
+                              {i.goal != null ? `${i.goal.toLocaleString()}` : 'Pending'} ·{' '}
+                              {i.beneficiaries != null ? `${i.beneficiaries} beneficiaries` : 'Beneficiaries pending'}
                             </p>
                           </li>
                         );

@@ -8,6 +8,13 @@ export const FOUNDATION_PROGRAMS = [
   { id: 'digital-access', label: 'Digital Access Initiative' },
   { id: 'girls-in-stem', label: 'Girls in STEM' },
   { id: 'community-grants', label: 'Community Impact Grants' },
+  { id: 'youth-employment', label: 'Youth Employment & Freelancing Fund' },
+  { id: 'teacher-training', label: 'Teacher Digital Capacity Initiative' },
+  { id: 'inclusive-learning', label: 'Inclusive Learning Fund' },
+  { id: 'refugee-support', label: 'Refugee & Displaced Youth Fund' },
+  { id: 'rural-learning-hubs', label: 'Rural Learning Hubs Initiative' },
+  { id: 'green-skills', label: 'Green & Climate Skills Fund' },
+  { id: 'msme-digital', label: 'MSME Digital Growth Fund' },
 ];
 
 export const APPLICATION_STATUSES = [

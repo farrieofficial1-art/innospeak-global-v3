@@ -2,9 +2,9 @@ import { Target, TrendingUp, Users, DollarSign, Plus } from 'lucide-react';
 import { FOUNDATION_INITIATIVES } from '../../components/sections/foundation/foundationData.js';
 
 export default function FoundationInitiatives() {
-  const totalGoal = FOUNDATION_INITIATIVES.reduce((s, i) => s + i.goal, 0);
-  const totalRaised = FOUNDATION_INITIATIVES.reduce((s, i) => s + i.raised, 0);
-  const totalBeneficiaries = FOUNDATION_INITIATIVES.reduce((s, i) => s + i.beneficiaries, 0);
+  const totalGoal = FOUNDATION_INITIATIVES.reduce((s, i) => s + (i.goal || 0), 0);
+  const totalRaised = FOUNDATION_INITIATIVES.reduce((s, i) => s + (i.raised || 0), 0);
+  const totalBeneficiaries = FOUNDATION_INITIATIVES.reduce((s, i) => s + (i.beneficiaries || 0), 0);
   const progress = totalGoal > 0 ? Math.round((totalRaised / totalGoal) * 100) : 0;
 
   return (
@@ -73,11 +73,11 @@ export default function FoundationInitiatives() {
                 <div className="mt-4 grid grid-cols-2 gap-3 border-t border-navy-100 pt-4 text-xs">
                   <div>
                     <p className="font-body text-[10px] uppercase tracking-wider text-navy-400">Raised</p>
-                    <p className="mt-0.5 font-body font-bold text-navy-900">${initiative.raised.toLocaleString()}</p>
+                    <p className="mt-0.5 font-body font-bold text-navy-900">{initiative.raised != null ? `${initiative.raised.toLocaleString()}` : 'Pending'}</p>
                   </div>
                   <div>
                     <p className="font-body text-[10px] uppercase tracking-wider text-navy-400">Goal</p>
-                    <p className="mt-0.5 font-body font-bold text-navy-900">${initiative.goal.toLocaleString()}</p>
+                    <p className="mt-0.5 font-body font-bold text-navy-900">{initiative.goal != null ? `${initiative.goal.toLocaleString()}` : 'Pending'}</p>
                   </div>
                 </div>
               </div>

@@ -1,10 +1,36 @@
 import { motion } from 'framer-motion';
-import { Award, Sparkles, Heart, Laptop, Check, ArrowRight } from 'lucide-react';
+import {
+  Award,
+  Sparkles,
+  Heart,
+  Laptop,
+  Briefcase,
+  Users,
+  Accessibility,
+  Globe,
+  Building,
+  Leaf,
+  Store,
+  Check,
+  ArrowRight,
+} from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SectionHeading from '../../ui/SectionHeading.jsx';
 import { FOCUS_AREAS } from './foundationData.js';
 
-const ICONS = { award: Award, sparkles: Sparkles, heart: Heart, laptop: Laptop };
+const ICONS = {
+  award: Award,
+  sparkles: Sparkles,
+  heart: Heart,
+  laptop: Laptop,
+  briefcase: Briefcase,
+  users: Users,
+  accessibility: Accessibility,
+  globe: Globe,
+  building: Building,
+  leaf: Leaf,
+  store: Store,
+};
 
 export default function FocusAreas() {
   return (
@@ -12,8 +38,8 @@ export default function FocusAreas() {
       <div className="container-premium">
         <SectionHeading
           eyebrow="Our Programs"
-          title="Four Focused Programmes. Clear Outcomes."
-          subtitle="These are proposed programme models. Each must have approved eligibility, a costed plan, safeguarding and a reporting framework before it is advertised as open or funded."
+          title="Eleven Sponsor-Ready Programs. Clear Outcomes."
+          subtitle="Each programme has a defined goal, costed sponsor impact tiers and measurable outcomes. Choose a program to support, or apply if you or your community need assistance."
         />
 
         <div className="mt-12 grid gap-6 md:grid-cols-2 lg:gap-7">
@@ -46,12 +72,44 @@ export default function FocusAreas() {
                   {area.short}
                 </p>
 
-                {/* Description */}
+                {/* Goal */}
                 <p className="mt-3 font-body text-sm leading-6 text-navy-600">
+                  <span className="font-bold text-navy-800">Goal: </span>
+                  {area.goal}
+                </p>
+
+                {/* Sponsor impact tiers */}
+                <div className="mt-5 rounded-xl border border-emerald-100 bg-emerald-50/50 p-4">
+                  <p className="font-body text-[11px] font-bold uppercase tracking-wider text-navy-500">
+                    Sponsor Impact
+                  </p>
+                  <ul className="mt-3 space-y-2">
+                    {area.sponsorImpact.map((tier) => (
+                      <li
+                        key={tier.amount}
+                        className="flex items-start justify-between gap-3 font-body text-sm text-navy-700"
+                      >
+                        <span className="flex items-start gap-2">
+                          <Check size={14} className="mt-0.5 flex-shrink-0 text-emerald-600" />
+                          <span>{tier.label}</span>
+                        </span>
+                        <span className="shrink-0 font-display text-sm font-bold text-emerald-700">
+                          ${tier.amount.toLocaleString()}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="mt-3 border-t border-emerald-100 pt-3 font-body text-sm italic leading-5 text-emerald-800">
+                    &ldquo;{area.sponsorHook}&rdquo;
+                  </p>
+                </div>
+
+                {/* Description */}
+                <p className="mt-5 font-body text-sm leading-6 text-navy-600">
                   {area.description}
                 </p>
 
-                <div className="mt-5 rounded-xl border border-emerald-100 bg-emerald-50/50 p-4">
+                <div className="mt-5 rounded-xl border border-navy-100 bg-navy-50/30 p-4">
                   <p className="font-body text-[11px] font-bold uppercase tracking-wider text-navy-500">Who this is designed to serve</p>
                   <p className="mt-2 font-body text-sm leading-6 text-navy-700">{area.targetGroup}</p>
                 </div>
@@ -109,7 +167,7 @@ export default function FocusAreas() {
         </div>
 
         <p className="mt-10 text-center font-body text-xs text-navy-500">
-          Additional Foundation programs will be added over time. Each program has its own eligibility and application.
+          Each program has its own eligibility and application. Sponsorship packages range from $25 to $25,000 depending on the program and tier.
         </p>
       </div>
     </section>
