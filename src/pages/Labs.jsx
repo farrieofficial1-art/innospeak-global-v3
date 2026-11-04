@@ -16,13 +16,11 @@ const LEVELS = ['Beginner', 'Intermediate', 'Advanced', 'Expert'];
 
 export default function Labs() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const initialTrack = searchParams.get('track') || 'all';
-  const [selectedTrack, setSelectedTrack] = useState(initialTrack);
+  const selectedTrack = searchParams.get('track') || 'all';
   const [selectedLevel, setSelectedLevel] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
 
   function handleTrackChange(trackId) {
-    setSelectedTrack(trackId);
     if (trackId === 'all') searchParams.delete('track');
     else searchParams.set('track', trackId);
     setSearchParams(searchParams, { replace: true });
