@@ -1,20 +1,11 @@
-import foundationPhoto1 from '../../../assets/foundation/foundation-1.jpg';
-import foundationPhoto2 from '../../../assets/foundation/foundation-2.jpg';
-import foundationPhoto3 from '../../../assets/foundation/foundation-3.jpg';
-
 export const FOUNDATION_HERO_SLIDES = [
-  { id: 'session', image: foundationPhoto1, title: 'Mentorship in Action' },
-  { id: 'community', image: foundationPhoto2, title: 'Community Outreach' },
-  { id: 'team', image: foundationPhoto3, title: 'Building Relationships' },
+  { id: 'session', image: 'https://images.pexels.com/photos/39523809/pexels-photo-39523809.jpeg?auto=compress&cs=tinysrgb&h=650&w=940', title: 'Mentorship in Action' },
+  { id: 'community', image: 'https://images.pexels.com/photos/9090746/pexels-photo-9090746.jpeg?auto=compress&cs=tinysrgb&h=650&w=940', title: 'Community Outreach' },
+  { id: 'team', image: 'https://images.pexels.com/photos/28344265/pexels-photo-28344265.jpeg?auto=compress&cs=tinysrgb&h=650&w=940', title: 'Building Relationships' },
 ];
 
-export const FOUNDATION_HERO_IMAGE = foundationPhoto3;
+export const FOUNDATION_HERO_IMAGE = FOUNDATION_HERO_SLIDES[2].image;
 
-/**
- * These are deliberately real/verifiable, not invented impact numbers —
- * see the honesty note in FocusAreas/WaysToGive: no fabricated donor or
- * beneficiary stats until real figures exist.
- */
 export const FOUNDATION_HERO_IMAGE_STATS = [
   { value: '3', label: 'Focus Areas' },
   { value: '2', label: 'Giving Channels' },

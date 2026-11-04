@@ -81,9 +81,23 @@ export const TRACKS = [
   },
 ];
 
-export const PATHWAYS = [];
+export const PATHWAYS = [
+  { id: 'english-communication', title: 'English Communication', slug: 'english-communication', description: 'English language skills for everyday and professional contexts.' },
+  { id: 'world-languages', title: 'World Languages', slug: 'world-languages', description: 'Spanish, French, German, Mandarin, Japanese, Korean and more.' },
+  { id: 'international-qualifications', title: 'International Qualifications', slug: 'international-qualifications', description: 'IELTS, SAT, IGCSE, GMAT, GRE, TOEFL and other exam prep.' },
+  { id: 'kenya-curriculum-tvet', title: 'Kenya Curriculum & TVET', slug: 'kenya-curriculum-tvet', description: 'CBE school programme (Grades 3–12), TVET, and engineering trades.' },
+  { id: 'digital-skills-productivity', title: 'Digital Skills & Productivity', slug: 'digital-skills-productivity', description: 'AI, data, coding, cloud, cybersecurity, and digital tools.' },
+  { id: 'creative-design-media', title: 'Creative Design & Media', slug: 'creative-design-media', description: 'Design, video, photography, animation, and AI-generated media.' },
+  { id: 'business-entrepreneurship', title: 'Business & Entrepreneurship', slug: 'business-entrepreneurship', description: 'Business, leadership, marketing, finance, and operations.' },
+  { id: 'freelancing-remote-work', title: 'Freelancing & Remote Work', slug: 'freelancing-remote-work', description: 'Build a freelance career, win global clients, and work remotely.' },
+  { id: 'career-global', title: 'Career Global', slug: 'career-global', description: 'Job search, interview prep, and global career advancement.' },
+  { id: 'education-teaching-training', title: 'Education & Training', slug: 'education-teaching-training', description: 'Teaching methodologies, curriculum, EdTech, and instructional design.' },
+  { id: 'health-hospitality-community', title: 'Health & Community Services', slug: 'health-hospitality-community', description: 'Hospitality, caregiving, community health, and events.' },
+  { id: 'personal-life-skills', title: 'Personal & Professional Development', slug: 'personal-life-skills', description: 'Thinking, productivity, branding, communication, and resilience.' },
+];
 
 export function getGrouping() { return null; }
 
 export const TRACK_BY_ID = Object.fromEntries(TRACKS.map((t) => [t.id, t]));
 export const TRACK_BY_SLUG = Object.fromEntries(TRACKS.map((t) => [t.slug, t]));
+export const PATHWAY_BY_ID = Object.fromEntries(PATHWAYS.map((p) => [p.id, p]));

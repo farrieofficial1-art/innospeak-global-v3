@@ -13,8 +13,36 @@ import {
   TRACK_BY_ID,
   KES_RATE,
 } from './academy.js';
+import { PATHWAYS } from './registry.js';
 
 export const ACADEMY = 'InnoSpeak Academy';
+
+// Maps Academy track_id (short, from academy.js) to the 12 pathway IDs
+// expected by the catalogue audit and used across the admissions form.
+const TRACK_TO_PATHWAY = {
+  ai: 'digital-skills-productivity',
+  data: 'digital-skills-productivity',
+  digital: 'digital-skills-productivity',
+  tech: 'digital-skills-productivity',
+  engineering: 'kenya-curriculum-tvet',
+  cbe: 'kenya-curriculum-tvet',
+  freelance: 'freelancing-remote-work',
+  career: 'career-global',
+  business: 'business-entrepreneurship',
+  leadership: 'business-entrepreneurship',
+  marketing: 'business-entrepreneurship',
+  finance: 'business-entrepreneurship',
+  creative: 'creative-design-media',
+  languages: 'world-languages',
+  exams: 'international-qualifications',
+  education: 'education-teaching-training',
+  personal: 'personal-life-skills',
+  health: 'health-hospitality-community',
+};
+
+// Track IDs whose English-language courses belong to english-communication
+// rather than world-languages.
+const ENGLISH_CODES = new Set(['LNG101','LNG102','LNG103','LNG104','LNG105']);
 
 // Study modes offered across Academy + Labs admissions.
 export const STUDY_MODES = [
@@ -26,14 +54,13 @@ export const STUDY_MODES = [
 
 export const INTAKES = ['January', 'March', 'May', 'September', 'December'];
 
-// Pathways are the Academy tracks, re-shaped to { id, title } for the
-// admissions form. The CBE pathway id matches gradeBundles.js.
-export const PATHWAYS = ACADEMY_TRACKS.map((t) => ({
-  id: t.id,
-  title: t.name,
-  slug: t.slug,
-  description: t.description,
-}));
+// Pathways come from registry.js (the 12 expected by the audit).
+// We re-export them in the shape { id, title, slug, description } for the
+// admissions form and audit script.
+export const PATHWAYS_EXP = PATHWAYS;
+
+// Keep the old export name for backward compat — derive from registry PATHWAYS.
+export { PATHWAYS };
 
 // Labs tracks (Technology & Cybersecurity subset) exposed separately for
 // the Labs division selector. The admissions form uses TRACKS when the
@@ -49,18 +76,22 @@ function adaptCourse(c) {
   const track = TRACK_BY_ID[c.track_id];
   const feesUSD = c.price_usd || 0;
   const isFree = feesUSD === 0;
+  const pathwayId = ENGLISH_CODES.has(c.code)
+    ? 'english-communication'
+    : TRACK_TO_PATHWAY[c.track_id] || 'personal-life-skills';
   return {
     code: c.code,
     name: c.title,
-    pathwayId: c.track_id,
+    pathwayId,
     pathway: track?.name || null,
     category: track?.name || null,
+    division: 'academy',
     level: c.level || null,
     slug: c.slug || null,
     duration: '8 Weeks',
     studyMode: 'Self-Paced',
     feesUSD,
-    fees: isFree ? 'Free' : `$${feesUSD}`,
+    fees: isFree ? 'Free' : `${feesUSD}`,
     isFree,
   };
 }
@@ -85,7 +116,7 @@ export function getAcademyCourses() {
 
 export function getLabsCourses() {
   return COURSES.filter((c) =>
-    ['tech', 'ai', 'data', 'engineering'].includes(c.pathwayId)
+    ['digital-skills-productivity', 'kenya-curriculum-tvet'].includes(c.pathwayId)
   );
 }
 
