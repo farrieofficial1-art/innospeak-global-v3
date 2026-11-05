@@ -559,7 +559,7 @@ export default function MyProgress() {
                 title="No enrolled courses yet"
                 message="Once you enroll in a course, your progress will show up here."
                 action={
-                  <Link to="/academy" className="btn-gold text-sm">
+                  <Link to="/learn/catalog" className="btn-gold text-sm">
                     Browse Courses
                   </Link>
                 }

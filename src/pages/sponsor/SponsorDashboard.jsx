@@ -113,7 +113,7 @@ export default function SponsorDashboard() {
             Once the Foundation team confirms a gift, it will appear here.
           </p>
           <Link
-            to="/foundation#ways-to-give"
+            to="/foundation#foundation-programs"
             className="btn-gold mt-6 inline-flex items-center gap-2 px-6 py-3"
           >
             Explore ways to support

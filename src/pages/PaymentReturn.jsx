@@ -64,7 +64,7 @@ export default function PaymentReturn() {
           <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
             {state.status === 'login' && <Link to="/login" state={{ from: location }} className="btn-gold">Sign in to continue</Link>}
             {(state.status === 'success' || state.status === 'pending') && <Link to="/learn" className="btn-gold">Go to My Learning</Link>}
-            {(state.status === 'cancelled' || state.status === 'error') && <Link to="/academy" className="btn-outline">Return to course catalogue</Link>}
+            {(state.status === 'cancelled' || state.status === 'error') && <Link to="/learn/catalog" className="btn-outline">Return to course catalogue</Link>}
             <Link to="/contact?interest=payment-support" className="btn-outline">Contact support</Link>
           </div>
         </section>

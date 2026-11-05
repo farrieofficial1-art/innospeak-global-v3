@@ -207,7 +207,7 @@ export default function SponsorSignIn() {
                 <p className="mt-6 text-center font-body text-xs text-navy-400">
                   Haven&rsquo;t given yet?{' '}
                   <Link
-                    to="/foundation#ways-to-give"
+                    to="/foundation#foundation-programs"
                     className="font-semibold text-emerald-600 hover:text-emerald-700"
                   >
                     Explore ways to support

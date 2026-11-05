@@ -8,7 +8,6 @@ import {
   getContributionsBySponsor,
 } from '../../lib/data/sponsorStore.js';
 import { FOUNDATION_PROGRAMS } from '../../lib/data/foundationApplicationsData.js';
-import { FOUNDATION_INITIATIVES } from '../../components/sections/foundation/foundationData.js';
 
 export default function SponsorPrograms() {
   const [tick, setTick] = useState(0);
@@ -78,10 +77,6 @@ export default function SponsorPrograms() {
             const entry = byProgram.get(program.id);
             if (!entry) return null;
 
-            const initiatives = FOUNDATION_INITIATIVES.filter(
-              (i) => i.category === program.label
-            );
-
             return (
               <div
                 key={program.id}
@@ -130,40 +125,8 @@ export default function SponsorPrograms() {
                   </p>
                 )}
 
-                {initiatives.length > 0 && (
-                  <div className="mt-5 border-t border-navy-100 pt-5">
-                    <p className="font-body text-[11px] font-bold uppercase tracking-wider text-navy-400">
-                      Active Initiatives
-                    </p>
-                    <ul className="mt-2 space-y-2">
-                      {initiatives.map((i) => {
-                        const pct =
-                          i.goal > 0 ? Math.min((i.raised / i.goal) * 100, 100) : 0;
-                        return (
-                          <li key={i.id}>
-                            <p className="font-body text-sm font-semibold text-navy-900">
-                              {i.title}
-                            </p>
-                            <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-cream">
-                              <div
-                                className="h-full bg-gradient-to-r from-emerald-500 to-emerald-600"
-                                style={{ width: `${pct}%` }}
-                              />
-                            </div>
-                            <p className="mt-1 font-body text-[11px] text-navy-400">
-                              {i.raised != null ? `${i.raised.toLocaleString()}` : 'Pending'} of{' '}
-                              {i.goal != null ? `${i.goal.toLocaleString()}` : 'Pending'} ·{' '}
-                              {i.beneficiaries != null ? `${i.beneficiaries} beneficiaries` : 'Beneficiaries pending'}
-                            </p>
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  </div>
-                )}
-
                 <a
-                  href="/foundation#ways-to-give"
+                  href="/foundation#foundation-programs"
                   className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-br from-emerald-600 to-emerald-700 px-5 py-3 font-body text-sm font-bold text-white shadow-md transition-transform hover:scale-[1.02]"
                 >
                   Support This Program
