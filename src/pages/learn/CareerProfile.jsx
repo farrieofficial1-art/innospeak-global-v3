@@ -75,7 +75,7 @@ function SkillsSection({ skills }) {
           title="No skills demonstrated yet"
           message="Complete a course or add a project to your portfolio to start building evidence of what you can do."
           action={
-            <Link to="/academy" className="btn-gold inline-flex items-center gap-2 text-sm">
+            <Link to="/learn/catalog" className="btn-gold inline-flex items-center gap-2 text-sm">
               Browse Courses
               <ArrowRight size={14} aria-hidden="true" />
             </Link>

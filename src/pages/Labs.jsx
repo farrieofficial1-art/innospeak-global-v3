@@ -9,18 +9,19 @@ import SectionHeading from '../components/ui/SectionHeading.jsx';
 import LabCourseCard from '../components/academy/LabCourseCard.jsx';
 import { TRACKS, TRACK_BY_ID } from '../lib/data/registry.js';
 import { LAB_COURSES, LAB_BY_TRACK } from '../lib/data/labs.js';
-import { getLabSchoolById } from '../lib/data/labsData.js';
 import { inViewOnce } from '../lib/motion/presets';
 
 const LEVELS = ['Beginner', 'Intermediate', 'Advanced', 'Expert'];
 
 export default function Labs() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const selectedTrack = searchParams.get('track') || 'all';
+  const initialTrack = searchParams.get('track') || 'all';
+  const [selectedTrack, setSelectedTrack] = useState(initialTrack);
   const [selectedLevel, setSelectedLevel] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
 
   function handleTrackChange(trackId) {
+    setSelectedTrack(trackId);
     if (trackId === 'all') searchParams.delete('track');
     else searchParams.set('track', trackId);
     setSearchParams(searchParams, { replace: true });
@@ -43,7 +44,6 @@ export default function Labs() {
   }, [selectedTrack, selectedLevel, searchQuery]);
 
   const activeTrack = selectedTrack !== 'all' ? TRACK_BY_ID[selectedTrack] : null;
-  const activeSchool = selectedTrack !== 'all' ? getLabSchoolById(selectedTrack) : null;
 
   return (
     <>
@@ -97,7 +97,8 @@ export default function Labs() {
             />
             <motion.div
               initial="hidden"
-              animate="visible"
+              whileInView="visible"
+              viewport={inViewOnce}
               variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.06 } } }}
               className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
             >
@@ -107,7 +108,7 @@ export default function Labs() {
                 return (
                   <motion.div
                     key={track.id}
-                    variants={{ hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } } }}
+                    variants={{ hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0 } }}
                   >
                     <Link
                       to={`/labs?track=${track.id}`}
@@ -151,50 +152,6 @@ export default function Labs() {
                 subtitle={activeTrack.description}
                 center={false}
               />
-
-              {/* Explore panel — sub-tracks & technologies */}
-              {activeSchool && (activeSchool.tracks.length > 0 || activeSchool.technologies.length > 0) && (
-                <div className="mt-8 grid gap-6 lg:grid-cols-2">
-                  {activeSchool.tracks.length > 0 && (
-                    <div className="rounded-2xl border border-navy-100 bg-white p-6 shadow-premium">
-                      <h3 className="font-display text-base font-bold text-navy-900">
-                        What you can learn
-                      </h3>
-                      <p className="mt-1 font-body text-xs text-navy-500">
-                        Focus areas within {activeTrack.title}. The enrollable unit is the course.
-                      </p>
-                      <ul className="mt-4 grid gap-2 sm:grid-cols-2">
-                        {activeSchool.tracks.map((t) => (
-                          <li key={t} className="flex items-start gap-2 font-body text-sm text-navy-700">
-                            <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-gold-500" />
-                            {t}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                  {activeSchool.technologies.length > 0 && (
-                    <div className="rounded-2xl border border-navy-100 bg-white p-6 shadow-premium">
-                      <h3 className="font-display text-base font-bold text-navy-900">
-                        Technologies & tools
-                      </h3>
-                      <p className="mt-1 font-body text-xs text-navy-500">
-                        Hands-on stack you will work with across the track.
-                      </p>
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        {activeSchool.technologies.map((tech) => (
-                          <span
-                            key={tech}
-                            className="rounded-full bg-navy-50 px-3 py-1.5 font-body text-xs font-semibold text-navy-700"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              )}
             </div>
           )}
 

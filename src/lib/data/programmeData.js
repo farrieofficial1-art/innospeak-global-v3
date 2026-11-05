@@ -14,7 +14,6 @@ import {
   KES_RATE,
 } from './academy.js';
 import { PATHWAYS } from './registry.js';
-import { getCurriculumStatus } from './courseReadiness.js';
 
 export const ACADEMY = 'InnoSpeak Academy';
 
@@ -77,7 +76,6 @@ function adaptCourse(c) {
   const track = TRACK_BY_ID[c.track_id];
   const feesUSD = c.price_usd || 0;
   const isFree = feesUSD === 0;
-  const publicationAuthorized = getCurriculumStatus(c.code).hasStructuredContent;
   const pathwayId = ENGLISH_CODES.has(c.code)
     ? 'english-communication'
     : TRACK_TO_PATHWAY[c.track_id] || 'personal-life-skills';
@@ -95,9 +93,6 @@ function adaptCourse(c) {
     feesUSD,
     fees: isFree ? 'Free' : `${feesUSD}`,
     isFree,
-    ownerAuthorizedForPublication: publicationAuthorized,
-    enrollmentOpen: publicationAuthorized,
-    selfPacedAvailable: publicationAuthorized,
   };
 }
 

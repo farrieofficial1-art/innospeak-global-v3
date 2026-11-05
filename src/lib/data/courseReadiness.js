@@ -4,9 +4,7 @@
 // have owner-authorised structured curriculum content (modules, lessons,
 // assessments) published and ready for self-paced enrolment.
 
-import { OWNER_AUTHORIZED_COURSE_CODES } from './coursePublicationCodes.js';
-
-export const STRUCTURED_CURRICULUM_CODES = OWNER_AUTHORIZED_COURSE_CODES;
+export const STRUCTURED_CURRICULUM_CODES = new Set();
 
 export function getCurriculumStatus(courseOrCode) {
   const code = typeof courseOrCode === 'string' ? courseOrCode : courseOrCode?.code;
