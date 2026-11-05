@@ -101,6 +101,47 @@ export async function getMyFeeStatement() {
 }
 
 /**
+ * Admin: every enrolment's fee balance. Enforced server-side for administrators only.
+ */
+export async function listAdminFeeBalances() {
+  assertConfigured();
+  const { data, error } = await supabase.rpc('admin_fee_balances');
+  if (error) throw error;
+  return (data || []).map((row) => ({
+    enrollmentId: row.enrollment_id,
+    studentId: row.student_id,
+    studentName: row.student_name,
+    courseCode: row.course_code,
+    courseTitle: row.course_title,
+    termName: row.term_name,
+    feeDeadline: row.fee_deadline,
+    tuitionUsd: Number(row.tuition_usd),
+    paidUsd: Number(row.paid_usd),
+    balanceUsd: Number(row.balance_usd),
+    isOverdue: row.is_overdue === true,
+  }));
+}
+
+/**
+ * Admin: every verified fee payment. Enforced server-side for administrators only.
+ */
+export async function listAdminFeePayments() {
+  assertConfigured();
+  const { data, error } = await supabase.rpc('admin_fee_payments');
+  if (error) throw error;
+  return (data || []).map((row) => ({
+    id: row.id,
+    receiptNumber: row.receipt_number,
+    studentId: row.student_id,
+    studentName: row.student_name,
+    courseCode: row.course_code,
+    amountUsd: Number(row.amount_usd),
+    provider: row.provider,
+    paidAt: row.paid_at,
+  }));
+}
+
+/**
  * Verified fee receipts for the current student.
  */
 export async function listMyFeePayments() {

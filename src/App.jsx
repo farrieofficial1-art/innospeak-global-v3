@@ -141,6 +141,7 @@ const BecomeTutor = lazyPage('./pages/BecomeTutor.jsx');
 const AdminTutorApplications = lazyPage('./pages/admin/TutorApplications.jsx');
 const AdminCourseReview = lazyPage('./pages/admin/CourseReview.jsx');
 const AdminCertificates = lazyPage('./pages/admin/Certificates.jsx');
+const AdminFeeMonitoring = lazyPage('./pages/admin/FeeMonitoring.jsx');
 const AdminPayments = lazyPage('./pages/admin/Payments.jsx');
 const AdminFoundationApplications = lazyPage('./pages/admin/FoundationApplications.jsx');
 const AdminFoundationApplicationDetail = lazyPage('./pages/admin/FoundationApplicationDetail.jsx');
@@ -288,6 +289,7 @@ export default function App() {
               <Route path="career-applications" element={<CareerApplications />} />
               <Route path="lms" element={<AdminLmsOverview />} />
               <Route path="certificates" element={<AdminCertificates />} />
+              <Route path="fee-monitoring" element={<AdminFeeMonitoring />} />
               <Route path="payments" element={<AdminPayments />} />
 
               {/* Foundation */}

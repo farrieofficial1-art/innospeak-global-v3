@@ -15,7 +15,7 @@ import {
   ChartBar as BarChart3,
   UsersRound,
   BriefcaseBusiness,
-  Inbox,             // ← ADDED
+  Inbox,
   UserCheck,
   BookOpen,
   ShieldCheck,
@@ -33,7 +33,7 @@ export const adminNav = [
   { key: 'lms-overview', label: 'E-Learning Overview', path: '/admin/lms', icon: BarChart3 },
   { key: 'cohorts', label: 'Cohorts & Intakes', path: '/admin/cohorts', icon: UsersRound },
   { key: 'career-opportunities', label: 'Career Opportunities', path: '/admin/career-opportunities', icon: BriefcaseBusiness },
-  { key: 'career-applications', label: 'Career Applications', path: '/admin/career-applications', icon: Inbox },  // ← ADDED
+  { key: 'career-applications', label: 'Career Applications', path: '/admin/career-applications', icon: Inbox },
   { key: 'students', label: 'Students', path: '/admin/students', icon: Users },
   { key: 'applications', label: 'Applications', path: '/admin/applications', icon: ClipboardList },
   { key: 'tutor-applications', label: 'Tutor Applications', path: '/admin/tutor-applications', icon: UserCheck },
@@ -55,6 +55,7 @@ export const adminNav = [
   { key: 'units', label: 'Units', path: '/admin/units', icon: BookMarked },
   { key: 'timetable-exams', label: 'Timetable & Exams', path: '/admin/timetable-exams', icon: CalendarDays },
   { key: 'fees', label: 'Fee Structures', path: '/admin/fees', icon: Wallet },
+  { key: 'fee-monitoring', label: 'Fee Monitoring', path: '/admin/fee-monitoring', icon: Receipt },
   { key: 'payments', label: 'Payments', path: '/admin/payments', icon: Receipt },
   { key: 'requests', label: 'Requests', path: '/admin/requests', icon: SendHorizonal },
   { key: 'support', label: 'Support Tickets', path: '/admin/support', icon: LifeBuoy },
