@@ -97,8 +97,7 @@ export default function Labs() {
             />
             <motion.div
               initial="hidden"
-              whileInView="visible"
-              viewport={inViewOnce}
+              animate="visible"
               variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.06 } } }}
               className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
             >
@@ -108,7 +107,7 @@ export default function Labs() {
                 return (
                   <motion.div
                     key={track.id}
-                    variants={{ hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0 } }}
+                    variants={{ hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } } }}
                   >
                     <Link
                       to={`/labs?track=${track.id}`}
