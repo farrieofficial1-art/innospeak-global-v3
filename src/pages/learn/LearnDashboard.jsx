@@ -125,7 +125,7 @@ export default function LearnDashboard() {
             <p className="font-body text-xs font-semibold uppercase tracking-wider text-gold-600">Learn</p>
             <h1 className="mt-1 font-display text-2xl font-bold text-navy-900 sm:text-3xl">My Learning</h1>
           </div>
-          <Link to="/academy" className="btn-outline inline-flex items-center gap-2 text-sm">
+          <Link to="/learn/catalog" className="btn-outline inline-flex items-center gap-2 text-sm">
             <Compass size={15} /> Browse Courses
           </Link>
         </div>
@@ -135,7 +135,7 @@ export default function LearnDashboard() {
             title="You're not enrolled in any course yet"
             message="Browse the catalog to find a course to start learning."
             action={
-              <Link to="/academy" className="btn-gold text-sm">
+              <Link to="/learn/catalog" className="btn-gold text-sm">
                 Browse Courses
               </Link>
             }
@@ -154,7 +154,7 @@ export default function LearnDashboard() {
           <p className="font-body text-xs font-semibold uppercase tracking-wider text-gold-600">Learn</p>
           <h1 className="mt-1 font-display text-2xl font-bold text-navy-900 sm:text-3xl">My Learning</h1>
         </div>
-        <Link to="/academy" className="btn-outline inline-flex items-center gap-2 text-sm">
+        <Link to="/learn/catalog" className="btn-outline inline-flex items-center gap-2 text-sm">
           <Compass size={15} /> Browse Courses
         </Link>
       </div>

@@ -113,6 +113,28 @@ export async function listMyPayments() {
 }
 
 /**
+ * Check if a student has a paid payment for a course.
+ */
+export async function checkCoursePaid(courseRef) {
+  assertConfigured();
+  const { data: authData, error: authError } = await supabase.auth.getUser();
+  if (authError) throw authError;
+  const uid = authData?.user?.id;
+  if (!uid) return null;
+  // Always scope the result to the current learner, even with RLS enabled.
+  const column = UUID_RE.test(String(courseRef || '')) ? 'course_id' : 'course_code';
+  const { data, error } = await supabase
+    .from('payments')
+    .select('id, status, course_id, course_code, amount, currency')
+    .eq('student_id', uid)
+    .eq(column, courseRef)
+    .eq('status', 'paid')
+    .maybeSingle();
+  if (error) throw error;
+  return data;
+}
+
+/**
  * Get a single payment by ID.
  */
 export async function getPayment(paymentId) {

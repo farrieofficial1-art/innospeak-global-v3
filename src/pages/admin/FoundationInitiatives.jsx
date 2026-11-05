@@ -1,12 +1,8 @@
-import { Target, TrendingUp, Users, DollarSign, Plus } from 'lucide-react';
-import { FOUNDATION_INITIATIVES } from '../../components/sections/foundation/foundationData.js';
+import { Target, Layers, HandCoins } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { FOUNDATION_PROGRAMS } from '../../lib/data/foundationApplicationsData.js';
 
 export default function FoundationInitiatives() {
-  const totalGoal = FOUNDATION_INITIATIVES.reduce((s, i) => s + (i.goal || 0), 0);
-  const totalRaised = FOUNDATION_INITIATIVES.reduce((s, i) => s + (i.raised || 0), 0);
-  const totalBeneficiaries = FOUNDATION_INITIATIVES.reduce((s, i) => s + (i.beneficiaries || 0), 0);
-  const progress = totalGoal > 0 ? Math.round((totalRaised / totalGoal) * 100) : 0;
-
   return (
     <div>
       <header className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
@@ -20,76 +16,46 @@ export default function FoundationInitiatives() {
                 Foundation
               </p>
               <h1 className="font-display text-2xl font-bold text-navy-900">
-                Initiatives & Funding
+                Programmes & Sponsorship
               </h1>
             </div>
           </div>
           <p className="mt-3 max-w-2xl font-body text-sm leading-6 text-navy-600">
-            Track progress on active Foundation initiatives. Edit in <code className="rounded bg-cream px-1.5 py-0.5 font-mono text-xs">foundationData.js</code>.
+            The eleven sponsor-ready programmes published on the Foundation website. Funding totals are recorded on the Contributions page.
           </p>
         </div>
-        <button
-          type="button"
-          disabled
-          title="Add via foundationData.js for now"
-          className="inline-flex items-center gap-2 rounded-xl border border-dashed border-navy-200 bg-white px-4 py-2.5 font-body text-sm font-bold text-navy-500 opacity-60"
+        <Link
+          to="/admin/foundation/contributions"
+          className="inline-flex items-center gap-2 rounded-xl border border-navy-200 bg-white px-4 py-2.5 font-body text-sm font-bold text-navy-900 transition-colors hover:border-emerald-400 hover:text-emerald-700"
         >
-          <Plus size={15} /> Add initiative
-        </button>
+          <HandCoins size={15} /> View contributions
+        </Link>
       </header>
 
-      {/* Summary tiles */}
-      <div className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <SummaryTile icon={Target} label="Active initiatives" value={FOUNDATION_INITIATIVES.length} />
-        <SummaryTile icon={Users} label="Beneficiaries targeted" value={totalBeneficiaries} />
-        <SummaryTile icon={DollarSign} label="Funding goal" value={`$${totalGoal.toLocaleString()}`} />
-        <SummaryTile icon={TrendingUp} label="Raised overall" value={`$${totalRaised.toLocaleString()}`} sub={`${progress}% of goal`} />
+      <div className="mb-8 grid gap-4 sm:grid-cols-2">
+        <SummaryTile icon={Layers} label="Sponsor-ready programmes" value={FOUNDATION_PROGRAMS.length} />
+        <SummaryTile icon={HandCoins} label="Sponsorship tiers per programme" value={FOUNDATION_PROGRAMS[0].sponsorImpact.length} />
       </div>
 
-      {/* Initiative cards */}
       <div className="grid gap-5 lg:grid-cols-2">
-        {FOUNDATION_INITIATIVES.map((initiative) => {
-          const pct = initiative.goal > 0 ? Math.min((initiative.raised / initiative.goal) * 100, 100) : 0;
-          return (
-            <div key={initiative.id} className="rounded-2xl border border-navy-100 bg-white shadow-sm">
-              <div className="h-1.5 w-full overflow-hidden rounded-t-2xl bg-emerald-100">
-                <div className="h-full bg-gradient-to-r from-emerald-500 to-emerald-600" style={{ width: `${pct}%` }} />
-              </div>
-              <div className="p-5">
-                <div className="flex items-center justify-between gap-3">
-                  <span className="rounded-full bg-emerald-50 px-2.5 py-1 font-body text-[10px] font-bold uppercase tracking-wider text-emerald-700">
-                    {initiative.category}
-                  </span>
-                  <span className="font-body text-xs font-bold text-navy-500">
-                    {pct.toFixed(0)}%
-                  </span>
-                </div>
-                <h3 className="mt-3 font-display text-base font-bold text-navy-900">
-                  {initiative.title}
-                </h3>
-                <p className="mt-1 font-body text-sm leading-6 text-navy-600">
-                  {initiative.description}
-                </p>
-                <div className="mt-4 grid grid-cols-2 gap-3 border-t border-navy-100 pt-4 text-xs">
-                  <div>
-                    <p className="font-body text-[10px] uppercase tracking-wider text-navy-400">Raised</p>
-                    <p className="mt-0.5 font-body font-bold text-navy-900">{initiative.raised != null ? `${initiative.raised.toLocaleString()}` : 'Pending'}</p>
-                  </div>
-                  <div>
-                    <p className="font-body text-[10px] uppercase tracking-wider text-navy-400">Goal</p>
-                    <p className="mt-0.5 font-body font-bold text-navy-900">{initiative.goal != null ? `${initiative.goal.toLocaleString()}` : 'Pending'}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          );
-        })}
+        {FOUNDATION_PROGRAMS.map((program) => (
+          <div key={program.id} className="rounded-2xl border border-navy-100 bg-white p-5 shadow-sm">
+            <h3 className="font-display text-base font-bold text-navy-900">{program.label}</h3>
+            <p className="mt-1 font-body text-sm leading-6 text-navy-600">{program.goal}</p>
+            <p className="mt-3 font-body text-xs font-semibold text-emerald-700">{program.hook}</p>
+            <ul className="mt-4 space-y-1.5 border-t border-navy-100 pt-4">
+              {program.sponsorImpact.map((tier) => (
+                <li key={tier} className="font-body text-xs text-navy-700">{tier}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </div>
     </div>
   );
 }
 
-function SummaryTile({ icon: Icon, label, value, sub }) {
+function SummaryTile({ icon: Icon, label, value }) {
   return (
     <div className="rounded-2xl border border-navy-100 bg-white p-5 shadow-sm">
       <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50 text-emerald-700">
@@ -99,7 +65,6 @@ function SummaryTile({ icon: Icon, label, value, sub }) {
         {label}
       </p>
       <p className="mt-1 font-display text-2xl font-bold text-navy-900">{value}</p>
-      {sub && <p className="mt-0.5 font-body text-xs text-emerald-700">{sub}</p>}
     </div>
   );
 }

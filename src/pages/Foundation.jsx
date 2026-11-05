@@ -2,10 +2,8 @@ import Seo from '../components/ui/Seo.jsx';
 import FoundationHero from '../components/sections/foundation/FoundationHero.jsx';
 import FoundationImpact from '../components/sections/foundation/FoundationImpact.jsx';
 import FocusAreas from '../components/sections/foundation/FocusAreas.jsx';
-import FoundationInitiatives from '../components/sections/foundation/FoundationInitiatives.jsx';
 import UpcomingEvents from '../components/sections/foundation/UpcomingEvents.jsx';
 import HowSupportWorks from '../components/sections/foundation/HowSupportWorks.jsx';
-import WaysToGive from '../components/sections/foundation/WaysToGive.jsx';
 import Transparency from '../components/sections/foundation/Transparency.jsx';
 import FoundationStories from '../components/sections/foundation/FoundationStories.jsx';
 import FoundationFAQ from '../components/sections/foundation/FoundationFAQ.jsx';
@@ -16,7 +14,7 @@ export default function Foundation() {
     <>
       <Seo
         title="InnoSpeak Global Foundation — Opening Doors to Learning, Skills & Opportunity"
-        description="The InnoSpeak Global Foundation removes barriers to education, digital access, girls in STEM, youth employment, teacher capacity, inclusive learning, refugee support, rural learning hubs, green skills, community impact and MSME digital growth through eleven sponsor-ready programs."
+        description="The InnoSpeak Global Foundation removes barriers to education, technology, STEM and community opportunity through eleven sponsor-ready programmes."
         path="/foundation"
       />
 
@@ -26,31 +24,25 @@ export default function Foundation() {
       {/* ACT 2 — Proof */}
       <FoundationImpact />
 
-      {/* ACT 3 — Understanding (4 programs) */}
+      {/* ACT 3 — Programmes (sponsor-ready) */}
       <FocusAreas />
 
-      {/* ACT 4 — Live initiatives */}
-      <FoundationInitiatives />
-
-      {/* ACT 5 — Upcoming events & opportunities */}
+      {/* ACT 4 — Upcoming events & opportunities */}
       <UpcomingEvents />
 
-      {/* ACT 6 — Process (how support works) */}
+      {/* ACT 5 — Process (how support works) */}
       <HowSupportWorks />
 
-      {/* ACT 7 — Ways to give */}
-      <WaysToGive />
-
-      {/* ACT 8 — Accountability */}
+      {/* ACT 6 — Accountability */}
       <Transparency />
 
-      {/* ACT 9 — Stories from the field */}
+      {/* ACT 7 — Stories from the field */}
       <FoundationStories />
 
-      {/* ACT 10 — Objections */}
+      {/* ACT 8 — Objections */}
       <FoundationFAQ />
 
-      {/* ACT 11 — Close */}
+      {/* ACT 9 — Close */}
       <FoundationClosingCTA />
     </>
   );

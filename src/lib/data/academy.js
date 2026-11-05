@@ -6,7 +6,7 @@
 import {
   Bot, BarChart3, MonitorSmartphone, Globe2, Briefcase, Users,
   Megaphone, Wallet, Code2, Palette, Languages, GraduationCap,
-  BookOpen, Sparkles, HeartPulse, Cpu, School, Target,
+  BookOpen, Sparkles, HeartPulse, Cpu, School,
 } from 'lucide-react';
 
 export const TRACKS = [
@@ -27,7 +27,6 @@ export const TRACKS = [
   { id: 'health', name: 'Health & Community Services', slug: 'health-community', description: 'Hospitality, caregiving, community health and events.', icon: HeartPulse, gradient: 'from-red-500 to-rose-600' },
   { id: 'engineering', name: 'Engineering & Technical Skills', slug: 'engineering', description: 'Electrical, electronics, power, automation and solar.', icon: Cpu, gradient: 'from-yellow-500 to-amber-600' },
   { id: 'cbe', name: 'Kenya CBE School Programme', slug: 'cbe-school', description: 'Competency-Based Curriculum for Grades 3-12 + electives.', icon: School, gradient: 'from-green-600 to-emerald-600' },
-  { id: 'career', name: 'Career & Global Opportunities', slug: 'career-global', description: 'Job search, interview prep, and global career advancement.', icon: Target, gradient: 'from-cyan-500 to-blue-600' },
 ];
 
 export const TRACK_BY_ID = Object.fromEntries(TRACKS.map((t) => [t.id, t]));
@@ -102,7 +101,7 @@ export const ACADEMY_COURSES = [
   { code: 'BUS107', title: 'Pricing for Profit', slug: 'bus107-pricing-for-profit', price_usd: 39, track_id: 'business', level: 'Beginner' },
   { code: 'BUS108', title: 'Sales Essentials', slug: 'bus108-sales-essentials', price_usd: 49, track_id: 'business', level: 'Intermediate' },
   { code: 'BUS109', title: 'Operations Management', slug: 'bus109-operations-management', price_usd: 59, track_id: 'business', level: 'Intermediate' },
-  { code: 'BUS110', title: 'AI for Business Owners', slug: 'bus110-ai-for-business-owners', price_usd: 49, track_id: 'business', level: 'Intermediate' },
+  { code: 'BUS110', title: 'Business Process Mapping', slug: 'bus110-business-process-mapping', price_usd: 49, track_id: 'business', level: 'Intermediate' },
   { code: 'BUS111', title: 'Lean Operations', slug: 'bus111-lean-operations', price_usd: 59, track_id: 'business', level: 'Intermediate' },
   { code: 'BUS112', title: 'Inventory Management', slug: 'bus112-inventory-management', price_usd: 49, track_id: 'business', level: 'Intermediate' },
   { code: 'BUS113', title: 'Procurement Basics', slug: 'bus113-procurement-basics', price_usd: 49, track_id: 'business', level: 'Intermediate' },
@@ -278,7 +277,9 @@ export const ACADEMY_COURSES = [
   { code: 'LNG140', title: 'Everyday Portuguese', slug: 'lng140-everyday-portuguese', price_usd: 29, track_id: 'languages', level: 'Beginner' },
   { code: 'LNG141', title: 'Portuguese for Business', slug: 'lng141-portuguese-for-business', price_usd: 39, track_id: 'languages', level: 'Beginner' },
   { code: 'LNG142', title: 'Dutch for Beginners', slug: 'lng142-dutch-for-beginners', price_usd: 29, track_id: 'languages', level: 'Beginner' },
-  { code: 'SWA101', title: 'Swahili Language', slug: 'swa101-swahili-language', price_usd: 115.38, track_id: 'languages', level: 'Beginner' },
+  { code: 'LNG143', title: 'Swahili for Beginners', slug: 'lng143-swahili-for-beginners', price_usd: 29, track_id: 'languages', level: 'Beginner' },
+  { code: 'LNG144', title: 'Everyday Swahili', slug: 'lng144-everyday-swahili', price_usd: 29, track_id: 'languages', level: 'Beginner' },
+  { code: 'LNG145', title: 'Intermediate Swahili', slug: 'lng145-intermediate-swahili', price_usd: 39, track_id: 'languages', level: 'Intermediate' },
   { code: 'IQP101', title: 'AP Preparation', slug: 'iqp101-ap-preparation', price_usd: 59, track_id: 'exams', level: 'Intermediate' },
   { code: 'IQP102', title: 'Cambridge English', slug: 'iqp102-cambridge-english', price_usd: 59, track_id: 'exams', level: 'Intermediate' },
   { code: 'IQP103', title: 'Duolingo English Test', slug: 'iqp103-duolingo-english-test', price_usd: 49, track_id: 'exams', level: 'Intermediate' },
@@ -306,11 +307,11 @@ export const ACADEMY_COURSES = [
   { code: 'EDU108', title: 'AI for Educators', slug: 'edu108-ai-for-educators', price_usd: 49, track_id: 'education', level: 'Intermediate' },
   { code: 'EDU109', title: 'Inclusive Education', slug: 'edu109-inclusive-education', price_usd: 39, track_id: 'education', level: 'Beginner' },
   { code: 'EDU110', title: 'EdTech Tools', slug: 'edu110-edtech-tools', price_usd: 39, track_id: 'education', level: 'Beginner' },
-  { code: 'EDT111', title: 'Philosophy of Education', slug: 'edt111-philosophy-of-education', price_usd: 39, track_id: 'education', level: 'Beginner' },
-  { code: 'EDT112', title: 'Educational Psychology', slug: 'edt112-educational-psychology', price_usd: 39, track_id: 'education', level: 'Beginner' },
-  { code: 'EDT113', title: 'Sociology of Education', slug: 'edt113-sociology-of-education', price_usd: 39, track_id: 'education', level: 'Beginner' },
-  { code: 'EDT114', title: 'Training Methodologies', slug: 'edt114-training-methodologies', price_usd: 49, track_id: 'education', level: 'Intermediate' },
-  { code: 'EDT115', title: 'Workshop Planning & Management', slug: 'edt115-workshop-planning-and-management', price_usd: 39, track_id: 'education', level: 'Beginner' },
+  { code: 'EDU111', title: 'Philosophy of Education', slug: 'edu111-philosophy-of-education', price_usd: 39, track_id: 'education', level: 'Beginner' },
+  { code: 'EDU112', title: 'Educational Psychology', slug: 'edu112-educational-psychology', price_usd: 39, track_id: 'education', level: 'Beginner' },
+  { code: 'EDU113', title: 'Sociology of Education', slug: 'edu113-sociology-of-education', price_usd: 39, track_id: 'education', level: 'Beginner' },
+  { code: 'EDU114', title: 'Training Methodologies', slug: 'edu114-training-methodologies', price_usd: 49, track_id: 'education', level: 'Intermediate' },
+  { code: 'EDU115', title: 'Workshop Planning', slug: 'edu115-workshop-planning', price_usd: 39, track_id: 'education', level: 'Beginner' },
   { code: 'LIF101', title: 'Cultural Intelligence', slug: 'lif101-cultural-intelligence', price_usd: 29, track_id: 'personal', level: 'Beginner' },
   { code: 'LIF102', title: 'Global Citizenship', slug: 'lif102-global-citizenship', price_usd: 29, track_id: 'personal', level: 'Beginner' },
   { code: 'LIF103', title: 'Emotional Intelligence', slug: 'lif103-emotional-intelligence', price_usd: 39, track_id: 'personal', level: 'Beginner' },
@@ -333,8 +334,8 @@ export const ACADEMY_COURSES = [
   { code: 'HLT106', title: 'Food Safety', slug: 'hlt106-food-safety', price_usd: 39, track_id: 'health', level: 'Beginner' },
   { code: 'HLT107', title: 'Community Health Essentials', slug: 'hlt107-community-health-essentials', price_usd: 49, track_id: 'health', level: 'Intermediate' },
   { code: 'HLT108', title: 'Event Management', slug: 'hlt108-event-management', price_usd: 49, track_id: 'health', level: 'Intermediate' },
-  { code: 'HSP108', title: 'Front Office Operations', slug: 'hsp108-front-office-operations', price_usd: 49, track_id: 'health', level: 'Intermediate' },
-  { code: 'HSP109', title: 'Tour Guide Operations', slug: 'hsp109-tour-guide-operations', price_usd: 49, track_id: 'health', level: 'Intermediate' },
+  { code: 'HLT109', title: 'Front Office Operations', slug: 'hlt109-front-office-operations', price_usd: 49, track_id: 'health', level: 'Intermediate' },
+  { code: 'HLT110', title: 'Tour Guide Operations', slug: 'hlt110-tour-guide-operations', price_usd: 49, track_id: 'health', level: 'Intermediate' },
   { code: 'HLT111', title: 'Elderly Care and Support', slug: 'hlt111-elderly-care-and-support', price_usd: 49, track_id: 'health', level: 'Intermediate' },
   { code: 'HLT112', title: 'Community Health Worker Essentials', slug: 'hlt112-community-health-worker-essentials', price_usd: 49, track_id: 'health', level: 'Intermediate' },
   { code: 'HLT113', title: 'First Aid and Emergency Response', slug: 'hlt113-first-aid-and-emergency-response', price_usd: 49, track_id: 'health', level: 'Intermediate' },
@@ -462,24 +463,6 @@ export const ACADEMY_COURSES = [
   { code: 'CBE195', title: 'Electrical Technology', slug: 'cbe195-electrical-technology', price_usd: 19, track_id: 'cbe', level: 'Beginner' },
   { code: 'CBE196', title: 'Building Construction', slug: 'cbe196-building-construction', price_usd: 19, track_id: 'cbe', level: 'Beginner' },
   { code: 'CBE197', title: 'Aviation Technology', slug: 'cbe197-aviation-technology', price_usd: 19, track_id: 'cbe', level: 'Beginner' },
-  // ── New Academy courses (audit batch) ──
-  { code: 'AIL101', title: 'AI Literacy for Work', slug: 'ail101-ai-literacy-for-work', price_usd: 0, track_id: 'ai', level: 'Beginner' },
-  { code: 'PDS108', title: 'Analytical Thinking for Professionals', slug: 'pds108-analytical-thinking-for-professionals', price_usd: 39, track_id: 'personal', level: 'Intermediate' },
-  { code: 'PDS109', title: 'Resilience & Adaptability', slug: 'pds109-resilience-and-adaptability', price_usd: 29, track_id: 'personal', level: 'Beginner' },
-  { code: 'ECM101', title: 'Ecommerce Management', slug: 'ecm101-ecommerce-management', price_usd: 49, track_id: 'freelance', level: 'Intermediate' },
-  { code: 'AIV101', title: 'AI Video Generation & Editing', slug: 'aiv101-ai-video-generation-and-editing', price_usd: 69, track_id: 'creative', level: 'Intermediate' },
-  { code: 'AII101', title: 'AI Image Generation & Editing', slug: 'aii101-ai-image-generation-and-editing', price_usd: 69, track_id: 'creative', level: 'Intermediate' },
-  { code: 'CRD108', title: 'AI Interview Preparation', slug: 'crd108-ai-interview-preparation', price_usd: 49, track_id: 'career', level: 'Intermediate' },
-  // ── Free courses ──
-  { code: 'ICT101', title: 'ICT Fundamentals', slug: 'ict101-ict-fundamentals', price_usd: 0, track_id: 'digital', level: 'Beginner' },
-  { code: 'DLP101', title: 'Digital Literacy Primer', slug: 'dlp101-digital-literacy-primer', price_usd: 0, track_id: 'digital', level: 'Beginner' },
-  { code: 'DLP105', title: 'Digital Productivity Lab', slug: 'dlp105-digital-productivity-lab', price_usd: 0, track_id: 'digital', level: 'Beginner' },
-  { code: 'CVW101', title: 'CV & Cover Letter Writing', slug: 'cvw101-cv-and-cover-letter-writing', price_usd: 0, track_id: 'personal', level: 'Beginner' },
-  { code: 'ITP101', title: 'IT Productivity Essentials', slug: 'itp101-it-productivity-essentials', price_usd: 0, track_id: 'digital', level: 'Beginner' },
-  { code: 'LKD101', title: 'LinkedIn for Job Seekers', slug: 'lkd101-linkedin-for-job-seekers', price_usd: 0, track_id: 'freelance', level: 'Beginner' },
-  { code: 'ENG101', title: 'English Conversation Basics', slug: 'eng101-english-conversation-basics', price_usd: 0, track_id: 'languages', level: 'Beginner' },
-  { code: 'ENG111', title: 'Business English Essentials', slug: 'eng111-business-english-essentials', price_usd: 0, track_id: 'languages', level: 'Beginner' },
-  { code: 'EDT108', title: 'Technology for Teaching', slug: 'edt108-technology-for-teaching', price_usd: 0, track_id: 'education', level: 'Beginner' },
 ];
 
 export const CBE_COURSES = ACADEMY_COURSES.filter((c) => c.track_id === 'cbe');
