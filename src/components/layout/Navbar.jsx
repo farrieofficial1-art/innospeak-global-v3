@@ -248,7 +248,7 @@ export default function Navbar() {
                       <BookOpen size={16} />
                       E-Learning
                     </Link>
-                    <Link to="/learn" onClick={() => setAccountOpen(false)} className={`flex items-center gap-2.5 px-4 py-2.5 font-body text-sm font-medium text-white/85 transition-colors hover:bg-white/5 hover:text-gold-400 ${pathname.startsWith('/learn') || pathname === '/my-learning' ? 'bg-white/5 text-gold-400' : ''}`}>
+                    <Link to="/my-learning" onClick={() => setAccountOpen(false)} className={`flex items-center gap-2.5 px-4 py-2.5 font-body text-sm font-medium text-white/85 transition-colors hover:bg-white/5 hover:text-gold-400 ${pathname === '/my-learning' ? 'bg-white/5 text-gold-400' : ''}`}>
                       <GraduationCap size={16} />
                       My Learning
                     </Link>
@@ -348,7 +348,7 @@ export default function Navbar() {
                   <>
                     <Link to="/portal" onClick={() => setMobileOpen(false)} className="rounded-xl border border-white/20 bg-white/5 px-5 py-3 text-center font-body text-sm font-bold text-white transition-colors hover:bg-white/10">Student Portal</Link>
                     <Link to="/learn" onClick={() => setMobileOpen(false)} className="rounded-xl border border-white/20 bg-white/5 px-5 py-3 text-center font-body text-sm font-bold text-white transition-colors hover:bg-white/10">E-Learning</Link>
-                    <Link to="/learn" onClick={() => setMobileOpen(false)} className="rounded-xl border border-white/20 bg-white/5 px-5 py-3 text-center font-body text-sm font-bold text-white transition-colors hover:bg-white/10">My Learning</Link>
+                    <Link to="/my-learning" onClick={() => setMobileOpen(false)} className="rounded-xl border border-white/20 bg-white/5 px-5 py-3 text-center font-body text-sm font-bold text-white transition-colors hover:bg-white/10">My Learning</Link>
                     {isInstructor && <Link to="/teach" onClick={() => setMobileOpen(false)} className="rounded-xl border border-white/20 bg-white/5 px-5 py-3 text-center font-body text-sm font-bold text-white transition-colors hover:bg-white/10">Teach</Link>}
                     {isAdmin && <Link to="/admin" onClick={() => setMobileOpen(false)} className="rounded-xl border border-white/20 bg-white/5 px-5 py-3 text-center font-body text-sm font-bold text-white transition-colors hover:bg-white/10">Staff Panel</Link>}
                     <Link to="/become-tutor" onClick={() => setMobileOpen(false)} className="rounded-xl border border-white/20 bg-white/5 px-5 py-3 text-center font-body text-sm font-bold text-white transition-colors hover:bg-white/10">Become a Tutor</Link>

@@ -1,9 +1,7 @@
-import { ACADEMY_COURSES, TRACKS } from '../../lib/data/academy.js';
-
 export const WHY_CHOOSE_HIGHLIGHTS = [
-  { id: 'courses', value: ACADEMY_COURSES.length, suffix: '+', label: 'On-Demand Courses' },
-  { id: 'tracks', value: TRACKS.length, suffix: '', label: 'Learning Tracks' },
-  { id: 'languages', value: 11, suffix: '+', label: 'Languages' },
+  { id: 'courses', value: 427, suffix: '+', label: 'On-Demand Courses' },
+  { id: 'tracks', value: 17, suffix: '', label: 'Learning Tracks' },
+  { id: 'languages', value: 10, suffix: '+', label: 'Languages' },
   { id: 'price', value: 19, suffix: '$', label: 'Starting Price' },
 ];
 
