@@ -104,3 +104,142 @@ export async function getMyEnrollments() {
   if (error) throw error;
   return data || [];
 }
+
+/* ------------------------------------------------------------------ */
+/* Fee monitoring (admin) & fee statement (student)                    */
+/*                                                                      */
+/* fee_transactions tracks charges and payments per student+semester.  */
+/* Balances are aggregated at the student level since the schema does   */
+/* not link individual transactions to specific enrollments.            */
+/* ------------------------------------------------------------------ */
+
+export async function listAdminFeeBalances() {
+  if (!supabase) return [];
+  const { data, error } = await supabase
+    .from('fee_transactions')
+    .select(
+      'student_id, type, amount, semester_id, profiles!inner ( id, full_name, student_number ), semesters ( name, end_date )',
+    )
+    .order('created_at', { ascending: false });
+  if (error) throw error;
+
+  const byStudent = {};
+  for (const tx of data || []) {
+    const sid = tx.student_id;
+    if (!byStudent[sid]) {
+      byStudent[sid] = {
+        studentId: sid,
+        studentName: tx.profiles?.full_name || '',
+        tuitionUsd: 0,
+        paidUsd: 0,
+        termName: tx.semesters?.name || '',
+        feeDeadline: tx.semesters?.end_date || null,
+      };
+    }
+    const amt = Number(tx.amount || 0);
+    if (tx.type === 'payment') byStudent[sid].paidUsd += amt;
+    else byStudent[sid].tuitionUsd += amt;
+  }
+
+  const now = new Date();
+  return Object.values(byStudent).map((s) => ({
+    ...s,
+    enrollmentId: s.studentId,
+    courseTitle: 'All courses',
+    courseCode: '',
+    balanceUsd: s.tuitionUsd - s.paidUsd,
+    isOverdue: s.feeDeadline ? new Date(s.feeDeadline) < now && s.tuitionUsd - s.paidUsd > 0 : false,
+  }));
+}
+
+export async function listAdminFeePayments() {
+  if (!supabase) return [];
+  const { data, error } = await supabase
+    .from('fee_transactions')
+    .select('id, student_id, amount, method, reference, created_at, profiles ( full_name )')
+    .eq('type', 'payment')
+    .order('created_at', { ascending: false });
+  if (error) throw error;
+  return (data || []).map((p) => ({
+    id: p.id,
+    receiptNumber: p.reference || p.id.slice(0, 8),
+    studentName: p.profiles?.full_name || '-',
+    courseCode: '',
+    provider: (p.method || 'manual').replace('_', ' '),
+    paidAt: p.created_at,
+    amountUsd: Number(p.amount || 0),
+  }));
+}
+
+export async function getMyFeeStatement() {
+  if (!supabase) return [];
+  const { data: authData, error: authError } = await supabase.auth.getUser();
+  if (authError) throw authError;
+  const uid = authData?.user?.id;
+  if (!uid) return [];
+
+  const { data, error } = await supabase
+    .from('fee_transactions')
+    .select('type, amount, semester_id, semesters ( name, end_date )')
+    .eq('student_id', uid)
+    .order('created_at', { ascending: false });
+  if (error) throw error;
+
+  let tuition = 0;
+  let paid = 0;
+  let termName = '';
+  let feeDeadline = null;
+  for (const tx of data || []) {
+    const amt = Number(tx.amount || 0);
+    if (tx.type === 'payment') {
+      paid += amt;
+    } else {
+      tuition += amt;
+      if (!termName && tx.semesters?.name) {
+        termName = tx.semesters.name;
+        feeDeadline = tx.semesters.end_date;
+      }
+    }
+  }
+
+  if (tuition === 0 && paid === 0) return [];
+  const balance = tuition - paid;
+  const now = new Date();
+  return [
+    {
+      enrollmentId: uid,
+      courseTitle: 'All courses',
+      courseCode: '',
+      termName,
+      feeDeadline,
+      tuitionUsd: tuition,
+      paidUsd: paid,
+      balanceUsd: balance,
+      isOverdue: feeDeadline ? new Date(feeDeadline) < now && balance > 0 : false,
+    },
+  ];
+}
+
+export async function listMyFeePayments() {
+  if (!supabase) return [];
+  const { data: authData, error: authError } = await supabase.auth.getUser();
+  if (authError) throw authError;
+  const uid = authData?.user?.id;
+  if (!uid) return [];
+
+  const { data, error } = await supabase
+    .from('fee_transactions')
+    .select('id, amount, method, reference, created_at')
+    .eq('student_id', uid)
+    .eq('type', 'payment')
+    .order('created_at', { ascending: false });
+  if (error) throw error;
+  return (data || []).map((p) => ({
+    id: p.id,
+    receipt_number: p.reference || p.id.slice(0, 8),
+    enrollment_id: uid,
+    paid_at: p.created_at,
+    provider: p.method || 'manual',
+    amount_usd: Number(p.amount || 0),
+  }));
+}
