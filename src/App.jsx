@@ -141,6 +141,8 @@ const EmployerApplications = lazy(() => import('./pages/employer/EmployerApplica
 const OrganisationProfile = lazy(() => import('./pages/employer/OrganisationProfile.jsx'));
 const NotFound = lazy(() => import('./pages/NotFound.jsx'));
 const PaymentReturn = lazy(() => import('./pages/PaymentReturn.jsx'));
+const AdminFeeMonitoring = lazy(() => import('./pages/admin/FeeMonitoring.jsx'));
+const FeeStatement = lazy(() => import('./pages/learn/FeeStatement.jsx'));
 
 export default function App() {
   return (
@@ -268,6 +270,7 @@ export default function App() {
               <Route path="lms" element={<AdminLmsOverview />} />
               <Route path="certificates" element={<AdminCertificates />} />
               <Route path="payments" element={<AdminPayments />} />
+              <Route path="fee-monitoring" element={<AdminFeeMonitoring />} />
 
               {/* Foundation */}
               <Route path="foundation/applications" element={<AdminFoundationApplications />} />
@@ -300,6 +303,7 @@ export default function App() {
               <Route path="courses/:courseId/lessons/:lessonId" element={<LearningPlayer />} />
               <Route path="assignments/:assignmentId" element={<AssignmentView />} />
               <Route path="quizzes/:quizId" element={<QuizAttempt />} />
+              <Route path="fees" element={<FeeStatement />} />
             </Route>
           </Route>
 
