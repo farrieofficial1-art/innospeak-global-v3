@@ -10,6 +10,7 @@ import {
   FolderKanban,
   UserRound,
   Award,
+  Wallet,
 } from 'lucide-react';
 
 export const learnNav = [
@@ -24,4 +25,5 @@ export const learnNav = [
   { key: 'projects',     label: 'Projects & Labs',   path: '/learn/projects',     icon: FolderKanban },
   { key: 'mentorship',   label: 'Mentorship',        path: '/learn/mentorship',   icon: UserRound },
   { key: 'certificates', label: 'Certificates',      path: '/learn/certificates', icon: Award },
+  { key: 'fees',         label: 'Fees & Payments',   path: '/learn/fees',         icon: Wallet },
 ];

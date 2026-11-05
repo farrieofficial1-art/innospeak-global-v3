@@ -70,21 +70,47 @@ export async function enrollInCourse({ code }) {
   if (authError) throw authError;
   if (!authData?.user?.id) throw new Error('You must be logged in to enroll.');
 
-  const course = await getLmsCourseByCode(code);
-  if (!course) {
-    throw new Error('This course is not open for enrollment yet. Please check back soon or contact us.');
-  }
-  if (course.is_free !== true) {
-    throw new Error('This course requires checkout. Complete payment before enrolling.');
-  }
-
-  const { data, error } = await supabase.rpc('enroll_in_free_course', {
-    p_course_id: course.id,
+  const { data, error } = await supabase.rpc('enroll_in_course', {
     p_course_code: String(code).trim().toUpperCase(),
   });
+  if (error) throw new Error(error.message || 'Could not enrol you in this course.');
+  if (!data?.id || !data?.course_id) {
+    throw new Error('Enrolment did not return a confirmed record. Please refresh and try again.');
+  }
+  return { ...data, courseId: data.course_id };
+}
+
+/**
+ * Term fee statement for the current student: tuition, paid, balance per enrolment.
+ */
+export async function getMyFeeStatement() {
+  assertConfigured();
+  const { data, error } = await supabase.rpc('get_my_fee_statement');
   if (error) throw error;
-  const enrollment = data?.enrollment || data;
-  return { ...enrollment, courseId: enrollment?.course_id || course.id };
+  return (data || []).map((row) => ({
+    enrollmentId: row.enrollment_id,
+    courseCode: row.course_code,
+    courseTitle: row.course_title,
+    termName: row.term_name,
+    feeDeadline: row.fee_deadline,
+    tuitionUsd: Number(row.tuition_usd),
+    paidUsd: Number(row.paid_usd),
+    balanceUsd: Number(row.balance_usd),
+    isOverdue: row.is_overdue === true,
+  }));
+}
+
+/**
+ * Verified fee receipts for the current student.
+ */
+export async function listMyFeePayments() {
+  assertConfigured();
+  const { data, error } = await supabase
+    .from('fee_payments')
+    .select('id, enrollment_id, amount_usd, provider, receipt_number, paid_at')
+    .order('paid_at', { ascending: false });
+  if (error) throw error;
+  return data || [];
 }
 
 /**

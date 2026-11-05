@@ -128,6 +128,7 @@ const Goals = lazyPage('./pages/learn/Goals.jsx');
 const Projects = lazyPage('./pages/learn/Projects.jsx');
 const Mentorship = lazyPage('./pages/learn/Mentorship.jsx');
 const Certificates = lazyPage('./pages/learn/Certificates.jsx');
+const FeeStatement = lazyPage('./pages/learn/FeeStatement.jsx');
 const CertificateVerify = lazyPage('./pages/learn/CertificateVerify.jsx');
 const CareerHub = lazyPage('./pages/CareerHub.jsx');
 const Opportunities = lazyPage('./pages/career/Opportunities.jsx');
@@ -316,6 +317,7 @@ export default function App() {
               <Route path="projects" element={<Projects />} />
               <Route path="mentorship" element={<Mentorship />} />
               <Route path="certificates" element={<Certificates />} />
+              <Route path="fees" element={<FeeStatement />} />
               <Route path="courses/:courseId" element={<LearningPlayer />} />
               <Route path="courses/:courseId/lessons/:lessonId" element={<LearningPlayer />} />
               <Route path="assignments/:assignmentId" element={<AssignmentView />} />
