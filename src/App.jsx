@@ -143,6 +143,7 @@ const NotFound = lazy(() => import('./pages/NotFound.jsx'));
 const PaymentReturn = lazy(() => import('./pages/PaymentReturn.jsx'));
 const AdminFeeMonitoring = lazy(() => import('./pages/admin/FeeMonitoring.jsx'));
 const FeeStatement = lazy(() => import('./pages/learn/FeeStatement.jsx'));
+const Programs = lazy(() => import('./pages/Programs.jsx'));
 
 export default function App() {
   return (
@@ -165,6 +166,7 @@ export default function App() {
           <Route path="/labs" element={<Labs />} />
           <Route path="/labs/:slug" element={<LabCourseDetail />} />
 
+          <Route path="/programs" element={<Programs />} />
           <Route path="/my-learning" element={<MyLearning />} />
 
           <Route path="/foundation" element={<Foundation />} />

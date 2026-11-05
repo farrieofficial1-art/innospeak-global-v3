@@ -56,6 +56,7 @@ export const adminNav = [
   { key: 'timetable-exams', label: 'Timetable & Exams', path: '/admin/timetable-exams', icon: CalendarDays },
   { key: 'fees', label: 'Fee Structures', path: '/admin/fees', icon: Wallet },
   { key: 'payments', label: 'Payments', path: '/admin/payments', icon: Receipt },
+  { key: 'fee-monitoring', label: 'Fee Monitoring', path: '/admin/fee-monitoring', icon: TrendingUp },
   { key: 'requests', label: 'Requests', path: '/admin/requests', icon: SendHorizonal },
   { key: 'support', label: 'Support Tickets', path: '/admin/support', icon: LifeBuoy },
   { key: 'graduation', label: 'Graduation', path: '/admin/graduation', icon: Award },
