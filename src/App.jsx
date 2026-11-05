@@ -1,156 +1,178 @@
-import { Routes, Route } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext.jsx';
 import AppLayout from './components/layout/AppLayout.jsx';
 import ProtectedRoute from './components/auth/ProtectedRoute.jsx';
-import Home from './pages/Home.jsx';
-import About from './pages/About.jsx';
-import Foundation from './pages/Foundation.jsx';
-import FoundationEvents from './pages/FoundationEvents.jsx';
-import Founder from './pages/Founder.jsx';
-import Impact from './pages/Impact.jsx';
-import Contact from './pages/Contact.jsx';
-import Apply from './pages/Apply.jsx';
-import Research from './pages/Research.jsx';
-import Tutor from './pages/Tutor.jsx';
-import News from './pages/News.jsx';
-import Events from './pages/Events.jsx';
-import Community from './pages/Community.jsx';
-import Partnerships from './pages/Partnerships.jsx';
-import Careers from './pages/Careers.jsx';
-import FAQ from './pages/FAQ.jsx';
-import Privacy from './pages/Privacy.jsx';
-import Terms from './pages/Terms.jsx';
-import Login from './pages/auth/Login.jsx';
-import Signup from './pages/auth/Signup.jsx';
-import Register from './pages/Register.jsx';
-import Academy from './pages/Academy.jsx';
-import AcademyCbe from './pages/AcademyCbe.jsx';
-import AcademyCbeBundle from './pages/AcademyCbeBundle.jsx';
-import AcademyCourseDetail from './pages/AcademyCourseDetail.jsx';
-import Labs from './pages/Labs.jsx';
-import LabCourseDetail from './pages/LabCourseDetail.jsx';
-import MyLearning from './pages/MyLearning.jsx';                            
-import ForgotPassword from './pages/auth/ForgotPassword.jsx';
-import ResetPassword from './pages/auth/ResetPassword.jsx';
-import StudentDashboard from './pages/portal/StudentDashboard.jsx';
 import PortalShell from './components/portal/PortalShell.jsx';
-import Profile from './pages/portal/Profile.jsx';
-import Registration from './pages/portal/Registration.jsx';
-import Records from './pages/portal/Records.jsx';
-import Finance from './pages/portal/Finance.jsx';
-import Timetable from './pages/portal/Timetable.jsx';
-import Attendance from './pages/portal/Attendance.jsx';
-import Exams from './pages/portal/Exams.jsx';
-import Documents from './pages/portal/Documents.jsx';
-import Communication from './pages/portal/Communication.jsx';
-import Requests from './pages/portal/Requests.jsx';
-import Support from './pages/portal/Support.jsx';
-import Graduation from './pages/portal/Graduation.jsx';
-import ChangePassword from './pages/portal/ChangePassword.jsx';
-import MyProgress from './pages/portal/MyProgress.jsx';
-import FoundationApplications from './pages/portal/FoundationApplications.jsx';
-import FoundationApplicationDetail from './pages/portal/FoundationApplicationDetail.jsx';
 import SponsorShell from './components/sponsor/SponsorShell.jsx';
-import SponsorSignIn from './pages/sponsor/SponsorSignIn.jsx';
-import SponsorDashboard from './pages/sponsor/SponsorDashboard.jsx';
-import SponsorPrograms from './pages/sponsor/SponsorPrograms.jsx';
-import SponsorContributions from './pages/sponsor/SponsorContributions.jsx';
-import SponsorImpact from './pages/sponsor/SponsorImpact.jsx';
 import AdminRoute from './components/auth/AdminRoute.jsx';
 import AdminShell from './components/admin/AdminShell.jsx';
-import AdminDashboard from './pages/admin/AdminDashboard.jsx';
-import AdminStudents from './pages/admin/Students.jsx';
-import AdminStudentDetail from './pages/admin/StudentDetail.jsx';
-import AdminApplications from './pages/admin/Applications.jsx';
-import AdminContactMessages from './pages/admin/ContactMessages.jsx';
-import AdminPrograms from './pages/admin/Programs.jsx';
-import AdminSemesters from './pages/admin/Semesters.jsx';
-import AdminUnits from './pages/admin/Units.jsx';
-import AdminTimetableExams from './pages/admin/TimetableExams.jsx';
-import AdminFeeStructures from './pages/admin/FeeStructures.jsx';
-import AdminRequests from './pages/admin/Requests.jsx';
-import AdminSupport from './pages/admin/Support.jsx';
-import AdminGraduation from './pages/admin/Graduation.jsx';
-import AdminAnnouncements from './pages/admin/Announcements.jsx';
-import AdminLmsOverview from './pages/admin/LmsOverview.jsx';
-import AdminCohorts from './pages/admin/Cohorts.jsx';
-import AdminCareerOpportunities from './pages/admin/CareerOpportunities.jsx';
-import CareerApplications from './pages/admin/CareerApplications.jsx';
 import InstructorRoute from './components/auth/InstructorRoute.jsx';
 import TeachShell from './components/teach/TeachShell.jsx';
-import TeachOverview from './pages/teach/TeachOverview.jsx';
-import TeachProfile from './pages/teach/TeachProfile.jsx';
-import MyCourses from './pages/teach/MyCourses.jsx';
-import CreateCourse from './pages/teach/CreateCourse.jsx';
-import TeachStudents from './pages/teach/TeachStudents.jsx';
-import LearningMaterials from './pages/teach/LearningMaterials.jsx';
-import Assignments from './pages/teach/Assignments.jsx';
-import Assessments from './pages/teach/Assessments.jsx';
-import TeachMessages from './pages/teach/TeachMessages.jsx';
-import TeachNotifications from './pages/teach/TeachNotifications.jsx';
-import TeachSettings from './pages/teach/TeachSettings.jsx';
-import CourseBuilder from './pages/teach/CourseBuilder.jsx';
-import LessonContentBuilder from './pages/teach/LessonContentBuilder.jsx';
-import Submissions from './pages/teach/Submissions.jsx';
-import SessionsManager from './pages/teach/SessionsManager.jsx';
-import Gradebook from './pages/teach/Gradebook.jsx';
 import LearnShell from './components/learn/LearnShell.jsx';
-import LearnDashboard from './pages/learn/LearnDashboard.jsx';
-import CareerProfile from './pages/learn/CareerProfile.jsx';
-import MyApplications from './pages/learn/MyApplications.jsx';
-import Sessions from './pages/learn/Sessions.jsx';
-import Calendar from './pages/learn/Calendar.jsx';
-import Portfolio from './pages/learn/Portfolio.jsx';
-import Goals from './pages/learn/Goals.jsx';
-import Projects from './pages/learn/Projects.jsx';
-import Mentorship from './pages/learn/Mentorship.jsx';
-import Certificates from './pages/learn/Certificates.jsx';
-import CertificateVerify from './pages/learn/CertificateVerify.jsx';
-import CareerHub from './pages/CareerHub.jsx';
-import Opportunities from './pages/career/Opportunities.jsx';
-import OpportunityDetail from './pages/career/OpportunityDetail.jsx';
-import Connections from './pages/career/Connections.jsx';
-import LearningPlayer from './pages/learn/LearningPlayer.jsx';
-import AssignmentView from './pages/learn/AssignmentView.jsx';
-import QuizAttempt from './pages/learn/QuizAttempt.jsx';
-import BecomeTutor from './pages/BecomeTutor.jsx';
-import AdminTutorApplications from './pages/admin/TutorApplications.jsx';
-import AdminCourseReview from './pages/admin/CourseReview.jsx';
-import AdminCertificates from './pages/admin/Certificates.jsx';
-import AdminPayments from './pages/admin/Payments.jsx';
-import AdminFoundationApplications from './pages/admin/FoundationApplications.jsx';
-import AdminFoundationApplicationDetail from './pages/admin/FoundationApplicationDetail.jsx';
-import AdminFoundationStories from './pages/admin/FoundationStories.jsx';
-import AdminFoundationInitiatives from './pages/admin/FoundationInitiatives.jsx';
-import AdminFoundationEvents from './pages/admin/FoundationEvents.jsx';
-import AdminFoundationEventEditor from './pages/admin/FoundationEventEditor.jsx';
-import AdminFoundationSponsors from './pages/admin/FoundationSponsors.jsx';
-import AdminFoundationContributions from './pages/admin/FoundationContributions.jsx';
-import AdminFoundationDisbursements from './pages/admin/FoundationDisbursements.jsx';
-import AdminFoundationProgressReports from './pages/admin/FoundationProgressReports.jsx';
-import ForEmployers from './pages/ForEmployers.jsx';
 import EmployerRoute from './components/auth/EmployerRoute.jsx';
 import EmployerShell from './components/employer/EmployerShell.jsx';
-import EmployerOverview from './pages/employer/EmployerOverview.jsx';
-import EmployerOpportunities from './pages/employer/EmployerOpportunities.jsx';
-import EmployerOpportunityEditor from './pages/employer/EmployerOpportunityEditor.jsx';
-import EmployerApplications from './pages/employer/EmployerApplications.jsx';
-import OrganisationProfile from './pages/employer/OrganisationProfile.jsx';
-import NotFound from './pages/NotFound.jsx';
-import PaymentReturn from './pages/PaymentReturn.jsx';
 import RouteErrorBoundary from './components/ui/RouteErrorBoundary.jsx';
+
+const pageModules = import.meta.glob('./pages/**/*.jsx');
+
+function lazyPage(modulePath) {
+  const loadPage = pageModules[modulePath];
+  if (!loadPage) throw new Error(`Unknown route page module: ${modulePath}`);
+  return lazy(loadPage);
+}
+
+function RouteLoading() {
+  return (
+    <main className="flex min-h-[50vh] items-center justify-center bg-cream" role="status" aria-live="polite">
+      <span className="sr-only">Loading page</span>
+      <div aria-hidden="true" className="h-8 w-8 animate-spin rounded-full border-2 border-navy-200 border-t-gold-500 motion-reduce:animate-none" />
+    </main>
+  );
+}
+
+const Home = lazyPage('./pages/Home.jsx');
+const About = lazyPage('./pages/About.jsx');
+const Programs = lazyPage('./pages/Programs.jsx');
+const Foundation = lazyPage('./pages/Foundation.jsx');
+const FoundationEvents = lazyPage('./pages/FoundationEvents.jsx');
+const Founder = lazyPage('./pages/Founder.jsx');
+const Impact = lazyPage('./pages/Impact.jsx');
+const Contact = lazyPage('./pages/Contact.jsx');
+const Apply = lazyPage('./pages/Apply.jsx');
+const Research = lazyPage('./pages/Research.jsx');
+const Tutor = lazyPage('./pages/Tutor.jsx');
+const News = lazyPage('./pages/News.jsx');
+const Events = lazyPage('./pages/Events.jsx');
+const Community = lazyPage('./pages/Community.jsx');
+const Partnerships = lazyPage('./pages/Partnerships.jsx');
+const Careers = lazyPage('./pages/Careers.jsx');
+const FAQ = lazyPage('./pages/FAQ.jsx');
+const Privacy = lazyPage('./pages/Privacy.jsx');
+const Terms = lazyPage('./pages/Terms.jsx');
+const Login = lazyPage('./pages/auth/Login.jsx');
+const Signup = lazyPage('./pages/auth/Signup.jsx');
+const Register = lazyPage('./pages/Register.jsx');
+const Academy = lazyPage('./pages/Academy.jsx');
+const AcademyCbe = lazyPage('./pages/AcademyCbe.jsx');
+const AcademyCbeBundle = lazyPage('./pages/AcademyCbeBundle.jsx');
+const AcademyCourseDetail = lazyPage('./pages/AcademyCourseDetail.jsx');
+const Labs = lazyPage('./pages/Labs.jsx');
+const LabCourseDetail = lazyPage('./pages/LabCourseDetail.jsx');
+const MyLearning = lazyPage('./pages/MyLearning.jsx');
+const ForgotPassword = lazyPage('./pages/auth/ForgotPassword.jsx');
+const ResetPassword = lazyPage('./pages/auth/ResetPassword.jsx');
+const StudentDashboard = lazyPage('./pages/portal/StudentDashboard.jsx');
+const Profile = lazyPage('./pages/portal/Profile.jsx');
+const Registration = lazyPage('./pages/portal/Registration.jsx');
+const Records = lazyPage('./pages/portal/Records.jsx');
+const Finance = lazyPage('./pages/portal/Finance.jsx');
+const Timetable = lazyPage('./pages/portal/Timetable.jsx');
+const Attendance = lazyPage('./pages/portal/Attendance.jsx');
+const Exams = lazyPage('./pages/portal/Exams.jsx');
+const Documents = lazyPage('./pages/portal/Documents.jsx');
+const Communication = lazyPage('./pages/portal/Communication.jsx');
+const Requests = lazyPage('./pages/portal/Requests.jsx');
+const Support = lazyPage('./pages/portal/Support.jsx');
+const Graduation = lazyPage('./pages/portal/Graduation.jsx');
+const ChangePassword = lazyPage('./pages/portal/ChangePassword.jsx');
+const MyProgress = lazyPage('./pages/portal/MyProgress.jsx');
+const FoundationApplications = lazyPage('./pages/portal/FoundationApplications.jsx');
+const FoundationApplicationDetail = lazyPage('./pages/portal/FoundationApplicationDetail.jsx');
+const SponsorSignIn = lazyPage('./pages/sponsor/SponsorSignIn.jsx');
+const SponsorDashboard = lazyPage('./pages/sponsor/SponsorDashboard.jsx');
+const SponsorPrograms = lazyPage('./pages/sponsor/SponsorPrograms.jsx');
+const SponsorContributions = lazyPage('./pages/sponsor/SponsorContributions.jsx');
+const SponsorImpact = lazyPage('./pages/sponsor/SponsorImpact.jsx');
+const AdminDashboard = lazyPage('./pages/admin/AdminDashboard.jsx');
+const AdminStudents = lazyPage('./pages/admin/Students.jsx');
+const AdminStudentDetail = lazyPage('./pages/admin/StudentDetail.jsx');
+const AdminApplications = lazyPage('./pages/admin/Applications.jsx');
+const AdminContactMessages = lazyPage('./pages/admin/ContactMessages.jsx');
+const AdminPrograms = lazyPage('./pages/admin/Programs.jsx');
+const AdminSemesters = lazyPage('./pages/admin/Semesters.jsx');
+const AdminUnits = lazyPage('./pages/admin/Units.jsx');
+const AdminTimetableExams = lazyPage('./pages/admin/TimetableExams.jsx');
+const AdminFeeStructures = lazyPage('./pages/admin/FeeStructures.jsx');
+const AdminRequests = lazyPage('./pages/admin/Requests.jsx');
+const AdminSupport = lazyPage('./pages/admin/Support.jsx');
+const AdminGraduation = lazyPage('./pages/admin/Graduation.jsx');
+const AdminAnnouncements = lazyPage('./pages/admin/Announcements.jsx');
+const AdminLmsOverview = lazyPage('./pages/admin/LmsOverview.jsx');
+const AdminCohorts = lazyPage('./pages/admin/Cohorts.jsx');
+const AdminCareerOpportunities = lazyPage('./pages/admin/CareerOpportunities.jsx');
+const CareerApplications = lazyPage('./pages/admin/CareerApplications.jsx');
+const TeachOverview = lazyPage('./pages/teach/TeachOverview.jsx');
+const TeachProfile = lazyPage('./pages/teach/TeachProfile.jsx');
+const MyCourses = lazyPage('./pages/teach/MyCourses.jsx');
+const CreateCourse = lazyPage('./pages/teach/CreateCourse.jsx');
+const TeachStudents = lazyPage('./pages/teach/TeachStudents.jsx');
+const LearningMaterials = lazyPage('./pages/teach/LearningMaterials.jsx');
+const Assignments = lazyPage('./pages/teach/Assignments.jsx');
+const Assessments = lazyPage('./pages/teach/Assessments.jsx');
+const TeachMessages = lazyPage('./pages/teach/TeachMessages.jsx');
+const TeachNotifications = lazyPage('./pages/teach/TeachNotifications.jsx');
+const TeachSettings = lazyPage('./pages/teach/TeachSettings.jsx');
+const CourseBuilder = lazyPage('./pages/teach/CourseBuilder.jsx');
+const LessonContentBuilder = lazyPage('./pages/teach/LessonContentBuilder.jsx');
+const Submissions = lazyPage('./pages/teach/Submissions.jsx');
+const SessionsManager = lazyPage('./pages/teach/SessionsManager.jsx');
+const Gradebook = lazyPage('./pages/teach/Gradebook.jsx');
+const LearnDashboard = lazyPage('./pages/learn/LearnDashboard.jsx');
+const CareerProfile = lazyPage('./pages/learn/CareerProfile.jsx');
+const MyApplications = lazyPage('./pages/learn/MyApplications.jsx');
+const Sessions = lazyPage('./pages/learn/Sessions.jsx');
+const Calendar = lazyPage('./pages/learn/Calendar.jsx');
+const Portfolio = lazyPage('./pages/learn/Portfolio.jsx');
+const Goals = lazyPage('./pages/learn/Goals.jsx');
+const Projects = lazyPage('./pages/learn/Projects.jsx');
+const Mentorship = lazyPage('./pages/learn/Mentorship.jsx');
+const Certificates = lazyPage('./pages/learn/Certificates.jsx');
+const CertificateVerify = lazyPage('./pages/learn/CertificateVerify.jsx');
+const CareerHub = lazyPage('./pages/CareerHub.jsx');
+const Opportunities = lazyPage('./pages/career/Opportunities.jsx');
+const OpportunityDetail = lazyPage('./pages/career/OpportunityDetail.jsx');
+const Connections = lazyPage('./pages/career/Connections.jsx');
+const LearningPlayer = lazyPage('./pages/learn/LearningPlayer.jsx');
+const AssignmentView = lazyPage('./pages/learn/AssignmentView.jsx');
+const QuizAttempt = lazyPage('./pages/learn/QuizAttempt.jsx');
+const BecomeTutor = lazyPage('./pages/BecomeTutor.jsx');
+const AdminTutorApplications = lazyPage('./pages/admin/TutorApplications.jsx');
+const AdminCourseReview = lazyPage('./pages/admin/CourseReview.jsx');
+const AdminCertificates = lazyPage('./pages/admin/Certificates.jsx');
+const AdminPayments = lazyPage('./pages/admin/Payments.jsx');
+const AdminFoundationApplications = lazyPage('./pages/admin/FoundationApplications.jsx');
+const AdminFoundationApplicationDetail = lazyPage('./pages/admin/FoundationApplicationDetail.jsx');
+const AdminFoundationStories = lazyPage('./pages/admin/FoundationStories.jsx');
+const AdminFoundationInitiatives = lazyPage('./pages/admin/FoundationInitiatives.jsx');
+const AdminFoundationEvents = lazyPage('./pages/admin/FoundationEvents.jsx');
+const AdminFoundationEventEditor = lazyPage('./pages/admin/FoundationEventEditor.jsx');
+const AdminFoundationSponsors = lazyPage('./pages/admin/FoundationSponsors.jsx');
+const AdminFoundationContributions = lazyPage('./pages/admin/FoundationContributions.jsx');
+const AdminFoundationDisbursements = lazyPage('./pages/admin/FoundationDisbursements.jsx');
+const AdminFoundationProgressReports = lazyPage('./pages/admin/FoundationProgressReports.jsx');
+const ForEmployers = lazyPage('./pages/ForEmployers.jsx');
+const EmployerOverview = lazyPage('./pages/employer/EmployerOverview.jsx');
+const EmployerOpportunities = lazyPage('./pages/employer/EmployerOpportunities.jsx');
+const EmployerOpportunityEditor = lazyPage('./pages/employer/EmployerOpportunityEditor.jsx');
+const EmployerApplications = lazyPage('./pages/employer/EmployerApplications.jsx');
+const OrganisationProfile = lazyPage('./pages/employer/OrganisationProfile.jsx');
+const NotFound = lazyPage('./pages/NotFound.jsx');
+const PaymentReturn = lazyPage('./pages/PaymentReturn.jsx');
+
 
 export default function App() {
   return (
     <AuthProvider>
       <RouteErrorBoundary>
-      <Routes>
+      <Suspense fallback={<RouteLoading />}>
+        <Routes>
         <Route element={<AppLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/programs" element={<Programs />} />
+          <Route path="/learn/catalog" element={<Navigate to="/academy" replace />} />
           
-          {/* ALL COURSE ROUTES HAVE BEEN PURGED FOR REBUILD */}
-
           {/* Academy */}
           <Route path="/academy" element={<Academy />} />
           <Route path="/academy/cbe" element={<AcademyCbe />} />
@@ -325,7 +347,8 @@ export default function App() {
 
           <Route path="*" element={<NotFound />} />
         </Route>
-      </Routes>
+        </Routes>
+      </Suspense>
       </RouteErrorBoundary>
     </AuthProvider>
   );

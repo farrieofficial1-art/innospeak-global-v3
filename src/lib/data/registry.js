@@ -83,7 +83,7 @@ export const TRACKS = [
 
 export const PATHWAYS = [
   { id: 'english-communication', title: 'English Communication', slug: 'english-communication', description: 'English language skills for everyday and professional contexts.' },
-  { id: 'world-languages', title: 'World Languages', slug: 'world-languages', description: 'Spanish, French, German, Mandarin, Japanese, Korean and more.' },
+  { id: 'world-languages', title: 'World Languages', slug: 'world-languages', description: 'Swahili, Spanish, French, German, Mandarin, Japanese, Korean and more.' },
   { id: 'international-qualifications', title: 'International Qualifications', slug: 'international-qualifications', description: 'IELTS, SAT, IGCSE, GMAT, GRE, TOEFL and other exam prep.' },
   { id: 'kenya-curriculum-tvet', title: 'Kenya Curriculum & TVET', slug: 'kenya-curriculum-tvet', description: 'CBE school programme (Grades 3–12), TVET, and engineering trades.' },
   { id: 'digital-skills-productivity', title: 'Digital Skills & Productivity', slug: 'digital-skills-productivity', description: 'AI, data, coding, cloud, cybersecurity, and digital tools.' },

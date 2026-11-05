@@ -178,7 +178,7 @@ export default function AcademyCbeBundle() {
                   Enrol in any course in this bundle to begin learning. Each course is self-paced and aligned to the Kenya CBC.
                 </p>
                 <Link
-                  to="/my-learning"
+                  to="/learn"
                   className="btn-gold mt-4 inline-flex w-full items-center justify-center gap-2"
                 >
                   Go to My Learning

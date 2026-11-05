@@ -87,6 +87,8 @@ const lines = [
   '',
   'This is a structural quality-screening report for prioritising human review. It does not write or validate teaching content, verify factual accuracy, confirm current standards, or establish academic accreditation. A flag is a review prompt, not a verdict that a course is unusable.',
   '',
+  'This screening reads `courseCurricula.generated.js`; it does not inspect curriculum records seeded by Supabase migrations. A `MISSING_CURRICULUM` flag means no generated-JavaScript curriculum entry was found and does not by itself mean that the LMS has no modules or lessons.',
+  '',
   '## Coverage',
   '',
   `- Catalogue courses scanned: **${rows.length}**`,
@@ -122,6 +124,7 @@ const lines = [
   'Keep the current curriculum structures available as a draft/self-paced learning baseline, but do not treat structural completeness as proof of detailed instructional quality. Prioritise safety-sensitive content and repeated generic activities for course-by-course refinement. Supabase wiring and live backend security are outside the scope of this audit and remain deferred as requested.',
   '',
 ];
+fs.mkdirSync(path.dirname(reportPath), { recursive: true });
 fs.writeFileSync(reportPath, lines.join('\n'), 'utf8');
 const header = ['course_code','course_title','pathway_id','priority_score','review_flags','description_words','module_count','average_module_description_words','generic_activity_count','generic_prerequisite_count','safety_sensitive','safety_guidance_detected','learning_outcome_count','assessment_weight_total','capstone_brief_words'];
 const csv = [header, ...rows.map((row) => [row.course.code, row.course.name, row.course.pathwayId || '', row.score, row.flags.join('; '), row.descriptionWords ?? 0, row.curriculum?.courseStructure?.length ?? 0, row.moduleDescriptionAverage?.toFixed(1) ?? '0', row.genericActivities ?? 0, row.genericPrerequisites ?? 0, row.safetySensitive ? 'yes' : 'no', row.hasSafetyGuidance ? 'yes' : 'no', row.outcomeCount ?? 0, row.assessmentWeight ?? 0, row.capstoneWords ?? 0])].map((row) => row.map(csvCell).join(',')).join('\n') + '\n';

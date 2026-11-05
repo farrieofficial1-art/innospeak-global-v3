@@ -1,19 +1,17 @@
-import { useState, useEffect } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   ArrowLeft,
   CheckCircle2,
   Clock,
   Award,
-  PlayCircle,
   Lock,
-  Wrench,
   BriefcaseBusiness,
 } from 'lucide-react';
 import Seo from '../components/ui/Seo.jsx';
 import Container from '../components/ui/Container.jsx';
 import Button from '../components/ui/Button.jsx';
+import EnrollButton from '../components/portal/EnrollButton.jsx';
 import LabCourseCard from '../components/academy/LabCourseCard.jsx';
 import {
   LAB_BY_SLUG,
@@ -21,8 +19,6 @@ import {
 } from '../lib/data/labs.js';
 import { TRACK_BY_ID } from '../lib/data/registry.js';
 import { priceKes } from '../lib/data/labs.js';
-import { useAuth } from '../context/AuthContext.jsx';
-import { supabase } from '../lib/supabase/client.js';
 
 const OUTCOMES = [
   'Hands-on, project-based learning with real engineering tasks',
@@ -43,34 +39,7 @@ const TRACK_GRADIENTS = {
 
 export default function LabCourseDetail() {
   const { slug } = useParams();
-  const navigate = useNavigate();
-  const { user } = useAuth();
-  const [enrolled, setEnrolled] = useState(false);
-  const [checking, setChecking] = useState(true);
-
   const course = LAB_BY_SLUG[slug];
-
-  useEffect(() => {
-    let cancelled = false;
-    async function checkEnrollment() {
-      if (!course || !user || !supabase) {
-        setChecking(false);
-        return;
-      }
-      const { data } = await supabase
-        .from('academy_enrollments')
-        .select('id')
-        .eq('course_code', course.code)
-        .eq('user_id', user.id)
-        .maybeSingle();
-      if (!cancelled) {
-        setEnrolled(Boolean(data));
-        setChecking(false);
-      }
-    }
-    checkEnrollment();
-    return () => { cancelled = true; };
-  }, [course, user]);
 
   if (!course) {
     return (
@@ -99,6 +68,13 @@ export default function LabCourseDetail() {
   const Icon = track.icon;
   const gradient = TRACK_GRADIENTS[course.track_id] || 'from-navy-600 to-navy-800';
   const kes = priceKes(course.price_usd || 0);
+  const enrollmentCourse = {
+    code: course.code,
+    name: course.title,
+    pathway: track.title,
+    fees: course.price_usd > 0 ? `${course.price_usd}` : 'Free',
+    isFree: course.price_usd === 0,
+  };
   const related = getLabCoursesByTrack(course.track_id)
     .filter((c) => c.code !== course.code)
     .slice(0, 4);
@@ -268,29 +244,7 @@ export default function LabCourseDetail() {
                 </div>
 
                 <div className="mt-6 space-y-3">
-                  {checking ? (
-                    <p className="font-body text-sm text-navy-400">Checking enrollment…</p>
-                  ) : enrolled ? (
-                    <Button to="/my-learning" variant="gold" className="w-full">
-                      <PlayCircle size={18} />
-                      Continue Learning
-                    </Button>
-                  ) : (
-                    <Button
-                      onClick={() => {
-                        if (!user) {
-                          navigate('/login?redirect=/labs/' + course.slug);
-                          return;
-                        }
-                        navigate(`/my-learning?enroll=${course.code}`);
-                      }}
-                      variant="gold"
-                      className="w-full"
-                    >
-                      <Wrench size={18} />
-                      Enroll Now
-                    </Button>
-                  )}
+                  <EnrollButton course={enrollmentCourse} />
                   <Button to="/labs" variant="outline" className="w-full">
                     Browse more lab courses
                   </Button>

@@ -1,7 +1,9 @@
+import { ACADEMY_COURSES, TRACKS } from '../../lib/data/academy.js';
+
 export const IMPACT_STATS = [
-  { id: 'courses', value: 427, suffix: '+', label: 'On-Demand Courses', description: 'Across 17 learning tracks' },
-  { id: 'tracks', value: 17, suffix: '', label: 'Learning Tracks', description: 'From AI to languages, CBE to engineering' },
-  { id: 'languages', value: 10, suffix: '+', label: 'Global Languages', description: 'English, Spanish, French, German, Mandarin and more' },
+  { id: 'courses', value: ACADEMY_COURSES.length, suffix: '+', label: 'On-Demand Courses', description: `Across ${TRACKS.length} learning tracks` },
+  { id: 'tracks', value: TRACKS.length, suffix: '', label: 'Learning Tracks', description: 'From AI to languages, CBE to engineering' },
+  { id: 'languages', value: 11, suffix: '+', label: 'Global Languages', description: 'English, Swahili, Spanish, French, German, Mandarin and more' },
   { id: 'grades', value: 10, suffix: '', label: 'CBE Grade Levels', description: 'Grades 3–12 plus electives, aligned to Kenyan CBC' },
   { id: 'price', value: 19, suffix: '$', label: 'Starting Price', description: 'Affordable, pay-per-course learning' },
   { id: 'programs', value: 4, suffix: '', label: 'Connected Programs', description: 'Academy, Labs, Career Hub and Foundation' },
