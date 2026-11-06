@@ -280,6 +280,7 @@ export const ACADEMY_COURSES = [
   { code: 'LNG143', title: 'Swahili for Beginners', slug: 'lng143-swahili-for-beginners', price_usd: 29, track_id: 'languages', level: 'Beginner' },
   { code: 'LNG144', title: 'Everyday Swahili', slug: 'lng144-everyday-swahili', price_usd: 29, track_id: 'languages', level: 'Beginner' },
   { code: 'LNG145', title: 'Intermediate Swahili', slug: 'lng145-intermediate-swahili', price_usd: 39, track_id: 'languages', level: 'Intermediate' },
+  { code: 'SWA101', title: 'Swahili Language', slug: 'swa101-swahili-language', price_usd: 115.38, track_id: 'languages', level: 'Beginner' },
   { code: 'IQP101', title: 'AP Preparation', slug: 'iqp101-ap-preparation', price_usd: 59, track_id: 'exams', level: 'Intermediate' },
   { code: 'IQP102', title: 'Cambridge English', slug: 'iqp102-cambridge-english', price_usd: 59, track_id: 'exams', level: 'Intermediate' },
   { code: 'IQP103', title: 'Duolingo English Test', slug: 'iqp103-duolingo-english-test', price_usd: 49, track_id: 'exams', level: 'Intermediate' },

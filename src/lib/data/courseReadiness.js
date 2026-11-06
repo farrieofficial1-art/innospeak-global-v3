@@ -4,7 +4,9 @@
 // have owner-authorised structured curriculum content (modules, lessons,
 // assessments) published and ready for self-paced enrolment.
 
-export const STRUCTURED_CURRICULUM_CODES = new Set();
+export const STRUCTURED_CURRICULUM_CODES = new Set([
+  'SWA101',
+]);
 
 export function getCurriculumStatus(courseOrCode) {
   const code = typeof courseOrCode === 'string' ? courseOrCode : courseOrCode?.code;

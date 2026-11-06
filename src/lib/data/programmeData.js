@@ -14,6 +14,7 @@ import {
   KES_RATE,
 } from './academy.js';
 import { PATHWAYS } from './registry.js';
+import { STRUCTURED_CURRICULUM_CODES } from './courseReadiness.js';
 
 export const ACADEMY = 'InnoSpeak Academy';
 
@@ -79,6 +80,7 @@ function adaptCourse(c) {
   const pathwayId = ENGLISH_CODES.has(c.code)
     ? 'english-communication'
     : TRACK_TO_PATHWAY[c.track_id] || 'personal-life-skills';
+  const hasStructuredContent = STRUCTURED_CURRICULUM_CODES.has(c.code);
   return {
     code: c.code,
     name: c.title,
@@ -93,6 +95,8 @@ function adaptCourse(c) {
     feesUSD,
     fees: isFree ? 'Free' : `${feesUSD}`,
     isFree,
+    ownerAuthorizedForPublication: hasStructuredContent,
+    enrollmentOpen: hasStructuredContent,
   };
 }
 
