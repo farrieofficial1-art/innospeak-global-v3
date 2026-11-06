@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, Search, X } from 'lucide-react';
@@ -20,11 +20,18 @@ export default function Labs() {
   const [selectedLevel, setSelectedLevel] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
 
+  // Sync selectedTrack when the URL ?track= param changes externally
+  // (e.g. clicking a track card Link while already on the Labs page).
+  useEffect(() => {
+    setSelectedTrack(searchParams.get('track') || 'all');
+  }, [searchParams]);
+
   function handleTrackChange(trackId) {
     setSelectedTrack(trackId);
-    if (trackId === 'all') searchParams.delete('track');
-    else searchParams.set('track', trackId);
-    setSearchParams(searchParams, { replace: true });
+    const next = new URLSearchParams(searchParams);
+    if (trackId === 'all') next.delete('track');
+    else next.set('track', trackId);
+    setSearchParams(next, { replace: true });
   }
 
   const filtered = useMemo(() => {
@@ -66,7 +73,7 @@ export default function Labs() {
               Practical engineering & innovation.
             </h1>
             <p className="mt-5 max-w-2xl font-body text-base leading-relaxed text-white/70 sm:text-lg">
-              {LAB_COURSES.length} hands-on courses across {TRACKS.length} tracks —
+              {LAB_COURSES.length} hands-on courses across {TRACKS.length} tracks
               from software engineering and AI to cloud, cybersecurity, smart systems,
               and creative technology. Build, break, and ship real projects.
             </p>
@@ -110,9 +117,10 @@ export default function Labs() {
                     key={track.id}
                     variants={{ hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0 } }}
                   >
-                    <Link
-                      to={`/labs?track=${track.id}`}
-                      className="group flex h-full flex-col rounded-2xl border border-navy-100 bg-white p-6 shadow-premium transition-all duration-300 hover:-translate-y-1 hover:border-gold-300/60 hover:shadow-premium-lg"
+                    <button
+                      type="button"
+                      onClick={() => handleTrackChange(track.id)}
+                      className="group flex h-full w-full flex-col rounded-2xl border border-navy-100 bg-white p-6 text-left shadow-premium transition-all duration-300 hover:-translate-y-1 hover:border-gold-300/60 hover:shadow-premium-lg"
                     >
                       <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-navy-900 text-gold-400 transition-colors group-hover:bg-gold-gradient group-hover:text-navy-900">
                         {Icon && <Icon size={24} strokeWidth={1.8} />}
@@ -125,14 +133,14 @@ export default function Labs() {
                       </p>
                       <div className="mt-4 flex items-center justify-between">
                         <span className="font-mono text-xs font-bold text-navy-400">
-                          {track.code} · {count} courses
+                          {track.code} {count} courses
                         </span>
                         <span className="inline-flex items-center gap-1 font-body text-sm font-bold text-gold-700 transition-all group-hover:gap-2">
                           Explore
                           <ArrowRight size={14} />
                         </span>
                       </div>
-                    </Link>
+                    </button>
                   </motion.div>
                 );
               })}
@@ -152,6 +160,14 @@ export default function Labs() {
                 subtitle={activeTrack.description}
                 center={false}
               />
+              <button
+                type="button"
+                onClick={() => handleTrackChange('all')}
+                className="mt-6 inline-flex items-center gap-1.5 font-body text-sm font-semibold text-gold-700 transition-colors hover:text-gold-600"
+              >
+                <ArrowRight size={15} className="rotate-180" />
+                Back to all tracks
+              </button>
             </div>
           )}
 
@@ -163,7 +179,7 @@ export default function Labs() {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search by name, code, or skill (e.g. React, AWS, Python)…"
+                placeholder="Search by name, code, or skill (e.g. React, AWS, Python)"
                 className="w-full rounded-2xl border border-navy-100 bg-white py-3.5 pl-12 pr-12 font-body text-sm text-navy-900 shadow-premium outline-none transition-colors placeholder:text-navy-400 focus:border-gold-400 focus:ring-2 focus:ring-gold-400/30"
               />
               {searchQuery && (

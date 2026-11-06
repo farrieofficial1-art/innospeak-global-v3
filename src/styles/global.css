@@ -9,6 +9,13 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
   :focus-visible {
     @apply outline outline-2 outline-offset-2 outline-gold-500;
   }
@@ -16,11 +23,24 @@
   body {
     @apply bg-cream font-sans text-navy-900 antialiased;
   }
+
+  /* Consistent heading line-heights */
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.2;
+  }
+
+  p {
+    line-height: 1.6;
+  }
 }
 
 @layer components {
   .container-premium {
     @apply mx-auto max-w-7xl px-5 sm:px-8 lg:px-12;
+  }
+
+  .container-px {
+    @apply mx-auto w-full max-w-[1280px] px-4 sm:px-6 lg:px-8 xl:px-12;
   }
 
   .skip-link {
@@ -32,58 +52,16 @@
   }
 
   .btn-gold {
-  @apply inline-flex items-center justify-center gap-2
-  rounded-2xl
-  bg-gold-gradient
-  px-8 py-4
-  font-body
-  text-sm
-  font-bold
-  text-navy-900
-  shadow-gold
-  transition-all
-  duration-300
-  hover:-translate-y-1
-  hover:shadow-premium-lg
-  hover:brightness-110
-  active:translate-y-0;
-}
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-gold-gradient px-6 py-3 font-body text-sm font-bold text-navy-900 shadow-gold transition-all duration-300 hover:-translate-y-0.5 hover:shadow-premium-lg hover:brightness-110 active:translate-y-0;
+  }
 
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border-2 border-navy-900 bg-white px-6 py-3 font-body text-sm font-bold text-navy-900 transition-all duration-300 hover:-translate-y-0.5 hover:bg-navy-900 hover:text-white hover:shadow-lg active:translate-y-0;
+  }
 
-.btn-outline {
-  @apply inline-flex items-center justify-center gap-2
-  rounded-2xl
-  border-2
-  border-navy-900
-  bg-white
-  px-8 py-4
-  font-body
-  text-sm
-  font-bold
-  text-navy-900
-  transition-all
-  duration-300
-  hover:-translate-y-1
-  hover:bg-navy-900
-  hover:text-white
-  hover:shadow-lg
-  active:translate-y-0;
-}
-
-
-.btn-ghost {
-  @apply inline-flex items-center justify-center gap-2
-  rounded-2xl
-  px-6 py-3
-  font-body
-  text-sm
-  font-semibold
-  text-navy-700
-  transition-all
-  duration-300
-  hover:bg-navy-50
-  hover:text-navy-900;
-}
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 font-body text-sm font-semibold text-navy-700 transition-all duration-300 hover:bg-navy-50 hover:text-navy-900;
+  }
 
   .card-premium {
     @apply rounded-2xl border border-navy-100 bg-white shadow-premium;
@@ -95,6 +73,11 @@
 
   .text-gradient-gold {
     @apply bg-gold-gradient bg-clip-text text-transparent;
+  }
+
+  /* Skeleton loading shimmer */
+  .skeleton {
+    @apply animate-pulse rounded-md bg-navy-100;
   }
 }
 
@@ -108,6 +91,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   *,
   *::before,
   *::after {
@@ -115,5 +102,36 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+@media print {
+  body {
+    background: white !important;
+  }
+
+  .print\:hidden {
+    display: none !important;
+  }
+
+  .certificate-print-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .shadow-premium,
+  .shadow-premium-lg {
+    box-shadow: none !important;
   }
 }

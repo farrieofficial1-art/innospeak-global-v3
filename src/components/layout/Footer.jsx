@@ -35,7 +35,7 @@ export default function Footer() {
   const { user, profile } = useAuth();
 
   const isAdmin = profile?.role === 'admin';
-  const isInstructor = profile?.role === 'instructor' || profile?.role === 'lms_admin';
+  const isInstructor = ['admin', 'lms_admin', 'instructor'].includes(profile?.role);
 
   return (
     <footer className="bg-navy-gradient text-white">

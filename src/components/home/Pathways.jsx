@@ -67,7 +67,7 @@ export default function Pathways() {
           transition={{ duration: 0.5 }}
           className="mt-12 text-center"
         >
-          <Button to="/courses" variant="gold" size="lg" className="group">
+          <Button to="/programs" variant="gold" size="lg" className="group">
             Browse the Full Catalogue
             <ArrowRight size={18} className="ml-2 transition-transform group-hover:translate-x-1" />
           </Button>
