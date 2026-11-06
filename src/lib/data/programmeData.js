@@ -102,7 +102,26 @@ function adaptCourse(c) {
 
 export const COURSES = ACADEMY_COURSES.map(adaptCourse);
 
+const SWAHILI_PROGRAMME = {
+  code: 'SWA101',
+  name: 'Swahili Language',
+  pathwayId: 'world-languages',
+  pathway: 'Global Languages',
+  category: 'Global Languages',
+  division: 'academy',
+  level: 'Beginner',
+  slug: 'swa101-swahili-language',
+  duration: '8 Weeks',
+  studyMode: 'Self-Paced',
+  feesUSD: 115.38,
+  fees: '115.38',
+  isFree: false,
+  ownerAuthorizedForPublication: true,
+  enrollmentOpen: true,
+};
+
 const COURSES_BY_CODE = Object.fromEntries(COURSES.map((c) => [c.code, c]));
+COURSES_BY_CODE.SWA101 = { ...COURSES_BY_CODE.SWA101, ...SWAHILI_PROGRAMME };
 
 export function getProgrammeByCode(code) {
   if (!code) return null;

@@ -235,6 +235,7 @@ export const ACADEMY_COURSES = [
   { code: 'CRE118', title: 'Animation Essentials', slug: 'cre118-animation-essentials', price_usd: 59, track_id: 'creative', level: 'Intermediate' },
   { code: 'CRE119', title: 'AI Image Creation', slug: 'cre119-ai-image-creation', price_usd: 49, track_id: 'creative', level: 'Intermediate' },
   { code: 'CRE201', title: 'Creative Portfolio Development', slug: 'cre201-creative-portfolio-development', price_usd: 49, track_id: 'creative', level: 'Intermediate' },
+  { code: 'SWA101', title: 'Swahili Language', slug: 'swa101-swahili-language', price_usd: 115.38, track_id: 'languages', level: 'Beginner' },
   { code: 'LNG101', title: 'English Foundations', slug: 'lng101-english-foundations', price_usd: 29, track_id: 'languages', level: 'Beginner' },
   { code: 'LNG102', title: 'Everyday English', slug: 'lng102-everyday-english', price_usd: 29, track_id: 'languages', level: 'Beginner' },
   { code: 'LNG103', title: 'Professional English', slug: 'lng103-professional-english', price_usd: 39, track_id: 'languages', level: 'Beginner' },
