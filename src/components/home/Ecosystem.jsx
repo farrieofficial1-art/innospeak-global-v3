@@ -5,7 +5,7 @@ import { ECOSYSTEM_CARDS, ECOSYSTEM_STATEMENT } from './ecosystemData.js';
 
 export default function Ecosystem() {
   return (
-    <section className="bg-white py-20 sm:py-24">
+    <section className="bg-cream py-20 sm:py-24">
       <div className="container-premium">
         <SectionHeading
           eyebrow="Our Ecosystem"

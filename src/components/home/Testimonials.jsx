@@ -8,7 +8,7 @@ import { LEARNERS, LEARNERS_INTRO } from './learnersData.js';
 
 export default function Testimonials() {
   return (
-    <section className="bg-cream py-20 sm:py-24">
+    <section className="bg-white py-20 sm:py-24">
       <div className="container-premium">
         <SectionHeading
           eyebrow={LEARNERS_INTRO.eyebrow}

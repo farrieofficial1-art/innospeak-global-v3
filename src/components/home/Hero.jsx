@@ -47,8 +47,7 @@ export default function Hero() {
       <HeroSlider />
       <HeroFloatingCards />
 
-      {/* ═══ Main content — vertically centred ═══ */}
-      <div className="relative z-10 flex flex-1 items-center pt-32 pb-10 sm:pt-36 lg:pt-40 lg:pb-12">
+      <div className="relative z-10 flex flex-1 items-center pt-28 pb-8 sm:pt-32 lg:pt-36 lg:pb-10">
         <div className="container-premium w-full">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -56,7 +55,7 @@ export default function Hero() {
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="max-w-3xl"
           >
-            {/* Badge */}
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -69,7 +68,7 @@ export default function Hero() {
               </span>
             </motion.div>
 
-            {/* Heading */}
+
             <h1 className="mt-6 font-display text-4xl font-bold leading-[1.08] text-white sm:mt-7 sm:text-5xl sm:leading-[1.05] lg:mt-8 lg:text-6xl">
               {HERO_HEADLINE.map((line, i) => (
                 <motion.span
@@ -84,7 +83,7 @@ export default function Hero() {
               ))}
             </h1>
 
-            {/* Description */}
+
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -94,7 +93,7 @@ export default function Hero() {
               {HERO_DESCRIPTION}
             </motion.p>
 
-            {/* CTAs */}
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -115,12 +114,11 @@ export default function Hero() {
               </Button>
             </motion.div>
 
-            {/* Stats */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 1.2 }}
-              className="mt-12 border-t border-white/10 pt-8 sm:mt-14 lg:mt-16"
+              className="mt-10 border-t border-white/10 pt-6 sm:mt-12 lg:mt-14"
             >
               <HeroStats />
             </motion.div>
@@ -128,8 +126,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* ═══ Pillars — bottom strip ═══ */}
-      <div className="relative z-10 pb-6 sm:pb-8 lg:pb-12">
+      <div className="relative z-10 pb-8 sm:pb-10 lg:pb-12">
         <div className="container-premium">
           <motion.div
             initial={{ opacity: 0, y: 24 }}

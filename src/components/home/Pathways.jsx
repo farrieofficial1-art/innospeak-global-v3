@@ -20,7 +20,7 @@ export default function Pathways() {
   const courses = getInDemandCourses(8);
 
   return (
-    <section className="bg-cream py-20 sm:py-24">
+    <section className="bg-white py-20 sm:py-24">
       <div className="container-premium">
         <SectionHeading
           eyebrow="In-Demand Skills"

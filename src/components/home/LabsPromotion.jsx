@@ -37,11 +37,11 @@ export default function LabsPromotion() {
   );
 
   return (
-    <section className="py-20 sm:py-24">
+    <section className="bg-cream py-20 sm:py-24">
       <div className="container-premium">
         <SectionHeading
           eyebrow="Practical Learning"
-          title="Don't Just Learn It. Build It."
+          title="Learn by Building"
           subtitle="Practical Labs help you apply concepts through experiments, technical tasks, projects and evidence-based assessments."
         />
 

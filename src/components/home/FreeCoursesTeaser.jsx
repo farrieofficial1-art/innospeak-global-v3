@@ -8,7 +8,7 @@ export default function FreeCoursesTeaser() {
   const courses = ACADEMY_COURSES.filter((c) => c.price_usd <= 19).slice(0, 4);
 
   return (
-    <section className="bg-white py-20 sm:py-24">
+    <section className="bg-cream py-20 sm:py-24">
       <div className="container-premium">
         <SectionHeading
           eyebrow="Start for less"

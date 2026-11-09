@@ -7,7 +7,7 @@ import { FAQ_CTA } from './faqData.js';
 
 export default function FAQ() {
   return (
-    <section className="bg-white py-20 sm:py-24">
+    <section className="bg-cream py-20 sm:py-24">
       <div className="container-premium">
         <SectionHeading
           eyebrow="Frequently Asked Questions"

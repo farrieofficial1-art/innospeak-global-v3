@@ -2,14 +2,14 @@ import { ArrowRight, CalendarDays, Sparkles, Wrench } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const campaigns = [
-  { icon: Sparkles, eyebrow: 'NEW LEARNING', title: 'AI, data & automation', text: 'Build practical digital skills around modern AI workflows, data and intelligent systems.', to: '/courses' },
+  { icon: Sparkles, eyebrow: 'NEW LEARNING', title: 'AI, data & automation', text: 'Build practical digital skills around modern AI workflows, data and intelligent systems.', to: '/programs' },
   { icon: Wrench, eyebrow: 'HANDS-ON', title: 'Engineering & innovation labs', text: 'Turn theory into practical projects, evidence and portfolio-ready work.', to: '/labs' },
   { icon: CalendarDays, eyebrow: 'FLEXIBLE', title: 'Online, physical & hybrid', text: 'Choose a study mode that fits your schedule and learning goals.', to: '/academy' },
 ];
 
 export default function PromotionRail() {
   return (
-    <section className="relative z-10 bg-white py-10 sm:py-12">
+    <section className="relative z-10 bg-cream py-16 sm:py-20">
       <div className="container-premium">
         <div className="grid gap-4 lg:grid-cols-3 lg:gap-6">
           {campaigns.map(({ icon: Icon, eyebrow, title, text, to }) => (

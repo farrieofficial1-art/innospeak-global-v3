@@ -17,7 +17,7 @@ const TRUST_ICONS = {
 
 export default function CertificatePreview() {
   return (
-    <section className="relative overflow-hidden bg-white py-20 sm:py-24">
+    <section className="relative overflow-hidden bg-cream py-20 sm:py-24">
       {/* Subtle background accents */}
       <div className="pointer-events-none absolute right-0 top-20 h-80 w-80 rounded-full bg-gold-500/5 blur-3xl" />
       <div className="pointer-events-none absolute bottom-20 left-0 h-72 w-72 rounded-full bg-navy-900/5 blur-3xl" />
@@ -91,10 +91,10 @@ export default function CertificatePreview() {
                 <ArrowRight size={16} />
               </Link>
               <Link
-                to="/courses"
+                to="/programs"
                 className="inline-flex items-center justify-center gap-2 rounded-xl border border-navy-200 bg-white px-6 py-3 font-body text-sm font-bold text-navy-900 transition-all duration-300 hover:border-gold-400 hover:text-gold-700"
               >
-                Browse Certificates Courses
+                Browse Certificate Courses
               </Link>
             </motion.div>
           </div>
