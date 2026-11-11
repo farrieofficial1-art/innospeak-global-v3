@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { staggerContainer, fadeUpItem, inViewOnce } from '../../../lib/motion/presets';
-const founderPhoto = 'https://images.pexels.com/photos/33048698/pexels-photo-33048698.jpeg?auto=compress&cs=tinysrgb&w=400&h=400';
+const founderPhoto = '/images/founder-profile.jpg';
 
 const container = staggerContainer(0.1, 0.1);
 
