@@ -9,6 +9,7 @@ import Button from '../components/ui/Button.jsx';
 import { useAuth } from '../context/AuthContext.jsx';
 import { supabase } from '../lib/supabase/client.js';
 import { ACADEMY_BY_CODE } from '../lib/data/academy.js';
+import { enrollInCourse, getMyEnrollments } from '../lib/supabase/portal.js';
 
 export default function MyLearning() {
   const { user } = useAuth();
@@ -25,17 +26,13 @@ export default function MyLearning() {
     }
     setLoading(true);
     setError(null);
-    const { data, error: fetchError } = await supabase
-      .from('academy_enrollments')
-      .select('id, course_code, status, enrolled_at')
-      .eq('user_id', user.id)
-      .order('enrolled_at', { ascending: false });
-    if (fetchError) {
+    try {
+      setEnrollments(await getMyEnrollments());
+    } catch (fetchError) {
       setError(fetchError.message);
-    } else {
-      setEnrollments(data || []);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   }, [user]);
 
   useEffect(() => {
@@ -49,22 +46,20 @@ export default function MyLearning() {
 
     (async () => {
       setEnrolling(true);
-      const { error: insertError } = await supabase
-        .from('academy_enrollments')
-        .insert({ course_code: code, user_id: user.id, status: 'active' });
-      if (insertError) {
-        setError(insertError.message);
-      } else {
+      try {
+        await enrollInCourse({ code });
         searchParams.delete('enroll');
         setSearchParams(searchParams, { replace: true });
         await loadEnrollments();
+      } catch (enrollError) {
+        setError(enrollError.message);
       }
       setEnrolling(false);
     })();
   }, [searchParams, user]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const enrolledCourses = enrollments
-    .map((e) => ACADEMY_BY_CODE[e.course_code])
+    .map((e) => ACADEMY_BY_CODE[e.lms_courses?.code || e.course_code])
     .filter(Boolean);
 
   return (

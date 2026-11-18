@@ -24,6 +24,7 @@ import { TRACK_BY_ID } from '../lib/data/registry.js';
 import { priceKes } from '../lib/data/labs.js';
 import { useAuth } from '../context/AuthContext.jsx';
 import { supabase } from '../lib/supabase/client.js';
+import { getEnrollmentByCode } from '../lib/supabase/portal.js';
 import { COURSE_PAGE_DEFAULTS } from '../config/coursePageContent.js';
 
 const OUTCOMES = [
@@ -59,12 +60,7 @@ export default function LabCourseDetail() {
         setChecking(false);
         return;
       }
-      const { data } = await supabase
-        .from('academy_enrollments')
-        .select('id')
-        .eq('course_code', course.code)
-        .eq('user_id', user.id)
-        .maybeSingle();
+      const data = await getEnrollmentByCode(course.code);
       if (!cancelled) {
         setEnrolled(Boolean(data));
         setChecking(false);
