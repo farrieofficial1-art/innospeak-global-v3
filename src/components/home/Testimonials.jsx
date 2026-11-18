@@ -25,10 +25,7 @@ export default function Testimonials() {
 
         {/* Review submission */}
         <div className="mt-16">
-          <ReviewSubmission
-            // TODO: wire to Supabase — see src/lib/supabase/
-            // onSubmit={async (payload) => { await supabase.from('reviews').insert(payload) }}
-          />
+          <ReviewSubmission />
         </div>
 
         {/* Closing CTA */}

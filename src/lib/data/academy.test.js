@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { getCourseByCode, getCourseBySlug, TRACK_BY_ID } from './academy.js';
+import { ACADEMY_COURSES, getCourseByCode, getCourseBySlug, TRACK_BY_ID } from './academy.js';
 import { getCurriculumStatus } from './courseReadiness.js';
 import { resolveLmsCourse } from './lmsCourse.js';
 import { getProgrammeByCode } from './programmeData.js';
@@ -27,4 +27,9 @@ test('Swahili is wired to the published LMS and programme catalogue', () => {
   assert.equal(course?.feesUSD, 115.38);
   assert.equal(resolved.title, 'Swahili Language');
   assert.equal(resolved.level, 'Beginner');
+});
+
+test('Academy catalogue codes are unique', () => {
+  const codes = ACADEMY_COURSES.map((course) => course.code);
+  assert.equal(new Set(codes).size, codes.length);
 });
