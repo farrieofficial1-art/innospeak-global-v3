@@ -165,8 +165,8 @@ export default function CourseReview() {
     try {
       const items = await listAllCourses();
       setList({ loading: false, error: null, items });
-    } catch {
-      setList({ loading: false, error: 'Could not load courses.', items: [] });
+    } catch (err) {
+      setList({ loading: false, error: err?.message || 'Could not load courses.', items: [] });
     }
   }, []);
 
@@ -187,8 +187,8 @@ export default function CourseReview() {
         requires_quiz_pass: course.requires_quiz_pass === true,
         requires_assignment_completion: course.requires_assignment_completion === true,
       });
-    } catch {
-      setDetail({ loading: false, error: 'Could not load this course.', course: null, modules: [] });
+    } catch (err) {
+      setDetail({ loading: false, error: err?.message || 'Could not load this course.', course: null, modules: [] });
     }
   }, []);
 
@@ -212,8 +212,8 @@ export default function CourseReview() {
       }
       await loadDetail(selectedId);
       await loadList();
-    } catch {
-      setActionError('Could not complete this action. Please try again.');
+    } catch (err) {
+      setActionError(err?.message || 'Could not complete this action. Please try again.');
     } finally {
       setActionLoading(false);
     }
@@ -480,8 +480,8 @@ export default function CourseReview() {
                       await updateCourseCompletionConfig(selectedId, completionConfig);
                       setConfigSaved(true);
                       setTimeout(() => setConfigSaved(false), 3000);
-                    } catch {
-                      setActionError('Could not save completion settings.');
+                    } catch (err) {
+                      setActionError(err?.message || 'Could not save completion settings.');
                     } finally {
                       setConfigSaving(false);
                     }

@@ -448,7 +448,7 @@ export async function getAdminOverview() {
     supabase.from('service_requests').select('id', { count: 'exact', head: true }).eq('status', 'submitted'),
     supabase.from('support_tickets').select('id', { count: 'exact', head: true }).in('status', ['open', 'in_progress']),
     supabase.from('fee_transactions').select('type, amount'),
-    supabase.from('applications').select('id', { count: 'exact', head: true }).eq('status', 'pending'),
+    supabase.from('applications').select('id', { count: 'exact', head: true }).in('status', ['pending', 'submitted']),
     supabase.from('contact_messages').select('id', { count: 'exact', head: true }).eq('status', 'new'),
   ]);
   const unpaidBalance = (feeRows.data || []).reduce(

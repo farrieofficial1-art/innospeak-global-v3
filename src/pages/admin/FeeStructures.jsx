@@ -16,6 +16,7 @@ export default function FeeStructures() {
   const [semesters, setSemesters] = useState([]);
   const [form, setForm] = useState(emptyForm);
   const [saving, setSaving] = useState(false);
+  const [success, setSuccess] = useState('');
 
   function load() {
     listFeeStructures()
@@ -33,6 +34,7 @@ export default function FeeStructures() {
     e.preventDefault();
     if (!form.item || !form.amount) return;
     setSaving(true);
+    setSuccess('');
     try {
       await createFeeStructure({
         program_id: form.program_id || null,
@@ -41,6 +43,7 @@ export default function FeeStructures() {
         amount: Number(form.amount),
       });
       setForm(emptyForm);
+      setSuccess('Fee item added.');
       load();
     } catch (err) {
       setState((prev) => ({ ...prev, error: err.message || 'Could not add this fee item.' }));
@@ -52,6 +55,7 @@ export default function FeeStructures() {
   async function handleDelete(id) {
     try {
       await deleteFeeStructure(id);
+      setSuccess('Fee item deleted.');
       load();
     } catch (err) {
       setState((prev) => ({ ...prev, error: err.message || 'Could not delete this fee item.' }));
@@ -120,6 +124,11 @@ export default function FeeStructures() {
         </SectionCard>
 
         <SectionCard title="All Fee Items" className="lg:col-span-2">
+          {success && (
+            <div role="status" className="mb-4 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 font-body text-sm text-emerald-800">
+              {success}
+            </div>
+          )}
           {state.loading && <LoadingState />}
           {!state.loading && state.error && <ErrorState message={state.error} />}
           {!state.loading && !state.error && state.structures.length === 0 && (
