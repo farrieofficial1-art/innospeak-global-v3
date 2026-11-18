@@ -22,6 +22,8 @@ import {
 } from '../lib/data/academy.js';
 import { useAuth } from '../context/AuthContext.jsx';
 import { supabase } from '../lib/supabase/client.js';
+import { buildCourseData } from '../lib/data/courseDetails.js';
+import { COURSE_PAGE_DEFAULTS, FREE_ACADEMY_CODES } from '../config/coursePageContent.js';
 
 const OUTCOMES = [
   'Practical, project-based learning you can apply immediately',
@@ -92,6 +94,11 @@ export default function AcademyCourseDetail() {
   const related = getCoursesByTrack(course.track_id)
     .filter((c) => c.code !== course.code)
     .slice(0, 4);
+  const courseDetails = buildCourseData(course.code);
+  const isFree = FREE_ACADEMY_CODES.has(course.code);
+  const syllabus = courseDetails?.modules?.length
+    ? courseDetails.modules
+    : [{ title: 'Syllabus to be confirmed' }];
 
   return (
     <>
@@ -211,6 +218,50 @@ export default function AcademyCourseDetail() {
                     Self-paced, on-demand
                   </p>
                 </div>
+                <div className="card-premium p-5">
+                  <p className="font-body text-sm font-semibold text-navy-500">Duration</p>
+                  <p className="mt-2 font-display text-lg font-bold text-navy-900">{COURSE_PAGE_DEFAULTS.duration}</p>
+                </div>
+                <div className="card-premium p-5">
+                  <p className="font-body text-sm font-semibold text-navy-500">Weekly effort</p>
+                  <p className="mt-2 font-display text-lg font-bold text-navy-900">{COURSE_PAGE_DEFAULTS.weeklyEffort}</p>
+                </div>
+                <div className="card-premium p-5">
+                  <p className="font-body text-sm font-semibold text-navy-500">Start date</p>
+                  <p className="mt-2 font-display text-lg font-bold text-navy-900">{COURSE_PAGE_DEFAULTS.startStatus}</p>
+                </div>
+                <div className="card-premium p-5">
+                  <p className="font-body text-sm font-semibold text-navy-500">Prerequisites</p>
+                  <p className="mt-2 font-display text-lg font-bold text-navy-900">{COURSE_PAGE_DEFAULTS.prerequisites}</p>
+                </div>
+              </div>
+
+              <h2 className="mt-10 font-display text-2xl font-bold text-navy-900">Syllabus</h2>
+              <ol className="mt-5 space-y-3">
+                {syllabus.map((module, index) => (
+                  <li key={module.title} className="card-premium p-5">
+                    <p className="font-body text-xs font-bold uppercase tracking-wider text-gold-700">Module {index + 1}</p>
+                    <p className="mt-1 font-display text-lg font-bold text-navy-900">{module.title}</p>
+                  </li>
+                ))}
+              </ol>
+
+              <h2 className="mt-10 font-display text-2xl font-bold text-navy-900">Instructor</h2>
+              <p className="mt-3 font-body text-base leading-relaxed text-navy-600">{COURSE_PAGE_DEFAULTS.instructorName}</p>
+
+              <div className="mt-10 grid gap-4 sm:grid-cols-2">
+                <div className="card-premium p-5">
+                  <p className="font-body text-sm font-semibold text-navy-500">Certificate</p>
+                  <p className="mt-2 font-body text-sm leading-6 text-navy-700">{COURSE_PAGE_DEFAULTS.certificate}</p>
+                </div>
+                <div className="card-premium p-5">
+                  <p className="font-body text-sm font-semibold text-navy-500">Refund policy</p>
+                  <p className="mt-2 font-body text-sm leading-6 text-navy-700">{COURSE_PAGE_DEFAULTS.refundPolicy}</p>
+                </div>
+                <div className="card-premium p-5 sm:col-span-2">
+                  <p className="font-body text-sm font-semibold text-navy-500">Completion policy</p>
+                  <p className="mt-2 font-body text-sm leading-6 text-navy-700">{COURSE_PAGE_DEFAULTS.completionPolicy}</p>
+                </div>
               </div>
 
               {/* Related */}
@@ -262,12 +313,16 @@ export default function AcademyCourseDetail() {
                           navigate('/login?redirect=/academy/' + course.slug);
                           return;
                         }
-                        navigate(`/my-learning?enroll=${course.code}`);
+                        if (isFree) {
+                          navigate(`/my-learning?enroll=${course.code}`);
+                        } else {
+                          navigate(`/contact?interest=course-enrolment-support&courseCode=${encodeURIComponent(course.code)}`);
+                        }
                       }}
                       variant="gold"
                       className="w-full"
                     >
-                      Enroll Now
+                      {isFree ? 'Enroll Now' : 'Talk to an Advisor'}
                     </Button>
                   )}
                   <Button
@@ -282,7 +337,7 @@ export default function AcademyCourseDetail() {
                 <div className="mt-6 border-t border-navy-100 pt-5">
                   <p className="flex items-center gap-2 font-body text-xs text-navy-500">
                     <Lock size={14} className="text-gold-500" />
-                    Secure checkout · Instant access
+                    {isFree ? 'Free course enrolment' : 'Payment terms confirmed before enrolment'}
                   </p>
                 </div>
               </div>

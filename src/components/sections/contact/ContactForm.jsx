@@ -21,6 +21,7 @@ const SUBJECT_OPTIONS = [
 // ?interest= values → subject option + optional intro copy
 const INTEREST_MAP = {
   'foundation':                  { subject: 'Foundation Donation' },
+  'course-enrolment-support':    { subject: 'Admissions', intro: 'Tell us which course you are interested in and the support you need before enrolment.' },
   'foundation-donate':           { subject: 'Foundation Donation', intro: "Tell us how you'd like to support us, whether through a one-time, monthly, or unrestricted donation." },
   'foundation-donate-individual':{ subject: 'Foundation Donation', intro: "Tell us how you'd like to support us, whether through a one-time, monthly, or unrestricted donation." },
   'foundation-donate-girls-in-tech': { subject: 'Foundation Donation', intro: "You are supporting the Girls in Tech Scholarship. Every $500 funds one full scholar." },
@@ -79,7 +80,11 @@ export default function ContactForm() {
     try {
       setIsSubmitting(true);
       setSubmitError('');
-      await submitContactMessage({ ...data, interest: interest || null });
+      const courseCode = searchParams.get('courseCode');
+      const message = courseCode
+        ? `Course code: ${courseCode}\n\n${data.message}`
+        : data.message;
+      await submitContactMessage({ ...data, message, interest: interest || null });
       setSubmitted(true);
       setData(initialData);
     } catch (err) {

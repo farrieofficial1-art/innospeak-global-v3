@@ -24,6 +24,7 @@ import { TRACK_BY_ID } from '../lib/data/registry.js';
 import { priceKes } from '../lib/data/labs.js';
 import { useAuth } from '../context/AuthContext.jsx';
 import { supabase } from '../lib/supabase/client.js';
+import { COURSE_PAGE_DEFAULTS } from '../config/coursePageContent.js';
 
 const OUTCOMES = [
   'Hands-on, project-based learning with real engineering tasks',
@@ -249,6 +250,41 @@ export default function LabCourseDetail() {
                     {course.duration_weeks} weeks · Self-paced
                   </p>
                 </div>
+                <div className="card-premium p-5">
+                  <p className="font-body text-sm font-semibold text-navy-500">Weekly effort</p>
+                  <p className="mt-2 font-display text-lg font-bold text-navy-900">{COURSE_PAGE_DEFAULTS.weeklyEffort}</p>
+                </div>
+                <div className="card-premium p-5">
+                  <p className="font-body text-sm font-semibold text-navy-500">Prerequisites</p>
+                  <p className="mt-2 font-display text-lg font-bold text-navy-900">{COURSE_PAGE_DEFAULTS.prerequisites}</p>
+                </div>
+                <div className="card-premium p-5">
+                  <p className="font-body text-sm font-semibold text-navy-500">Start date</p>
+                  <p className="mt-2 font-display text-lg font-bold text-navy-900">{COURSE_PAGE_DEFAULTS.startStatus}</p>
+                </div>
+              </div>
+
+              <h2 className="mt-10 font-display text-2xl font-bold text-navy-900">Syllabus</h2>
+              <div className="mt-5 card-premium p-5">
+                <p className="font-body text-sm leading-6 text-navy-600">Syllabus outline to be confirmed. The published skills and course summary above describe the current course scope.</p>
+              </div>
+
+              <h2 className="mt-10 font-display text-2xl font-bold text-navy-900">Instructor</h2>
+              <p className="mt-3 font-body text-base leading-relaxed text-navy-600">{COURSE_PAGE_DEFAULTS.instructorName}</p>
+
+              <div className="mt-10 grid gap-4 sm:grid-cols-2">
+                <div className="card-premium p-5">
+                  <p className="font-body text-sm font-semibold text-navy-500">Certificate</p>
+                  <p className="mt-2 font-body text-sm leading-6 text-navy-700">{COURSE_PAGE_DEFAULTS.certificate}</p>
+                </div>
+                <div className="card-premium p-5">
+                  <p className="font-body text-sm font-semibold text-navy-500">Refund policy</p>
+                  <p className="mt-2 font-body text-sm leading-6 text-navy-700">{COURSE_PAGE_DEFAULTS.refundPolicy}</p>
+                </div>
+                <div className="card-premium p-5 sm:col-span-2">
+                  <p className="font-body text-sm font-semibold text-navy-500">Completion policy</p>
+                  <p className="mt-2 font-body text-sm leading-6 text-navy-700">{COURSE_PAGE_DEFAULTS.completionPolicy}</p>
+                </div>
               </div>
 
               {/* Related */}
@@ -296,13 +332,13 @@ export default function LabCourseDetail() {
                           navigate('/login?redirect=/labs/' + course.slug);
                           return;
                         }
-                        navigate(`/my-learning?enroll=${course.code}`);
+                        navigate(`/contact?interest=course-enrolment-support&courseCode=${encodeURIComponent(course.code)}`);
                       }}
                       variant="gold"
                       className="w-full"
                     >
                       <Wrench size={18} />
-                      Enroll Now
+                      Talk to an Advisor
                     </Button>
                   )}
                   <Button to="/labs" variant="outline" className="w-full">
@@ -313,7 +349,7 @@ export default function LabCourseDetail() {
                 <div className="mt-6 border-t border-navy-100 pt-5">
                   <p className="flex items-center gap-2 font-body text-xs text-navy-500">
                     <Lock size={14} className="text-gold-500" />
-                    Secure checkout · Instant access
+                    Payment terms confirmed before enrolment
                   </p>
                 </div>
               </div>
