@@ -9,7 +9,8 @@ import {
   PlayCircle,
   Lock,
 } from 'lucide-react';
-import Seo from '../components/ui/Seo.jsx';
+import Seo, { createCourseJsonLd, createBreadcrumbJsonLd } from '../components/ui/Seo.jsx';
+import { SITE_ORIGIN } from '../config/site.js';
 import Container from '../components/ui/Container.jsx';
 import Button from '../components/ui/Button.jsx';
 import CourseCard from '../components/academy/CourseCard.jsx';
@@ -98,6 +99,19 @@ export default function AcademyCourseDetail() {
         title={`${course.title} — ${course.code}`}
         description={`${course.title} — ${course.level} level course from InnoSpeak Academy.`}
         path={`/academy/${course.slug}`}
+        type="product"
+        jsonLd={[
+          createCourseJsonLd({
+            name: course.title,
+            description: `${course.title} is a ${course.level} level course from InnoSpeak Academy.`,
+            url: `${SITE_ORIGIN}/academy/${course.slug}`,
+          }),
+          createBreadcrumbJsonLd([
+            { name: 'Home', path: '/' },
+            { name: 'Academy', path: '/academy' },
+            { name: course.title, path: `/academy/${course.slug}` },
+          ]),
+        ]}
       />
 
       {/* Hero */}

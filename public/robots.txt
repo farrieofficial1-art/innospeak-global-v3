@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://innospeakglobal.org/sitemap.xml
+Sitemap: https://sage-biscochitos-d6506d.netlify.app/sitemap.xml

@@ -11,7 +11,8 @@ import {
   Wrench,
   BriefcaseBusiness,
 } from 'lucide-react';
-import Seo from '../components/ui/Seo.jsx';
+import Seo, { createCourseJsonLd, createBreadcrumbJsonLd } from '../components/ui/Seo.jsx';
+import { SITE_ORIGIN } from '../config/site.js';
 import Container from '../components/ui/Container.jsx';
 import Button from '../components/ui/Button.jsx';
 import LabCourseCard from '../components/academy/LabCourseCard.jsx';
@@ -109,6 +110,19 @@ export default function LabCourseDetail() {
         title={`${course.title} — ${course.code}`}
         description={`${course.title} — ${course.level} level lab course from InnoSpeak Labs.`}
         path={`/labs/${course.slug}`}
+        type="product"
+        jsonLd={[
+          createCourseJsonLd({
+            name: course.title,
+            description: `${course.title} is a ${course.level} level lab course from InnoSpeak Labs.`,
+            url: `${SITE_ORIGIN}/labs/${course.slug}`,
+          }),
+          createBreadcrumbJsonLd([
+            { name: 'Home', path: '/' },
+            { name: 'Labs', path: '/labs' },
+            { name: course.title, path: `/labs/${course.slug}` },
+          ]),
+        ]}
       />
 
       {/* Hero */}

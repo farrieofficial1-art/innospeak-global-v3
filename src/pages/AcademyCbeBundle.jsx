@@ -1,7 +1,8 @@
 import { useState, useMemo } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft, Search, X, CheckCircle2 } from 'lucide-react';
-import Seo from '../components/ui/Seo.jsx';
+import Seo, { createCourseJsonLd, createBreadcrumbJsonLd } from '../components/ui/Seo.jsx';
+import { SITE_ORIGIN } from '../config/site.js';
 import Container from '../components/ui/Container.jsx';
 import Reveal from '../components/ui/Reveal.jsx';
 import CourseCard from '../components/academy/CourseCard.jsx';
@@ -51,6 +52,20 @@ export default function AcademyCbeBundle() {
         title={`${bundle.title} — Kenya CBE`}
         description={bundle.description}
         path={`/academy/cbe/${bundle.slug}`}
+        type="product"
+        jsonLd={[
+          createCourseJsonLd({
+            name: bundle.title,
+            description: bundle.description,
+            url: `${SITE_ORIGIN}/academy/cbe/${bundle.slug}`,
+          }),
+          createBreadcrumbJsonLd([
+            { name: 'Home', path: '/' },
+            { name: 'Academy', path: '/academy' },
+            { name: 'CBE', path: '/academy/cbe' },
+            { name: bundle.title, path: `/academy/cbe/${bundle.slug}` },
+          ]),
+        ]}
       />
 
       <section className="relative overflow-hidden bg-navy-radial pt-32 pb-16">

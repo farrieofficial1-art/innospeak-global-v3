@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#001F3F"/>
+  <circle cx="1040" cy="120" r="260" fill="#0F766E" opacity=".35"/>
+  <circle cx="110" cy="590" r="220" fill="#D4A017" opacity=".12"/>
+  <path d="M110 180 L240 430 L370 180" fill="none" stroke="#D4A017" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="430" y="280" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="74" font-weight="700">InnoSpeak Global</text>
+  <text x="430" y="355" fill="#D4A017" font-family="Arial, sans-serif" font-size="34" font-weight="600">Learn. Lead. Innovate.</text>
+</svg>
