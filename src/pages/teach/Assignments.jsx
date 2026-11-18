@@ -19,12 +19,12 @@ export default function Assignments() {
               const modules = await listModulesWithLessons(c.id);
               let assignmentCount = 0;
               for (const m of modules) {
-                for (const l of m.lessons || []) {
-                  try {
-                    const { count } = await supabase.from('assignments').select('*', { count: 'exact', head: true }).eq('module_id', m.id);
-                    assignmentCount += count || 0;
-                  } catch { /* skip */ }
-                }
+              const { count, error } = await supabase
+                .from('assignments')
+                .select('*', { count: 'exact', head: true })
+                .eq('module_id', m.id);
+              if (error) throw error;
+              assignmentCount += count || 0;
               }
               return { ...c, assignmentCount };
             } catch {

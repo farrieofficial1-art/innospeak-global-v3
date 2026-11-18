@@ -297,21 +297,26 @@ function CourseSettingsPanel({ course, onSaved }) {
   const [thumbnailUrl, setThumbnailUrl] = useState(course.thumbnail_path || '');
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [saveError, setSaveError] = useState('');
 
   function update(field, value) { setForm((p) => ({ ...p, [field]: value })); }
 
   async function handleThumbnail(e) {
     const file = e.target.files?.[0];
     if (!file) return;
+    setSaveError('');
     try {
       const url = await uploadCourseThumbnail(course.id, file);
       setThumbnailUrl(url);
       await updateCourse(course.id, { thumbnail_path: url });
-    } catch { /* ignore */ }
+    } catch (err) {
+      setSaveError(err?.message || 'Could not upload the course thumbnail.');
+    }
   }
 
   async function handleSave() {
     setSaving(true);
+    setSaveError('');
     try {
       const cleanOutcomes = outcomes.map((o) => o.trim()).filter(Boolean);
       await updateCourse(course.id, {
@@ -323,7 +328,9 @@ function CourseSettingsPanel({ course, onSaved }) {
       setSaved(true);
       setTimeout(() => setSaved(false), 2000);
       onSaved();
-    } catch { /* ignore */ }
+    } catch (err) {
+      setSaveError(err?.message || 'Could not save course settings.');
+    }
     setSaving(false);
   }
 
@@ -333,6 +340,11 @@ function CourseSettingsPanel({ course, onSaved }) {
       action={saved && <span className="font-body text-xs font-semibold text-emerald-600">Saved!</span>}
     >
       <div className="space-y-5">
+        {saveError && (
+          <div role="alert" className="rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 font-body text-sm text-rose-700">
+            {saveError}
+          </div>
+        )}
         {/* Catalogue link */}
         <CourseCatalogPicker
           value={programmeCode}

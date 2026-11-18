@@ -21,7 +21,12 @@ export default function TeachNotifications() {
     try {
       await markAllNotificationsRead();
       load();
-    } catch { /* ignore */ }
+    } catch (err) {
+      setState((prev) => ({
+        ...prev,
+        error: err?.message || 'Could not mark notifications as read.',
+      }));
+    }
   }
 
   return (

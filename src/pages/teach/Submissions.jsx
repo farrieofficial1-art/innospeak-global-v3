@@ -229,6 +229,7 @@ export default function Submissions() {
   const [announcementForm, setAnnouncementForm] = useState({ title: '', body: '' });
   const [showAnnouncementForm, setShowAnnouncementForm] = useState(false);
   const [analytics, setAnalytics] = useState(null);
+  const [announcementStatus, setAnnouncementStatus] = useState('');
 
   const loadAnnouncements = useCallback(() => {
     listCourseAnnouncements(courseId).then(setAnnouncements).catch(() => {});
@@ -247,10 +248,16 @@ export default function Submissions() {
   async function handlePostAnnouncement(e) {
     e.preventDefault();
     if (!announcementForm.title) return;
-    await createAnnouncement(courseId, announcementForm);
-    setAnnouncementForm({ title: '', body: '' });
-    setShowAnnouncementForm(false);
-    loadAnnouncements();
+    setAnnouncementStatus('');
+    try {
+      await createAnnouncement(courseId, announcementForm);
+      setAnnouncementForm({ title: '', body: '' });
+      setShowAnnouncementForm(false);
+      setAnnouncementStatus('Announcement posted.');
+      loadAnnouncements();
+    } catch (err) {
+      setAnnouncementStatus(err?.message || 'Could not post the announcement.');
+    }
   }
 
   if (state.loading) return <LoadingState />;
@@ -297,6 +304,11 @@ export default function Submissions() {
       )}
 
       <SectionCard title="Announcements" className="mt-6">
+        {announcementStatus && (
+          <div role="status" className="mb-4 rounded-xl border border-navy-100 bg-navy-50 px-4 py-3 font-body text-sm text-navy-700">
+            {announcementStatus}
+          </div>
+        )}
         <button type="button" onClick={() => setShowAnnouncementForm((v) => !v)} className="btn-outline mb-4 inline-flex items-center gap-2 text-xs">
           <Plus size={13} /> Post Announcement
         </button>
