@@ -9,6 +9,7 @@ import {
   UserCheck,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext.jsx';
+import { CONTACT_DETAILS } from '../../config/contact.js';
 
 const quickLinks = [
   { label: 'About Us', to: '/about' },
@@ -133,13 +134,13 @@ export default function Footer() {
             <ul className="mt-5 space-y-4">
               <li className="flex items-start gap-3">
                 <Mail size={18} className="mt-0.5 shrink-0 text-gold-400" />
-                <a href="mailto:hello@innospeak.global" className={linkClass}>
-                  hello@innospeak.global
+                <a href={CONTACT_DETAILS.email.href} className={linkClass}>
+                  {CONTACT_DETAILS.email.value}
                 </a>
               </li>
               <li className="flex items-start gap-3">
                 <MapPin size={18} className="mt-0.5 shrink-0 text-gold-400" />
-                <span className={linkClass}>Global · Remote &amp; On-site</span>
+                <span className={linkClass}>{CONTACT_DETAILS.location}</span>
               </li>
             </ul>
           </div>
@@ -154,10 +155,16 @@ export default function Footer() {
           </p>
           <div className="flex items-center gap-4">
             <Link to="/privacy" className="font-body text-xs text-navy-100/70 transition-colors hover:text-gold-300">
-              Privacy
+              Privacy Policy
             </Link>
             <Link to="/terms" className="font-body text-xs text-navy-100/70 transition-colors hover:text-gold-300">
               Terms
+            </Link>
+            <Link to="/refund-policy" className="font-body text-xs text-navy-100/70 transition-colors hover:text-gold-300">
+              Refund Policy
+            </Link>
+            <Link to="/accessibility" className="font-body text-xs text-navy-100/70 transition-colors hover:text-gold-300">
+              Accessibility
             </Link>
             <Link to="/faq" className="font-body text-xs text-navy-100/70 transition-colors hover:text-gold-300">
               FAQ

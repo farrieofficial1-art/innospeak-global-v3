@@ -35,7 +35,7 @@ const INTEREST_MAP = {
   'tvet':                        { subject: 'Admissions' },
 };
 
-const initialData = { name: '', email: '', phone: '', subject: '', message: '' };
+const initialData = { name: '', email: '', phone: '', subject: '', message: '', website: '' };
 
 export default function ContactForm() {
   const [searchParams] = useSearchParams();
@@ -66,8 +66,10 @@ export default function ContactForm() {
 
   function validate() {
     const e = {};
+    if (data.website) return false;
     if (!data.name.trim()) e.name = 'Required';
     if (!data.email.trim()) e.email = 'Required';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email.trim())) e.email = 'Enter a valid email address';
     if (!data.subject) e.subject = 'Required';
     if (!data.message.trim()) e.message = 'Required';
     setErrors(e);
@@ -130,6 +132,18 @@ export default function ContactForm() {
       onSubmit={handleSubmit}
       className="rounded-3xl border border-navy-100 bg-white p-8 shadow-premium-lg md:p-10"
     >
+      <div className="hidden" aria-hidden="true">
+        <label htmlFor="website">Website</label>
+        <input
+          id="website"
+          name="website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          value={data.website}
+          onChange={(e) => update('website', e.target.value)}
+        />
+      </div>
       {/* Context banner when arriving from a Foundation link */}
       {showFoundationBanner && (
         <div className="mb-6 flex items-start gap-3 rounded-2xl border border-emerald-200 bg-emerald-50 px-5 py-4">
@@ -222,7 +236,7 @@ export default function ContactForm() {
       </div>
 
       {submitError && (
-        <p className="mt-4 font-body text-sm font-semibold text-red-600">{submitError}</p>
+        <p className="mt-4 font-body text-sm font-semibold text-red-600" role="alert">{submitError}</p>
       )}
 
       <Button

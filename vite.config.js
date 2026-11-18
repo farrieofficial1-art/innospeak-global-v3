@@ -50,6 +50,8 @@ export default defineConfig({
           '/faq',
           '/privacy',
           '/terms',
+          '/refund-policy',
+          '/accessibility',
         ];
         const paths = [
           ...staticPaths,

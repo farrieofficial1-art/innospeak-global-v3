@@ -23,6 +23,8 @@ const Careers = lazy(() => import('./pages/Careers.jsx'));
 const FAQ = lazy(() => import('./pages/FAQ.jsx'));
 const Privacy = lazy(() => import('./pages/Privacy.jsx'));
 const Terms = lazy(() => import('./pages/Terms.jsx'));
+const RefundPolicy = lazy(() => import('./pages/RefundPolicy.jsx'));
+const Accessibility = lazy(() => import('./pages/Accessibility.jsx'));
 const Login = lazy(() => import('./pages/auth/Login.jsx'));
 const Signup = lazy(() => import('./pages/auth/Signup.jsx'));
 const Register = lazy(() => import('./pages/Register.jsx'));
@@ -193,6 +195,8 @@ export default function App() {
           <Route path="/faq" element={<FAQ />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
+          <Route path="/refund-policy" element={<RefundPolicy />} />
+          <Route path="/accessibility" element={<Accessibility />} />
           <Route path="/payment-return" element={<PaymentReturn />} />
 
           {/* Auth */}

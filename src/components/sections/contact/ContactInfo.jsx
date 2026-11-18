@@ -1,26 +1,27 @@
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Clock, Linkedin, Facebook, MessageCircle } from 'lucide-react';
 import { fadeUpItem, inViewOnce } from '../../../lib/motion/presets';
+import { CONTACT_DETAILS } from '../../../config/contact.js';
 
 const CHANNELS = [
   {
     icon: Mail,
     label: 'Email Us',
-    value: 'info@innospeakglobal.org',
-    href: 'mailto:info@innospeakglobal.org',
+    value: CONTACT_DETAILS.email.value,
+    href: CONTACT_DETAILS.email.href,
     hint: 'We reply within 24 hours',
   },
   {
     icon: Phone,
     label: 'Call or WhatsApp',
-    value: '+254 716 921 700',
-    href: 'tel:+254716921700',
+    value: CONTACT_DETAILS.phone.value,
+    href: CONTACT_DETAILS.phone.href,
     hint: 'Mon–Sun, available all day',
   },
   {
     icon: MapPin,
     label: 'Based In',
-    value: 'Nairobi, Kenya',
+    value: CONTACT_DETAILS.location,
     href: null,
     hint: 'Serving learners worldwide',
   },
@@ -38,7 +39,7 @@ const SOCIALS = [
     id: 'whatsapp',
     label: 'WhatsApp',
     icon: MessageCircle,
-    href: 'https://wa.me/254716921700',
+    href: CONTACT_DETAILS.whatsappHref,
     hoverClass: 'hover:bg-[#25D366] hover:text-white hover:border-[#25D366]',
   },
   {
@@ -111,10 +112,10 @@ export default function ContactInfo() {
           </div>
           <div>
             <p className="font-body text-[11px] font-bold uppercase tracking-wider text-emerald-700">
-              Open 7 Days
+              Support hours
             </p>
             <p className="mt-0.5 font-body text-sm font-bold text-navy-900">
-              Monday – Sunday · Available all day
+              {CONTACT_DETAILS.supportHours}
             </p>
             <p className="mt-0.5 font-body text-xs text-navy-500">
               Reach out any time. We reply within 24 hours.
