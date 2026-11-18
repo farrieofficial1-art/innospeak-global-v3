@@ -31,7 +31,7 @@ export default function ImpactHeroImage() {
           transition={{ duration: 0.6, delay: 0.8 }}
           className="absolute bottom-4 left-4 right-4 flex items-center justify-around rounded-2xl border border-white/20 bg-white/15 px-4 py-3 shadow-glass backdrop-blur-md"
         >
-          {IMPACT_HERO_IMAGE_STATS.map((stat) => (
+          {IMPACT_HERO_IMAGE_STATS.filter((stat) => stat.value != null && stat.value !== 0).map((stat) => (
             <div key={stat.label} className="text-center">
               <div className="font-display text-lg font-bold text-white sm:text-xl">
                 {stat.value}

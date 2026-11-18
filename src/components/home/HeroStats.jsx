@@ -6,7 +6,8 @@ import { HERO_STATS } from './heroData.js';
 function StatItem({ stat, index }) {
   const [ref, inView] = useInView();
   const animated = useCountUp(stat.value, 2000, inView);
-  const display = stat.value === 0 ? '' : animated;
+  if (stat.value == null || stat.value === 0) return null;
+  const display = animated;
 
   return (
     <motion.div

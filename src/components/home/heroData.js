@@ -1,11 +1,4 @@
-import { ACADEMY_COURSES, TRACKS as ACADEMY_TRACKS } from '../../lib/data/academy.js';
-import { LAB_COURSES } from '../../lib/data/labs.js';
-import { TRACKS as LAB_TRACKS } from '../../lib/data/registry.js';
-
-const academyCourseCount = ACADEMY_COURSES.length;
-const labCourseCount = LAB_COURSES.length;
-const totalCourses = academyCourseCount + labCourseCount;
-const totalTracks = ACADEMY_TRACKS.length + LAB_TRACKS.length;
+import { CATALOGUE_STATS } from '../../config/catalogueStats.js';
 
 export const HERO_BADGE = 'Learn • Build • Innovate • Make an Impact';
 
@@ -18,10 +11,10 @@ export const HERO_DESCRIPTION =
   'InnoSpeak Global brings together structured learning, practical innovation and educational support through Academy, Labs and Foundation. Together, they help you do more than finish a course.';
 
 export const HERO_STATS = [
-  { value: totalCourses, suffix: '+', label: 'Courses in catalogue' },
-  { value: totalTracks, suffix: '', label: 'Learning tracks' },
-  { value: LAB_TRACKS.length, suffix: '', label: 'Innovation schools' },
-  { value: 3, suffix: '', label: 'Ecosystem pillars' },
+  { value: CATALOGUE_STATS.totalCourses, suffix: '', label: 'Courses in catalogue' },
+  { value: CATALOGUE_STATS.academyTracks + CATALOGUE_STATS.labTracks, suffix: '', label: 'Learning tracks' },
+  { value: CATALOGUE_STATS.labTracks, suffix: '', label: 'Innovation schools' },
+  { value: CATALOGUE_STATS.ecosystemPillars, suffix: '', label: 'Ecosystem pillars' },
 ];
 
 export const HERO_SLIDES = [

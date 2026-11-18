@@ -90,8 +90,8 @@ export default function CertificateMock({ sample = CERTIFICATE_SAMPLE }) {
               <p className="font-body text-[9px] uppercase tracking-wider text-white/50">
                 Verified
               </p>
-              <p className="mt-1 font-body text-[11px] font-semibold text-emerald-400">
-                ✓ InnoSpeak
+              <p className="mt-1 font-body text-[11px] font-semibold text-amber-300">
+                Demo only
               </p>
             </div>
           </div>
@@ -120,7 +120,7 @@ export default function CertificateMock({ sample = CERTIFICATE_SAMPLE }) {
       <div className="absolute -bottom-3 -right-3 flex items-center gap-1.5 rounded-full bg-emerald-600 px-3 py-1.5 shadow-md">
         <span className="h-1.5 w-1.5 rounded-full bg-emerald-200" />
         <span className="font-body text-[10px] font-bold uppercase tracking-wide text-white">
-          Verifiable
+          Demo credential
         </span>
       </div>
     </div>

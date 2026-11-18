@@ -61,7 +61,7 @@ export default function Academy() {
     <>
       <Seo
         title="Academy — Browse All Courses"
-        description="Explore 400+ on-demand courses across AI, data, marketing, engineering, languages, CBE and more."
+        description="Explore on-demand courses across AI, data, marketing, engineering, languages, CBE and more."
         path="/academy"
       />
 

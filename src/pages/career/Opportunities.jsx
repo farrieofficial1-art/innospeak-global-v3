@@ -178,7 +178,7 @@ function ErrorState({ onRetry }) {
       <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h3 className="font-display text-base font-bold text-navy-900">
-            Unable to load opportunities right now
+            Opportunities could not be loaded
           </h3>
           <p className="mt-1 font-body text-sm text-navy-500">
             Please try again shortly.

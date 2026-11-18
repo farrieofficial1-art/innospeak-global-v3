@@ -15,8 +15,8 @@ export const CERTIFICATE_SAMPLE = {
   courseName: 'Python Programming',
   courseCode: 'PY101',
   division: 'InnoSpeak Global Academy',
-  issuedOn: 'Illustrative sample — not issued',
-  certificateId: 'SAMPLE-NOT-VALID',
+  issuedOn: 'Demo — not issued',
+  certificateId: 'DEMO-NOT-VALID',
   signature: 'Fred Omondi',
   signatureTitle: 'Founder & CEO',
 };

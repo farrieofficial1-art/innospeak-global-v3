@@ -56,7 +56,7 @@ export default function Labs() {
     <>
       <Seo
         title="Labs — Practical Engineering & Innovation Tracks"
-        description="175 hands-on courses across software engineering, data, AI, cloud, cybersecurity, smart systems, and creative technology."
+        description="Hands-on courses across software engineering, data, AI, cloud, cybersecurity, smart systems, and creative technology."
         path="/labs"
       />
 

@@ -1,6 +1,6 @@
 // src/lib/data/labs.js
 //
-// Labs catalogue — 175 practical engineering & innovation courses across 7 tracks.
+// Labs catalogue — practical engineering and innovation courses across 7 tracks.
 // Source of truth for the Labs division. Do not edit individual entries by hand.
 
 export const KES_RATE = 130;
