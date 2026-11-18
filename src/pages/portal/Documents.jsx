@@ -20,6 +20,7 @@ const DOC_TYPE_LABELS = {
 
 export default function Documents() {
   const [state, setState] = useState({ loading: true, error: null, documents: [] });
+  const [downloadError, setDownloadError] = useState('');
 
   useEffect(() => {
     getStudentDocuments()
@@ -28,9 +29,14 @@ export default function Documents() {
   }, []);
 
   async function handleDownload(doc) {
-    if (!doc.file_path || !supabase) return;
+    setDownloadError('');
+    if (!doc.file_path || !supabase) {
+      setDownloadError('This document is not available for download yet.');
+      return;
+    }
     const { data, error } = await supabase.storage.from('student-documents').createSignedUrl(doc.file_path, 60);
     if (!error && data?.signedUrl) window.open(data.signedUrl, '_blank', 'noopener');
+    else setDownloadError(error?.message || 'Could not create a secure document link.');
   }
 
   const columns = [
@@ -70,6 +76,11 @@ export default function Documents() {
       </div>
 
       <div className="mt-6">
+        {downloadError && (
+          <div role="alert" className="mb-4 rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 font-body text-sm text-rose-700">
+            {downloadError}
+          </div>
+        )}
         <SectionCard
           title="Official Documents"
           description="Need something not listed here? Submit a request under Services / Requests."

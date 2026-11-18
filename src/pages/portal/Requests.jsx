@@ -15,6 +15,7 @@ export default function Requests() {
   const [notes, setNotes] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState(null);
+  const [submitted, setSubmitted] = useState(false);
 
   function load() {
     getMyServiceRequests()
@@ -31,10 +32,12 @@ export default function Requests() {
     if (!requestType) return;
     setSubmitting(true);
     setSubmitError(null);
+    setSubmitted(false);
     try {
       await submitServiceRequest(requestType, { notes });
       setRequestType('');
       setNotes('');
+      setSubmitted(true);
       load();
     } catch (err) {
       setSubmitError(err.message || 'Could not submit your request.');
@@ -81,6 +84,11 @@ export default function Requests() {
               placeholder="Any additional details for this request"
             />
             {submitError && <ErrorState message={submitError} />}
+            {submitted && (
+              <div role="status" className="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 font-body text-sm text-emerald-800">
+                Your request was submitted.
+              </div>
+            )}
             <button
               type="submit"
               disabled={submitting || !requestType}

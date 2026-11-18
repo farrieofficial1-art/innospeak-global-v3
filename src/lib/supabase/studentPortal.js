@@ -31,9 +31,15 @@ async function requireUserId() {
 
 export async function updateStudentProfile(updates) {
   const userId = await requireUserId();
+  const allowed = ['full_name', 'phone', 'avatar_url'];
+  const safeUpdates = Object.fromEntries(
+    allowed
+      .filter((key) => Object.prototype.hasOwnProperty.call(updates || {}, key))
+      .map((key) => [key, updates[key] ?? null]),
+  );
   const { data, error } = await supabase
     .from('profiles')
-    .update(updates)
+    .update(safeUpdates)
     .eq('id', userId)
     .select()
     .single();
@@ -357,6 +363,8 @@ export async function getGraduationStatus() {
 
 export async function applyForGraduation() {
   const userId = await requireUserId();
+  const existing = await getGraduationStatus();
+  if (existing) throw new Error('A graduation application already exists.');
   const { data, error } = await supabase
     .from('graduation_applications')
     .insert({ student_id: userId, status: 'applied', applied_at: new Date().toISOString() })

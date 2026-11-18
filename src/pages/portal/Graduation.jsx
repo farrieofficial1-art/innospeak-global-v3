@@ -22,6 +22,7 @@ export default function Graduation() {
   }, []);
 
   async function handleApply() {
+    if (app) return;
     setApplying(true);
     try {
       await applyForGraduation();

@@ -26,8 +26,11 @@ export default function Communication() {
         ...prev,
         messages: prev.messages.map((m) => (m.id === id ? { ...m, is_read: true } : m)),
       }));
-    } catch {
-      /* non-critical */
+    } catch (err) {
+      setState((prev) => ({
+        ...prev,
+        error: err.message || 'Could not mark this message as read.',
+      }));
     }
   }
 

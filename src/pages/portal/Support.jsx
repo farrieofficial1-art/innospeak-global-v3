@@ -16,6 +16,7 @@ export default function Support() {
   const [message, setMessage] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState(null);
+  const [submitted, setSubmitted] = useState(false);
 
   function load() {
     getMySupportTickets()
@@ -32,11 +33,13 @@ export default function Support() {
     if (!category || !subject || !message) return;
     setSubmitting(true);
     setSubmitError(null);
+    setSubmitted(false);
     try {
       await submitSupportTicket({ category, subject, message });
       setCategory('');
       setSubject('');
       setMessage('');
+      setSubmitted(true);
       load();
     } catch (err) {
       setSubmitError(err.message || 'Could not submit your ticket.');
@@ -76,6 +79,11 @@ export default function Support() {
             <TextField label="Subject" name="subject" value={subject} onChange={(e) => setSubject(e.target.value)} required />
             <TextField label="Message" name="message" value={message} onChange={(e) => setMessage(e.target.value)} required />
             {submitError && <ErrorState message={submitError} />}
+            {submitted && (
+              <div role="status" className="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 font-body text-sm text-emerald-800">
+                Your support ticket was submitted.
+              </div>
+            )}
             <button
               type="submit"
               disabled={submitting || !category || !subject || !message}

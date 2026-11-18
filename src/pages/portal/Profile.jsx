@@ -7,43 +7,28 @@ import { ErrorState } from '../../components/portal/PortalStates.jsx';
 import { useAuth } from '../../context/AuthContext';
 import { updateStudentProfile } from '../../lib/supabase/studentPortal';
 
-const FIELD_GROUPS = [
+const EDITABLE_FIELD_GROUPS = [
   {
     title: 'Personal Information',
     description: 'Your basic identity details on file with the institution.',
-    fields: [
-      { name: 'full_name', label: 'Full Name' },
-      { name: 'date_of_birth', label: 'Date of Birth', type: 'date' },
-      { name: 'gender', label: 'Gender' },
-      { name: 'national_id', label: 'National ID / Passport No.' },
-    ],
+    fields: [{ name: 'full_name', label: 'Full Name' }],
   },
   {
     title: 'Contact Information',
     description: 'How the institution reaches you.',
-    fields: [
-      { name: 'phone', label: 'Phone Number' },
-      { name: 'address', label: 'Address' },
-    ],
+    fields: [{ name: 'phone', label: 'Phone Number' }],
   },
-  {
-    title: 'Emergency Contact',
-    description: 'Who we should contact in case of an emergency.',
-    fields: [
-      { name: 'emergency_contact_name', label: 'Contact Name' },
-      { name: 'emergency_contact_phone', label: 'Contact Phone' },
-      { name: 'emergency_contact_relationship', label: 'Relationship' },
-    ],
-  },
-  {
-    title: 'Next of Kin',
-    description: 'Your registered next of kin.',
-    fields: [
-      { name: 'next_of_kin_name', label: 'Full Name' },
-      { name: 'next_of_kin_phone', label: 'Phone Number' },
-      { name: 'next_of_kin_relationship', label: 'Relationship' },
-    ],
-  },
+];
+
+const READ_ONLY_FIELDS = [
+  ['Date of Birth', 'date_of_birth'],
+  ['Gender', 'gender'],
+  ['National ID / Passport', 'national_id'],
+  ['Address', 'address'],
+  ['Emergency Contact', 'emergency_contact_name'],
+  ['Emergency Phone', 'emergency_contact_phone'],
+  ['Next of Kin', 'next_of_kin_name'],
+  ['Next of Kin Phone', 'next_of_kin_phone'],
 ];
 
 export default function Profile() {
@@ -71,7 +56,7 @@ export default function Profile() {
     setSaved(false);
     try {
       const updates = {};
-      FIELD_GROUPS.flatMap((g) => g.fields).forEach(({ name }) => {
+      EDITABLE_FIELD_GROUPS.flatMap((g) => g.fields).forEach(({ name }) => {
         updates[name] = form[name] ?? null;
       });
       await updateStudentProfile(updates);
@@ -96,7 +81,7 @@ export default function Profile() {
       </div>
 
       <form onSubmit={handleSubmit} className="mt-6 space-y-6">
-        {FIELD_GROUPS.map((group) => (
+        {EDITABLE_FIELD_GROUPS.map((group) => (
           <SectionCard key={group.title} title={group.title} description={group.description}>
             <div className="grid gap-4 sm:grid-cols-2">
               {group.fields.map((field) => (
@@ -112,6 +97,17 @@ export default function Profile() {
             </div>
           </SectionCard>
         ))}
+
+        <SectionCard title="Institution-Controlled Information" description="These details are managed by the institution. Contact support to request a correction.">
+          <div className="grid gap-4 sm:grid-cols-2">
+            {READ_ONLY_FIELDS.map(([label, name]) => (
+              <div key={name} className="rounded-xl border border-navy-100 bg-navy-50/50 px-4 py-3">
+                <p className="font-body text-xs font-semibold uppercase tracking-wider text-navy-400">{label}</p>
+                <p className="mt-1 font-body text-sm font-semibold text-navy-700">{form[name] || 'Not recorded'}</p>
+              </div>
+            ))}
+          </div>
+        </SectionCard>
 
         {error && <ErrorState message={error} />}
         {saved && (
