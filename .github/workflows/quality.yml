@@ -15,4 +15,6 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run audit:project
+      - run: npm run quality:links
+      - run: npm run quality:routes
       - run: npm run build

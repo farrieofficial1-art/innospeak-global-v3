@@ -10,7 +10,12 @@
     "audit:project": "node scripts/audit-project.mjs",
     "check": "npm test && npm run audit:project && npm run build",
     "test": "node --test",
-    "audit:curriculum": "node scripts/audit-curriculum-quality.mjs"
+    "audit:curriculum": "node scripts/audit-curriculum-quality.mjs",
+    "quality:links": "node scripts/check-broken-links.mjs",
+    "quality:routes": "node scripts/check-routes.mjs",
+    "quality:lighthouse": "node scripts/lighthouse-placeholder.mjs",
+    "quality:a11y": "node scripts/a11y-placeholder.mjs",
+    "quality": "npm test && npm run audit:project && npm run quality:links && npm run quality:routes && npm run build"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.110.6",
