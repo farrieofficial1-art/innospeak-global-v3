@@ -200,8 +200,8 @@ export default function EnrollButton({ course }) {
 
   /* ── Ready to enroll ── */
   const enrollLabel = isPaid
-    ? `Enroll Now: ${course.fees}`
-    : 'Enroll Now: Free';
+    ? `Enrol Now: ${course.fees}`
+    : 'Enrol Now: Free';
 
   return (
     <div className="mx-auto flex max-w-2xl flex-col items-center gap-4">

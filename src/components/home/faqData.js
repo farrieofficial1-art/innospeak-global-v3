@@ -15,7 +15,7 @@ export const FAQ_ITEMS = [
     id: 'certificates',
     question: 'Do learners receive certificates?',
     answer:
-      'Yes. Learners who successfully complete their programmes receive certificates recognising their achievement and acquired skills.',
+      'Where a course or programme publishes completion certificate criteria, learners who meet those criteria may receive a verifiable completion credential.',
   },
   {
     id: 'how-to-apply',

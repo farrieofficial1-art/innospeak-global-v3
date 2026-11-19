@@ -11,9 +11,9 @@ export default function Partners() {
     <section className="relative overflow-hidden bg-cream py-20 sm:py-24">
       <div className="container-premium">
         <SectionHeading
-          eyebrow="Strategic Partners & Global Network"
+          eyebrow="Partnership Opportunities"
           title="Building Futures, Together"
-          subtitle="InnoSpeak Global partners with universities, technology companies, NGOs and international institutions to create world-class learning opportunities and shared impact."
+          subtitle="InnoSpeak Global welcomes collaboration with education providers, technology organisations, NGOs and community institutions to create learning opportunities and shared impact."
         />
 
         <motion.div

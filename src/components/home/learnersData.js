@@ -1,5 +1,5 @@
 /**
- * learnersData — real InnoSpeak Global learners.
+ * learnersData — illustrative learner profiles.
  * Initials avatars used in place of photos. Real photos come from
  * learner-submitted reviews via ReviewSubmission.
  */
@@ -62,8 +62,8 @@ export const LEARNERS = [
 ];
 
 export const LEARNERS_INTRO = {
-  eyebrow: 'Real Learners, Real Progress',
-  title: 'Meet the InnoSpeak Community',
+  eyebrow: 'Learner Profiles',
+  title: 'Explore the InnoSpeak Community',
   subtitle:
     'Learners from Kenya, Somalia and beyond are building language skills, qualifications and confidence through InnoSpeak Global programmes.',
 };
