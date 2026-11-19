@@ -28,6 +28,10 @@ export default function AboutHeroImage() {
         <img
           src={ABOUT_HERO_IMAGE}
           alt="Students collaborating at InnoSpeak Global"
+          width="900"
+          height="1100"
+          fetchPriority="high"
+          decoding="async"
           className="aspect-[4/5] w-full object-cover sm:aspect-[4/3] lg:aspect-[5/6]"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-navy-900/40 via-transparent to-transparent" />
