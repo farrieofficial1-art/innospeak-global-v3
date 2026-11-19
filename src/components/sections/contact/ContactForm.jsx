@@ -5,6 +5,7 @@ import { Send, CheckCircle2, Heart, MessageCircle } from 'lucide-react';
 import { TextField, SelectField, Button } from '../../ui';
 import { submitContactMessage } from '../../../lib/supabase/contact';
 import { fadeUpItem, inViewOnce } from '../../../lib/motion/presets';
+import { trackEvent } from '../../../lib/analytics';
 
 const SUBJECT_OPTIONS = [
   'General Inquiry',
@@ -87,6 +88,7 @@ export default function ContactForm() {
         ? `Course code: ${courseCode}\n\n${data.message}`
         : data.message;
       await submitContactMessage({ ...data, message, interest: interest || null });
+      trackEvent('form_submit', { form_name: 'contact', subject: data.subject });
       setSubmitted(true);
       setData(initialData);
     } catch (err) {

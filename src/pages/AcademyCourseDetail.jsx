@@ -25,6 +25,7 @@ import { supabase } from '../lib/supabase/client.js';
 import { getEnrollmentByCode } from '../lib/supabase/portal.js';
 import { buildCourseData } from '../lib/data/courseDetails.js';
 import { COURSE_PAGE_DEFAULTS, FREE_ACADEMY_CODES } from '../config/coursePageContent.js';
+import { trackEvent } from '../lib/analytics';
 
 const OUTCOMES = [
   'Practical, project-based learning you can apply immediately',
@@ -41,6 +42,12 @@ export default function AcademyCourseDetail() {
   const [checking, setChecking] = useState(true);
 
   const course = ACADEMY_BY_SLUG[slug];
+
+  useEffect(() => {
+    if (course) {
+      trackEvent('course_view', { course_code: course.code, course_name: course.title });
+    }
+  }, [course]);
 
   useEffect(() => {
     let cancelled = false;
@@ -305,6 +312,10 @@ export default function AcademyCourseDetail() {
                   ) : (
                     <Button
                       onClick={() => {
+                        trackEvent(isFree ? 'enrol_click' : 'advisor_click', {
+                          course_code: course.code,
+                          course_name: course.title,
+                        });
                         if (!user) {
                           navigate('/login?redirect=/academy/' + course.slug);
                           return;

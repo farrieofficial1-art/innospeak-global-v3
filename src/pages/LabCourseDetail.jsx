@@ -26,6 +26,7 @@ import { useAuth } from '../context/AuthContext.jsx';
 import { supabase } from '../lib/supabase/client.js';
 import { getEnrollmentByCode } from '../lib/supabase/portal.js';
 import { COURSE_PAGE_DEFAULTS } from '../config/coursePageContent.js';
+import { trackEvent } from '../lib/analytics';
 
 const OUTCOMES = [
   'Hands-on, project-based learning with real engineering tasks',
@@ -52,6 +53,12 @@ export default function LabCourseDetail() {
   const [checking, setChecking] = useState(true);
 
   const course = LAB_BY_SLUG[slug];
+
+  useEffect(() => {
+    if (course) {
+      trackEvent('course_view', { course_code: course.code, course_name: course.title });
+    }
+  }, [course]);
 
   useEffect(() => {
     let cancelled = false;
@@ -324,6 +331,10 @@ export default function LabCourseDetail() {
                   ) : (
                     <Button
                       onClick={() => {
+                        trackEvent('advisor_click', {
+                          course_code: course.code,
+                          course_name: course.title,
+                        });
                         if (!user) {
                           navigate('/login?redirect=/labs/' + course.slug);
                           return;

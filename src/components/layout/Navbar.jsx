@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import useScrolled from '../../hooks/useScrolled.js';
 import { useAuth } from '../../context/AuthContext.jsx';
+import { trackEvent } from '../../lib/analytics';
 
 /**
  * Routes whose hero opens with a dark image or gradient.
@@ -278,7 +279,7 @@ export default function Navbar() {
               Student Login
             </Link>
           )}
-          <Link to="/apply" className="btn-gold">
+          <Link to="/apply" className="btn-gold" onClick={() => trackEvent('primary_cta_click', { cta: 'apply_now', location: 'desktop_nav' })}>
             Apply Now
           </Link>
         </div>
@@ -356,7 +357,7 @@ export default function Navbar() {
                 ) : (
                   <Link to="/login" onClick={() => setMobileOpen(false)} className="rounded-xl border border-white/20 bg-white/5 px-5 py-3 text-center font-body text-sm font-bold text-white transition-colors hover:bg-white/10">Student Login</Link>
                 )}
-                <Link to="/apply" onClick={() => setMobileOpen(false)} className="btn-gold w-full">Apply Now</Link>
+                <Link to="/apply" onClick={() => { setMobileOpen(false); trackEvent('primary_cta_click', { cta: 'apply_now', location: 'mobile_nav' }); }} className="btn-gold w-full">Apply Now</Link>
               </li>
             </ul>
           </motion.div>

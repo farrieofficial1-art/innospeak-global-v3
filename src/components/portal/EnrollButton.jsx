@@ -10,6 +10,7 @@ import { parseFee } from '../../lib/data/programmeData.js';
 import { getCurriculumStatus } from '../../lib/data/courseReadiness.js';
 import { checkCoursePaid } from '../../lib/supabase/payments';
 import CheckoutModal from './CheckoutModal';
+import { trackEvent } from '../../lib/analytics';
 
 /**
  * EnrollButton — self-service enrollment for a course.
@@ -72,6 +73,7 @@ export default function EnrollButton({ course }) {
         title: course.name,
         pathway: course.pathway,
       });
+      trackEvent('enrol_complete', { course_code: course.code, course_name: course.name });
       setEnrollment(data);
     } catch (err) {
       setError(err.message || 'Could not enroll you right now. Please try again.');
@@ -232,7 +234,14 @@ export default function EnrollButton({ course }) {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               type="button"
-              onClick={() => (isPaid ? setCheckoutOpen(true) : handleEnroll())}
+              onClick={() => {
+                trackEvent(isPaid ? 'enrol_click' : 'free_enrol_click', {
+                  course_code: course.code,
+                  course_name: course.name,
+                });
+                if (isPaid) setCheckoutOpen(true);
+                else handleEnroll();
+              }}
               disabled={isEnrolling}
               className="btn-gold inline-flex w-full items-center justify-center gap-2 px-6 py-3 sm:w-auto disabled:opacity-60"
             >
