@@ -27,6 +27,10 @@ export default function HeroSlider({ showIndicators = true, autoRotate = true })
           <img
             src={HERO_SLIDES[current].image}
             alt={HERO_SLIDES[current].title}
+            width="1600"
+            height="900"
+            loading={current === 0 ? 'eager' : 'lazy'}
+            decoding="async"
             className="h-full w-full object-cover"
           />
         </motion.div>

@@ -30,9 +30,9 @@ export default function ConsentBanner() {
   }
 
   return (
-    <div className="fixed bottom-4 left-4 right-4 z-[100] mx-auto max-w-xl rounded-2xl border border-navy-100 bg-white p-4 shadow-premium-lg sm:left-auto sm:right-4" role="dialog" aria-label="Analytics consent">
-      <p className="font-body text-sm font-bold text-navy-900">Analytics consent</p>
-      <p className="mt-1 font-body text-xs leading-5 text-navy-600">
+    <div className="fixed bottom-4 left-4 right-4 z-[100] mx-auto max-w-xl rounded-2xl border border-navy-100 bg-white p-4 shadow-premium-lg sm:left-auto sm:right-4" role="dialog" aria-modal="false" aria-labelledby="analytics-consent-title" aria-describedby="analytics-consent-description">
+      <h2 id="analytics-consent-title" className="font-body text-sm font-bold text-navy-900">Analytics consent</h2>
+      <p id="analytics-consent-description" className="mt-1 font-body text-xs leading-5 text-navy-600">
         We use Google Analytics to understand how this site is used. Analytics cookies are disabled until you accept.
       </p>
       <div className="mt-3 flex gap-2">

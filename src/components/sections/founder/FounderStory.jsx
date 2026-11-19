@@ -34,6 +34,10 @@ export default function FounderStory() {
                   <img
                     src={founderPhoto}
                     alt="Fred Omondi, Founder & CEO of InnoSpeak Global"
+                    width="128"
+                    height="128"
+                    loading="lazy"
+                    decoding="async"
                     className="h-24 w-24 rounded-full object-cover shadow-gold"
                   />
                 </div>
