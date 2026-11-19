@@ -43,25 +43,7 @@ export default function EventRegistrationForm({ event, open, onClose, onSubmit }
     e.preventDefault();
     if (!name.trim()) return setError('Please enter your name.');
     if (!email.trim() || !/^\S+@\S+\.\S+$/.test(email)) return setError('Please enter a valid email.');
-    setError('');
-
-    const payload = {
-      eventId: event.id,
-      eventTitle: event.title,
-      name: name.trim(),
-      email: email.trim(),
-      phone: phone.trim(),
-      organization: organization.trim(),
-      attendanceMode,
-      notes: notes.trim(),
-      submittedAt: new Date().toISOString(),
-      status: 'pending',
-    };
-
-    if (typeof onSubmit === 'function') onSubmit(payload);
-    else console.info('[EventRegistration] payload:', payload);
-
-    setSubmitted(true);
+    setError('Event registration requires an approved Supabase workflow. Your registration was not stored.');
   }
 
   return (

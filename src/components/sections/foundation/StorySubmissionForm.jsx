@@ -115,38 +115,6 @@ export default function StorySubmissionForm({ open, onClose, onSubmit }) {
 
     setError('Story submissions require an approved Supabase workflow. Your story was not stored.');
     return;
-
-    if (!category) return setError('Please choose a story type.');
-    if (category === 'review' && rating < 1) return setError('Please add a star rating.');
-    if (!name.trim()) return setError('Please enter your name.');
-    if (!email.trim() || !/^\S+@\S+\.\S+$/.test(email)) return setError('Please enter a valid email.');
-    if (title.trim().length < 5) return setError('Title must be at least 5 characters.');
-    if (body.trim().length < 40) return setError('Story must be at least 40 characters.');
-    if (!consent) return setError('Please accept the consent checkbox.');
-
-    setError('');
-
-    const payload = {
-      category,
-      rating: category === 'review' ? rating : null,
-      author: { name: name.trim(), role: role.trim(), email: email.trim() },
-      location: location.trim(),
-      title: title.trim(),
-      body: body.trim(),
-      photos: photos.map((p) => p.file),
-      video: video?.file || null,
-      videoUrl: videoUrl.trim() || null,
-      submittedAt: new Date().toISOString(),
-      status: 'pending',
-    };
-
-    if (typeof onSubmit === 'function') {
-      onSubmit(payload);
-    } else {
-      console.info('[StorySubmission] no onSubmit handler — payload:', payload);
-    }
-
-    setSubmitted(true);
   }
 
   const inputBase =

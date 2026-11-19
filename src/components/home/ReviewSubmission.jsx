@@ -57,21 +57,7 @@ export default function ReviewSubmission({ onSubmit }) {
     if (!program) return setError('Please select the course you took.');
     if (message.trim().length < 20) return setError('Please write at least 20 characters.');
 
-    setError('');
-
-    const payload = { name: name.trim(), program, rating, message: message.trim(), photo };
-
-    if (typeof onSubmit === 'function') {
-      onSubmit(payload);
-    } else {
-      console.info('[ReviewSubmission] no onSubmit handler — payload:', payload);
-    }
-
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      reset();
-    }, 4000);
+    setError('Review submissions require an approved Supabase review workflow. Your review was not stored.');
   }
 
   const inputBase =
