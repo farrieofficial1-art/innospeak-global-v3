@@ -373,26 +373,22 @@ function MentorshipSection({ mentorships }) {
   );
 }
 
-/* ──────────────────────────────────────────────────────────────
-   Phase 2b placeholder — learner-controlled fields
-   ────────────────────────────────────────────────────────────── */
-
 function ProfilePreferencesSection() {
   return (
-    <SectionCard title="Profile Preferences" description="Control how employers and partners see you.">
-      <div className="rounded-2xl border border-dashed border-navy-200 bg-cream/40 p-5">
+    <SectionCard title="Profile Preferences" description="Employer-facing preferences are derived from your verified learning profile.">
+      <div className="rounded-2xl border border-navy-100 bg-cream/40 p-5">
         <div className="flex items-start gap-3">
           <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-gold-500/10 text-gold-600">
             <BriefcaseBusiness size={18} strokeWidth={1.8} aria-hidden="true" />
           </span>
           <div>
             <p className="font-body text-sm font-bold text-navy-900">
-              Coming soon
+              Verified profile controls
             </p>
             <p className="mt-1 font-body text-xs leading-5 text-navy-500">
-              Professional summary, career interests, availability and
-              visibility controls. Until then, your profile aggregates
-              everything from your verified learning record.
+              Professional summary and career evidence come from your certificates,
+              portfolio, skills and learning activity. Visibility controls require
+              an approved Supabase privacy workflow.
             </p>
           </div>
         </div>
