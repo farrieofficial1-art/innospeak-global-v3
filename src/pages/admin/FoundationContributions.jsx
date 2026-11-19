@@ -92,41 +92,7 @@ export default function FoundationContributions() {
     }
     setError('');
 
-    // Ensure the sponsor exists in the store
-        let sponsor = getSponsorByEmail(form.sponsorEmail);
-    if (!sponsor) {
-      // Auto-create a sponsor record
-      sponsor = upsertSponsor({
-        email: form.sponsorEmail,
-        name: form.sponsorName || null,
-      });
-    }
-
-    createContribution({
-      sponsorId: sponsor.id,
-      sponsorEmail: form.sponsorEmail.trim().toLowerCase(),
-      programId: form.programId,
-      amount: Number(form.amount),
-      currency: form.currency,
-      frequency: form.frequency,
-      method: form.method,
-      reference: form.reference.trim() || null,
-      notes: form.notes.trim() || null,
-    });
-
-    setForm({
-      sponsorEmail: '',
-      sponsorName: '',
-      programId: 'education-access',
-      amount: '',
-      currency: 'USD',
-      frequency: 'one_time',
-      method: 'pending',
-      reference: '',
-      notes: '',
-    });
-    setShowModal(false);
-    refresh();
+    setError('Foundation contributions require an approved, server-verified Supabase workflow. No contribution was recorded.');
   }
 
   function handleDelete(id) {

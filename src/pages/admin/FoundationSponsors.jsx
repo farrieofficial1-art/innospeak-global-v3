@@ -51,11 +51,7 @@ export default function FoundationSponsors() {
     if (!form.email.trim() || !/^\S+@\S+\.\S+$/.test(form.email)) {
       return setError('Please enter a valid email.');
     }
-    setError('');
-    upsertSponsor(form);
-    setForm({ email: '', name: '', organization: '', tier: 'individual' });
-    setShowModal(false);
-    refresh();
+    setError('Sponsor records require an approved Supabase sponsor workflow. No browser-only record was created.');
   }
 
   function handleDelete(id) {

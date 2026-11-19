@@ -65,32 +65,7 @@ export default function FoundationDisbursements() {
     }
     setError('');
 
-    createDisbursement({
-      applicationId: form.applicationId || null,
-      studentEmail: form.studentEmail.trim() || null,
-      studentName: form.studentName.trim() || null,
-      category: form.category,
-      amount: Number(form.amount),
-      currency: form.currency,
-      reference: form.reference.trim() || null,
-      receiptUrl: form.receiptUrl.trim() || null,
-      notes: form.notes.trim() || null,
-      recordedBy: 'admin',
-    });
-
-    setForm({
-      applicationId: '',
-      studentEmail: '',
-      studentName: '',
-      category: 'tuition',
-      amount: '',
-      currency: 'USD',
-      reference: '',
-      receiptUrl: '',
-      notes: '',
-    });
-    setShowModal(false);
-    refresh();
+    setError('Foundation disbursements require an approved, server-verified Supabase workflow. No payout was recorded.');
   }
 
   function handleDelete(id) {

@@ -67,22 +67,7 @@ export default function FoundationProgressReports() {
     const app = applications.find((a) => a.id === form.applicationId);
     if (!app) return setError('Application not found.');
 
-    createProgressReport({
-      applicationId: app.id,
-      programId: app.program,
-      studentEmail: app.userEmail,
-      studentName: app.userName,
-      studentInitials: initialsOf(app.userName || app.userEmail),
-      title: form.title.trim(),
-      body: form.body.trim(),
-      authorName: 'Foundation Team',
-      authorRole: 'Program Operations',
-      visibleToSponsor: form.visibleToSponsor,
-    });
-
-    setForm({ applicationId: '', title: '', body: '', visibleToSponsor: true });
-    setShowModal(false);
-    refresh();
+    setError('Foundation progress reports require an approved Supabase workflow. No report was stored.');
   }
 
   function handleDelete(id) {

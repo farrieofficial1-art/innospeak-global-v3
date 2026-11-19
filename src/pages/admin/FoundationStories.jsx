@@ -31,9 +31,18 @@ export default function FoundationStories() {
 
   useEffect(() => { refresh(); }, [refresh]);
 
-  function handleApprove(id) { approveStory(id); refresh(); }
-  function handleReject(id) { rejectStory(id); refresh(); }
-  function handleDelete(id) { deleteStory(id); refresh(); }
+  function handleApprove(id) {
+    setItems((prev) => prev);
+    window.alert('Story moderation requires an approved Supabase workflow. No story was changed.');
+  }
+  function handleReject(id) {
+    setItems((prev) => prev);
+    window.alert('Story moderation requires an approved Supabase workflow. No story was changed.');
+  }
+  function handleDelete(id) {
+    setItems((prev) => prev);
+    window.alert('Story deletion requires an approved Supabase workflow. No story was changed.');
+  }
 
   return (
     <div>

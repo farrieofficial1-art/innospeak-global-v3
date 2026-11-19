@@ -26,15 +26,11 @@ export default function StoryModerationPanel({ open, onClose, onChanged }) {
   }, [open]);
 
   function handleApprove(id) {
-    approveStory(id);
-    refresh();
-    onChanged?.();
+    window.alert('Story moderation requires an approved Supabase workflow. No story was changed.');
   }
 
   function handleReject(id) {
-    rejectStory(id);
-    refresh();
-    onChanged?.();
+    window.alert('Story moderation requires an approved Supabase workflow. No story was changed.');
   }
 
   if (!open) return null;

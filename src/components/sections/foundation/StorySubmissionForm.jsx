@@ -113,6 +113,9 @@ export default function StorySubmissionForm({ open, onClose, onSubmit }) {
   function handleSubmit(e) {
     e.preventDefault();
 
+    setError('Story submissions require an approved Supabase workflow. Your story was not stored.');
+    return;
+
     if (!category) return setError('Please choose a story type.');
     if (category === 'review' && rating < 1) return setError('Please add a star rating.');
     if (!name.trim()) return setError('Please enter your name.');

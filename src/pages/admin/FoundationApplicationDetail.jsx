@@ -85,65 +85,26 @@ export default function FoundationApplicationDetail() {
   const documents = application.documents || {};
 
   function handleStatusChange(nextStatus, note) {
-    setBusy(true);
-    pushStatus(id, nextStatus, note);
-    refresh();
     setBusy(false);
-    setActionNote('');
-    setShowNoteModal(false);
+    setActionNote('Foundation application decisions require an approved Supabase workflow. No status was changed.');
   }
 
   function handleAddNote() {
-    if (!actionNote.trim()) return;
-    setBusy(true);
-    pushStatus(id, application.status, actionNote.trim());
-    refresh();
-    setActionNote('');
-    setShowNoteModal(false);
     setBusy(false);
+    setActionNote('Foundation application notes require an approved Supabase workflow. No note was stored.');
   }
 
   function handleConfirmSupport() {
-    if (!supportSummary.trim()) return;
-    setBusy(true);
-    updateApplication(id, {
-      support: {
-        summary: supportSummary.trim(),
-        notes: supportNotes.trim(),
-        confirmedAt: new Date().toISOString(),
-      },
-    });
-    pushStatus(id, 'support_confirmed', `Support confirmed: ${supportSummary.trim()}`);
-    refresh();
-    setShowSupportModal(false);
-    setSupportSummary('');
-    setSupportNotes('');
     setBusy(false);
+    setActionNote('Support confirmation requires an approved Supabase workflow. No support record was stored.');
   }
 
   function handleVerifyDoc(docKey, docId) {
-    setDocumentStatus(id, docKey, docId, 'verified', null);
-    refresh();
+    setActionNote('Document verification requires an approved Supabase workflow. No document status was changed.');
   }
 
   function handleRejectDocConfirm() {
-    if (!rejectTarget || !rejectReason.trim()) return;
-    setDocumentStatus(
-      id,
-      rejectTarget.docKey,
-      rejectTarget.docId,
-      'rejected',
-      rejectReason.trim()
-    );
-    // Notify the applicant
-    pushStatus(
-      id,
-      application.status,
-      `Document rejected — "${rejectTarget.fileName}": ${rejectReason.trim()}. Please re-upload.`
-    );
-    refresh();
-    setRejectTarget(null);
-    setRejectReason('');
+    setActionNote('Document rejection requires an approved Supabase workflow. No document status was changed.');
   }
 
   function getAvailableActions() {

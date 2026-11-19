@@ -29,18 +29,7 @@ export default function SponsorSignIn() {
       setError('Please enter a valid email address.');
       return;
     }
-
-    let sponsor = getSponsorByEmail(trimmed);
-    if (!sponsor) {
-      // First-time visitor — create a sponsor record
-      sponsor = upsertSponsor({ email: trimmed, name: name.trim() || null });
-    } else if (name.trim() && name.trim() !== sponsor.name) {
-      // Update name if provided
-      upsertSponsor({ email: trimmed, name: name.trim() });
-    }
-
-    setSponsorSession(trimmed);
-    navigate('/sponsor', { replace: true });
+    setError('Sponsor sign-in requires an approved Supabase sponsor account. No browser-only session was created.');
   }
 
   return (

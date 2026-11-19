@@ -54,8 +54,7 @@ export default function FoundationStories() {
   }, [allStories]);
 
   function handleSubmit(payload) {
-    submitStory(payload);
-    refresh();
+    setFormOpen(false);
   }
 
   function handleModerationClose() {

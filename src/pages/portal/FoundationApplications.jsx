@@ -46,24 +46,7 @@ export default function FoundationApplications() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (!program) return setSubmitError('Please choose a programme.');
-    if (reason.trim().length < 30) return setSubmitError('Please describe your situation in at least 30 characters.');
-    setSubmitError('');
-    setSubmitting(true);
-
-    const app = createApplication({
-      program,
-      reason,
-      userEmail: email,
-      userName: profile?.full_name || null,
-    });
-
-    setJustSubmitted(app);
-    setProgram('');
-    setReason('');
-    setSubmitting(false);
-    setFormOpen(false);
-    refresh();
+    setSubmitError('Foundation applications require an approved Supabase workflow. Your submission was not stored.');
   }
 
   return (
