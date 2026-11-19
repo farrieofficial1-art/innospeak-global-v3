@@ -13,6 +13,7 @@ export default function EmployerOpportunities() {
   const [state, setState] = useState({ loading: true, error: false, data: [] });
   const [reloadKey, setReloadKey] = useState(0);
   const [busyId, setBusyId] = useState(null);
+  const [actionError, setActionError] = useState('');
 
   useEffect(() => {
     let cancelled = false;
@@ -32,12 +33,12 @@ export default function EmployerOpportunities() {
   async function handleDelete(id) {
     if (!window.confirm('Delete this opportunity? This cannot be undone.')) return;
     setBusyId(id);
+    setActionError('');
     try {
       await deleteMyOrganisationOpportunity(id);
       setReloadKey((k) => k + 1);
     } catch (err) {
-      // eslint-disable-next-line no-console
-      console.error('[EmployerOpportunities] delete failed:', err);
+      setActionError(err?.message || 'Could not delete this opportunity.');
     } finally {
       setBusyId(null);
     }
@@ -94,6 +95,12 @@ export default function EmployerOpportunities() {
             </button>
           </div>
         </SectionCard>
+      )}
+
+      {actionError && (
+        <div role="alert" className="mt-6 rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 font-body text-sm text-rose-700">
+          {actionError}
+        </div>
       )}
 
       {!state.loading && !state.error && state.data.length === 0 && (

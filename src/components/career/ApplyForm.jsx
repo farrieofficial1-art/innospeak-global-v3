@@ -53,9 +53,13 @@ export default function ApplyForm({ opportunity, onApplied }) {
       .then((existing) => {
         if (!cancelled) setState((s) => ({ ...s, checking: false, existing: existing || null }));
       })
-      .catch(() => {
-        // Silent — treat as "no existing application"
-        if (!cancelled) setState((s) => ({ ...s, checking: false, existing: null }));
+      .catch((err) => {
+        if (!cancelled) setState((s) => ({
+          ...s,
+          checking: false,
+          existing: null,
+          error: err?.message || 'Could not verify your application status.',
+        }));
       });
     return () => { cancelled = true; };
   }, [user, opportunity.id]);

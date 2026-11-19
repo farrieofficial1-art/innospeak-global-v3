@@ -45,6 +45,7 @@ export default function MyApplications() {
   const [state, setState] = useState({ loading: true, error: false, data: [] });
   const [reloadKey, setReloadKey] = useState(0);
   const [busyId, setBusyId] = useState(null);
+  const [actionError, setActionError] = useState('');
 
   useEffect(() => {
     let cancelled = false;
@@ -74,12 +75,12 @@ export default function MyApplications() {
   async function handleWithdraw(id) {
     if (!window.confirm('Withdraw this application? This cannot be undone.')) return;
     setBusyId(id);
+    setActionError('');
     try {
       await withdrawApplication(id);
       setReloadKey((k) => k + 1);
     } catch (err) {
-      // eslint-disable-next-line no-console
-      console.error('[MyApplications] withdraw failed:', err);
+      setActionError(err?.message || 'Could not withdraw this application.');
     } finally {
       setBusyId(null);
     }
@@ -139,6 +140,12 @@ export default function MyApplications() {
             </button>
           </div>
         </SectionCard>
+      )}
+
+      {actionError && (
+        <div role="alert" className="mt-6 rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 font-body text-sm text-rose-700">
+          {actionError}
+        </div>
       )}
 
       {!state.loading && !state.error && (

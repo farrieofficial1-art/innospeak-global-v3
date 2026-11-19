@@ -146,6 +146,7 @@ export default function EmployerApplications() {
   const [reloadKey, setReloadKey] = useState(0);
   const [statusFilter, setStatusFilter] = useState('all');
   const [busyId, setBusyId] = useState(null);
+  const [updateError, setUpdateError] = useState('');
 
   useEffect(() => {
     let cancelled = false;
@@ -177,12 +178,12 @@ export default function EmployerApplications() {
 
   async function handleUpdate(id, status, notes) {
     setBusyId(id);
+    setUpdateError('');
     try {
       await updateMyOrganisationApplicationStatus(id, status, notes);
       setReloadKey((k) => k + 1);
     } catch (err) {
-      // eslint-disable-next-line no-console
-      console.error('[EmployerApplications] update failed:', err);
+      setUpdateError(err?.message || 'Could not update this application.');
     } finally {
       setBusyId(null);
     }
@@ -241,6 +242,12 @@ export default function EmployerApplications() {
             message="When learners apply to your opportunities, their applications will appear here."
           />
         </SectionCard>
+      )}
+
+      {updateError && (
+        <div role="alert" className="mt-6 rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 font-body text-sm text-rose-700">
+          {updateError}
+        </div>
       )}
 
       {!state.loading && !state.error && state.data.length > 0 && (
