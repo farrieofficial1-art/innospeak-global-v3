@@ -27,6 +27,7 @@ export default function CheckoutModal({ course, open, onClose, onSuccess }) {
 
   const amount = parseFee(course?.fees);
   const currency = course?.fees?.includes('USD') || course?.fees?.includes('$') ? 'USD' : 'KES';
+  const courseCode = String(course?.code || '').trim();
   const paypalAvailable = currency === 'USD' && amount > 0;
 
   function handleClose() {
@@ -80,7 +81,13 @@ export default function CheckoutModal({ course, open, onClose, onSuccess }) {
   }, [status, provider, activePaymentId, onSuccess]);
 
   async function handleMpesa() {
-    if (!phone || phone.length < 9) {
+    if (!courseCode) {
+      setStatus('error');
+      setErrorMsg('This course is missing a canonical course code. Payment could not be started.');
+      return;
+    }
+    const normalizedPhone = phone.replace(/[^\d+]/g, '');
+    if (!normalizedPhone || normalizedPhone.replace(/\D/g, '').length < 9) {
       setErrorMsg('Please enter a valid M-PESA phone number.');
       return;
     }
@@ -90,7 +97,7 @@ export default function CheckoutModal({ course, open, onClose, onSuccess }) {
       const payment = await createPendingPayment({
         courseCode: course.code,
         provider: 'mpesa',
-        phone,
+        phone: normalizedPhone,
       });
 
       setActivePaymentId(payment.id);
@@ -109,6 +116,11 @@ export default function CheckoutModal({ course, open, onClose, onSuccess }) {
   }
 
   async function handlePaypal() {
+    if (!courseCode) {
+      setStatus('error');
+      setErrorMsg('This course is missing a canonical course code. Payment could not be started.');
+      return;
+    }
     setStatus('processing');
     setErrorMsg('');
     try {
@@ -294,7 +306,7 @@ export default function CheckoutModal({ course, open, onClose, onSuccess }) {
                   <div>
                     <p className="font-display text-base font-bold text-navy-900">Check Your Phone</p>
                     <p className="mt-1 font-body text-sm text-navy-600">
-                      We've sent an M-PESA payment request to {phone}. Enter your M-PESA PIN to complete
+                      We've sent an M-PESA payment request to {phone.replace(/[^\d+]/g, '')}. Enter your M-PESA PIN to complete
                       the payment. Your enrollment will be activated automatically once payment is confirmed.
                     </p>
                   </div>
